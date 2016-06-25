@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Mark Simonson - Proxima Nova Alt Bold.ttf">
+            <string>ProximaNovaA-Bold</string>
+            <string>ProximaNovaA-Bold</string>
+        </mutableArray>
+        <mutableArray key="Mark Simonson - Proxima Nova Alt Regular.ttf">
+            <string>ProximaNovaA-Regular</string>
+            <string>ProximaNovaA-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="275" id="KGk-i7-Jjw" customClass="FeedCell" customModule="HolidayHappenings" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="274.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzE-Je-CFA" customClass="DesignableView" customModule="HolidayHappenings" customModuleProvider="target">
+                        <rect key="frame" x="5" y="5" width="365" height="268"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kid1" translatesAutoresizingMaskIntoConstraints="NO" id="Mfj-qJ-OkB">
+                                <rect key="frame" x="0.0" y="0.0" width="365" height="206"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="206" id="spZ-m1-nZr"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Img_Curve" translatesAutoresizingMaskIntoConstraints="NO" id="tIM-VK-RGd">
+                                <rect key="frame" x="0.0" y="142" width="365" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="pbB-eo-6XG"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPJ-2V-Qac">
+                                <rect key="frame" x="315" y="142" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="F4T-fI-hUv"/>
+                                    <constraint firstAttribute="width" constant="36" id="xWQ-At-Jiw"/>
+                                </constraints>
+                                <state key="normal" image="Ic_Heart"/>
+                                <state key="selected" image="ic_activeheart"/>
+                                <connections>
+                                    <action selector="heartClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eyx-iJ-cI7"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Ic_AddressPin" translatesAutoresizingMaskIntoConstraints="NO" id="U7a-Sb-74f">
+                                <rect key="frame" x="23" y="245" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="Xgw-gm-mgu"/>
+                                    <constraint firstAttribute="height" constant="15" id="yN1-WK-Ydc"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elementary Shenanigans" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnD-rE-9Kj">
+                                <rect key="frame" x="23" y="207" width="155.5" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="Elj-rP-9B6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNovaA-Regular" family="Proxima Nova Alt" pointSize="14"/>
+                                <color key="textColor" red="0.41568627450980394" green="0.50196078431372548" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kensington, Melbourne" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pq7-iI-lik">
+                                <rect key="frame" x="46" y="240" width="122.5" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="Sbn-GM-KXV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNovaA-Regular" family="Proxima Nova Alt" pointSize="12"/>
+                                <color key="textColor" red="0.41568627450980394" green="0.50196078431372548" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Specialised creative programs" textAlignment="natural" lineBreakMode="clip" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-0W-Igs">
+                                <rect key="frame" x="23" y="171" width="234.5" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="uV3-hP-vs3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNovaA-Bold" family="Proxima Nova Alt" pointSize="17"/>
+                                <color key="textColor" red="0.062745098039215685" green="0.67450980392156867" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="23" y="176" width="331" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Kms" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-r8-hrR">
+                                <rect key="frame" x="323" y="231" width="34" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="fkD-RH-T7O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ProximaNovaA-Bold" family="Proxima Nova Alt" pointSize="12"/>
+                                <color key="textColor" red="0.40392156862745099" green="0.46666666666666667" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="HnD-rE-9Kj" firstAttribute="leading" secondItem="AzE-Je-CFA" secondAttribute="leading" constant="23" id="0Zb-0t-6ku"/>
+                            <constraint firstItem="Mfj-qJ-OkB" firstAttribute="top" secondItem="AzE-Je-CFA" secondAttribute="top" id="2SY-78-wLw"/>
+                            <constraint firstItem="AXd-r8-hrR" firstAttribute="top" secondItem="HnD-rE-9Kj" secondAttribute="bottom" constant="-5" id="5tT-UL-dzF"/>
+                            <constraint firstAttribute="bottom" secondItem="pq7-iI-lik" secondAttribute="bottom" constant="1" id="Cl7-9H-syy"/>
+                            <constraint firstAttribute="bottom" secondItem="AXd-r8-hrR" secondAttribute="bottom" constant="17" id="Fnm-XK-7H0"/>
+                            <constraint firstAttribute="trailing" secondItem="DPJ-2V-Qac" secondAttribute="trailing" constant="14" id="I6G-hA-0mu"/>
+                            <constraint firstItem="U7a-Sb-74f" firstAttribute="leading" secondItem="AzE-Je-CFA" secondAttribute="leading" constant="23" id="LaB-qH-ifH"/>
+                            <constraint firstAttribute="bottom" secondItem="U7a-Sb-74f" secondAttribute="bottom" constant="8" id="Ndf-7R-Wlw"/>
+                            <constraint firstItem="pq7-iI-lik" firstAttribute="leading" secondItem="U7a-Sb-74f" secondAttribute="trailing" constant="8" id="PtI-om-qcG"/>
+                            <constraint firstItem="hYm-0W-Igs" firstAttribute="top" secondItem="DPJ-2V-Qac" secondAttribute="bottom" constant="-7" id="WQT-Tn-8P1"/>
+                            <constraint firstAttribute="bottom" secondItem="AXd-r8-hrR" secondAttribute="bottom" constant="17" id="aSg-BZ-Ao9"/>
+                            <constraint firstItem="Mfj-qJ-OkB" firstAttribute="leading" secondItem="AzE-Je-CFA" secondAttribute="leading" id="enT-RW-wIe"/>
+                            <constraint firstItem="tIM-VK-RGd" firstAttribute="leading" secondItem="AzE-Je-CFA" secondAttribute="leading" id="et7-OH-nbd"/>
+                            <constraint firstAttribute="trailing" secondItem="tIM-VK-RGd" secondAttribute="trailing" id="ha3-1T-sTo"/>
+                            <constraint firstAttribute="bottom" secondItem="tIM-VK-RGd" secondAttribute="bottom" constant="1" id="itX-So-jpz"/>
+                            <constraint firstItem="tIM-VK-RGd" firstAttribute="top" secondItem="Mfj-qJ-OkB" secondAttribute="bottom" constant="-64" id="joi-5A-gzm"/>
+                            <constraint firstAttribute="trailing" secondItem="AXd-r8-hrR" secondAttribute="trailing" constant="8" id="owO-t9-qGl"/>
+                            <constraint firstItem="hYm-0W-Igs" firstAttribute="leading" secondItem="AzE-Je-CFA" secondAttribute="leading" constant="23" id="ph6-lg-Grh"/>
+                            <constraint firstItem="HnD-rE-9Kj" firstAttribute="top" secondItem="hYm-0W-Igs" secondAttribute="bottom" id="w9J-Rg-rPt"/>
+                            <constraint firstAttribute="trailing" secondItem="Mfj-qJ-OkB" secondAttribute="trailing" id="zgt-mI-A46"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.76470588235294112" green="0.80784313725490198" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.85882352941176465" green="0.90196078431372551" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="AzE-Je-CFA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="NMD-p2-nMH"/>
+                    <constraint firstAttribute="bottom" secondItem="AzE-Je-CFA" secondAttribute="bottom" constant="1.5" id="QVR-5x-Y9x"/>
+                    <constraint firstItem="AzE-Je-CFA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="agg-wm-vhs"/>
+                    <constraint firstAttribute="trailing" secondItem="AzE-Je-CFA" secondAttribute="trailing" constant="5" id="qxh-aQ-zXN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.92156862750000001" green="0.20000000000000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="feedImage" destination="Mfj-qJ-OkB" id="QD1-TG-vcJ"/>
+                <outlet property="imageHighConst" destination="spZ-m1-nZr" id="BHJ-GH-VU8"/>
+            </connections>
+            <point key="canvasLocation" x="273.5" y="62.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Ic_AddressPin" width="12" height="17"/>
+        <image name="Ic_Heart" width="36" height="36"/>
+        <image name="Img_Curve" width="355" height="90"/>
+        <image name="ic_activeheart" width="36" height="36"/>
+        <image name="kid1" width="12" height="17"/>
+    </resources>
+</document>

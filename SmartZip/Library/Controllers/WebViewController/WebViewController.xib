@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WebViewController" customModule="TemplateApp" customModuleProvider="target">
+            <connections>
+                <outlet property="activityView" destination="gmM-r0-EX5" id="hf2-I8-ZNr"/>
+                <outlet property="navItem" destination="5xt-o4-Cwf" id="UET-bK-iuG"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="cdD-x2-K8k" id="8TN-sN-iz2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDk-Py-t8S">
+                    <rect key="frame" x="0.0" y="18" width="600" height="44"/>
+                    <items>
+                        <navigationItem id="5xt-o4-Cwf">
+                            <barButtonItem key="leftBarButtonItem" enabled="NO" id="hU5-Be-YXM"/>
+                            <barButtonItem key="rightBarButtonItem" title="Done" id="hMn-nu-Juq"/>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdD-x2-K8k">
+                    <rect key="frame" x="0.0" y="62" width="600" height="538"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="dyl-5b-YFJ"/>
+                    </connections>
+                </webView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gmM-r0-EX5">
+                    <rect key="frame" x="290" y="312" width="20" height="20"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="cdD-x2-K8k" secondAttribute="trailing" id="2I8-P5-4M7"/>
+                <constraint firstAttribute="centerX" secondItem="cdD-x2-K8k" secondAttribute="centerX" id="4C4-e7-kgK"/>
+                <constraint firstAttribute="trailing" secondItem="HDk-Py-t8S" secondAttribute="trailing" id="Fax-hD-gfz"/>
+                <constraint firstItem="gmM-r0-EX5" firstAttribute="centerX" secondItem="cdD-x2-K8k" secondAttribute="centerX" id="GbL-GL-kkS"/>
+                <constraint firstItem="gmM-r0-EX5" firstAttribute="centerY" secondItem="cdD-x2-K8k" secondAttribute="centerY" constant="-9" id="TPX-Nf-c4H"/>
+                <constraint firstItem="cdD-x2-K8k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="W3D-UR-0n8"/>
+                <constraint firstItem="HDk-Py-t8S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W60-8s-M3e"/>
+                <constraint firstItem="cdD-x2-K8k" firstAttribute="top" secondItem="HDk-Py-t8S" secondAttribute="bottom" id="YrJ-hk-Oey"/>
+                <constraint firstAttribute="bottom" secondItem="cdD-x2-K8k" secondAttribute="bottom" id="Yt7-wP-d8r"/>
+                <constraint firstAttribute="centerY" secondItem="cdD-x2-K8k" secondAttribute="centerY" constant="-31" id="dw4-jW-YeH"/>
+                <constraint firstItem="HDk-Py-t8S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="18" id="k9S-AP-IKX"/>
+                <constraint firstItem="cdD-x2-K8k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="scb-V9-chI"/>
+            </constraints>
+            <point key="canvasLocation" x="289" y="314"/>
+        </view>
+    </objects>
+</document>
