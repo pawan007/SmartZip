@@ -2,7 +2,7 @@
 //  NSDate+Operators.swift
 //
 //  Created by Anish Kumar on 30/03/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import Foundation

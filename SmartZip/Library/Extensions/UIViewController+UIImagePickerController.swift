@@ -1,9 +1,9 @@
 //
 //  UIViewController+UIImagePickerController.swift
-//  HolidayHappenings
+//  SmartZip
 //
-//  Created by Arvind Singh on 19/05/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Created by Pawan Kumar on 19/05/16.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import Foundation

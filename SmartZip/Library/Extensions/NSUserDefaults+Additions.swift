@@ -2,7 +2,7 @@
 //  NSUserDefaults+Additions.swift
 //
 //  Created by Anish Kumar on 20/04/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import Foundation

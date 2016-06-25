@@ -1,8 +1,8 @@
 //
 //  Constants.swift
 //
-//  Created by Sourabh Bhardwaj on 01/04/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Created by Pawan Kumar on 01/04/16.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import Foundation

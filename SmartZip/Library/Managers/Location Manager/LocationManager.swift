@@ -50,6 +50,7 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     private var geocodingCompletionHandler:LMGeocodeCompletionHandler
     
     private var locationStatus : NSString = "Calibrating"// to pass in handler
+    
     private var locationManager: CLLocationManager!
     private var verboseMessage = "Calibrating"
     

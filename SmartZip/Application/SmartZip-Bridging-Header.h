@@ -1,8 +1,8 @@
 //
-//  HolidayHappenings-Bridging-Header.h
+//  SmartZip-Bridging-Header.h
 //
 //  Created by Saurabh Verma on 09/03/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 #ifndef SmartZip_Bridging_Header_h
@@ -20,4 +20,4 @@
 #import "AFImagePager.h"
 
 
-#endif /* HolidayHappenings_Bridging_Header_h */
+#endif /* SmartZip_Bridging_Header_h */

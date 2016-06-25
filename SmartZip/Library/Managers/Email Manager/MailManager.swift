@@ -80,7 +80,7 @@ class MailManager: NSObject, MFMailComposeViewControllerDelegate {
             mailComposerVC.setSubject("")
             //            mailComposerVC.addAttachmentData(UIImageJPEGRepresentation(image, 0.5)!, mimeType: "image/png", fileName:  StringConstants.WorkoutSummaryFileName)
             
-            mailComposerVC.setToRecipients(["pawan.kumar@appster.iin"])
+            mailComposerVC.setToRecipients(["pawan.kumar@Modi.iin"])
             viewcontroller.presentViewController(mailComposerVC, animated: true, completion:nil)
             
             if let block = completion {

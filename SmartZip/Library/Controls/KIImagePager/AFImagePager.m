@@ -11,7 +11,7 @@
 #define kOverlayHeight      15
 
 #import "AFImagePager.h"
-#import "HolidayHappenings-Bridging-Header.h"
+#import "SmartZip-Bridging-Header.h"
 @interface AFImagePager () <UIScrollViewDelegate>
 {
     __weak id <AFImagePagerDataSource> _dataSource;

@@ -1,8 +1,8 @@
 //
 //  InAppPurchaseManager.swift
 //
-//  Created by Sourabh Bhardwaj on 30/03/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Created by Pawan Kumar on 30/03/16.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import UIKit

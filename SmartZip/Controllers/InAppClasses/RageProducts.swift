@@ -25,7 +25,7 @@ import Foundation
 public struct RageProducts {
   
   // TODO:  Change this to the BundleID chosen when registering this app's App ID in the Apple Member Center.
-  private static let Prefix = "com.holidayhappenings.app."
+  private static let Prefix = "com.SmartZip.app."
   
   public static let Threemonthsdeal             = Prefix + "threemonthsdeal"
   public static let Twelvemonthsdeal             = Prefix + "twelvemonthsdeal"

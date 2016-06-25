@@ -1,9 +1,9 @@
 //
 //  SideMenuManager.swift
-//  HolidayHappenings
+//  SmartZip
 //
 //  Created by Pawan Joshi on 13/04/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import UIKit

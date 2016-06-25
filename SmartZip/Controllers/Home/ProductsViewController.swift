@@ -1,8 +1,8 @@
 //
 //  ProductsViewController.swift
 //
-//  Created by Sourabh Bhardwaj on 31/03/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Created by Pawan Kumar on 31/03/16.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,8 @@ class ProductsViewController: BaseViewController, ProductCellDelegate {
     // MARK: View Life cycle
     override internal func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+               
         self.navigationItem.title = NSLocalizedString("Available Products", comment: "Available Products")
         self.tableView.tableFooterView = UIView()
         
@@ -30,7 +31,7 @@ class ProductsViewController: BaseViewController, ProductCellDelegate {
         // Enable view controller to listen observers
         addObservers()
         
-        let productIdentifiers = NSSet(array: ["com.appster.test.free_product_1","com.appster.test.free_product_2"])
+        let productIdentifiers = NSSet(array: ["com.Modi.test.free_product_1","com.Modi.test.free_product_2"])
         InAppPurchaseManager.sharedManager().requestProducts(productIdentifiers) { (error, products) -> () in
             
             if (error == nil) {

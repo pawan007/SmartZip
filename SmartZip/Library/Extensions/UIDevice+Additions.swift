@@ -1,9 +1,9 @@
 //
 //  UIDevice+Additions.swift
-//  HolidayHappenings
+//  SmartZip
 //
 //  Created by Gurkaran Singh on 21/06/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import Foundation

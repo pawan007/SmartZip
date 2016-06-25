@@ -1,9 +1,9 @@
 //
 //  LeftMenuViewController.swift
-//  HolidayHappenings
+//  SmartZip
 //
 //  Created by Pawan Joshi on 13/04/16.
-//  Copyright © 2016 Appster. All rights reserved.
+//  Copyright © 2016 Modi. All rights reserved.
 //
 
 import UIKit
@@ -268,7 +268,7 @@ extension LeftMenuViewController: UITableViewDelegate
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["nathan@holidayhappenings.com.au"])
+            mail.setToRecipients(["nathan@SmartZip.com.au"])
             mail.setSubject("Holiday Happenings - Feedback to Admin")
             mail.setMessageBody("<p>Dear Admin</p>", isHTML: true)
             presentViewController(mail, animated: true, completion: nil)
@@ -294,7 +294,7 @@ extension LeftMenuViewController: UITableViewDelegate
         let webActionButton: UIAlertAction = UIAlertAction(title: "View Website", style: .Default)
         { action -> Void in
             
-            let url:NSURL? = NSURL(string: "http://www.holidayhappenings.com.au/")
+            let url:NSURL? = NSURL(string: "http://www.SmartZip.com.au/")
             UIApplication.sharedApplication().openURL(url!)
             
         }
