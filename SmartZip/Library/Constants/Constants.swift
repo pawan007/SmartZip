@@ -36,26 +36,6 @@ struct Constants {
     // MARK: APIServiceMethods
     struct APIServiceMethods {
         static let loginAPI = Constants.APIServiceMethods.apiURL("user/login")
-        static let socialLoginAPI = Constants.APIServiceMethods.apiURL("user/socialLogin")
-        static let otpLoginAPI = Constants.APIServiceMethods.apiURL("user/getotp")
-        static let otpLoginVerify = Constants.APIServiceMethods.apiURL("user/otpverification")
-        static let loginWithPhoneAPI = Constants.APIServiceMethods.apiURL("loginwithphone")
-        static let logoutAPI = Constants.APIServiceMethods.apiURL("user/signout")
-        static let sigupAPI = Constants.APIServiceMethods.apiURL("user/signup")
-        static let imageUploadAPI = Constants.APIServiceMethods.apiURL("user/uploadfile")
-        static let sendOtpAPI = Constants.APIServiceMethods.apiURL("getotp")
-        static let verifyOtpAPI = Constants.APIServiceMethods.apiURL("otpverification")
-        static let resetPassword = Constants.APIServiceMethods.apiURL("user/forgotpassword")
-        static let changePassword = Constants.APIServiceMethods.apiURL("user/changepassword")
-        static let getEvetsAPI = Constants.APIServiceMethods.apiURL("event/eventlist")
-        static let getFiltersAPI = Constants.APIServiceMethods.apiURL("event/filters")
-        static let guestUserLogin = Constants.APIServiceMethods.apiURL("user/guestuser")
-        static let getFavouriteAPI = Constants.APIServiceMethods.apiURL("event/favouritelist")
-
-        static let getEventdetailAPI = Constants.APIServiceMethods.apiURL("event/eventdetail")
-        static let getAddfavouriteAPI = Constants.APIServiceMethods.apiURL("event/addfavourite")
-        static let getRemovefavouriteAPI = Constants.APIServiceMethods.apiURL("event/removefavourite")
-
         
          static func apiURL(methodName: String) -> String {
             return Constants.BASE_URL + "/" + methodName
@@ -71,5 +51,16 @@ struct Constants {
         static let passwordSentMessage =            "A new password has been sent to your email."
         static let mailAccountRequired =            "Please configure a mail account to send email."
         }
+    var Timestamp: String {
+        
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-DD-HH-mm-ss"
+        return dateFormatter.stringFromDate(date)
+    }
     
+    let ResTypeAudio = "audio"
+    let ResTypeVideo = "video"
+    let ResTypeImage = "image"
+    let ResTypeDoc = "document"
 }
