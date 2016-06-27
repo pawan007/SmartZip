@@ -6,6 +6,7 @@ PODS:
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
+  - FileBrowser (0.1.4)
   - IQKeyboardManagerSwift (4.0.4)
   - Kingfisher (2.4.1)
   - Masonry (0.6.4)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.4)
   - CCBottomRefreshControl
   - Crashlytics
+  - FileBrowser (~> 0.1)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 2.4)
   - Mixpanel
@@ -71,6 +73,7 @@ SPEC CHECKSUMS:
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  FileBrowser: 4e48c118606571cf59fd1d20930ac41887c026d0
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
