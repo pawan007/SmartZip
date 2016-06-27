@@ -38,9 +38,6 @@ class ContentViewer: UIViewController {
         }else{
             
         }
-        
-        
-        
     }
     
     @IBAction func backBtnTapped(sender: AnyObject) {
@@ -48,9 +45,7 @@ class ContentViewer: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    
     private func playVideo(path:String) {
-        
         let player = AVPlayer(URL: NSURL(fileURLWithPath: path))
         let playerController = AVPlayerViewController()
         playerController.player = player

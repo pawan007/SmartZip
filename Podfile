@@ -1,7 +1,7 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, '8.0'
 # Uncomment this line if you're using Swift
-# use_frameworks!
+use_frameworks!
 
 target 'SmartZip' do
     pod 'SSZipArchive'
@@ -19,13 +19,16 @@ target 'SmartZip' do
     pod 'Kingfisher', '~> 2.4'
     pod 'SnapKit', '~> 0.21'
     pod 'RxSwift', '~> 2.5'
-    pod 'Spring', '~> 1.0'  
-   
+    pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
+    pod 'SSZipArchive'
+    pod 'QBImagePickerController'
+    pod 'XCGLogger', '~> 3.3'
+    pod 'FileBrowser', '~> 0.1'
+    
     #There are some alternets of these pods, so lets try that first
     #pod 'Google/Analytics'
     #pod 'SDWebImage'
     #pod 'FRHyperLabel', '~> 1.0'
-    #pod 'XCGLogger', '~> 3.3'
     #pod 'MXParallaxHeader', '~> 0.5'
     #pod 'KIImagePager', '~> 1.1.0'
     #pod 'ObjectMapper', '~> 1.1'

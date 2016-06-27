@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol FeedCellDelegate1: class {
     func heartClick(index: NSInteger)
@@ -43,9 +44,9 @@ class FeedCell: UITableViewCell {
          */
         
         let url:NSURL? = NSURL(string: "http://www.blueevents-agency.com/wp-content/uploads/2013/11/explore-events-food-and-wine-events.jpg")
-        
-        feedImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "img_shadow"))
-    }
+        imageView!.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "img_shadow"))
+
+     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

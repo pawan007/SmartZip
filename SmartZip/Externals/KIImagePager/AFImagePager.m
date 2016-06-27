@@ -11,8 +11,7 @@
 #define kOverlayHeight      15
 
 #import "AFImagePager.h"
-#import "SmartZip-Bridging-Header.h"
-@interface AFImagePager () <UIScrollViewDelegate>
+ @interface AFImagePager () <UIScrollViewDelegate>
 {
     __weak id <AFImagePagerDataSource> _dataSource;
     __weak id <AFImagePagerDelegate> _delegate;
@@ -153,14 +152,14 @@
             [imageView setTag:i];
             //[imageView setImageWithURL:[NSURL URLWithString:(NSString *)[aImageUrls objectAtIndex:i]]];
             //to do :pawan
-            [imageView sd_setImageWithURL:[NSURL URLWithString:(NSString *)[aImageUrls objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"img_shadow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {//... completion code here ...
-                
-                if (image) {
-                    imageView.image=image;
-                    self.currentImage=[image copy];
-                }
-                
-            }];
+//            [imageView sd_setImageWithURL:[NSURL URLWithString:(NSString *)[aImageUrls objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"img_shadow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {//... completion code here ...
+//                
+//                if (image) {
+//                    imageView.image=image;
+//                    self.currentImage=[image copy];
+//                }
+//                
+//            }];
              [_scrollView addSubview:imageView];
         }
         

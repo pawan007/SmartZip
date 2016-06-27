@@ -1,1 +1,90 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.0.5)
+  - Alamofire (3.4.1)
+  - CCBottomRefreshControl (0.5.1):
+    - Masonry (~> 0.6.2)
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
+  - IQKeyboardManagerSwift (4.0.4)
+  - Kingfisher (2.4.1)
+  - Masonry (0.6.4)
+  - Mixpanel (3.0.0):
+    - Mixpanel/Mixpanel (= 3.0.0)
+  - Mixpanel/Mixpanel (3.0.0)
+  - MMDrawerController (0.5.7):
+    - MMDrawerController/Core (= 0.5.7)
+    - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
+    - MMDrawerController/MMDrawerVisualStates (= 0.5.7)
+    - MMDrawerController/Subclass (= 0.5.7)
+  - MMDrawerController/Core (0.5.7)
+  - MMDrawerController/MMDrawerBarButtonItem (0.5.7):
+    - MMDrawerController/Core
+  - MMDrawerController/MMDrawerVisualStates (0.5.7):
+    - MMDrawerController/Core
+  - MMDrawerController/Subclass (0.5.7):
+    - MMDrawerController/Core
+  - QBImagePickerController (3.4.0)
+  - Reachability (3.2)
+  - RxSwift (2.5.0)
+  - SnapKit (0.21.1)
+  - Spring (1.0.3)
+  - SSZipArchive (1.2)
+  - SwiftSpinner (0.9.5)
+  - TTTAttributedLabel (2.0.0)
+  - UIView+TKGeometry (0.2)
+  - XCGLogger (3.3)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.0.5)
+  - Alamofire (~> 3.4)
+  - CCBottomRefreshControl
+  - Crashlytics
+  - IQKeyboardManagerSwift
+  - Kingfisher (~> 2.4)
+  - Mixpanel
+  - MMDrawerController (~> 0.5.7)
+  - QBImagePickerController
+  - Reachability (~> 3.2)
+  - RxSwift (~> 2.5)
+  - SnapKit (~> 0.21)
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift2`)
+  - SSZipArchive
+  - SwiftSpinner
+  - TTTAttributedLabel
+  - UIView+TKGeometry
+  - XCGLogger (~> 3.3)
+
+EXTERNAL SOURCES:
+  Spring:
+    :branch: swift2
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 18d5c7b74489de8044e34767f856d1e574f0820e
+    :git: https://github.com/MengTo/Spring.git
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
+  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  Mixpanel: ac92056ee35a961362513ba11049e67cffcaa1f1
+  MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
+  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
+  SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
+  SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+  UIView+TKGeometry: bef0d7727753910d66d6fa51a3128ae6908047ef
+  XCGLogger: d6e196e78940ff6daab17d6917107876f973fa31
+
 COCOAPODS: 0.39.0

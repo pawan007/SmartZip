@@ -59,7 +59,7 @@ class OnBoardingViewController: BaseViewController {
     
     override func viewDidDisappear(animated: Bool)
     {
-        NSUserDefaults.setObject(true, forKey: TUTORIAL_VIEWED_KEY)
+       // NSUserDefaults.setObject(true, forKey: TUTORIAL_VIEWED_KEY)
     }
     // MARK: - Helper Functions
     private func setupInitialLayoutConstraintAndViews() {

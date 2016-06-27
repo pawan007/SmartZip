@@ -7,7 +7,7 @@
 
 import UIKit
 import Mixpanel
-import Flurry_iOS_SDK
+//import Flurry_iOS_SDK
 
 enum PlatformType {
     case MixPannel
@@ -41,15 +41,15 @@ class AnalyticsManager: NSObject {
         
         switch self.platformType {
             
-        case .Flurry:
-            Flurry.startSession(Constants.Tokens.FLURRY_APP_ID);
-            Flurry.setCrashReportingEnabled(true)
+        case .Flurry: break
+//            Flurry.startSession(Constants.Tokens.FLURRY_APP_ID);
+//            Flurry.setCrashReportingEnabled(true)
             
         case .GoogleAnalytics:
             self.googleAnalyserInitialize()
             
-        default: // .MixPannel:
-            Mixpanel.sharedInstanceWithToken(Constants.Tokens.MIX_PANNEL_TOKEN)
+        default: break // .MixPannel:
+           // Mixpanel.sharedInstanceWithToken(Constants.Tokens.MIX_PANNEL_TOKEN)
         }
     }
     
@@ -65,8 +65,8 @@ class AnalyticsManager: NSObject {
         
         switch self.platformType {
             
-        case .Flurry:
-            Flurry.logEvent(eventName, withParameters: attributes as! [NSObject : AnyObject])
+        case .Flurry: break
+           // Flurry.logEvent(eventName, withParameters: attributes as! [NSObject : AnyObject])
             
         case .GoogleAnalytics: break
 //            let tracker = GAI.sharedInstance().defaultTracker

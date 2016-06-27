@@ -2,7 +2,7 @@
 //  SideMenuManager.swift
 //  SmartZip
 //
-//  Created by Pawan Joshi on 13/04/16.
+//  Created by Pawan Kumar on 13/04/16.
 //  Copyright © 2016 Modi. All rights reserved.
 //
 

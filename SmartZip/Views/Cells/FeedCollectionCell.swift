@@ -31,7 +31,7 @@ class FeedCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+    /*
     func setUpUIWithData (eventObj : Event!) {
         
         self.title1.text = eventObj.product_title
@@ -45,9 +45,7 @@ class FeedCollectionCell: UICollectionViewCell {
         //let url:NSURL? = NSURL(string: eventObj.event_img!)
         //feedImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "img_shadow"))
         feedImage.kf_setImageWithURL(NSURL(string: eventObj.event_img!)!, placeholderImage: UIImage(named: "img_shadow"))
-        
-        
-    }
+    }*/
     // MARK: Control Actions
     @IBAction private func heartClick(sender: UIButton) {
         // sender.selected  = !sender.selected;

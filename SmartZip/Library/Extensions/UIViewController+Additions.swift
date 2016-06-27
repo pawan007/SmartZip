@@ -23,33 +23,7 @@ extension UIViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    /**
-     Shows a simple alert banner with a title and dismiss button
-     
-     - parameter title:   title for alerview
-     - parameter message: message to be shown
-     */
-    func showAlertBannerWith(title: String, message: String, bannerStyle:ALAlertBannerStyle, timeDurationInSeconds:NSTimeInterval) {
-        
-        let bannerAlertPosition = ALAlertBannerPositionBottom
-        let banner = ALAlertBanner(forView: self.view, style: bannerStyle, position: bannerAlertPosition, title: title, subtitle: message)
-        banner.secondsToShow = timeDurationInSeconds
-    }
-    
-    /**
-     Shows a simple alert banner with auto hide
-    
-     - parameter message:     message description
-     - parameter bannerStyle: bannerStyle description
-     */
-    func showAlertBannerWithMessage(message: String, bannerStyle:ALAlertBannerStyle) {
-        
-        let bannerAlertPosition = ALAlertBannerPositionTop
-        let banner = ALAlertBanner(forView: self.view, style: bannerStyle, position: bannerAlertPosition, title: message)
-        banner.show()
-    }
-    
-    /**
+      /**
      Shows a simple alert view with a title, dismiss button and action handler for dismiss button
      
      - parameter title:         title for alerview

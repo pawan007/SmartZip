@@ -8,7 +8,7 @@
 import UIKit
 import StoreKit
 
-class ProductsViewController: BaseViewController, ProductCellDelegate {
+class ProductsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -130,11 +130,11 @@ extension ProductsViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: ProductCell! = self.tableView.dequeueReusableCellWithIdentifier(productCellIdentifier, forIndexPath: indexPath) as! ProductCell
-        cell.delegate = self
-        cell.index = indexPath.row
-        let product = self.products[indexPath.row]
-        cell.name.text = "\(product.localizedTitle) :Rs. \(product.price)"
+        let cell: FeedCell! = self.tableView.dequeueReusableCellWithIdentifier(productCellIdentifier, forIndexPath: indexPath) as! FeedCell
+//        cell.delegate = self
+//        cell.index = indexPath.row
+//        let product = self.products[indexPath.row]
+//        cell.name.text = "\(product.localizedTitle) :Rs. \(product.price)"
         return cell;
     }
 }
