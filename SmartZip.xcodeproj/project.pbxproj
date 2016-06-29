@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D175C331D2BAB7C541EA1613 /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8252ACE0A913F5672E98A143 /* Pods_SmartZip.framework */; };
+		56977A5486F545A348DA4ACA /* Pods_SmartZipUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4FD88D26FA000BA8CBE5012 /* Pods_SmartZipUITests.framework */; };
+		D2A977CD69C1D4C169CA6595 /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
 		D4284CC81D1E4B9800E1BCA9 /* SmartZipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CC71D1E4B9800E1BCA9 /* SmartZipUITests.swift */; };
 		D436FD261D1F8C1000F2BE72 /* DropBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD211D1F8C1000F2BE72 /* DropBoxVC.swift */; };
 		D436FD281D1F8C1000F2BE72 /* PhotoPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD231D1F8C1000F2BE72 /* PhotoPickerVC.swift */; };
 		D436FD291D1F8C1000F2BE72 /* UnZipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD241D1F8C1000F2BE72 /* UnZipVC.swift */; };
 		D436FD2A1D1F8C1000F2BE72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD251D1F8C1000F2BE72 /* ViewController.swift */; };
-		D436FD2C1D1F8D3A00F2BE72 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D436FD2B1D1F8D3A00F2BE72 /* Default-568h@2x.png */; };
 		D436FD521D1FA6E800F2BE72 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D436FD511D1FA6E800F2BE72 /* DropboxSDK.framework */; };
 		D436FD5A1D1FA77A00F2BE72 /* AFImagePager.m in Sources */ = {isa = PBXBuildFile; fileRef = D436FD551D1FA77A00F2BE72 /* AFImagePager.m */; };
 		D436FD5B1D1FA77A00F2BE72 /* KICamera.png in Resources */ = {isa = PBXBuildFile; fileRef = D436FD561D1FA77A00F2BE72 /* KICamera.png */; };
@@ -103,6 +103,7 @@
 		D44DF3DD1D1E802E000C75B7 /* ExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF3641D1E802E000C75B7 /* ExtendedView.swift */; };
 		D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44DF3E11D1EE15E000C75B7 /* Launch Screen.storyboard */; };
 		D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = D44DF3E31D1EE393000C75B7 /* ReadMe.txt */; };
+		E33959C563C31DD8DD231C4F /* Pods_SmartZipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C15925F08F1C4AF7EA75494 /* Pods_SmartZipTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,8 +124,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E53BF6311350FBCE8375153 /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
-		8252ACE0A913F5672E98A143 /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C0A56975B1D7F50B1B4FA23 /* Pods-SmartZipUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipUITests/Pods-SmartZipUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1C15925F08F1C4AF7EA75494 /* Pods_SmartZipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		611E1960B4950434044D1C85 /* Pods-SmartZipTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests.release.xcconfig"; sourceTree = "<group>"; };
+		9CB4400481621D6200CCFF1F /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
+		A4FD88D26FA000BA8CBE5012 /* Pods_SmartZipUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZipUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CA41D1E4B9800E1BCA9 /* SmartZip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartZip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CB81D1E4B9800E1BCA9 /* SmartZipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartZipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartZipTests.swift; sourceTree = "<group>"; };
@@ -136,7 +141,6 @@
 		D436FD231D1F8C1000F2BE72 /* PhotoPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerVC.swift; sourceTree = "<group>"; };
 		D436FD241D1F8C1000F2BE72 /* UnZipVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnZipVC.swift; sourceTree = "<group>"; };
 		D436FD251D1F8C1000F2BE72 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D436FD2B1D1F8D3A00F2BE72 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D436FD511D1FA6E800F2BE72 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		D436FD541D1FA77A00F2BE72 /* AFImagePager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImagePager.h; sourceTree = "<group>"; };
 		D436FD551D1FA77A00F2BE72 /* AFImagePager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImagePager.m; sourceTree = "<group>"; };
@@ -229,7 +233,9 @@
 		D44DF3641D1E802E000C75B7 /* ExtendedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ExtendedView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF3E11D1EE15E000C75B7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D44DF3E31D1EE393000C75B7 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
-		E37062BADB4BE161AE98DFAE /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
+		D6B8EBF27995F632D1FFD56E /* Pods-SmartZipTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DBE97F56CAF10DF1CCAFC163 /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
+		F3C50BCA1FA963CF8CB9B0B0 /* Pods-SmartZipUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipUITests/Pods-SmartZipUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D436FD521D1FA6E800F2BE72 /* DropboxSDK.framework in Frameworks */,
-				D175C331D2BAB7C541EA1613 /* Pods_SmartZip.framework in Frameworks */,
+				D2A977CD69C1D4C169CA6595 /* Pods_SmartZip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E33959C563C31DD8DD231C4F /* Pods_SmartZipTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56977A5486F545A348DA4ACA /* Pods_SmartZipUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,8 +271,12 @@
 			isa = PBXGroup;
 			children = (
 				D4284CA51D1E4B9800E1BCA9 /* Products */,
-				E37062BADB4BE161AE98DFAE /* Pods-SmartZip.debug.xcconfig */,
-				1E53BF6311350FBCE8375153 /* Pods-SmartZip.release.xcconfig */,
+				9CB4400481621D6200CCFF1F /* Pods-SmartZip.debug.xcconfig */,
+				DBE97F56CAF10DF1CCAFC163 /* Pods-SmartZip.release.xcconfig */,
+				D6B8EBF27995F632D1FFD56E /* Pods-SmartZipTests.debug.xcconfig */,
+				611E1960B4950434044D1C85 /* Pods-SmartZipTests.release.xcconfig */,
+				F3C50BCA1FA963CF8CB9B0B0 /* Pods-SmartZipUITests.debug.xcconfig */,
+				0C0A56975B1D7F50B1B4FA23 /* Pods-SmartZipUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -272,14 +284,12 @@
 		D4284C9B1D1E4B9800E1BCA9 = {
 			isa = PBXGroup;
 			children = (
-				D436FD2B1D1F8D3A00F2BE72 /* Default-568h@2x.png */,
 				D44DF3E31D1EE393000C75B7 /* ReadMe.txt */,
 				D436FD501D1FA6E800F2BE72 /* Frameworks */,
 				D4284CA61D1E4B9800E1BCA9 /* SmartZip */,
 				D4284CBB1D1E4B9800E1BCA9 /* SmartZipTests */,
 				D4284CC61D1E4B9800E1BCA9 /* SmartZipUITests */,
 				9E43BB36368F4560283168B5 /* Pods */,
-				F60E1F4F69A59AED03EC2E47 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -328,6 +338,9 @@
 			isa = PBXGroup;
 			children = (
 				D436FD511D1FA6E800F2BE72 /* DropboxSDK.framework */,
+				3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */,
+				1C15925F08F1C4AF7EA75494 /* Pods_SmartZipTests.framework */,
+				A4FD88D26FA000BA8CBE5012 /* Pods_SmartZipUITests.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -733,14 +746,6 @@
 			path = Storeboards;
 			sourceTree = "<group>";
 		};
-		F60E1F4F69A59AED03EC2E47 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8252ACE0A913F5672E98A143 /* Pods_SmartZip.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -748,12 +753,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4284CCC1D1E4B9800E1BCA9 /* Build configuration list for PBXNativeTarget "SmartZip" */;
 			buildPhases = (
-				A2A1AAEE7A5148AC120C9503 /* Check Pods Manifest.lock */,
+				F788B5F2C938A25C3BA51A8D /* [CP] Check Pods Manifest.lock */,
 				D4284CA01D1E4B9800E1BCA9 /* Sources */,
 				D4284CA11D1E4B9800E1BCA9 /* Frameworks */,
 				D4284CA21D1E4B9800E1BCA9 /* Resources */,
-				9B514AD82E3AD9E507BBB44A /* Embed Pods Frameworks */,
-				A2E5D4716F375CF4399E827E /* Copy Pods Resources */,
+				1945F381EA2BC05A27B06245 /* [CP] Embed Pods Frameworks */,
+				1D985E1B950B5C22E201D672 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -768,9 +773,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4284CCF1D1E4B9800E1BCA9 /* Build configuration list for PBXNativeTarget "SmartZipTests" */;
 			buildPhases = (
+				7B1704A0368B4AE0BF6176D7 /* [CP] Check Pods Manifest.lock */,
 				D4284CB41D1E4B9800E1BCA9 /* Sources */,
 				D4284CB51D1E4B9800E1BCA9 /* Frameworks */,
 				D4284CB61D1E4B9800E1BCA9 /* Resources */,
+				732CF205F55F6B2CFB01DB50 /* [CP] Embed Pods Frameworks */,
+				F77AA0578C1834748492EA9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -786,9 +794,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4284CD21D1E4B9800E1BCA9 /* Build configuration list for PBXNativeTarget "SmartZipUITests" */;
 			buildPhases = (
+				4FBBBBFD75ADC66C3D5422C3 /* [CP] Check Pods Manifest.lock */,
 				D4284CBF1D1E4B9800E1BCA9 /* Sources */,
 				D4284CC01D1E4B9800E1BCA9 /* Frameworks */,
 				D4284CC11D1E4B9800E1BCA9 /* Resources */,
+				1B03CC697C247C3C7E13704C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -859,7 +869,6 @@
 				D436FD5C1D1FA77A00F2BE72 /* KICamera@2x.png in Resources */,
 				D44DF36E1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf in Resources */,
 				D44DF36D1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf in Resources */,
-				D436FD2C1D1F8D3A00F2BE72 /* Default-568h@2x.png in Resources */,
 				D44DF3D91D1E802E000C75B7 /* FeedCollectionCell.xib in Resources */,
 				D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */,
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
@@ -886,14 +895,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9B514AD82E3AD9E507BBB44A /* Embed Pods Frameworks */ = {
+		1945F381EA2BC05A27B06245 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -901,14 +910,44 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A2A1AAEE7A5148AC120C9503 /* Check Pods Manifest.lock */ = {
+		1B03CC697C247C3C7E13704C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZipUITests/Pods-SmartZipUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1D985E1B950B5C22E201D672 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FBBBBFD75ADC66C3D5422C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,19 +955,64 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A2E5D4716F375CF4399E827E /* Copy Pods Resources */ = {
+		732CF205F55F6B2CFB01DB50 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B1704A0368B4AE0BF6176D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F77AA0578C1834748492EA9B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F788B5F2C938A25C3BA51A8D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1138,7 +1222,7 @@
 		};
 		D4284CCD1D1E4B9800E1BCA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E37062BADB4BE161AE98DFAE /* Pods-SmartZip.debug.xcconfig */;
+			baseConfigurationReference = 9CB4400481621D6200CCFF1F /* Pods-SmartZip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1146,6 +1230,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modi.SmartZip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1155,7 +1240,7 @@
 		};
 		D4284CCE1D1E4B9800E1BCA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E53BF6311350FBCE8375153 /* Pods-SmartZip.release.xcconfig */;
+			baseConfigurationReference = DBE97F56CAF10DF1CCAFC163 /* Pods-SmartZip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1163,6 +1248,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modi.SmartZip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1172,6 +1258,7 @@
 		};
 		D4284CD01D1E4B9800E1BCA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6B8EBF27995F632D1FFD56E /* Pods-SmartZipTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SmartZipTests/Info.plist;
@@ -1184,6 +1271,7 @@
 		};
 		D4284CD11D1E4B9800E1BCA9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 611E1960B4950434044D1C85 /* Pods-SmartZipTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SmartZipTests/Info.plist;
@@ -1196,6 +1284,7 @@
 		};
 		D4284CD31D1E4B9800E1BCA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3C50BCA1FA963CF8CB9B0B0 /* Pods-SmartZipUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SmartZipUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1207,6 +1296,7 @@
 		};
 		D4284CD41D1E4B9800E1BCA9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C0A56975B1D7F50B1B4FA23 /* Pods-SmartZipUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SmartZipUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

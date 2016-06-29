@@ -8,7 +8,7 @@
 
 import UIKit
 import MMDrawerController
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -148,12 +148,12 @@ extension AppDelegate {
         return SideMenuManager.sharedManager().container!
     }
     
-    private func enableInputAccessoryView() {
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.orangeColor()
-        IQKeyboardManager.sharedManager().shouldShowTextFieldPlaceholder = false
-        IQKeyboardManager.sharedManager().enableAutoToolbar = true
-    }
+//    private func enableInputAccessoryView() {
+//        IQKeyboardManager.sharedManager().enable = true
+//        IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.orangeColor()
+//        IQKeyboardManager.sharedManager().shouldShowTextFieldPlaceholder = false
+//        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+//    }
     
     private func setupLogger() {
         #if DEBUG

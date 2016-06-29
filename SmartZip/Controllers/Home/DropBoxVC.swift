@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SSZipArchive
 
 class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,DBRestClientDelegate {
     
@@ -22,6 +23,8 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     var dbRestClient: DBRestClient!
     
+    var currentFilePath = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,6 +38,10 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         if DBSession.sharedSession().isLinked() {
             bbiConnect.title = "Disconnect"
             initDropboxRestClient()
+        }else{
+            
+            connectToDropbox(self)
+            
         }
         
     }
@@ -150,6 +157,18 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath)
         let currentFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         cell.textLabel?.text = currentFile.filename
+        
+        if(currentFile.icon == "folder" || currentFile.icon == "folder_app"){
+            
+            cell.imageView?.image = UIImage(named: "folderIcon")
+            
+        }else{
+            
+            cell.imageView?.image = UIImage(named: "fileIcon")
+            
+        }
+        
+        
         return cell
     }
     
@@ -171,6 +190,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             
             let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as NSString
             let exactPath = "\(documentsDirectoryPath)/\(selectedFile.filename)"
+            currentFilePath = exactPath
             showProgressBar()
             dbRestClient.loadFile(selectedFile.path, intoPath: exactPath as String)
             
@@ -244,6 +264,11 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
         print("The file \(metadata.filename) was downloaded. Content type: \(contentType)")
         progressBar.hidden = true
+        
+        let zipPath = "\(currentFilePath).zip"
+        zipMyFiles(zipPath, filePath: currentFilePath)
+        
+        
     }
     
     func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
@@ -264,6 +289,28 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     func restClient(client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
         
         print(error.description)
+        
+    }
+    
+    
+    func zipMyFiles(newZipFile:String, filePath:String) {
+        
+        let success = SSZipArchive.createZipFileAtPath(newZipFile, withFilesAtPaths: [filePath])
+        if success {
+            print("Zip file created successfully")
+            self.shareMyFile(newZipFile)
+        }
+        
+    }
+    
+    func shareMyFile(zipPath:String) -> Void {
+        
+        let fileDAta = NSURL(fileURLWithPath: zipPath)
+        
+        let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
+        ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
+        ac.setValue("My file", forKey: "Subject")
+        self.presentViewController(ac, animated: true, completion: nil)
         
     }
     
