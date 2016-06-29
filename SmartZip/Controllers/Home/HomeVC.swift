@@ -42,7 +42,11 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         if indexPath.section == 0 {
             
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
+                // File
+                handleLocalFile()
+                
+            }else if indexPath.row == 1 {
                 // photos
                 selectPhotos()
                 
