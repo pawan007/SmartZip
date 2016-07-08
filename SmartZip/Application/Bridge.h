@@ -9,7 +9,8 @@
 #define SmartZip_Bridging_Header_h
 
 #import "iCarousel.h"
-//#import "QBImagePickerController.h"
 #import <DropboxSDK/DropboxSDK.h>
-
+#import <GTMOAuth2/GTMOAuth2ViewControllerTouch.h>
+//#import "GTLDrive.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #endif
