@@ -87,6 +87,9 @@ extension UIStoryboard {
     class func dropBoxVC() -> DropBoxVC? {
         return storyboardMain().instantiateViewControllerWithIdentifier("DropBoxVC") as? DropBoxVC
     }
+    class func googleDriveVC() -> GoogleDriveVC? {
+        return storyboardMain().instantiateViewControllerWithIdentifier("GoogleDriveVC") as? GoogleDriveVC
+    }
     
     class func unZipVC() -> UnZipVC? {
         return storyboardMain().instantiateViewControllerWithIdentifier("UnZipVC") as? UnZipVC

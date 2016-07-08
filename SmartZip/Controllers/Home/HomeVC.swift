@@ -62,14 +62,13 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         }else{
             
             if indexPath.row == 0 {
-                // photos
                 useDropBox()
                 
             }else if indexPath.row == 1 {
-                // videos
+                useGoogle()
                 
             }else if indexPath.row == 2 {
-                // Audio
+                // user url path
             }
             
         }
@@ -114,6 +113,14 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     
+    func useGoogle() {
+        
+        let vc = UIStoryboard.googleDriveVC()
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    
+
     func selectVideos () {
         
         let imagePicker = QBImagePickerController()

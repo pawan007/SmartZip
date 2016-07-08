@@ -103,6 +103,8 @@
 		D44DF3DD1D1E802E000C75B7 /* ExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF3641D1E802E000C75B7 /* ExtendedView.swift */; };
 		D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44DF3E11D1EE15E000C75B7 /* Launch Screen.storyboard */; };
 		D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = D44DF3E31D1EE393000C75B7 /* ReadMe.txt */; };
+		D48D5B481D2FFDB200483BA6 /* folderIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D48D5B471D2FFDB200483BA6 /* folderIcon.png */; };
+		D48D5B4A1D2FFDC000483BA6 /* GoogleDriveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D5B491D2FFDC000483BA6 /* GoogleDriveVC.swift */; };
 		E33959C563C31DD8DD231C4F /* Pods_SmartZipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C15925F08F1C4AF7EA75494 /* Pods_SmartZipTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -233,6 +235,8 @@
 		D44DF3641D1E802E000C75B7 /* ExtendedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ExtendedView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF3E11D1EE15E000C75B7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D44DF3E31D1EE393000C75B7 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		D48D5B471D2FFDB200483BA6 /* folderIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folderIcon.png; sourceTree = "<group>"; };
+		D48D5B491D2FFDC000483BA6 /* GoogleDriveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveVC.swift; sourceTree = "<group>"; };
 		D6B8EBF27995F632D1FFD56E /* Pods-SmartZipTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DBE97F56CAF10DF1CCAFC163 /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
 		F3C50BCA1FA963CF8CB9B0B0 /* Pods-SmartZipUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipUITests/Pods-SmartZipUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 		D44DF2B91D1E802E000C75B7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				D48D5B471D2FFDB200483BA6 /* folderIcon.png */,
 				D44DF2BA1D1E802E000C75B7 /* AppDelegate+Notification.swift */,
 				D44DF2BB1D1E802E000C75B7 /* AppDelegate.swift */,
 				D44DF2BC1D1E802E000C75B7 /* Assets.xcassets */,
@@ -420,6 +425,7 @@
 		D44DF2CB1D1E802E000C75B7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D48D5B491D2FFDC000483BA6 /* GoogleDriveVC.swift */,
 				D436FD831D1FBAB000F2BE72 /* ContentViewer.swift */,
 				D436FD211D1F8C1000F2BE72 /* DropBoxVC.swift */,
 				D436FD231D1F8C1000F2BE72 /* PhotoPickerVC.swift */,
@@ -874,6 +880,7 @@
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
 				D44DF3741D1E802E000C75B7 /* Info.plist in Resources */,
 				D436FD861D201CC700F2BE72 /* Main.storyboard in Resources */,
+				D48D5B481D2FFDB200483BA6 /* folderIcon.png in Resources */,
 				D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1072,6 +1079,7 @@
 				D44DF39D1D1E802E000C75B7 /* Dictionary+Additions.swift in Sources */,
 				D44DF3AA1D1E802E000C75B7 /* Range+Additions.swift in Sources */,
 				D436FD821D1FA81100F2BE72 /* Constants.swift in Sources */,
+				D48D5B4A1D2FFDC000483BA6 /* GoogleDriveVC.swift in Sources */,
 				D44DF3BE1D1E802E000C75B7 /* MailManager.swift in Sources */,
 				D44DF37E1D1E802E000C75B7 /* TermsandConditionsViewController.swift in Sources */,
 				D44DF3C11D1E802E000C75B7 /* LocationManager.swift in Sources */,
