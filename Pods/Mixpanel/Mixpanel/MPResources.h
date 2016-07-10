@@ -13,6 +13,5 @@
 
 + (UIStoryboard *)notificationStoryboard;
 + (UIStoryboard *)surveyStoryboard;
-+ (UIImage *)imageNamed:(NSString *)name;
-
+    
 @end

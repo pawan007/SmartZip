@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag on this file.
+#endif
+
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "UIView+MPHelpers.h"
@@ -97,7 +101,7 @@
         self.titleView.text = self.notification.title;
         self.bodyView.text = self.notification.body;
 
-        if (self.notification.callToAction.length > 0) {
+        if (self.notification.callToAction && [self.notification.callToAction length] > 0) {
             [self.okayButton setTitle:self.notification.callToAction forState:UIControlStateNormal];
         }
         
@@ -109,7 +113,7 @@
             [self.okayButton setTitleColor:[UIColor colorWithRed:123/255.0 green:146/255.0 blue:163/255.0 alpha:1] forState:UIControlStateNormal];
             self.okayButton.layer.borderColor = [UIColor colorWithRed:218/255.0 green:223/255.0 blue:232/255.0 alpha:1].CGColor;
             UIImage *origImage = [self.closeButton imageForState:UIControlStateNormal];
-            UIImage *tintedImage = [origImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            id tintedImage = [origImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [self.closeButton setImage:tintedImage forState:UIControlStateNormal];
             self.closeButton.tintColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
         }
@@ -142,32 +146,40 @@
     return NO;
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
+#endif
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
 {
     return UIStatusBarAnimationFade;
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
+#else
+- (NSUInteger)supportedInterfaceOrientations
+#endif
 {
     return UIInterfaceOrientationMaskAll;
 }
 
 - (IBAction)pressedOkay
 {
-    if ([self.delegate respondsToSelector:@selector(notificationController:wasDismissedWithStatus:)]) {
-        [self.delegate notificationController:self wasDismissedWithStatus:YES];
+    id<MPNotificationViewControllerDelegate> delegate = self.delegate;
+    if (delegate && [delegate respondsToSelector:@selector(notificationController:wasDismissedWithStatus:)]) {
+        [delegate notificationController:self wasDismissedWithStatus:YES];
     }
 }
 
 - (IBAction)pressedClose
 {
-    if ([self.delegate respondsToSelector:@selector(notificationController:wasDismissedWithStatus:)]) {
-        [self.delegate notificationController:self wasDismissedWithStatus:NO];
+    id<MPNotificationViewControllerDelegate> delegate = self.delegate;
+    if (delegate && [delegate respondsToSelector:@selector(notificationController:wasDismissedWithStatus:)]) {
+        [delegate notificationController:self wasDismissedWithStatus:NO];
     }
 }
 
@@ -179,7 +191,7 @@
             _touching = YES;
         } else if (gesture.state == UIGestureRecognizerStateChanged) {
             CGPoint translation = [gesture translationInView:self.view];
-            self.imageView.layer.position = CGPointMake(0.3f * translation.x + _viewStart.x, 0.3f * translation.y + _viewStart.y);
+            self.imageView.layer.position = CGPointMake(0.3f * (translation.x) + _viewStart.x, 0.3f * (translation.y) + _viewStart.y);
         }
     }
 
@@ -230,7 +242,7 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
     self.bodyLabel.font = [UIFont systemFontOfSize:14.0f];
     self.bodyLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.bodyLabel.numberOfLines = 0;
-
+    
     [self initializeMiniNotification];
 
     if (self.notification != nil) {
@@ -252,7 +264,7 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
             self.view.backgroundColor = [UIColor whiteColor];
             self.bodyLabel.textColor = [UIColor colorWithRed:123/255.0 green:146/255.0 blue:163/255.0 alpha:1];
             UIImage *origImage = self.imageView.image;
-            UIImage *tintedImage = [origImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            id tintedImage = [origImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             self.imageView.image = tintedImage;
             self.imageView.tintColor = [UIColor colorWithRed:123/255.0 green:146/255.0 blue:163/255.0 alpha:1];
             self.view.layer.borderColor = [UIColor colorWithRed:218/255.0 green:223/255.0 blue:232/255.0 alpha:1].CGColor;
@@ -281,7 +293,20 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 - (void)viewWillLayoutSubviews
 {
     UIView *parentView = self.view.superview;
-    CGRect parentFrame = parentView.frame;
+    CGRect parentFrame;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+    parentFrame = parentView.frame;
+#elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([self respondsToSelector:@selector(viewWillTransitionToSize:withTransitionCoordinator:)]) {
+        parentFrame = parentView.frame;
+    } else {
+        double angle = [self angleForInterfaceOrientation:[self interfaceOrientation]];
+        parentFrame = CGRectApplyAffineTransform(parentView.frame, CGAffineTransformMakeRotation((float)angle));
+    }
+#else
+    double angle = [self angleForInterfaceOrientation:[self interfaceOrientation]];
+    parentFrame = CGRectApplyAffineTransform(parentView.frame, CGAffineTransformMakeRotation((float)angle));
+#endif
 
     if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         self.view.frame = CGRectMake(15, parentFrame.size.height - MPNotifHeight - MPMiniNotificationSpacingFromBottom, parentFrame.size.width - 30, MPNotifHeight);
@@ -300,10 +325,29 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 
     // Position body label
     CGSize constraintSize = CGSizeMake(self.view.frame.size.width - MPNotifHeight - 12.5f, CGFLOAT_MAX);
-    CGSize sizeToFit = [self.bodyLabel.text boundingRectWithSize:constraintSize
-                                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                                      attributes:@{NSFontAttributeName: self.bodyLabel.font}
-                                                         context:nil].size;
+    CGSize sizeToFit;
+    // Use boundingRectWithSize for iOS 7 and above, sizeWithFont otherwise.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
+        sizeToFit = [self.bodyLabel.text boundingRectWithSize:constraintSize
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:@{NSFontAttributeName: self.bodyLabel.font}
+                                                  context:nil].size;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+
+        sizeToFit = [self.bodyLabel.text sizeWithFont:self.bodyLabel.font
+                                constrainedToSize:constraintSize
+                                    lineBreakMode:self.bodyLabel.lineBreakMode];
+
+#pragma clang diagnostic pop
+    }
+#else
+        sizeToFit = [self.bodyLabel.text sizeWithFont:self.bodyLabel.font
+                                constrainedToSize:constraintSize
+                                    lineBreakMode:self.bodyLabel.lineBreakMode];
+#endif
 
     self.bodyLabel.frame = CGRectMake(MPNotifHeight, (CGFloat)ceil((MPNotifHeight - sizeToFit.height) / 2.0f) - 2.0f, (CGFloat)ceil(sizeToFit.width), (CGFloat)ceil(sizeToFit.height));
 }
@@ -311,9 +355,12 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 - (UIView *)getTopView
 {
     UIView *topView = nil;
-    for (UIView *subview in [UIApplication sharedApplication].keyWindow.subviews) {
-        if (!subview.hidden && subview.alpha > 0 && subview.frame.size.width > 0 && subview.frame.size.height > 0) {
-            topView = subview;
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    if(window) {
+        for (UIView *subview in window.subviews) {
+            if (!subview.hidden && subview.alpha > 0 && subview.frame.size.width > 0 && subview.frame.size.height > 0) {
+                topView = subview;
+            }
         }
     }
     return topView;
@@ -339,7 +386,23 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 
     UIView *topView = [self getTopView];
     if (topView) {
-        CGRect topFrame = topView.frame;
+
+        CGRect topFrame;
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+        topFrame = topView.frame;
+#elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+        if ([self respondsToSelector:@selector(viewWillTransitionToSize:withTransitionCoordinator:)]) {
+            topFrame = topView.frame;
+        } else {
+            double angle = [self angleForInterfaceOrientation:[self interfaceOrientation]];
+            topFrame = CGRectApplyAffineTransform(topView.frame, CGAffineTransformMakeRotation((float)angle));
+        }
+#else
+        double angle = [self angleForInterfaceOrientation:[self interfaceOrientation]];
+        topFrame = CGRectApplyAffineTransform(topView.frame, CGAffineTransformMakeRotation((float)angle));
+#endif
+
         [topView addSubview:self.view];
 
         _canPan = NO;
@@ -384,26 +447,48 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 
     if (!_isBeingDismissed) {
         _isBeingDismissed = YES;
-        
-        CGFloat duration = animated ? 0.5f : 0.f;
-        CGRect parentFrame = self.view.superview.frame;
-        
-        [UIView animateWithDuration:duration
-                         animations:^{
-                             self.view.frame = CGRectMake(self.view.frame.origin.x, parentFrame.size.height, self.view.frame.size.width, self.view.frame.size.height);
-                         } completion:^(BOOL finished) {
-                             [self.view removeFromSuperview];
-                             if (completion) {
-                                 completion();
-                             }
-                         }];
+
+        CGFloat duration;
+
+        if (animated) {
+            duration = 0.5f;
+        } else {
+            duration = 0.0f;
+        }
+
+        UIView *parentView = self.view.superview;
+        CGRect parentFrame;
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+        parentFrame = parentView.frame;
+#elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+        if ([self respondsToSelector:@selector(viewWillTransitionToSize:withTransitionCoordinator:)]) {
+            parentFrame = parentView.frame;
+        } else {
+            double angle = [self angleForInterfaceOrientation:[self interfaceOrientation]];
+            parentFrame = CGRectApplyAffineTransform(parentView.frame, CGAffineTransformMakeRotation((float)angle));
+        }
+#else
+        double angle = [self angleForInterfaceOrientation:[self interfaceOrientation]];
+        parentFrame = CGRectApplyAffineTransform(parentView.frame, CGAffineTransformMakeRotation((float)angle));
+#endif
+
+        [UIView animateWithDuration:duration animations:^{
+            self.view.frame = CGRectMake(0.0f, parentFrame.size.height, parentFrame.size.width, MPNotifHeight * 3.0f);
+        } completion:^(BOOL finished) {
+            [self.view removeFromSuperview];
+            if (completion) {
+                completion();
+            }
+        }];
     }
 }
 
 - (void)didTap:(UITapGestureRecognizer *)gesture
 {
-    if (!_isBeingDismissed && gesture.state == UIGestureRecognizerStateEnded) {
-        [self.delegate notificationController:self wasDismissedWithStatus:YES];
+    id strongDelegate = self.delegate;
+    if (!_isBeingDismissed && gesture.state == UIGestureRecognizerStateEnded && strongDelegate != nil) {
+        [strongDelegate notificationController:self wasDismissedWithStatus:YES];
     }
 }
 
@@ -442,7 +527,7 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder]) {
+    if(self = [super initWithCoder:aDecoder]) {
         _maskLayer = [GradientMaskLayer layer];
         [self.layer setMask:_maskLayer];
         self.opaque = NO;
@@ -563,16 +648,17 @@ static const NSUInteger MPMiniNotificationSpacingFromBottom = 10;
 
 - (void)drawInContext:(CGContextRef)ctx
 {
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
 
-    CGFloat components[] = { //[Grayscale, Alpha] for each component
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    CGFloat components[] = {
         1.0f, 1.0f,
         1.0f, 1.0f,
-        1.0f, 0.0f,
+        1.0f, 0.9f,
         1.0f, 0.0f};
 
-    CGFloat locations[] = {0.0f, 0.4f, 0.9f, 1.0f};
-    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, 4);
+    CGFloat locations[] = {0.0f, 0.7f, 0.8f, 1.0f};
+
+    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, 7);
     CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0.0f, 0.0f), CGPointMake(5.0f, self.bounds.size.height), (CGGradientDrawingOptions)0);
 
 

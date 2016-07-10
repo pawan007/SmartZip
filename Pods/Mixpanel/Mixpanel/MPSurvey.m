@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag on this file.
+#endif
+
 #import "MPLogger.h"
 #import "MPSurvey.h"
 #import "MPSurveyQuestion.h"
@@ -22,7 +26,7 @@
         return nil;
     }
     NSNumber *ID = object[@"id"];
-    if (!([ID isKindOfClass:[NSNumber class]] && ID.integerValue > 0)) {
+    if (!([ID isKindOfClass:[NSNumber class]] && [ID integerValue] > 0)) {
         MixpanelError(@"invalid survey id: %@", ID);
         return nil;
     }
@@ -32,7 +36,7 @@
         return nil;
     }
     NSArray *collections = object[@"collections"];
-    if (!([collections isKindOfClass:[NSArray class]] && collections.count > 0)) {
+    if (!([collections isKindOfClass:[NSArray class]] && [collections count] > 0)) {
         MixpanelError(@"invalid survey collections: %@", collections);
         return nil;
     }
@@ -42,7 +46,7 @@
         return nil;
     }
     NSNumber *collectionID = collection[@"id"];
-    if (!([collectionID isKindOfClass:[NSNumber class]] && collectionID.integerValue > 0)) {
+    if (!([collectionID isKindOfClass:[NSNumber class]] && [collectionID integerValue] > 0)) {
         MixpanelError(@"invalid survey collection id: %@", collectionID);
         return nil;
     }
@@ -53,21 +57,21 @@
             [questions addObject:q];
         }
     }
-    return [[MPSurvey alloc] initWithID:ID.unsignedIntegerValue
-                                   name:name
-                           collectionID:collectionID.unsignedIntegerValue
-                           andQuestions:[NSArray arrayWithArray:questions]];
+    return [[MPSurvey alloc] initWithID:[ID unsignedIntegerValue]
+                                    name:name
+                            collectionID:[collectionID unsignedIntegerValue]
+                            andQuestions:[NSArray arrayWithArray:questions]];
 }
 
 - (instancetype)initWithID:(NSUInteger)ID name:(NSString *)name collectionID:(NSUInteger)collectionID andQuestions:(NSArray *)questions
 {
     if (self = [super init]) {
         BOOL valid = YES;
-        if (name.length == 0) {
+        if (!(name && name.length > 0)) {
             valid = NO;
             MixpanelError(@"Invalid survey name %@", name);
         }
-        if (questions.count == 0) {
+        if (!(questions && [questions count] > 0)) {
             valid = NO;
             MixpanelError(@"Survey must have at least one question %@", questions);
         }
@@ -86,7 +90,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@, (ID:%lu, collection:%lu questions:%lu)", self.name, (unsigned long)self.ID, (unsigned long)self.collectionID, (unsigned long)self.questions.count];
+    return [NSString stringWithFormat:@"%@, (ID:%lu, collection:%lu questions:%lu)", self.name, (unsigned long)self.ID, (unsigned long)self.collectionID, (unsigned long)[self.questions count]];
 }
 
 

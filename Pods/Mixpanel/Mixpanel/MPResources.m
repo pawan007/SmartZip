@@ -37,9 +37,4 @@
     return [NSBundle bundleForClass:self.class];
 }
 
-+ (UIImage *)imageNamed:(NSString *)name {
-    NSString *imagePath = [[MPResources frameworkBundle] pathForResource:name ofType:@"png"];
-    return [UIImage imageWithContentsOfFile:imagePath];
-}
-
 @end

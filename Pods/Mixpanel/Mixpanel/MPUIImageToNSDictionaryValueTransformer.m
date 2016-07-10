@@ -3,6 +3,7 @@
 
 #import <ImageIO/ImageIO.h>
 #import "MPValueTransformers.h"
+#import "NSData+MPBase64.h"
 
 @implementation MPUIImageToNSDictionaryValueTransformer
 
@@ -38,21 +39,28 @@ static NSMutableDictionary *imageCache;
 
         NSArray *images = image.images ?: @[ image ];
 
-        NSMutableArray *imageDictionaries = [NSMutableArray array];
+        NSMutableArray *imageDictionaries = [[NSMutableArray alloc] init];
         for (UIImage *frame in images) {
-            NSData *imageData = UIImagePNGRepresentation(frame);
-            NSString *imageDataString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-            NSDictionary *imageDictionary = @{ @"scale": @(image.scale),
-                                               @"mime_type": @"image/png",
-                                               @"data": (imageData != nil ? imageDataString : [NSNull null]) };
+            NSData *imageRep = UIImagePNGRepresentation(frame);
+            NSDictionary *imageDictionary = @{
+                @"scale": @(image.scale),
+                @"mime_type" : @"image/png",
+                @"data": ((imageRep != nil) ? [imageRep mp_base64EncodedString] : [NSNull null])
+            };
 
             [imageDictionaries addObject:imageDictionary];
         }
 
+        NSInteger renderingMode = 0;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        if ([image respondsToSelector:@selector(renderingMode)]) {
+            renderingMode = image.renderingMode;
+        }
+#endif
         transformedValue = @{
            @"imageOrientation": @(image.imageOrientation),
            @"size": [sizeTransformer transformedValue:sizeValue],
-           @"renderingMode": @(image.renderingMode),
+           @"renderingMode": @(renderingMode),
            @"resizingMode": @(image.resizingMode),
            @"duration": @(image.duration),
            @"capInsets": [insetsTransformer transformedValue:capInsetsValue],
@@ -74,7 +82,7 @@ static NSMutableDictionary *imageCache;
         NSArray *imagesDictionary = dictionaryValue[@"images"];
         UIEdgeInsets capInsets = [[insetsTransformer reverseTransformedValue:dictionaryValue[@"capInsets"]] UIEdgeInsetsValue];
 
-        NSMutableArray *images = [NSMutableArray array];
+        NSMutableArray *images = [[NSMutableArray alloc] init];
         for (NSDictionary *imageDictionary in imagesDictionary) {
             NSNumber *scale = imageDictionary[@"scale"];
             UIImage *image;
@@ -87,11 +95,9 @@ static NSMutableDictionary *imageCache;
                     NSError *error;
                     NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:(NSDataReadingOptions)0 error:&error];
                     if (!error) {
-                        image = [UIImage imageWithData:imageData scale:fminf(1.0, scale.floatValue)];
+                        image = [UIImage imageWithData:imageData scale:fminf(1.0, [scale floatValue])];
                         @synchronized(imageCache) {
-                            if (image) {
-                                imageCache[imageDictionary[@"url"]] = image;
-                            }
+                            [imageCache setValue:image forKey:imageDictionary[@"url"]];
                         }
                     }
                 }
@@ -105,9 +111,7 @@ static NSMutableDictionary *imageCache;
                 }
             }
             else if (imageDictionary[@"data"] && imageDictionary[@"data"] != [NSNull null]) {
-                NSData *imageData = [[NSData alloc] initWithBase64EncodedString:imageDictionary[@"data"]
-                                                                        options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                image = [UIImage imageWithData:imageData scale:fminf(1.0, scale.floatValue)];
+                image = [UIImage imageWithData:[NSData mp_dataFromBase64String:imageDictionary[@"data"]] scale:fminf(1.0, [scale floatValue])];
             }
 
             if (image) {
@@ -117,11 +121,11 @@ static NSMutableDictionary *imageCache;
 
         UIImage *image = nil;
 
-        if (images.count > 1) {
+        if ([images count] > 1) {
             // animated image
             image =  [UIImage animatedImageWithImages:images duration:[dictionaryValue[@"duration"] doubleValue]];
         }
-        else if (images.count > 0)
+        else if ([images count] > 0)
         {
             image = images[0];
         }

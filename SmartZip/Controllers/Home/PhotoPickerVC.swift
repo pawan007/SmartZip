@@ -18,18 +18,9 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     
     var flagImage = false
     var flagVideo = false
-    /*var Timestamp: String {
-     
-     let date = NSDate()
-     let dateFormatter = NSDateFormatter()
-     dateFormatter.dateFormat = "YYYY-MM-DD-HH-mm-ss"
-     return dateFormatter.stringFromDate(date)
-     }*/
-    
     var totalItem = 0
     var currentItem = 0
     var folderDir = ""
-    
     var isLastIndex = false
     var totalfileCount = 0
     var currentFile = 0

@@ -103,7 +103,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="DeU-Ec-I4M">
-                        <barButtonItem key="leftBarButtonItem" image="30AA71DC-CBF0-4736-93C7-E86BCAC9D527" id="IMa-Ga-yTt">
+                        <barButtonItem key="leftBarButtonItem" image="ED73351F-7A43-4216-8E80-F9E9CEE56F76" id="IMa-Ga-yTt">
                             <connections>
                                 <action selector="menuButtonAction:" destination="BYZ-38-t0r" id="ETM-Id-i5h"/>
                             </connections>
@@ -460,7 +460,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BuyProCell" id="uft-gr-YV7">
-                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uft-gr-YV7" id="Rb1-HZ-xGc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -502,7 +502,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestoreCell" id="EQu-Ur-45V">
-                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EQu-Ur-45V" id="Moc-EJ-Me0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -544,7 +544,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShareAppCell" id="2ok-oS-IjZ">
-                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2ok-oS-IjZ" id="S3s-Ph-sRq">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -586,7 +586,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RateAppCell" id="hp1-6o-lYm">
-                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hp1-6o-lYm" id="cxw-ca-31R">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -628,7 +628,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmailCell" id="hh0-wr-ak4">
-                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hh0-wr-ak4" id="XEd-s7-ov3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -670,7 +670,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TutorialCell" id="iZx-hf-1p3">
-                                        <rect key="frame" x="0.0" y="336" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iZx-hf-1p3" id="O05-1S-Vju">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -786,7 +786,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="GwN-xy-4Fe"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPT-do-nej">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPT-do-nej">
                                                     <rect key="frame" x="46" y="11" width="64.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="250" constant="64" id="SAc-7w-he3"/>
@@ -822,7 +822,7 @@
                                                         <constraint firstAttribute="width" constant="15" id="lUB-0h-tAh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p03-HW-VWf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p03-HW-VWf">
                                                     <rect key="frame" x="46" y="11" width="53" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="chk-l9-CEn"/>
@@ -858,7 +858,7 @@
                                                         <constraint firstAttribute="width" constant="15" id="aPy-0f-lB6"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAg-Ze-YFE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAg-Ze-YFE">
                                                     <rect key="frame" x="46" y="11" width="44.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="250" constant="64" id="IPp-xu-HAI"/>
@@ -931,7 +931,7 @@
                                                         <constraint firstAttribute="width" constant="15" id="k1y-ya-mnY"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google Drive" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uh3-Xi-K95">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Google Drive" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uh3-Xi-K95">
                                                     <rect key="frame" x="46" y="11" width="100.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="9ow-wG-LpU"/>
@@ -967,7 +967,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="QYJ-Re-bm2"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Drive" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txi-g3-uU5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="One Drive" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txi-g3-uU5">
                                                     <rect key="frame" x="46" y="11" width="77" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="HkG-jm-pRT"/>
@@ -1003,7 +1003,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="hGU-cc-Z70"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Box" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCY-Lg-xaZ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Box" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCY-Lg-xaZ">
                                                     <rect key="frame" x="46" y="11" width="29" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="250" constant="64" id="DLu-Hy-aO2"/>
@@ -1211,7 +1211,6 @@
         <!--First View Controller-->
         <scene sceneID="oWT-eW-adU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QBl-D5-Z9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="4Wz-sB-g4k" customClass="FirstViewController" customModule="SmartZip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g9y-zZ-5Hx"/>
@@ -1224,12 +1223,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="RjD-pN-LEJ"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QBl-D5-Z9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="635" y="-529"/>
         </scene>
     </scenes>
     <resources>
-        <image name="30AA71DC-CBF0-4736-93C7-E86BCAC9D527" width="22" height="15">
+        <image name="Background" width="320" height="568"/>
+        <image name="ED73351F-7A43-4216-8E80-F9E9CEE56F76" width="22" height="15">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -1302,7 +1303,6 @@ AMIA2QDbAN0Opw6sDrcOwA7TDtcO4g7rDvAO+A77DwAPDw8TDxoPIg8vDzQPNg84Dz0PRQ9ID00PVQ9Y
 D2oPbQ9yAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAD3Q
 </mutableData>
         </image>
-        <image name="Background" width="320" height="568"/>
         <image name="Ic_Back" width="17" height="15"/>
         <image name="Ic_Menu" width="22" height="15"/>
         <image name="ic_email" width="22" height="22"/>
