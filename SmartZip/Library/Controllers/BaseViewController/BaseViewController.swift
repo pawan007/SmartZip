@@ -16,9 +16,9 @@ public class BaseViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        if let navBarFont = UIFont(name: Constants.Fonts.ProximaNovaRegular , size: 17.0) {
+        if let navBarFont = UIFont(name: Constants.Fonts.ProximaNovaSemiBold , size: 18.0) {
             let navBarAttributesDictionary: [String: AnyObject]? = [
-                NSForegroundColorAttributeName: UIColor.darkGrayColor(),
+                NSForegroundColorAttributeName: UIColor.whiteColor(), // Nav text color
                 NSFontAttributeName: navBarFont
             ]
             navigationController?.navigationBar.titleTextAttributes = navBarAttributesDictionary
@@ -106,4 +106,20 @@ public class BaseViewController: UIViewController {
     func keyboardWillHide(sender: NSNotification) {
         self.removeTapGesture()
     }
+    
+    
+    // MARK: Add Left or Right menu
+    func addRightMenu() {
+        let img = UIImage(named: "Menu")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        navigationItem.rightBarButtonItem  = UIBarButtonItem(image:img, style: .Plain, target: self, action: #selector(SSASideMenu.presentRightMenuViewController))
+    }
+    
+    func addLeftMenu() {
+        let img = UIImage(named: "Menu")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        
+        navigationItem.leftBarButtonItem  = UIBarButtonItem(image:img, style: .Plain, target: self, action: #selector(SSASideMenu.presentLeftMenuViewController))
+        
+        // navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Left", style: .Plain, target: self, action: #selector(SSASideMenu.presentLeftMenuViewController))
+    }
+    
 }

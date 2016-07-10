@@ -16,7 +16,7 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var topTableView: UITableView!
     
-    private var topTableIDs = ["HelpCell","BuyProCell","RestoreCell","PasswordCell","ShareAppCell","RateAppCell","EmailCell","TutorialCell"]
+    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
     
     override internal func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.topTableView.reloadData()
+       // self.topTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,12 +36,11 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
 extension LeftMenuViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  topTableIDs.count
+        return topTableIDs.count
         
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(topTableIDs[indexPath.row])
         return cell!
     }
@@ -51,8 +50,35 @@ extension LeftMenuViewController: UITableViewDataSource {
 
 
 // MARK: - UITableViewDelegate
-extension LeftMenuViewController: UITableViewDelegate
-{
+extension LeftMenuViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            //sideMenuViewController?.contentViewController = UINavigationController(rootViewController: (self.storyboard?.instantiateViewControllerWithIdentifier("FirstViewController") as? FirstViewController)!)
+            sideMenuViewController?.contentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("FirstViewController")
+            sideMenuViewController?.hideMenuViewController()
+            break
+        case 1:
+            //sideMenuViewController?.contentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PasscodeVC")
+            //sideMenuViewController?.hideMenuViewController()
+             break
+        case 2:
+            break
+        case 3:
+            break
+        case 4:
+            
+            break
+        default:
+            break
+        }
+    }
+    
+    /*
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.topTableViewSelected(tableView, didSelectRowAtIndexPath: indexPath)
     }
@@ -80,7 +106,6 @@ extension LeftMenuViewController: UITableViewDelegate
             container!.closeDrawerAnimated(true, completion: { (Bool) in
                 let passcodeVC : PasscodeVC = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("PasscodeVC") as! PasscodeVC
                 self.presentViewController(passcodeVC, animated: true, completion: nil)
-                //self.navigationController?.pushViewController(passcodeVC, animated: true)
             })
             break
         //TODO
@@ -165,6 +190,7 @@ extension LeftMenuViewController: UITableViewDelegate
             }
         }
     }
+   */
 }
 
 

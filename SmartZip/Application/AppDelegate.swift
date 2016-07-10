@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        /*
         // Override point for customization after application launch.
         let appKey = "xhhur59zpqig0ob"      // Set your own app key value here.
         let appSecret = "js2v6cbtl5oysjd"   // Set your own app secret value here.
@@ -33,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
             return true
         }
+       */
         AppDelegate.presentRootViewController()
+        ApperanceSetup()
         return true
     }
 
@@ -69,6 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return false
+    }
+    
+    
+    
+    func ApperanceSetup() {
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UINavigationBar.appearance().setBackgroundImage(UIImage.fromColor(.purpleColor()), forBarMetrics:.Default)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().barStyle = .Black
     }
 
 
@@ -135,6 +148,7 @@ extension AppDelegate {
     
     class func rootControllerForLoggenInUser() -> UIViewController
     {
+        /*
         let storyboard = UIStoryboard.mainStoryboard()
         
         let leftDrawer = storyboard.instantiateViewControllerWithIdentifier("LeftMenuViewController")
@@ -146,6 +160,12 @@ extension AppDelegate {
             drawer.centerViewController = center
         }
         return SideMenuManager.sharedManager().container!
+        */
+        
+        let storyboard = UIStoryboard.mainStoryboard()
+        let navController = storyboard.instantiateInitialViewController()
+        return navController!
+        
     }
     
     private func enableInputAccessoryView() {
