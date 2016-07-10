@@ -103,7 +103,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="DeU-Ec-I4M">
-                        <barButtonItem key="leftBarButtonItem" image="4D41E59D-0A45-4700-A629-6BF060D2506A" id="IMa-Ga-yTt">
+                        <barButtonItem key="leftBarButtonItem" image="30AA71DC-CBF0-4736-93C7-E86BCAC9D527" id="IMa-Ga-yTt">
                             <connections>
                                 <action selector="menuButtonAction:" destination="BYZ-38-t0r" id="ETM-Id-i5h"/>
                             </connections>
@@ -1229,7 +1229,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4D41E59D-0A45-4700-A629-6BF060D2506A" width="22" height="15">
+        <image name="30AA71DC-CBF0-4736-93C7-E86BCAC9D527" width="22" height="15">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
