@@ -9,6 +9,7 @@
 import UIKit
 import GoogleAPIClient
 import GTMOAuth2
+import SwiftSpinner
 
 class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -54,7 +55,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // This view controller itself will provide the delegate methods and row data for the table view.
         tableView.delegate = self
         tableView.dataSource = self
-        
+        self.title = "Google Drive"
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -84,6 +85,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Construct a query to get names and IDs of 10 files using the Google Drive API
     func fetchFiles() {
         //        output.text = "Getting files..."
+        SwiftSpinner.show("Processing, please wait..")
         let query = GTLQueryDrive.queryForFilesList()
         query.pageSize = 1000
         query.fields = "nextPageToken, files(id, name, mimeType, iconLink)"
@@ -130,6 +132,8 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func displayResultWithTicket(ticket : GTLServiceTicket,
                                  finishedWithObject response : GTLDriveFileList,
                                                     error : NSError?) {
+        
+        SwiftSpinner.hide()
         
         if let error = error {
             showAlert("Error", message: error.localizedDescription)
@@ -254,22 +258,27 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         if(file.mimeType == "application/vnd.google-apps.folder"){
             
-            fetchFolderFiles(file.identifier)
+            //            fetchFolderFiles(file.identifier)
             
         }else if(file.mimeType == "application/vnd.google-apps.spreadsheet" || file.mimeType == "application/vnd.google-apps.presentation" || file.mimeType == "application/vnd.google-apps.document" ){
             
+            SwiftSpinner.show("Processing, please wait..")
+            
             let file = self.files[indexPath.row] as GTLDriveFile
             let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)/export?alt=media&mimeType=application/pdf"
-            
             let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
-            
-            
             
             fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
                 
+                SwiftSpinner.hide()
+                
                 if(error == nil){
                     
-                    data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
+                    let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
+                    data?.writeToFile(exactPath, atomically: true)
+                    let zipPath = "\(exactPath).zip"
+                    CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
+                    
                     
                 }else{
                     
@@ -281,16 +290,22 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
         }else{
             
+            SwiftSpinner.show("Processing, please wait..")
+            
             let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)?alt=media"
-            
             let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
-            
             
             fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
                 
+                SwiftSpinner.hide()
+                
                 if(error == nil){
                     
-                    data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
+                    //                    data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
+                    let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
+                    data?.writeToFile(exactPath, atomically: true)
+                    let zipPath = "\(exactPath).zip"
+                    CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                     
                 }else{
                     
@@ -307,15 +322,22 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func downloadExportDocument(file:GTLDriveFile) -> Void {
         
+        SwiftSpinner.show("Processing, please wait..")
+        
         let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)/export?alt=media&mimeType=\(file.mimeType)"
         
         let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
         
         fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
             
+            SwiftSpinner.hide()
+            
             if(error == nil){
                 
-                data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
+                let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
+                data?.writeToFile(exactPath, atomically: true)
+                let zipPath = "\(exactPath).zip"
+                CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                 
             }else{
                 
@@ -328,14 +350,22 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func downloadNormalDocument(file:GTLDriveFile) -> Void {
         
+        SwiftSpinner.show("Processing, please wait..")
+        
         let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)?alt=media"
         let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
         
         fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
             
+            SwiftSpinner.hide()
+            
             if(error == nil){
                 
-                data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
+                //                data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
+                let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
+                data?.writeToFile(exactPath, atomically: true)
+                let zipPath = "\(exactPath).zip"
+                CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                 
             }else{
                 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		56977A5486F545A348DA4ACA /* Pods_SmartZipUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4FD88D26FA000BA8CBE5012 /* Pods_SmartZipUITests.framework */; };
+		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
 		D2A977CD69C1D4C169CA6595 /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
 		D4284CC81D1E4B9800E1BCA9 /* SmartZipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CC71D1E4B9800E1BCA9 /* SmartZipUITests.swift */; };
@@ -130,6 +131,7 @@
 		1C15925F08F1C4AF7EA75494 /* Pods_SmartZipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611E1960B4950434044D1C85 /* Pods-SmartZipTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests.release.xcconfig"; sourceTree = "<group>"; };
+		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		9CB4400481621D6200CCFF1F /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
 		A4FD88D26FA000BA8CBE5012 /* Pods_SmartZipUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZipUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CA41D1E4B9800E1BCA9 /* SmartZip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartZip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -425,6 +427,7 @@
 		D44DF2CB1D1E802E000C75B7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				87B56FA21D3675F100782F96 /* CommonFunctions.swift */,
 				D48D5B491D2FFDC000483BA6 /* GoogleDriveVC.swift */,
 				D436FD831D1FBAB000F2BE72 /* ContentViewer.swift */,
 				D436FD211D1F8C1000F2BE72 /* DropBoxVC.swift */,
@@ -1099,6 +1102,7 @@
 				D436FD2A1D1F8C1000F2BE72 /* ViewController.swift in Sources */,
 				D44DF3931D1E802E000C75B7 /* DesignableTextField.swift in Sources */,
 				D44DF3771D1E802E000C75B7 /* IAPHelper.swift in Sources */,
+				87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */,
 				D44DF3781D1E802E000C75B7 /* RageProducts.swift in Sources */,
 				D44DF36A1D1E802E000C75B7 /* AppDelegate+Notification.swift in Sources */,
 				D44DF3AF1D1E802E000C75B7 /* UIDevice+Additions.swift in Sources */,

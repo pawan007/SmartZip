@@ -8,6 +8,7 @@
 
 import UIKit
 import SSZipArchive
+import SwiftSpinner
 
 class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,DBRestClientDelegate {
     
@@ -25,9 +26,13 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     var currentFilePath = ""
     
+    var viewLoadedFirstTime = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.navigationController?.navigationBarHidden = true
         
         tblFiles.delegate = self
         tblFiles.dataSource = self
@@ -51,6 +56,17 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //        if !viewLoadedFirstTime {
+        //            viewLoadedFirstTime = true
+        //        }else if !DBSession.sharedSession().isLinked(){
+        //            self.btnBackTapped(self)
+        //        }
+        
+    }
+    
     
     // MARK: IBAction method implementation
     
@@ -63,6 +79,9 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             DBSession.sharedSession().unlinkAll()
             bbiConnect.title = "Connect"
             dbRestClient = nil
+            arrayDropboxMetaData.removeAllObjects()
+            dropboxMetadata = nil
+            tblFiles.reloadData()
         }
     }
     
@@ -116,20 +135,26 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     @IBAction func btnBackTapped(sender: AnyObject) {
         
-        
-        if arrayDropboxMetaData.count == 1 {
+        if DBSession.sharedSession().isLinked() {
             
-            self.navigationController?.popViewControllerAnimated(true)
+            if arrayDropboxMetaData.count == 1 {
+                
+                self.navigationController?.navigationBarHidden = false
+                self.navigationController?.popViewControllerAnimated(true)
+                
+            }else{
+                
+                arrayDropboxMetaData.removeLastObject()
+                dropboxMetadata = arrayDropboxMetaData.lastObject as! DBMetadata
+                tblFiles.reloadData()
+                
+            }
             
         }else{
             
-            arrayDropboxMetaData.removeLastObject()
-            dropboxMetadata = arrayDropboxMetaData.lastObject as! DBMetadata
-            
-            tblFiles.reloadData()
-            
+            self.navigationController?.navigationBarHidden = false
+            self.navigationController?.popViewControllerAnimated(true)
         }
-        
         
     }
     
@@ -182,14 +207,12 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         let selectedFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         if(selectedFile.icon == "folder" || selectedFile.icon == "folder_app"){
             
+            SwiftSpinner.show("Processing, please wait..")
             dbRestClient.loadMetadata(selectedFile.path)
-            
-            
             
         }else{
             
-            let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as NSString
-            let exactPath = "\(documentsDirectoryPath)/\(selectedFile.filename)"
+            let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(selectedFile.filename)"
             currentFilePath = exactPath
             showProgressBar()
             dbRestClient.loadFile(selectedFile.path, intoPath: exactPath as String)
@@ -221,6 +244,9 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     }
     
     func initDropboxRestClient() {
+        
+        SwiftSpinner.show("Processing, please wait..")
+        
         dbRestClient = DBRestClient(session: DBSession.sharedSession())
         dbRestClient.delegate = self
         dbRestClient.loadMetadata("/")
@@ -237,6 +263,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         print("File upload failed.")
         print(error.description)
         progressBar.hidden = true
+        SwiftSpinner.hide()
     }
     
     func restClient(client: DBRestClient!, uploadProgress progress: CGFloat, forFile destPath: String!, from srcPath: String!) {
@@ -246,9 +273,14 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     func showProgressBar() {
         progressBar.progress = 0.0
         progressBar.hidden = false
+        
+        //        SwiftSpinner.show("Processing, please wait..")
+        
     }
     
     func restClient(client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
+        
+        SwiftSpinner.hide()
         
         dropboxMetadata = metadata;
         
@@ -259,14 +291,19 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     func restClient(client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
         print(error.description)
+        SwiftSpinner.hide()
     }
     
     func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
+        
+        //        SwiftSpinner.hide()
+        
         print("The file \(metadata.filename) was downloaded. Content type: \(contentType)")
         progressBar.hidden = true
         
         let zipPath = "\(currentFilePath).zip"
-        zipMyFiles(zipPath, filePath: currentFilePath)
+        //        zipMyFiles(zipPath, filePath: currentFilePath)
+        CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: currentFilePath, vc: self)
         
         
     }
@@ -274,10 +311,14 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
         print(error.description)
         progressBar.hidden = true
+        //        SwiftSpinner.hide()
     }
     
     func restClient(client: DBRestClient!, loadProgress progress: CGFloat, forFile destPath: String!) {
         progressBar.progress = Float(progress)
+        let val:Int = Int(progress * 100)
+        print(val)
+        //        SwiftSpinner.show("Processing, please wait..\n\n\(val)%", animated: false)
     }
     
     
@@ -292,28 +333,9 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         
     }
     
-    
-    func zipMyFiles(newZipFile:String, filePath:String) {
-        
-        let success = SSZipArchive.createZipFileAtPath(newZipFile, withFilesAtPaths: [filePath])
-        if success {
-            print("Zip file created successfully")
-            self.shareMyFile(newZipFile)
-        }
+    func doNothing() {
         
     }
-    
-    func shareMyFile(zipPath:String) -> Void {
-        
-        let fileDAta = NSURL(fileURLWithPath: zipPath)
-        
-        let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
-        ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
-        ac.setValue("My file", forKey: "Subject")
-        self.presentViewController(ac, animated: true, completion: nil)
-        
-    }
-    
     
 }
 
