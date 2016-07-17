@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         let sampleDataPath = NSBundle.mainBundle().bundleURL.URLByAppendingPathComponent("Sample Data").path
         zipPath = tempZipPath()
 
-        let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: sampleDataPath)
+        let success = SSZipArchive.createZipFileAtPath(zipPath!, withContentsOfDirectory: sampleDataPath!)
         if success {
             unzipButton.enabled = true
             zipButton.enabled = false

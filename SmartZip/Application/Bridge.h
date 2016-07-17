@@ -13,4 +13,9 @@
 #import <GTMOAuth2/GTMOAuth2ViewControllerTouch.h>
 //#import "GTLDrive.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+
+#import "MYIntroductionPanel.h"
+#import "MYIntroductionView.h"
+#import "iRate.h"
+
 #endif

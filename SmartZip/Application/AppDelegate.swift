@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+
 //import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -17,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        iRateSetUp()
+        
+        
         let appKey = "xhhur59zpqig0ob"      // Set your own app key value here.
         let appSecret = "js2v6cbtl5oysjd"   // Set your own app secret value here.
         let dropboxSession = DBSession(appKey: appKey, appSecret: appSecret, root: kDBRootDropbox)
@@ -69,6 +74,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return false
+    }
+    
+    func iRateSetUp () {
+        iRate.sharedInstance().applicationBundleID = "com.modi.SmartZip"
+        iRate.sharedInstance().appStoreID = 553834731
+        iRate.sharedInstance().ratingsURL = NSURL(string: "https://itunes.apple.com/in/app/candy-crush-saga/id553834731?mt=8")
+        iRate.sharedInstance().onlyPromptIfLatestVersion = false
+        iRate.sharedInstance().previewMode = false
+        iRate.sharedInstance().daysUntilPrompt = 1
+        iRate.sharedInstance().usesUntilPrompt = 2
     }
     
     

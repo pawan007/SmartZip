@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14837B4E1D3B5B2E007B52BB /* background-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B401D3B5B2E007B52BB /* background-gradient.png */; };
+		14837B4F1D3B5B2E007B52BB /* background-gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B411D3B5B2E007B52BB /* background-gradient@2x.png */; };
+		14837B501D3B5B2E007B52BB /* button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B421D3B5B2E007B52BB /* button-background.png */; };
+		14837B511D3B5B2E007B52BB /* button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B431D3B5B2E007B52BB /* button-background@2x.png */; };
+		14837B521D3B5B2E007B52BB /* SampleHeaderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B441D3B5B2E007B52BB /* SampleHeaderImage.png */; };
+		14837B531D3B5B2E007B52BB /* tutorial_background_00@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B451D3B5B2E007B52BB /* tutorial_background_00@2x.jpg */; };
+		14837B541D3B5B2E007B52BB /* tutorial_background_01@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B461D3B5B2E007B52BB /* tutorial_background_01@2x.jpg */; };
+		14837B551D3B5B2E007B52BB /* tutorial_background_02@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B471D3B5B2E007B52BB /* tutorial_background_02@2x.jpg */; };
+		14837B561D3B5B2E007B52BB /* tutorial_background_03@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B481D3B5B2E007B52BB /* tutorial_background_03@2x.jpg */; };
+		14837B571D3B5B2E007B52BB /* tutorial_background_04@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B491D3B5B2E007B52BB /* tutorial_background_04@2x.jpg */; };
+		14837B581D3B5B2E007B52BB /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B4B1D3B5B2E007B52BB /* MYIntroductionPanel.m */; };
+		14837B591D3B5B2E007B52BB /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B4D1D3B5B2E007B52BB /* MYIntroductionView.m */; };
+		14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */; };
+		14837B5F1D3BD6F5007B52BB /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5E1D3BD6F5007B52BB /* iRate.m */; };
 		56977A5486F545A348DA4ACA /* Pods_SmartZipUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4FD88D26FA000BA8CBE5012 /* Pods_SmartZipUITests.framework */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
 		D2A977CD69C1D4C169CA6595 /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */; };
@@ -128,6 +142,23 @@
 
 /* Begin PBXFileReference section */
 		0C0A56975B1D7F50B1B4FA23 /* Pods-SmartZipUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipUITests/Pods-SmartZipUITests.release.xcconfig"; sourceTree = "<group>"; };
+		14837B401D3B5B2E007B52BB /* background-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-gradient.png"; sourceTree = "<group>"; };
+		14837B411D3B5B2E007B52BB /* background-gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-gradient@2x.png"; sourceTree = "<group>"; };
+		14837B421D3B5B2E007B52BB /* button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background.png"; sourceTree = "<group>"; };
+		14837B431D3B5B2E007B52BB /* button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background@2x.png"; sourceTree = "<group>"; };
+		14837B441D3B5B2E007B52BB /* SampleHeaderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleHeaderImage.png; sourceTree = "<group>"; };
+		14837B451D3B5B2E007B52BB /* tutorial_background_00@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_00@2x.jpg"; sourceTree = "<group>"; };
+		14837B461D3B5B2E007B52BB /* tutorial_background_01@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_01@2x.jpg"; sourceTree = "<group>"; };
+		14837B471D3B5B2E007B52BB /* tutorial_background_02@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_02@2x.jpg"; sourceTree = "<group>"; };
+		14837B481D3B5B2E007B52BB /* tutorial_background_03@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_03@2x.jpg"; sourceTree = "<group>"; };
+		14837B491D3B5B2E007B52BB /* tutorial_background_04@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_04@2x.jpg"; sourceTree = "<group>"; };
+		14837B4A1D3B5B2E007B52BB /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
+		14837B4B1D3B5B2E007B52BB /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
+		14837B4C1D3B5B2E007B52BB /* MYIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionView.h; sourceTree = "<group>"; };
+		14837B4D1D3B5B2E007B52BB /* MYIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionView.m; sourceTree = "<group>"; };
+		14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialVC.swift; sourceTree = "<group>"; };
+		14837B5D1D3BD6F5007B52BB /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		14837B5E1D3BD6F5007B52BB /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		1C15925F08F1C4AF7EA75494 /* Pods_SmartZipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B69761D4D6C9724BF4377DD /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611E1960B4950434044D1C85 /* Pods-SmartZipTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZipTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -273,6 +304,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14837B3E1D3B5B2E007B52BB /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				14837B3F1D3B5B2E007B52BB /* Images */,
+				14837B4A1D3B5B2E007B52BB /* MYIntroductionPanel.h */,
+				14837B4B1D3B5B2E007B52BB /* MYIntroductionPanel.m */,
+				14837B4C1D3B5B2E007B52BB /* MYIntroductionView.h */,
+				14837B4D1D3B5B2E007B52BB /* MYIntroductionView.m */,
+				14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		14837B3F1D3B5B2E007B52BB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				14837B401D3B5B2E007B52BB /* background-gradient.png */,
+				14837B411D3B5B2E007B52BB /* background-gradient@2x.png */,
+				14837B421D3B5B2E007B52BB /* button-background.png */,
+				14837B431D3B5B2E007B52BB /* button-background@2x.png */,
+				14837B441D3B5B2E007B52BB /* SampleHeaderImage.png */,
+				14837B451D3B5B2E007B52BB /* tutorial_background_00@2x.jpg */,
+				14837B461D3B5B2E007B52BB /* tutorial_background_01@2x.jpg */,
+				14837B471D3B5B2E007B52BB /* tutorial_background_02@2x.jpg */,
+				14837B481D3B5B2E007B52BB /* tutorial_background_03@2x.jpg */,
+				14837B491D3B5B2E007B52BB /* tutorial_background_04@2x.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		14837B5C1D3BD6F5007B52BB /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				14837B5D1D3BD6F5007B52BB /* iRate.h */,
+				14837B5E1D3BD6F5007B52BB /* iRate.m */,
+			);
+			path = iRate;
+			sourceTree = "<group>";
+		};
 		9E43BB36368F4560283168B5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +474,8 @@
 		D44DF2C81D1E802E000C75B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				14837B5C1D3BD6F5007B52BB /* iRate */,
+				14837B3E1D3B5B2E007B52BB /* Tutorial */,
 				D44DF2CB1D1E802E000C75B7 /* Home */,
 				D44DF2C91D1E802E000C75B7 /* About */,
 				D44DF2CD1D1E802E000C75B7 /* InAppClasses */,
@@ -768,6 +840,7 @@
 				D4284CA21D1E4B9800E1BCA9 /* Resources */,
 				1945F381EA2BC05A27B06245 /* [CP] Embed Pods Frameworks */,
 				1D985E1B950B5C22E201D672 /* [CP] Copy Pods Resources */,
+				5C99E289E9A6D665A53DEA9E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -867,21 +940,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14837B531D3B5B2E007B52BB /* tutorial_background_00@2x.jpg in Resources */,
 				D44DF3711D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Regular.ttf in Resources */,
 				D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */,
 				D44DF3731D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Thin.ttf in Resources */,
 				D44DF36C1D1E802E000C75B7 /* Assets.xcassets in Resources */,
 				D44DF3D71D1E802E000C75B7 /* FeedCell.xib in Resources */,
+				14837B541D3B5B2E007B52BB /* tutorial_background_01@2x.jpg in Resources */,
+				14837B4E1D3B5B2E007B52BB /* background-gradient.png in Resources */,
+				14837B551D3B5B2E007B52BB /* tutorial_background_02@2x.jpg in Resources */,
 				D436FD5B1D1FA77A00F2BE72 /* KICamera.png in Resources */,
+				14837B501D3B5B2E007B52BB /* button-background.png in Resources */,
+				14837B521D3B5B2E007B52BB /* SampleHeaderImage.png in Resources */,
+				14837B571D3B5B2E007B52BB /* tutorial_background_04@2x.jpg in Resources */,
 				D44DF3701D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Light.ttf in Resources */,
 				D44DF3721D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Semibold.ttf in Resources */,
 				D436FD5C1D1FA77A00F2BE72 /* KICamera@2x.png in Resources */,
+				14837B4F1D3B5B2E007B52BB /* background-gradient@2x.png in Resources */,
 				D44DF36E1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf in Resources */,
 				D44DF36D1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf in Resources */,
 				D44DF3D91D1E802E000C75B7 /* FeedCollectionCell.xib in Resources */,
 				D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */,
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
 				D44DF3741D1E802E000C75B7 /* Info.plist in Resources */,
+				14837B511D3B5B2E007B52BB /* button-background@2x.png in Resources */,
+				14837B561D3B5B2E007B52BB /* tutorial_background_03@2x.jpg in Resources */,
 				D436FD861D201CC700F2BE72 /* Main.storyboard in Resources */,
 				D48D5B481D2FFDB200483BA6 /* folderIcon.png in Resources */,
 				D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */,
@@ -963,6 +1046,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5C99E289E9A6D665A53DEA9E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		732CF205F55F6B2CFB01DB50 /* [CP] Embed Pods Frameworks */ = {
@@ -1052,7 +1150,9 @@
 				D44DF39C1D1E802E000C75B7 /* Character+Addition.swift in Sources */,
 				D44DF3B71D1E802E000C75B7 /* UIView+Additions.swift in Sources */,
 				D44DF38F1D1E802E000C75B7 /* WebViewController.swift in Sources */,
+				14837B591D3B5B2E007B52BB /* MYIntroductionView.m in Sources */,
 				D44DF39A1D1E802E000C75B7 /* Array+Additions.swift in Sources */,
+				14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */,
 				D44DF3A61D1E802E000C75B7 /* NSDate+Formatters.swift in Sources */,
 				D44DF3B41D1E802E000C75B7 /* UIStoryboard+Additions.swift in Sources */,
 				D44DF3A81D1E802E000C75B7 /* NSURLResponse+Additions.swift in Sources */,
@@ -1078,6 +1178,7 @@
 				D44DF39E1D1E802E000C75B7 /* Double+Additions.swift in Sources */,
 				D436FD281D1F8C1000F2BE72 /* PhotoPickerVC.swift in Sources */,
 				D44DF3BF1D1E802E000C75B7 /* InAppPurchaseManager.swift in Sources */,
+				14837B581D3B5B2E007B52BB /* MYIntroductionPanel.m in Sources */,
 				D44DF3941D1E802E000C75B7 /* DesignableTextView.swift in Sources */,
 				D44DF39D1D1E802E000C75B7 /* Dictionary+Additions.swift in Sources */,
 				D44DF3AA1D1E802E000C75B7 /* Range+Additions.swift in Sources */,
@@ -1100,6 +1201,7 @@
 				D44DF3BA1D1E802E000C75B7 /* Helper.swift in Sources */,
 				D44DF3B81D1E802E000C75B7 /* UIViewController+Additions.swift in Sources */,
 				D436FD2A1D1F8C1000F2BE72 /* ViewController.swift in Sources */,
+				14837B5F1D3BD6F5007B52BB /* iRate.m in Sources */,
 				D44DF3931D1E802E000C75B7 /* DesignableTextField.swift in Sources */,
 				D44DF3771D1E802E000C75B7 /* IAPHelper.swift in Sources */,
 				87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */,

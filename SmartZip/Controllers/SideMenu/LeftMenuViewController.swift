@@ -16,7 +16,10 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var topTableView: UITableView!
     
-    private var topTableIDs = ["HelpCell","BuyProCell","RestoreCell","PasswordCell","ShareAppCell","RateAppCell","EmailCell","TutorialCell"]
+   // private var topTableIDs = ["HelpCell","BuyProCell","RestoreCell","PasswordCell","ShareAppCell","RateAppCell","EmailCell","TutorialCell"]
+    
+    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +66,19 @@ extension LeftMenuViewController: UITableViewDelegate
         let identifier  = topTableIDs[indexPath.row]
         
         switch identifier {
-        case "Home" :
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("EventFeedViewController"))!
+        case "HomeCell" :
+            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HomeVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
             break
-        case "HelpCell" : break
+        case "TutorialCell" :
             //TODO
-            
+        let center = (self.storyboard?.instantiateViewControllerWithIdentifier("TutorialVC"))!
+        container!.centerViewController =  UINavigationController(rootViewController: center)
+        container!.closeDrawerAnimated(true, completion: { (Bool) in
+        })
+         break
         case "BuyProCell" : break
         //TODO
         case "RestoreCell" : break
@@ -84,10 +91,17 @@ extension LeftMenuViewController: UITableViewDelegate
             })
             break
         //TODO
-        case "ShareAppCell" : break
+        case "ShareAppCell" :
+            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            })
+            self.shareApp()
+            break
         //TODO
-        case "RateAppCell" : break
-        //TODO
+        case "RateAppCell" :
+            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            })
+            iRate.sharedInstance().openRatingsPageInAppStore()
+            break
         case "EmailCell" : break
         //TODO
         case "TutorialCell" : break
@@ -97,6 +111,19 @@ extension LeftMenuViewController: UITableViewDelegate
         }
     }
     
+    func shareApp() {
+        let textToShare = "I love this app."
+        
+        if let myWebsite = NSURL(string: "http://www.codingexplorer.com/") {
+            let objectsToShare = [textToShare, myWebsite]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //New Excluded Activities Code
+            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypeMessage]
+            //            
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        }
+    }
     
     func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
