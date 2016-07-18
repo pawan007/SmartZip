@@ -22,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         iRateSetUp()
         
         
-        let appKey = "xhhur59zpqig0ob"      // Set your own app key value here.
-        let appSecret = "js2v6cbtl5oysjd"   // Set your own app secret value here.
+        let appKey = "1pbpk77qpisojml"      // Set your own app key value here.
+        let appSecret = "16ok6bvw4j50q8c"   // Set your own app secret value here.
         let dropboxSession = DBSession(appKey: appKey, appSecret: appSecret, root: kDBRootDropbox)
         DBSession.setSharedSession(dropboxSession)
         if let URL = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL {
