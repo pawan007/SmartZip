@@ -23,6 +23,7 @@
 		14837B5F1D3BD6F5007B52BB /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5E1D3BD6F5007B52BB /* iRate.m */; };
 		1687EE07F3BD5FD3196B07BD /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27B5C38FD5A6D589F1EBAAC /* Pods_SmartZip.framework */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
+		D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4016B261D3D4CF60029AB3F /* CloudKit.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
 		D4284CC81D1E4B9800E1BCA9 /* SmartZipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CC71D1E4B9800E1BCA9 /* SmartZipUITests.swift */; };
 		D436FD261D1F8C1000F2BE72 /* DropBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD211D1F8C1000F2BE72 /* DropBoxVC.swift */; };
@@ -159,6 +160,8 @@
 		255872EA0357E2063A3D0131 /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
 		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		B27B5C38FD5A6D589F1EBAAC /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4016B251D3D3F390029AB3F /* SmartZip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SmartZip.entitlements; sourceTree = "<group>"; };
+		D4016B261D3D4CF60029AB3F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D4284CA41D1E4B9800E1BCA9 /* SmartZip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartZip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CB81D1E4B9800E1BCA9 /* SmartZipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartZipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartZipTests.swift; sourceTree = "<group>"; };
@@ -272,6 +275,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */,
 				D436FD521D1FA6E800F2BE72 /* DropboxSDK.framework in Frameworks */,
 				1687EE07F3BD5FD3196B07BD /* Pods_SmartZip.framework in Frameworks */,
 			);
@@ -368,6 +372,7 @@
 		D4284CA61D1E4B9800E1BCA9 /* SmartZip */ = {
 			isa = PBXGroup;
 			children = (
+				D4016B251D3D3F390029AB3F /* SmartZip.entitlements */,
 				D44DF2B91D1E802E000C75B7 /* Application */,
 				D44DF2C81D1E802E000C75B7 /* Controllers */,
 				D44DF2DA1D1E802E000C75B7 /* Externals */,
@@ -399,6 +404,7 @@
 		D436FD501D1FA6E800F2BE72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4016B261D3D4CF60029AB3F /* CloudKit.framework */,
 				D436FD511D1FA6E800F2BE72 /* DropboxSDK.framework */,
 				B27B5C38FD5A6D589F1EBAAC /* Pods_SmartZip.framework */,
 			);
@@ -887,6 +893,15 @@
 				TargetAttributes = {
 					D4284CA31D1E4B9800E1BCA9 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = AQ4P6J9D24;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					D4284CB71D1E4B9800E1BCA9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1307,6 +1322,8 @@
 			baseConfigurationReference = 255872EA0357E2063A3D0131 /* Pods-SmartZip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1320,9 +1337,9 @@
 					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.modi.SmartZip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holidayshappening.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};
@@ -1333,6 +1350,8 @@
 			baseConfigurationReference = F904634B008DD7C51B067350 /* Pods-SmartZip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1346,9 +1365,9 @@
 					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.modi.SmartZip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holidayshappening.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};

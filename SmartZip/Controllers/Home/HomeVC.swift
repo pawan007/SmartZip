@@ -14,7 +14,9 @@ import AssetsLibrary
 import SSZipArchive
 import SwiftSpinner
 import QBImagePickerController
+import NADocumentPicker
 
+import NADocumentPicker
 class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     var flagImage = false
@@ -68,7 +70,17 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 useGoogle()
                 
             }else if indexPath.row == 2 {
-                // user url path
+                // user url path..Please handle url
+                
+                
+                let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
+                
+                urlPickedfuture.onSuccess { url in
+                    print("URL: \(url)")
+                    
+                    
+                    
+                }
             }
             
         }

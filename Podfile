@@ -33,6 +33,7 @@ target 'SmartZip' do
     pod 'GTMOAuth2', '~> 1.1.0'
     pod 'SDWebImage', '~>3.7'
     
+    pod 'NADocumentPicker'
     
     #There are some alternets of these pods, so lets try that first
     #pod 'Google/Analytics'
