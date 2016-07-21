@@ -16,10 +16,10 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var topTableView: UITableView!
     
-   // private var topTableIDs = ["HelpCell","BuyProCell","RestoreCell","PasswordCell","ShareAppCell","RateAppCell","EmailCell","TutorialCell"]
+    // private var topTableIDs = ["HelpCell","BuyProCell","RestoreCell","PasswordCell","ShareAppCell","RateAppCell","EmailCell","TutorialCell"]
     
-    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
-
+    private var topTableIDs = ["HomeCell","HistoryCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,11 +74,11 @@ extension LeftMenuViewController: UITableViewDelegate
             break
         case "TutorialCell" :
             //TODO
-        let center = (self.storyboard?.instantiateViewControllerWithIdentifier("TutorialVC"))!
-        container!.centerViewController =  UINavigationController(rootViewController: center)
-        container!.closeDrawerAnimated(true, completion: { (Bool) in
-        })
-         break
+            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("TutorialVC"))!
+            container!.centerViewController =  UINavigationController(rootViewController: center)
+            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            })
+            break
         case "BuyProCell" : break
         //TODO
         case "RestoreCell" : break
@@ -105,6 +105,13 @@ extension LeftMenuViewController: UITableViewDelegate
         case "EmailCell" : break
         //TODO
         case "TutorialCell" : break
+            
+        case "HistoryCell" :
+            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HistoryVC"))!
+            container!.centerViewController =  UINavigationController(rootViewController: center)
+            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            })
+            break
         //TODO
         default: break
             
@@ -176,7 +183,7 @@ extension LeftMenuViewController: UITableViewDelegate
             self.callNumber("0450 663 654")
         }
         actionSheetController.addAction(callActionButton)
-          
+        
         if let popoverPresentationController = actionSheetController.popoverPresentationController {
             popoverPresentationController.sourceView = self.view
             popoverPresentationController.sourceRect = self.topTableView.frame

@@ -417,8 +417,8 @@ class CommonFunctions: NSObject {
     
     
     func docDirPath() -> String {
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as NSString
-        return documentsDirectoryPath as String
+        let directoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+        return directoryPath!
     }
     
 }

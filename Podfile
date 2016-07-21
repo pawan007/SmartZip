@@ -5,6 +5,8 @@ use_frameworks!
 
 target 'SmartZip' do
     # pod 'SSZipArchive'
+    
+    
     pod 'MMDrawerController', '~> 0.5.7'
     pod 'ActionSheetPicker-3.0', '~> 2.0.5'
     pod 'IQKeyboardManagerSwift'
@@ -18,22 +20,23 @@ target 'SmartZip' do
     pod 'Alamofire', '~> 3.4'
     pod 'Kingfisher', '~> 2.4'
     pod 'SnapKit', '~> 0.21'
-    
-    #   pod 'RxSwift', '~> 2.5'
-    # pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
-    
+    pod 'GoogleAPIClient/Drive', '~> 1.0.2'
+    pod 'GTMOAuth2', '~> 1.1.0'
+    pod 'SDWebImage', '~>3.7'
     pod 'SSZipArchive'
     pod 'QBImagePickerController'
     pod 'XCGLogger', '~> 3.3'
     pod 'FileBrowser', '~> 0.1'
-    
-    
-    
-    pod 'GoogleAPIClient/Drive', '~> 1.0.2'
-    pod 'GTMOAuth2', '~> 1.1.0'
-    pod 'SDWebImage', '~>3.7'
-    
     pod 'NADocumentPicker'
+    
+    #   pod 'RxSwift', '~> 2.5'
+    # pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
+    
+    
+    
+    
+    
+    
     
     #There are some alternets of these pods, so lets try that first
     #pod 'Google/Analytics'

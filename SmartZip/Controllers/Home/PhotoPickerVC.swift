@@ -131,10 +131,11 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
         if assets.count > 0 {
             
-            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             folderName = "Images-\(Timestamp)"
-            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+//            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+            var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
             do{
@@ -189,13 +190,14 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         if assets.count > 0 {
             
             
-            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             SwiftSpinner.show("Processing, please wait..")
 
             
             folderName = "Videos-\(Timestamp)"
-            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+//            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+            var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
             do{
@@ -422,10 +424,11 @@ extension PhotoPickerVC : MPMediaPickerControllerDelegate {
         
         if mediaItemCollection.items.count > 0 {
             
-            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             folderName = "Song-\(Timestamp)"
-            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+//            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+            var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
             do{

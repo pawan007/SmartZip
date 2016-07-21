@@ -22,6 +22,7 @@
 		14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */; };
 		14837B5F1D3BD6F5007B52BB /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5E1D3BD6F5007B52BB /* iRate.m */; };
 		1687EE07F3BD5FD3196B07BD /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27B5C38FD5A6D589F1EBAAC /* Pods_SmartZip.framework */; };
+		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
 		D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4016B261D3D4CF60029AB3F /* CloudKit.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
@@ -158,6 +159,7 @@
 		14837B5D1D3BD6F5007B52BB /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		14837B5E1D3BD6F5007B52BB /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		255872EA0357E2063A3D0131 /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
+		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		B27B5C38FD5A6D589F1EBAAC /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4016B251D3D3F390029AB3F /* SmartZip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SmartZip.entitlements; sourceTree = "<group>"; };
@@ -337,6 +339,14 @@
 			path = iRate;
 			sourceTree = "<group>";
 		};
+		87902D061D41402400D475AC /* History */ = {
+			isa = PBXGroup;
+			children = (
+				87902D071D41403700D475AC /* HistoryVC.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		9E43BB36368F4560283168B5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +474,7 @@
 		D44DF2C81D1E802E000C75B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				87902D061D41402400D475AC /* History */,
 				14837B5C1D3BD6F5007B52BB /* iRate */,
 				14837B3E1D3B5B2E007B52BB /* Tutorial */,
 				D44DF2CB1D1E802E000C75B7 /* Home */,
@@ -1138,6 +1149,7 @@
 				14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */,
 				D44DF3A61D1E802E000C75B7 /* NSDate+Formatters.swift in Sources */,
 				D44DF3B41D1E802E000C75B7 /* UIStoryboard+Additions.swift in Sources */,
+				87902D081D41403700D475AC /* HistoryVC.swift in Sources */,
 				D44DF3A81D1E802E000C75B7 /* NSURLResponse+Additions.swift in Sources */,
 				D44DF38C1D1E802E000C75B7 /* BaseViewController.swift in Sources */,
 				D44DF3B11D1E802E000C75B7 /* UIImage+Additions.swift in Sources */,
