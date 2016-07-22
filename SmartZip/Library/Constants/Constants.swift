@@ -49,4 +49,9 @@ let ResTypeAudio = "audio"
 let ResTypeVideo = "video"
 let ResTypeImage = "image"
 let ResTypeDoc = "document"
+
+let kAlertTitle = "SmartZip"
+let kFileManager = NSFileManager.defaultManager()
+
+
  

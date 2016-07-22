@@ -449,8 +449,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="FIs-J0-J1k"/>
                                                     <exclude reference="8YM-d2-zGi"/>
+                                                    <exclude reference="FIs-J0-J1k"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

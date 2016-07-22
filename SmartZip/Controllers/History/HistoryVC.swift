@@ -17,8 +17,8 @@ class HistoryVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     // Data model: These strings will be the data for the table view cells
-    var fileNames: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
-    var filePaths: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    var fileNames: [String] = []
+    var filePaths: [String] = []
     // cell reuse id (cells that scroll out of view can be reused)
     let cellReuseIdentifier = "cell"
     
@@ -48,19 +48,23 @@ class HistoryVC: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         print("You tapped cell number \(indexPath.row).")
-        
+        showActionSheet(indexPath.row)
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool{
         
-        return true
+        return false
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
         
         if editingStyle == .Delete {
             
-            try! NSFileManager.defaultManager().removeItemAtPath(filePaths[indexPath.row])
+            let path = filePaths[indexPath.row]
+            print(path)
+            try! kFileManager.removeItemAtPath(filePaths[indexPath.row])
+            filePaths.removeAtIndex(indexPath.row)
+            fileNames.removeAtIndex(indexPath.row)
             tableView.reloadData()
         }
         
@@ -78,13 +82,13 @@ class HistoryVC: UIViewController {
         
         let directoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
         
-        if let enumerator = NSFileManager.defaultManager().enumeratorAtPath(directoryPath!) {
+        if let enumerator = kFileManager.enumeratorAtPath(directoryPath!) {
             while let fileName = enumerator.nextObject() as? String {
                 
                 if fileName.containsString(".zip") {
                     
                     fileNames.append(fileName)
-                    filePaths.append("\(directoryPath)\(fileName)")
+                    filePaths.append("\(directoryPath!)/\(fileName)")
                 }
                 
             }
@@ -94,4 +98,41 @@ class HistoryVC: UIViewController {
         
     }
     
+    
+    
+    func showActionSheet(index:Int) {
+        //Create the AlertController
+        let actionSheetController: UIAlertController = UIAlertController(title: kAlertTitle, message: "", preferredStyle: .ActionSheet)
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            //Just dismiss the action sheet
+            CommonFunctions.sharedInstance.getFreeDiscSpase()
+            
+        }
+        actionSheetController.addAction(cancelAction)
+        //Create and add first option action
+        let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
+            //Code for launching the camera goes here
+            let path = self.filePaths[index]
+            print(path)
+            CommonFunctions.sharedInstance.shareMyFile(path, vc: self)
+            
+        }
+        actionSheetController.addAction(takePictureAction)
+        //Create and add a second option action
+        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
+            //Code for picking from camera roll goes here
+            let path = self.filePaths[index]
+            print(path)
+            try! kFileManager.removeItemAtPath(self.filePaths[index])
+            self.filePaths.removeAtIndex(index)
+            self.fileNames.removeAtIndex(index)
+            self.tableView.reloadData()
+        }
+        actionSheetController.addAction(choosePictureAction)
+        
+        //Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+    }
 }

@@ -98,6 +98,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     func handleLocalFile() {
         let fileBrowser = FileBrowser()
+        fileBrowser.excludesFileExtensions = ["zip"]
         self.presentViewController(fileBrowser, animated: true, completion: nil)
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
             print(file.displayName)
@@ -132,7 +133,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     
-
+    
     func selectVideos () {
         
         let imagePicker = QBImagePickerController()
@@ -206,15 +207,15 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         if assets.count > 0 {
             
             SwiftSpinner.show("Processing, please wait..")
-//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+            //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             folderName = "Images-\(Timestamp)"
-//            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+            //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
             do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -233,7 +234,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                         let array = url?.path?.componentsSeparatedByString("/")
                         let name = array!.last! as String
                         let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
-                        try NSFileManager.defaultManager().copyItemAtURL(url!, toURL: selectedVideo)
+                        try kFileManager.copyItemAtURL(url!, toURL: selectedVideo)
                         
                         currentItem += 1
                         
@@ -266,18 +267,18 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         if assets.count > 0 {
             
             
-//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+            //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             SwiftSpinner.show("Processing, please wait..")
             
             
             folderName = "Videos-\(Timestamp)"
-//            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+            //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
             do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -305,7 +306,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                             let array = url.path?.componentsSeparatedByString("/")
                             let name = array!.last! as String
                             let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
-                            try NSFileManager.defaultManager().copyItemAtURL(url, toURL: selectedVideo)
+                            try kFileManager.copyItemAtURL(url, toURL: selectedVideo)
                             self.currentItem += 1
                             
                             print("in normal motion cur item = \(self.currentItem)")
@@ -417,8 +418,19 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     func zipMyFiles(newZipFile:String, existingFolder:String) {
         
+        
+        if !CommonFunctions.sharedInstance.canCreateZip(existingFolder) {
+            
+            try! kFileManager.removeItemAtPath(existingFolder)
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: self)
+            return
+        }
+        
+        
         let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: existingFolder)
         if success {
+            
+            try! kFileManager.removeItemAtPath(existingFolder)
             print("Zip file created successfully")
             self.shareMyFile(newZipFile)
             
@@ -443,10 +455,10 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     func deleteAllFilesInDirectory(directoryPath:String) -> Void {
         
-        if let enumerator = NSFileManager.defaultManager().enumeratorAtPath(directoryPath) {
+        if let enumerator = kFileManager.enumeratorAtPath(directoryPath) {
             while let fileName = enumerator.nextObject() as? String {
                 do {
-                    try NSFileManager.defaultManager().removeItemAtPath("\(directoryPath)\(fileName)")
+                    try kFileManager.removeItemAtPath("\(directoryPath)\(fileName)")
                 }
                 catch let e as NSError {
                     print(e)
@@ -487,15 +499,15 @@ extension HomeVC : MPMediaPickerControllerDelegate {
         
         if mediaItemCollection.items.count > 0 {
             
-//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+            //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             folderName = "Song-\(Timestamp)"
-//            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+            //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
             do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -546,7 +558,7 @@ extension HomeVC : MPMediaPickerControllerDelegate {
                 let filePath = "\(parentDir)/\(title).m4a"
                 var fileSize : UInt64 = 0
                 do {
-                    let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
+                    let attr : NSDictionary? = try kFileManager.attributesOfItemAtPath(filePath)
                     if let _attr = attr {
                         fileSize = _attr.fileSize();
                         print("fileSize: \(fileSize)")
@@ -557,7 +569,7 @@ extension HomeVC : MPMediaPickerControllerDelegate {
                     }else{
                         newFilePath = filePath.stringByReplacingOccurrencesOfString(".m4a", withString: ".mp3")
                     }
-                    try! NSFileManager.defaultManager().moveItemAtPath(filePath, toPath: newFilePath)
+                    try! kFileManager.moveItemAtPath(filePath, toPath: newFilePath)
                     
                 } catch {
                     print("Error: \(error)")

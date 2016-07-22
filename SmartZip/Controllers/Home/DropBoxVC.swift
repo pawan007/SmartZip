@@ -302,7 +302,6 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         progressBar.hidden = true
         
         let zipPath = "\(currentFilePath).zip"
-        //        zipMyFiles(zipPath, filePath: currentFilePath)
         CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: currentFilePath, vc: self)
         
         

@@ -396,8 +396,16 @@ class CommonFunctions: NSObject {
     
     func zipMyFiles(newZipFile:String, filePath:String , vc:UIViewController) {
         
+        if !CommonFunctions.sharedInstance.canCreateZip(filePath) {
+            
+            try! kFileManager.removeItemAtPath(filePath)
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: vc)
+            return
+        }
+        
         let success = SSZipArchive.createZipFileAtPath(newZipFile, withFilesAtPaths: [filePath])
         if success {
+            try! kFileManager.removeItemAtPath(filePath)
             print("Zip file created successfully")
             self.shareMyFile(newZipFile, vc: vc)
         }
@@ -419,6 +427,213 @@ class CommonFunctions: NSObject {
     func docDirPath() -> String {
         let directoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
         return directoryPath!
+    }
+    
+    func report_memory() {
+        // constant
+        let MACH_TASK_BASIC_INFO_COUNT = (sizeof(mach_task_basic_info_data_t) / sizeof(natural_t))
+        
+        // prepare parameters
+        let name   = mach_task_self_
+        let flavor = task_flavor_t(MACH_TASK_BASIC_INFO)
+        var size   = mach_msg_type_number_t(MACH_TASK_BASIC_INFO_COUNT)
+        
+        // allocate pointer to mach_task_basic_info
+        let infoPointer = UnsafeMutablePointer<mach_task_basic_info>.alloc(1)
+        
+        // call task_info - note extra UnsafeMutablePointer(...) call
+        let kerr = task_info(name, flavor, UnsafeMutablePointer(infoPointer), &size)
+        
+        // get mach_task_basic_info struct out of pointer
+        let info = infoPointer.move()
+        
+        // deallocate pointer
+        infoPointer.dealloc(1)
+        
+        // check return value for success / failure
+        if kerr == KERN_SUCCESS {
+            print("Memory in use (in MB): \(info.resident_size/1000000)")
+            print("Memory in use (in MB): \(info.resident_size_max/1000000)")
+            
+            let remSize = ( info.resident_size_max - info.resident_size ) / 1000000
+            print("Free Memory): \(remSize)")
+            
+            
+        } else {
+            let errorString = String(CString: mach_error_string(kerr), encoding: NSASCIIStringEncoding)
+            print(errorString ?? "Error: couldn't parse error string")
+        }    
+    }
+    
+    
+    /*-(uint64_t)getFreeDiskspace {
+     uint64_t totalSpace = 0;
+     uint64_t totalFreeSpace = 0;
+     NSError *error = nil;
+     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+     NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+     
+     if (dictionary) {
+     NSNumber *fileSystemSizeInBytes = [dictionary objectForKey: NSFileSystemSize];
+     NSNumber *freeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
+     totalSpace = [fileSystemSizeInBytes unsignedLongLongValue];
+     totalFreeSpace = [freeFileSystemSizeInBytes unsignedLongLongValue];
+     NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.", ((totalSpace/1024ll)/1024ll), ((totalFreeSpace/1024ll)/1024ll));
+     } else {
+     NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
+     }
+     
+     return totalFreeSpace;
+     }*/
+    
+    func getFreeDiscSpase() -> UInt64 {
+        
+        var totalSpace:CUnsignedLongLong = 0
+        var totalFreeSpace:CUnsignedLongLong = 0
+        //        var error:NSError?
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        
+        do{
+            
+            let dictionary = try kFileManager.attributesOfFileSystemForPath(paths.last!)
+            
+            if !dictionary.isEmpty {
+                let fileSystemSizeInBytes = dictionary[NSFileSystemSize]
+                let freeFileSystemSizeInBytes = dictionary[NSFileSystemFreeSize]
+                totalSpace = (fileSystemSizeInBytes?.unsignedLongLongValue)!
+                totalFreeSpace = (freeFileSystemSizeInBytes?.unsignedLongLongValue)!
+                print("Memory Capacity of \( ((totalSpace/1024)/1024) ) MiB with \( ((totalFreeSpace/1024)/1024) ) MiB Free memory available.")
+            }
+            return totalFreeSpace
+            
+        }catch let error{
+            
+            print(error)
+            return totalFreeSpace
+            
+        }
+    }
+    
+    func deleteAllFilesInDirectory(directoryPath:String) -> Void {
+        
+        if let enumerator = kFileManager.enumeratorAtPath(directoryPath) {
+            while let fileName = enumerator.nextObject() as? String {
+                do {
+                    try kFileManager.removeItemAtPath("\(directoryPath)\(fileName)")
+                }
+                catch let e as NSError {
+                    print(e)
+                }
+                catch {
+                    print("error")
+                }
+            }
+        }
+        
+    }
+    
+    func getFolderSize(directoryPath:String) -> CUnsignedLongLong {
+        
+        var totalFolderSize:CUnsignedLongLong = 0
+        
+        if fileIsDir(directoryPath) {
+            
+            if let enumerator = kFileManager.enumeratorAtPath(directoryPath) {
+                while let fileName = enumerator.nextObject() as? String {
+                    
+                    totalFolderSize += getFileSize("\(directoryPath)/\(fileName)")
+                    
+                }
+            }
+            
+        }else{
+            
+            totalFolderSize = getFileSize(directoryPath)
+            
+        }
+        
+        
+        return totalFolderSize
+    }
+    
+    func getFileSize(filePath:String) -> CUnsignedLongLong {
+        
+        var fileSize:CUnsignedLongLong = 0
+        
+        if fileIsDir(filePath) {
+            
+            return getFolderSize(filePath)
+            
+        }else{
+            
+            do{
+                //                var fileSize : UInt64 = 0
+                let attr:NSDictionary? = try kFileManager.attributesOfItemAtPath(filePath)
+                if let _attr = attr {
+                    fileSize = _attr.fileSize();
+                    return fileSize
+                    
+                }else {
+                    
+                    return fileSize
+                }
+                
+                /*let dictionary = try kFileManager.attribute(kFileManager)
+                 
+                 if !dictionary.isEmpty {
+                 
+                 let fileSizeInBytes = dictionary[NSFileSize]
+                 fileSize = (fileSizeInBytes?.unsignedLongLongValue)!
+                 return fileSize
+                 
+                 }else{
+                 
+                 return fileSize
+                 }*/
+                
+            }catch let error{
+                
+                print(error)
+                return fileSize
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    func fileIsDir(path: String) -> Bool {
+        var isDir: ObjCBool = false;
+        kFileManager.fileExistsAtPath(path, isDirectory: &isDir)
+        return Bool(isDir);
+    }
+    
+    func canCreateZip(path: String) -> Bool {
+        
+        let freeSpace = getFreeDiscSpase()
+        let fileSpace = getFolderSize(path)
+        let difference = freeSpace - fileSpace
+        if difference > 0 {
+            return true
+        }
+        return false
+    }
+    
+    // Helper for showing an alert
+    func showAlert(title : String, message: String, vc:UIViewController) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        let ok = UIAlertAction(
+            title: "OK",
+            style: UIAlertActionStyle.Default,
+            handler: nil
+        )
+        alert.addAction(ok)
+        vc.presentViewController(alert, animated: true, completion: nil)
     }
     
 }

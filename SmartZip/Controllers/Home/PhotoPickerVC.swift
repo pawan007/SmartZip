@@ -355,8 +355,17 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     
     func zipMyFiles(newZipFile:String, existingFolder:String) {
         
+        
+        if !CommonFunctions.sharedInstance.canCreateZip(existingFolder) {
+            
+            try! kFileManager.removeItemAtPath(existingFolder)
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: self)
+            return
+        }
+        
         let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: existingFolder)
         if success {
+            try! NSFileManager.defaultManager().removeItemAtPath(existingFolder)
             print("Zip file created successfully")
             self.shareMyFile(newZipFile)
             
