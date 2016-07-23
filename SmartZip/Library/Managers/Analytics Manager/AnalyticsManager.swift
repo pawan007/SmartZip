@@ -17,7 +17,7 @@ enum PlatformType {
 
 class AnalyticsManager: NSObject {
     
-    var platformType: PlatformType = .Flurry
+    var platformType: PlatformType = .MixPannel
     
     // MARK: - Singleton Instance
     private static let _sharedManager = AnalyticsManager()
@@ -49,7 +49,7 @@ class AnalyticsManager: NSObject {
             self.googleAnalyserInitialize()
             
         default: break // .MixPannel:
-           // Mixpanel.sharedInstanceWithToken(Constants.Tokens.MIX_PANNEL_TOKEN)
+            Mixpanel.sharedInstanceWithToken(Constants.Tokens.MIX_PANNEL_TOKEN)
         }
     }
     

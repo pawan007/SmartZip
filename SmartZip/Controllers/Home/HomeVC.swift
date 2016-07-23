@@ -70,17 +70,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 useGoogle()
                 
             }else if indexPath.row == 2 {
-                // user url path..Please handle url
-                
-                
-                let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
-                
-                urlPickedfuture.onSuccess { url in
-                    print("URL: \(url)")
-                    
-                    
-                    
-                }
+               useMoreCloud()
             }
             
         }
@@ -103,6 +93,10 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
             print(file.displayName)
         }
+        
+        let flurryParams = [ "Type" :"handleLocalFile"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+
     }
     
     func selectPhotos () {
@@ -115,7 +109,8 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         flagImage = true
         self.presentViewController(imagePicker, animated: true, completion: nil)
         
-        
+        let flurryParams = [ "Type" :"selectPhotos"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
     }
     
     
@@ -123,6 +118,8 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         let vc = UIStoryboard.dropBoxVC()
         self.navigationController?.pushViewController(vc!, animated: true)
+        let flurryParams = [ "Type" :"useDropBox"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
         
     }
     
@@ -130,6 +127,9 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         let vc = UIStoryboard.googleDriveVC()
         self.navigationController?.pushViewController(vc!, animated: true)
+        
+        let flurryParams = [ "Type" :"useGoogle"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
         
     }
     
@@ -144,6 +144,9 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         flagVideo = true
         self.presentViewController(imagePicker, animated: true, completion: nil)
         
+        let flurryParams = [ "Type" :"selectVideos"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        
     }
     
     func selectAudio() {
@@ -156,9 +159,22 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         picker.preferredContentSize = CGSizeMake(500,600)
         self.presentViewController(picker, animated: true, completion: nil)
         
+        let flurryParams = [ "Type" :"selectAudio"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        
     }
     
-    
+    func useMoreCloud( ) {
+        // user url path..Please handle url
+        let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
+        urlPickedfuture.onSuccess { url in
+            print("URL: \(url)")
+            
+        }
+        
+        let flurryParams = [ "Type" :"selectMoreCloud"]
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+    }
     
     func qb_imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
         

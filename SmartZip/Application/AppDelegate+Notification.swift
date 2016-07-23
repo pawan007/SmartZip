@@ -11,6 +11,8 @@ extension AppDelegate {
     
     struct Keys {
         static let deviceToken = "deviceToken"
+        static let deviceIsRegister = "deviceIsRegister"
+
     }
     
     // MARK: - UIApplicationDelegate Methods
@@ -65,6 +67,19 @@ extension AppDelegate {
             return deviceToken!
         }
         
+        return ""
+    }
+    
+    
+    func setRigisterDevice () {
+             NSUserDefaults.setObject("register", forKey: Keys.deviceToken)
+    }
+    
+    func getRigisterDevice () -> String {
+        let deviceIsRegister: String? = NSUserDefaults.objectForKey(Keys.deviceIsRegister) as? String
+        if isObjectInitialized(deviceIsRegister) {
+            return deviceIsRegister!
+        }
         return ""
     }
     

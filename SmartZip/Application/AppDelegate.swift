@@ -39,6 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         AppDelegate.presentRootViewController()
+        
+        if AppDelegate.delegate().getRigisterDevice() == ""  {
+            AppDelegate.delegate().setRigisterDevice()
+            let flurryParams = [ "deviceToken" :AppDelegate.delegate().deviceToken()]
+            AnalyticsManager.sharedManager().trackEvent("New device register", attributes: flurryParams, screenName: "AppDelegate")
+        }
+
         return true
     }
     
@@ -50,10 +57,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+            let date = NSDate()
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+            let dateString = dateFormatter.stringFromDate(date)
+        
+            let flurryParams = [ "date" :dateString]
+            AnalyticsManager.sharedManager().trackEvent("applicationDidEnterBackground", attributes: flurryParams, screenName: "AppDelegate")
+
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        let dateString = dateFormatter.stringFromDate(date)
+        
+        let flurryParams = [ "date" :dateString]
+        AnalyticsManager.sharedManager().trackEvent("applicationWillEnterForeground", attributes: flurryParams, screenName: "AppDelegate")
+
     }
     
     func applicationDidBecomeActive(application: UIApplication) {

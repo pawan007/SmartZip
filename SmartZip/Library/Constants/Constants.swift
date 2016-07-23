@@ -14,7 +14,7 @@ struct Constants {
 
     // MARK: Tokens
     struct Tokens {
-        static let MIX_PANNEL_TOKEN: String = "1a9b461626c25e7918bebe789c21571b"
+        static let MIX_PANNEL_TOKEN: String = "86c7fdce297bc1d025ea3d749a1e67da"
         static let FLURRY_APP_ID: String = "TS58ZK76CMHNJ7JKV5K3"
         static let GOOGLE_ANALYTICS_APP_ID: String = "UA-76023878-1"
     }
