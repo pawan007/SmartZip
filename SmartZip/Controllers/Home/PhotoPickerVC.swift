@@ -384,6 +384,13 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
         ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
         ac.setValue("My file", forKey: "Subject")
+        
+        if let popoverPresentationController = ac.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            var rect=self.view.frame
+            rect.origin.y = rect.height
+            popoverPresentationController.sourceRect = rect
+        }
         self.presentViewController(ac, animated: true, completion: nil)
         
     }

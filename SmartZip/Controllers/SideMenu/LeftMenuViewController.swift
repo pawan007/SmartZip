@@ -15,10 +15,7 @@ import MessageUI
 class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDelegate{
     
     @IBOutlet weak var topTableView: UITableView!
-    
-    // private var topTableIDs = ["HelpCell","BuyProCell","RestoreCell","PasswordCell","ShareAppCell","RateAppCell","EmailCell","TutorialCell"]
-    
-    private var topTableIDs = ["HomeCell","HistoryCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
+     private var topTableIDs = ["HomeCell","HistoryCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
     
     
     override func viewDidLoad() {
@@ -96,38 +93,44 @@ extension LeftMenuViewController: UITableViewDelegate
             })
             self.shareApp()
             break
-        //TODO
         case "RateAppCell" :
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
             iRate.sharedInstance().openRatingsPageInAppStore()
             break
-        case "EmailCell" : break
-        //TODO
-        case "TutorialCell" : break
-            
+        case "EmailCell" :
+            self.sendEmail();
+            break
         case "HistoryCell" :
             let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HistoryVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
             break
-        //TODO
         default: break
             
         }
     }
     
     func shareApp() {
+        
         let textToShare = "I love this app."
         
         if let myWebsite = NSURL(string: "http://www.codingexplorer.com/") {
+            
             let objectsToShare = [textToShare, myWebsite]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             //New Excluded Activities Code
             activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypeMessage]
-            //            
+            //      
+            
+            if let popoverPresentationController = activityVC.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                var rect=self.view.frame
+                rect.origin.y = rect.height
+                popoverPresentationController.sourceRect = rect
+            }
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
     }
@@ -136,8 +139,8 @@ extension LeftMenuViewController: UITableViewDelegate
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["nathan@SmartZip.com.au"])
-            mail.setSubject("Holiday Happenings - Feedback to Admin")
+            mail.setToRecipients(["admin@mobirizer.com"])
+            mail.setSubject("Smart Zip - Feedback to Admin")
             mail.setMessageBody("<p>Dear Admin</p>", isHTML: true)
             presentViewController(mail, animated: true, completion: nil)
         } else {

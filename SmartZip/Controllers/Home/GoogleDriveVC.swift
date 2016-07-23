@@ -92,7 +92,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         service.executeQuery(
             query,
             delegate: self,
-            didFinishSelector: "displayResultWithTicket:finishedWithObject:error:"
+            didFinishSelector: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
         )
     }
     
@@ -107,7 +107,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         service.executeQuery(
             query,
             delegate: self,
-            didFinishSelector: "displayResultWithTicket:finishedWithObject:error:"
+            didFinishSelector: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
         )
         
     }
@@ -123,7 +123,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         service.executeQuery(
             query,
             delegate: self,
-            didFinishSelector: "displayResultWithTicket:finishedWithObject:error:"
+            didFinishSelector: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
         )
         
     }
@@ -193,7 +193,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             clientSecret: nil,
             keychainItemName: kKeychainItemName,
             delegate: self,
-            finishedSelector: "viewController:finishedWithAuth:error:"
+            finishedSelector: #selector(GoogleDriveVC.viewController(_:finishedWithAuth:error:))
         )
     }
     
@@ -225,6 +225,12 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             handler: nil
         )
         alert.addAction(ok)
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            var rect=self.view.frame
+            rect.origin.y = rect.height
+            popoverPresentationController.sourceRect = rect
+        }
         presentViewController(alert, animated: true, completion: nil)
     }
     

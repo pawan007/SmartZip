@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func iRateSetUp () {
-        iRate.sharedInstance().applicationBundleID = "com.modi.SmartZip"
+        iRate.sharedInstance().applicationBundleID = "com.holidayhappenings.app"
         iRate.sharedInstance().appStoreID = 553834731
         iRate.sharedInstance().ratingsURL = NSURL(string: "https://itunes.apple.com/in/app/candy-crush-saga/id553834731?mt=8")
         iRate.sharedInstance().onlyPromptIfLatestVersion = false

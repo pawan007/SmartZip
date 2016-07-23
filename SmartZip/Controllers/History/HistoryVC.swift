@@ -132,6 +132,12 @@ class HistoryVC: UIViewController {
         }
         actionSheetController.addAction(choosePictureAction)
         
+        if let popoverPresentationController = actionSheetController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            var rect=self.view.frame
+            rect.origin.y = rect.height
+            popoverPresentationController.sourceRect = rect
+        }
         //Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }

@@ -126,6 +126,13 @@ extension UIViewController {
         assert(array.count != 0, "Please specify at least element to share among image, text or url")
         
         let activityController = UIActivityViewController(activityItems: array, applicationActivities: activities)
+        
+        if let popoverPresentationController = activityController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            var rect=self.view.frame
+            rect.origin.y = rect.height
+            popoverPresentationController.sourceRect = rect
+        }
         presentViewController(activityController, animated: true, completion: nil)
     }
 }

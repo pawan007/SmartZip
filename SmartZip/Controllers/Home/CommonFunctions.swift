@@ -419,6 +419,13 @@ class CommonFunctions: NSObject {
         let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
         ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
         ac.setValue("My file", forKey: "Subject")
+        
+        if let popoverPresentationController = ac.popoverPresentationController {
+            popoverPresentationController.sourceView = vc.view
+            var rect=vc.view.frame
+            rect.origin.y = rect.height
+            popoverPresentationController.sourceRect = rect
+        }
         vc.presentViewController(ac, animated: true, completion: nil)
         
     }

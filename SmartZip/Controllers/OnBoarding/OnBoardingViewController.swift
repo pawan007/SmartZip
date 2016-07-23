@@ -80,12 +80,12 @@ class OnBoardingViewController: BaseViewController {
             self.scrollView.alpha = 0
             self.pageControl.alpha = 0
         }
-        
-        if (UIDevice().screenType == UIDevice.HHScreenType.iPhone4) {
-            
-            topVerticalSpaceConstraint.constant = 50;
-            
-        }
+//        
+//        if (UIDevice().screenType == UIDevice.HHScreenType.iPhone4) {
+//            
+//            topVerticalSpaceConstraint.constant = 50;
+//            
+//        }
         
     }
     
