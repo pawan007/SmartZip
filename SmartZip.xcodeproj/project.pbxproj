@@ -21,6 +21,9 @@
 		14837B591D3B5B2E007B52BB /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B4D1D3B5B2E007B52BB /* MYIntroductionView.m */; };
 		14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */; };
 		14837B5F1D3BD6F5007B52BB /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5E1D3BD6F5007B52BB /* iRate.m */; };
+		14C2CBEA1D43C95200F7472A /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE71D43C95200F7472A /* IAPHelper.swift */; };
+		14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE81D43C95200F7472A /* RageProducts.swift */; };
+		14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */; };
 		1687EE07F3BD5FD3196B07BD /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27B5C38FD5A6D589F1EBAAC /* Pods_SmartZip.framework */; };
 		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
@@ -158,6 +161,9 @@
 		14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialVC.swift; sourceTree = "<group>"; };
 		14837B5D1D3BD6F5007B52BB /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		14837B5E1D3BD6F5007B52BB /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
+		14C2CBE71D43C95200F7472A /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		14C2CBE81D43C95200F7472A /* RageProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RageProducts.swift; sourceTree = "<group>"; };
+		14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAccountTypeViewController.swift; sourceTree = "<group>"; };
 		255872EA0357E2063A3D0131 /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
@@ -337,6 +343,16 @@
 				14837B5E1D3BD6F5007B52BB /* iRate.m */,
 			);
 			path = iRate;
+			sourceTree = "<group>";
+		};
+		14C2CBE61D43C95200F7472A /* InApp */ = {
+			isa = PBXGroup;
+			children = (
+				14C2CBE71D43C95200F7472A /* IAPHelper.swift */,
+				14C2CBE81D43C95200F7472A /* RageProducts.swift */,
+				14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */,
+			);
+			path = InApp;
 			sourceTree = "<group>";
 		};
 		87902D061D41402400D475AC /* History */ = {
@@ -559,6 +575,7 @@
 		D44DF2DA1D1E802E000C75B7 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				14C2CBE61D43C95200F7472A /* InApp */,
 				D436FD531D1FA77A00F2BE72 /* KIImagePager */,
 				D44DF2EA1D1E802E000C75B7 /* iCarousel */,
 			);
@@ -841,6 +858,7 @@
 				D4284CA21D1E4B9800E1BCA9 /* Resources */,
 				1945F381EA2BC05A27B06245 /* [CP] Embed Pods Frameworks */,
 				1D985E1B950B5C22E201D672 /* [CP] Copy Pods Resources */,
+				805FC7CF944805C7247FD769 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1087,6 +1105,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		805FC7CF944805C7247FD769 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F77AA0578C1834748492EA9B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1131,6 +1164,7 @@
 				D44DF3D81D1E802E000C75B7 /* FeedCollectionCell.swift in Sources */,
 				D44DF3B61D1E802E000C75B7 /* UITextView+Additions.swift in Sources */,
 				D44DF3A91D1E802E000C75B7 /* NSUserDefaults+Additions.swift in Sources */,
+				14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */,
 				D436FD261D1F8C1000F2BE72 /* DropBoxVC.swift in Sources */,
 				D44DF3B31D1E802E000C75B7 /* UILabel+Additions.swift in Sources */,
 				D436FD891D201E3F00F2BE72 /* HomeVC.swift in Sources */,
@@ -1153,6 +1187,7 @@
 				D44DF3A81D1E802E000C75B7 /* NSURLResponse+Additions.swift in Sources */,
 				D44DF38C1D1E802E000C75B7 /* BaseViewController.swift in Sources */,
 				D44DF3B11D1E802E000C75B7 /* UIImage+Additions.swift in Sources */,
+				14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */,
 				D44DF37B1D1E802E000C75B7 /* CenterViewController.swift in Sources */,
 				D44DF3C31D1E802E000C75B7 /* LogManager.swift in Sources */,
 				D44DF37C1D1E802E000C75B7 /* LeftMenuViewController.swift in Sources */,
@@ -1168,6 +1203,7 @@
 				D436FD841D1FBAB000F2BE72 /* ContentViewer.swift in Sources */,
 				D44DF37D1D1E802E000C75B7 /* SideMenuManager.swift in Sources */,
 				D44DF3791D1E802E000C75B7 /* NotificationViewController.swift in Sources */,
+				14C2CBEA1D43C95200F7472A /* IAPHelper.swift in Sources */,
 				D44DF3951D1E802E000C75B7 /* DesignableView.swift in Sources */,
 				D44DF3911D1E802E000C75B7 /* DesignableButton.swift in Sources */,
 				D44DF39E1D1E802E000C75B7 /* Double+Additions.swift in Sources */,
