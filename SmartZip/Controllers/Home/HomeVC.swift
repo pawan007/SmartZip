@@ -177,6 +177,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 let destinationPath:NSString = documentsPath.stringByAppendingString(urlCloud.lastPathComponent!)
                 if (!filemanager.fileExistsAtPath(destinationPath as String)) {
                     dataFromURL?.writeToFile(destinationPath as String, atomically:true)
+                    CommonFunctions.sharedInstance.zipMyFiles("\(destinationPath).zip", filePath: destinationPath, vc: self)
                 } else {
                     print("The files already exist")
                 }
@@ -271,6 +272,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                         
                     }catch let e as NSError{
                         print(e)
+                        SwiftSpinner.hide()
                     }
                     
                 }
@@ -349,6 +351,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                             
                         }catch let e as NSError{
                             print(e)
+                            SwiftSpinner.hide()
                         }
                         
                     }else if (asset != nil &&  asset!.isKindOfClass(AVComposition.classForCoder()) ){
