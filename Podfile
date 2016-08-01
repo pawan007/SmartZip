@@ -28,6 +28,7 @@ target 'SmartZip' do
     pod 'XCGLogger', '~> 3.3'
     pod 'FileBrowser', '~> 0.1'
     pod 'NADocumentPicker'
+    pod 'NACommonUtils', '~> 1.3.2'
     
     #   pod 'RxSwift', '~> 2.5'
     # pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'

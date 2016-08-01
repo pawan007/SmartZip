@@ -177,7 +177,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 let destinationPath:NSString = documentsPath.stringByAppendingString(urlCloud.lastPathComponent!)
                 if (!filemanager.fileExistsAtPath(destinationPath as String)) {
                     dataFromURL?.writeToFile(destinationPath as String, atomically:true)
-                    CommonFunctions.sharedInstance.zipMyFiles("\(destinationPath).zip", filePath: destinationPath, vc: self)
+                    CommonFunctions.sharedInstance.zipMyFiles("\(destinationPath).zip", filePath: destinationPath as String, vc: self)
                 } else {
                     print("The files already exist")
                 }
