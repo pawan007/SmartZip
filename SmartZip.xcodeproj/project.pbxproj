@@ -26,6 +26,27 @@
 		14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */; };
 		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
+		87C921931D50282F0099BC7B /* FBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9217C1D50282F0099BC7B /* FBFile.swift */; };
+		87C921941D50282F0099BC7B /* FileBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9217E1D50282F0099BC7B /* FileBrowser.swift */; };
+		87C921951D50282F0099BC7B /* FileBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9217F1D50282F0099BC7B /* FileBrowserCell.swift */; };
+		87C921961D50282F0099BC7B /* FileListPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921801D50282F0099BC7B /* FileListPreview.swift */; };
+		87C921971D50282F0099BC7B /* FileListSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921811D50282F0099BC7B /* FileListSearch.swift */; };
+		87C921981D50282F0099BC7B /* FileListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921821D50282F0099BC7B /* FileListTableView.swift */; };
+		87C921991D50282F0099BC7B /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921831D50282F0099BC7B /* FileListViewController.swift */; };
+		87C9219A1D50282F0099BC7B /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921841D50282F0099BC7B /* FileParser.swift */; };
+		87C9219B1D50282F0099BC7B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87C921851D50282F0099BC7B /* Info.plist */; };
+		87C9219C1D50282F0099BC7B /* PreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921861D50282F0099BC7B /* PreviewManager.swift */; };
+		87C9219D1D50282F0099BC7B /* PreviewTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921871D50282F0099BC7B /* PreviewTransitionViewController.swift */; };
+		87C9219E1D50282F0099BC7B /* documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921891D50282F0099BC7B /* documents@2x.png */; };
+		87C9219F1D50282F0099BC7B /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218A1D50282F0099BC7B /* file@2x.png */; };
+		87C921A01D50282F0099BC7B /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218B1D50282F0099BC7B /* FileBrowser.xib */; };
+		87C921A11D50282F0099BC7B /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218C1D50282F0099BC7B /* folder@2x.png */; };
+		87C921A21D50282F0099BC7B /* image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218D1D50282F0099BC7B /* image@2x.png */; };
+		87C921A31D50282F0099BC7B /* pdf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218E1D50282F0099BC7B /* pdf@2x.png */; };
+		87C921A41D50282F0099BC7B /* PreviewTransitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */; };
+		87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */; };
+		87C921A61D50282F0099BC7B /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921911D50282F0099BC7B /* zip@2x.png */; };
+		87C921A71D50282F0099BC7B /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */; };
 		D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4016B261D3D4CF60029AB3F /* CloudKit.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
 		D4284CC81D1E4B9800E1BCA9 /* SmartZipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CC71D1E4B9800E1BCA9 /* SmartZipUITests.swift */; };
@@ -166,6 +187,28 @@
 		3CF85270DD85DDFA247D418C /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		87C9217C1D50282F0099BC7B /* FBFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBFile.swift; sourceTree = "<group>"; };
+		87C9217D1D50282F0099BC7B /* FileBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBrowser.h; sourceTree = "<group>"; };
+		87C9217E1D50282F0099BC7B /* FileBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBrowser.swift; sourceTree = "<group>"; };
+		87C9217F1D50282F0099BC7B /* FileBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBrowserCell.swift; sourceTree = "<group>"; };
+		87C921801D50282F0099BC7B /* FileListPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListPreview.swift; sourceTree = "<group>"; };
+		87C921811D50282F0099BC7B /* FileListSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListSearch.swift; sourceTree = "<group>"; };
+		87C921821D50282F0099BC7B /* FileListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListTableView.swift; sourceTree = "<group>"; };
+		87C921831D50282F0099BC7B /* FileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
+		87C921841D50282F0099BC7B /* FileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
+		87C921851D50282F0099BC7B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87C921861D50282F0099BC7B /* PreviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewManager.swift; sourceTree = "<group>"; };
+		87C921871D50282F0099BC7B /* PreviewTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewTransitionViewController.swift; sourceTree = "<group>"; };
+		87C921891D50282F0099BC7B /* documents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "documents@2x.png"; sourceTree = "<group>"; };
+		87C9218A1D50282F0099BC7B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
+		87C9218B1D50282F0099BC7B /* FileBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileBrowser.xib; sourceTree = "<group>"; };
+		87C9218C1D50282F0099BC7B /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
+		87C9218D1D50282F0099BC7B /* image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image@2x.png"; sourceTree = "<group>"; };
+		87C9218E1D50282F0099BC7B /* pdf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pdf@2x.png"; sourceTree = "<group>"; };
+		87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewTransitionViewController.xib; sourceTree = "<group>"; };
+		87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
+		87C921911D50282F0099BC7B /* zip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zip@2x.png"; sourceTree = "<group>"; };
+		87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
 		9D2542D9809635CA3965CB5B /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4016B251D3D3F390029AB3F /* SmartZip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SmartZip.entitlements; sourceTree = "<group>"; };
 		D4016B261D3D4CF60029AB3F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -359,6 +402,43 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		87C9217B1D50282F0099BC7B /* FileBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				87C9217C1D50282F0099BC7B /* FBFile.swift */,
+				87C9217D1D50282F0099BC7B /* FileBrowser.h */,
+				87C9217E1D50282F0099BC7B /* FileBrowser.swift */,
+				87C9217F1D50282F0099BC7B /* FileBrowserCell.swift */,
+				87C921801D50282F0099BC7B /* FileListPreview.swift */,
+				87C921811D50282F0099BC7B /* FileListSearch.swift */,
+				87C921821D50282F0099BC7B /* FileListTableView.swift */,
+				87C921831D50282F0099BC7B /* FileListViewController.swift */,
+				87C921841D50282F0099BC7B /* FileParser.swift */,
+				87C921851D50282F0099BC7B /* Info.plist */,
+				87C921861D50282F0099BC7B /* PreviewManager.swift */,
+				87C921871D50282F0099BC7B /* PreviewTransitionViewController.swift */,
+				87C921881D50282F0099BC7B /* Resources */,
+				87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */,
+			);
+			path = FileBrowser;
+			sourceTree = "<group>";
+		};
+		87C921881D50282F0099BC7B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				87C921891D50282F0099BC7B /* documents@2x.png */,
+				87C9218A1D50282F0099BC7B /* file@2x.png */,
+				87C9218B1D50282F0099BC7B /* FileBrowser.xib */,
+				87C9218C1D50282F0099BC7B /* folder@2x.png */,
+				87C9218D1D50282F0099BC7B /* image@2x.png */,
+				87C9218E1D50282F0099BC7B /* pdf@2x.png */,
+				87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */,
+				87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */,
+				87C921911D50282F0099BC7B /* zip@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9E43BB36368F4560283168B5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +566,7 @@
 		D44DF2C81D1E802E000C75B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				87C9217B1D50282F0099BC7B /* FileBrowser */,
 				87902D061D41402400D475AC /* History */,
 				14837B5C1D3BD6F5007B52BB /* iRate */,
 				14837B3E1D3B5B2E007B52BB /* Tutorial */,
@@ -953,9 +1034,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				14837B531D3B5B2E007B52BB /* tutorial_background_00@2x.jpg in Resources */,
+				87C921A31D50282F0099BC7B /* pdf@2x.png in Resources */,
 				D44DF3711D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Regular.ttf in Resources */,
 				D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */,
+				87C921A11D50282F0099BC7B /* folder@2x.png in Resources */,
 				D44DF3731D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Thin.ttf in Resources */,
+				87C921A01D50282F0099BC7B /* FileBrowser.xib in Resources */,
 				D44DF36C1D1E802E000C75B7 /* Assets.xcassets in Resources */,
 				D44DF3D71D1E802E000C75B7 /* FeedCell.xib in Resources */,
 				14837B541D3B5B2E007B52BB /* tutorial_background_01@2x.jpg in Resources */,
@@ -963,14 +1047,20 @@
 				14837B551D3B5B2E007B52BB /* tutorial_background_02@2x.jpg in Resources */,
 				D436FD5B1D1FA77A00F2BE72 /* KICamera.png in Resources */,
 				14837B501D3B5B2E007B52BB /* button-background.png in Resources */,
+				87C921A61D50282F0099BC7B /* zip@2x.png in Resources */,
 				14837B521D3B5B2E007B52BB /* SampleHeaderImage.png in Resources */,
 				14837B571D3B5B2E007B52BB /* tutorial_background_04@2x.jpg in Resources */,
+				87C921A41D50282F0099BC7B /* PreviewTransitionViewController.xib in Resources */,
 				D44DF3701D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Light.ttf in Resources */,
 				D44DF3721D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Semibold.ttf in Resources */,
 				D436FD5C1D1FA77A00F2BE72 /* KICamera@2x.png in Resources */,
+				87C921A21D50282F0099BC7B /* image@2x.png in Resources */,
+				87C9219B1D50282F0099BC7B /* Info.plist in Resources */,
+				87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */,
 				14837B4F1D3B5B2E007B52BB /* background-gradient@2x.png in Resources */,
 				D44DF36E1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf in Resources */,
 				D44DF36D1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf in Resources */,
+				87C9219F1D50282F0099BC7B /* file@2x.png in Resources */,
 				D44DF3D91D1E802E000C75B7 /* FeedCollectionCell.xib in Resources */,
 				D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */,
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
@@ -978,6 +1068,7 @@
 				14837B511D3B5B2E007B52BB /* button-background@2x.png in Resources */,
 				14837B561D3B5B2E007B52BB /* tutorial_background_03@2x.jpg in Resources */,
 				D436FD861D201CC700F2BE72 /* Main.storyboard in Resources */,
+				87C9219E1D50282F0099BC7B /* documents@2x.png in Resources */,
 				D48D5B481D2FFDB200483BA6 /* folderIcon.png in Resources */,
 				D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */,
 			);
@@ -1136,13 +1227,19 @@
 				D44DF3A91D1E802E000C75B7 /* NSUserDefaults+Additions.swift in Sources */,
 				14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */,
 				D436FD261D1F8C1000F2BE72 /* DropBoxVC.swift in Sources */,
+				87C921981D50282F0099BC7B /* FileListTableView.swift in Sources */,
 				D44DF3B31D1E802E000C75B7 /* UILabel+Additions.swift in Sources */,
 				D436FD891D201E3F00F2BE72 /* HomeVC.swift in Sources */,
+				87C9219D1D50282F0099BC7B /* PreviewTransitionViewController.swift in Sources */,
 				D436FD291D1F8C1000F2BE72 /* UnZipVC.swift in Sources */,
+				87C9219C1D50282F0099BC7B /* PreviewManager.swift in Sources */,
 				D44DF3A11D1E802E000C75B7 /* Int+NSTimeInterval.swift in Sources */,
 				D44DF3B51D1E802E000C75B7 /* UITextField+Additions.swift in Sources */,
+				87C921961D50282F0099BC7B /* FileListPreview.swift in Sources */,
 				D44DF36B1D1E802E000C75B7 /* AppDelegate.swift in Sources */,
 				D44DF3AC1D1E802E000C75B7 /* UIAlertViewController+Additions.swift in Sources */,
+				87C921971D50282F0099BC7B /* FileListSearch.swift in Sources */,
+				87C921931D50282F0099BC7B /* FBFile.swift in Sources */,
 				D44DF3A31D1E802E000C75B7 /* NSDate+Additions.swift in Sources */,
 				D44DF3761D1E802E000C75B7 /* ProductsViewController.swift in Sources */,
 				D44DF39C1D1E802E000C75B7 /* Character+Addition.swift in Sources */,
@@ -1154,6 +1251,7 @@
 				D44DF3A61D1E802E000C75B7 /* NSDate+Formatters.swift in Sources */,
 				D44DF3B41D1E802E000C75B7 /* UIStoryboard+Additions.swift in Sources */,
 				87902D081D41403700D475AC /* HistoryVC.swift in Sources */,
+				87C921941D50282F0099BC7B /* FileBrowser.swift in Sources */,
 				D44DF3A81D1E802E000C75B7 /* NSURLResponse+Additions.swift in Sources */,
 				D44DF38C1D1E802E000C75B7 /* BaseViewController.swift in Sources */,
 				D44DF3B11D1E802E000C75B7 /* UIImage+Additions.swift in Sources */,
@@ -1166,6 +1264,7 @@
 				D44DF39F1D1E802E000C75B7 /* Float+Additions.swift in Sources */,
 				D44DF3891D1E802E000C75B7 /* iCarousel.m in Sources */,
 				D436FD5A1D1FA77A00F2BE72 /* AFImagePager.m in Sources */,
+				87C921A71D50282F0099BC7B /* WebviewPreviewViewContoller.swift in Sources */,
 				D44DF3BB1D1E802E000C75B7 /* AnalyticsManager.swift in Sources */,
 				D44DF3A51D1E802E000C75B7 /* NSDate+Components.swift in Sources */,
 				D44DF3D61D1E802E000C75B7 /* FeedCell.swift in Sources */,
@@ -1177,11 +1276,13 @@
 				D44DF3951D1E802E000C75B7 /* DesignableView.swift in Sources */,
 				D44DF3911D1E802E000C75B7 /* DesignableButton.swift in Sources */,
 				D44DF39E1D1E802E000C75B7 /* Double+Additions.swift in Sources */,
+				87C921951D50282F0099BC7B /* FileBrowserCell.swift in Sources */,
 				D436FD281D1F8C1000F2BE72 /* PhotoPickerVC.swift in Sources */,
 				D44DF3BF1D1E802E000C75B7 /* InAppPurchaseManager.swift in Sources */,
 				14837B581D3B5B2E007B52BB /* MYIntroductionPanel.m in Sources */,
 				D44DF3941D1E802E000C75B7 /* DesignableTextView.swift in Sources */,
 				D44DF39D1D1E802E000C75B7 /* Dictionary+Additions.swift in Sources */,
+				87C921991D50282F0099BC7B /* FileListViewController.swift in Sources */,
 				D44DF3AA1D1E802E000C75B7 /* Range+Additions.swift in Sources */,
 				D436FD821D1FA81100F2BE72 /* Constants.swift in Sources */,
 				D48D5B4A1D2FFDC000483BA6 /* GoogleDriveVC.swift in Sources */,
@@ -1196,6 +1297,7 @@
 				D436FD8E1D202B3300F2BE72 /* PasscodeVC.swift in Sources */,
 				D44DF3C21D1E802E000C75B7 /* OneShotLocationManager.swift in Sources */,
 				D44DF3AD1D1E802E000C75B7 /* UIButton+Additions.swift in Sources */,
+				87C9219A1D50282F0099BC7B /* FileParser.swift in Sources */,
 				D44DF3C01D1E802E000C75B7 /* LanguageManager.swift in Sources */,
 				D44DF3AB1D1E802E000C75B7 /* String+Additions.swift in Sources */,
 				D44DF3B91D1E802E000C75B7 /* UIViewController+UIImagePickerController.swift in Sources */,

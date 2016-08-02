@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FileBrowser
 import MediaPlayer
 import MobileCoreServices
 import AssetsLibrary
@@ -70,7 +69,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 useGoogle()
                 
             }else if indexPath.row == 2 {
-               useMoreCloud()
+                useMoreCloud()
             }
             
         }
@@ -87,16 +86,21 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     }
     
     func handleLocalFile() {
-        let fileBrowser = FileBrowser()
-        fileBrowser.excludesFileExtensions = ["zip"]
-        self.presentViewController(fileBrowser, animated: true, completion: nil)
-        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            print(file.displayName)
-        }
+        
+        /*let fileBrowser = FileBrowser()
+         fileBrowser.excludesFileExtensions = ["zip"]
+         self.presentViewController(fileBrowser, animated: true, completion: nil)
+         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+         print(file.displayName)
+         }*/
+        
+        
+        let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController")
+        self.navigationController?.pushViewController(fileListViewController, animated: true)
         
         let flurryParams = [ "Type" :"handleLocalFile"]
         AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
-
+        
     }
     
     func selectPhotos () {
@@ -484,7 +488,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             rect.origin.y = rect.height
             popoverPresentationController.sourceRect = rect
         }
-
+        
         
         self.presentViewController(ac, animated: true, completion: nil)
         

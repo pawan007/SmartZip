@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let flurryParams = [ "deviceToken" :AppDelegate.delegate().deviceToken()]
             AnalyticsManager.sharedManager().trackEvent("New device register", attributes: flurryParams, screenName: "AppDelegate")
         }
-
+        
         return true
     }
     
@@ -58,14 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-            let date = NSDate()
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-            let dateString = dateFormatter.stringFromDate(date)
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        let dateString = dateFormatter.stringFromDate(date)
         
-            let flurryParams = [ "date" :dateString]
-            AnalyticsManager.sharedManager().trackEvent("applicationDidEnterBackground", attributes: flurryParams, screenName: "AppDelegate")
-
+        let flurryParams = [ "date" :dateString]
+        AnalyticsManager.sharedManager().trackEvent("applicationDidEnterBackground", attributes: flurryParams, screenName: "AppDelegate")
+        
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let flurryParams = [ "date" :dateString]
         AnalyticsManager.sharedManager().trackEvent("applicationWillEnterForeground", attributes: flurryParams, screenName: "AppDelegate")
-
+        
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
@@ -211,5 +211,15 @@ extension AppDelegate {
     
 }
 
+
+extension RangeReplaceableCollectionType where Generator.Element : Equatable {
+    
+    // Remove first collection element that is equal to the given `object`:
+    mutating func removeObject(object : Generator.Element) {
+        if let index = self.indexOf(object) {
+            self.removeAtIndex(index)
+        }
+    }
+}
 
 
