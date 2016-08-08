@@ -16,6 +16,10 @@ import QBImagePickerController
 import NADocumentPicker
 
 import NADocumentPicker
+
+import GoogleMobileAds
+
+
 class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     var flagImage = false
@@ -28,14 +32,85 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     var currentFile = 0
     var nameIndex = 0
     
+    @IBOutlet var bannerView: GADBannerView!
+    var interstitial: GADInterstitial!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: "check_slow_video", object: nil)
+        
+        self.setUpGoogleAds()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func setUpGoogleAds() {
+        print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        bannerView.adUnitID = kGoogleBannerAdId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+        
+        
+        interstitial = GADInterstitial(adUnitID: kGoogleInterstitialAd)
+        let request = GADRequest()
+        // Request test ads on devices you specify. Your test device ID is printed to the console when
+        // an ad request is made.
+       // request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
+        interstitial.loadRequest(request)
+    }
+    
+    func showFullPageAd() -> Bool {
+        let str = "TipsPopupValue"
+        var isShow = false
+        if var value:Int = NSUserDefaults.objectForKey(str)?.integerValue {
+            if(value == 0 || NSUserDefaults.objectForKey(str) == nil) {
+                isShow = true
+                let number = self.randomInt(1, max: 3)
+                NSUserDefaults.setObject(number, forKey: str)
+            }
+            else {
+                value = value - 1
+                NSUserDefaults.setObject(value, forKey: str)
+            }
+        }
+        else {
+            let number = self.randomInt(1, max: 3)
+            NSUserDefaults.setObject(number, forKey: str)
+        }
+        
+        if(isShow) {
+           
+            if interstitial.isReady {
+                interstitial.presentFromRootViewController(self)
+            } else {
+                print("Ad wasn't ready")
+            }
+            
+            /*
+            let viewsDictionary = ["subView":interstitial]
+            let view_constraint_H = NSLayoutConstraint.constraintsWithVisualFormat(
+                "H:|[subView]|",
+                options: NSLayoutFormatOptions(rawValue:0),
+                metrics: nil, views: viewsDictionary)
+            let view_constraint_V = NSLayoutConstraint.constraintsWithVisualFormat(
+                "V:|[subView]|",
+                options: NSLayoutFormatOptions.AlignAllLeading,
+                metrics: nil, views: viewsDictionary)
+            
+            APPDELEGATE.window?.addConstraints(view_constraint_H)
+            APPDELEGATE.window?.addConstraints(view_constraint_V)
+            */
+        }
+        return isShow
+    }
+    
+    func randomInt(min: Int, max:Int) -> Int {
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -78,9 +153,14 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     @IBAction   func menuButtonAction(sender: AnyObject) {
-        if let container = SideMenuManager.sharedManager().container {
-            container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
-                
+        if (self.showFullPageAd()) {
+            return;
+        }
+        else {
+            if let container = SideMenuManager.sharedManager().container {
+                container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
+                    
+                }
             }
         }
     }
