@@ -24,6 +24,7 @@
 		14C2CBEA1D43C95200F7472A /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE71D43C95200F7472A /* IAPHelper.swift */; };
 		14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE81D43C95200F7472A /* RageProducts.swift */; };
 		14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */; };
+		8706C57D1D5A2F8C006C560D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706C57C1D5A2F8C006C560D /* Reachability.swift */; };
 		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
 		87C921931D50282F0099BC7B /* FBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9217C1D50282F0099BC7B /* FBFile.swift */; };
@@ -185,6 +186,7 @@
 		14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAccountTypeViewController.swift; sourceTree = "<group>"; };
 		1B78CB5B29435EE41F7A4A27 /* Pods-SmartZip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.debug.xcconfig"; sourceTree = "<group>"; };
 		3CF85270DD85DDFA247D418C /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
+		8706C57C1D5A2F8C006C560D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		87C9217C1D50282F0099BC7B /* FBFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBFile.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				D44DF2BD1D1E802E000C75B7 /* fonts */,
 				D44DF2C51D1E802E000C75B7 /* Info.plist */,
 				D44DF2C61D1E802E000C75B7 /* Bridge.h */,
+				8706C57C1D5A2F8C006C560D /* Reachability.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -988,7 +991,7 @@
 				TargetAttributes = {
 					D4284CA31D1E4B9800E1BCA9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = AQ4P6J9D24;
+						DevelopmentTeam = 9YG7G7YB2J;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -1256,6 +1259,7 @@
 				D44DF38C1D1E802E000C75B7 /* BaseViewController.swift in Sources */,
 				D44DF3B11D1E802E000C75B7 /* UIImage+Additions.swift in Sources */,
 				14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */,
+				8706C57D1D5A2F8C006C560D /* Reachability.swift in Sources */,
 				D44DF37B1D1E802E000C75B7 /* CenterViewController.swift in Sources */,
 				D44DF3C31D1E802E000C75B7 /* LogManager.swift in Sources */,
 				D44DF37C1D1E802E000C75B7 /* LeftMenuViewController.swift in Sources */,
@@ -1364,7 +1368,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weblink inc (DFGM9S2ZXA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Weblink inc (DFGM9S2ZXA)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1384,9 +1389,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "e63780dd-c289-4029-bc8f-fa370051edee";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1412,7 +1418,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weblink inc (DFGM9S2ZXA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Weblink inc (DFGM9S2ZXA)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1426,8 +1433,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "e63780dd-c289-4029-bc8f-fa370051edee";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1442,6 +1450,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1457,8 +1466,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.holidays.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.zip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};
 			name = Debug;
@@ -1470,6 +1480,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1485,8 +1496,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.holidays.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.zip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};
 			name = Release;

@@ -103,6 +103,13 @@ class FileListViewController: UIViewController {
         
         // Register for 3D touch
         self.registerFor3DTouch()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
+        tableView.tableFooterView = UIView()
     }
     
     
@@ -164,6 +171,7 @@ class FileListViewController: UIViewController {
         })
         tableView.reloadData()
     }
+    
     
 }
 

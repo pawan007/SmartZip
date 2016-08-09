@@ -63,12 +63,27 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         }else{
             
             if indexPath.row == 0 {
+                
+                guard Reachability.isConnectedToNetwork()else{
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                    return
+                }
+                
                 useDropBox()
                 
             }else if indexPath.row == 1 {
+                
+                guard Reachability.isConnectedToNetwork()else{
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                    return
+                }
                 useGoogle()
                 
             }else if indexPath.row == 2 {
+                guard Reachability.isConnectedToNetwork()else{
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                    return
+                }
                 useMoreCloud()
             }
             
@@ -463,7 +478,10 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             
             try! kFileManager.removeItemAtPath(existingFolder)
             print("Zip file created successfully")
+            handleLocalFile()
             self.shareMyFile(newZipFile)
+            
+            
             
             /*let vc:UnZipVC = UIStoryboard.unZipVC()!
              vc.zipFilePath = newZipFile
