@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+import Firebase
 
 //import IQKeyboardManagerSwift
 
@@ -36,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navController?.navigationBarHidden = true
             self.window?.rootViewController = navController
             self.window?.makeKeyAndVisible()
+            
+            FIRApp.configure()
+            
             return true
         }
         AppDelegate.presentRootViewController()

@@ -53,5 +53,21 @@ let ResTypeDoc = "document"
 let kAlertTitle = "SmartZip"
 let kFileManager = NSFileManager.defaultManager()
 
+// narender.mobirizer@gmail.com
+// narender@mobirizer
+let kGoogleAdUnitId       = "ca-app-pub-7753603434154239/"
+let kGoogleBannerAdId     = "ca-app-pub-7753603434154239/4797926502"
+let kGoogleInterstitialAd = "ca-app-pub-7753603434154239/6274659704"
+
+let APPDELEGATE = UIApplication.sharedApplication().delegate as! AppDelegate
+
+
+
+
+
+
+
+
+
 
  
