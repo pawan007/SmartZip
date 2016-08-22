@@ -274,7 +274,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         progressBar.progress = 0.0
         progressBar.hidden = false
         
-        //        SwiftSpinner.show("Processing, please wait..")
+        SwiftSpinner.show("Processing, please wait..")
         
     }
     
@@ -296,7 +296,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
         
-        //        SwiftSpinner.hide()
+        SwiftSpinner.hide()
         
         print("The file \(metadata.filename) was downloaded. Content type: \(contentType)")
         progressBar.hidden = true
@@ -310,14 +310,14 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
         print(error.description)
         progressBar.hidden = true
-        //        SwiftSpinner.hide()
+        SwiftSpinner.hide()
     }
     
     func restClient(client: DBRestClient!, loadProgress progress: CGFloat, forFile destPath: String!) {
         progressBar.progress = Float(progress)
         let val:Int = Int(progress * 100)
         print(val)
-        //        SwiftSpinner.show("Processing, please wait..\n\n\(val)%", animated: false)
+        SwiftSpinner.show("Processing, please wait..\n\n\(val)%", animated: false)
     }
     
     

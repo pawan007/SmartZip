@@ -5,9 +5,9 @@ PODS:
     - Result (~> 2.0)
   - CCBottomRefreshControl (0.5.1):
     - Masonry (~> 0.6.2)
-  - Crashlytics (3.7.2):
+  - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.7)
+  - Fabric (1.6.8)
   - Firebase/AdMob (3.4.0):
     - Firebase/Analytics
     - Google-Mobile-Ads-SDK (= 7.9.1)
@@ -67,8 +67,8 @@ PODS:
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
-  - SnapKit (0.21.1)
-  - SSZipArchive (1.4)
+  - SnapKit (0.22.0)
+  - SSZipArchive (1.5)
   - SwiftSpinner (0.9.5)
   - TTTAttributedLabel (2.0.0)
   - UIView+TKGeometry (0.2)
@@ -104,8 +104,8 @@ SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   BrightFutures: 2b9f317ca249be86025f5747a76e72c9a0b4f4d2
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Firebase: 754562547af419cc2f4b15247fee419081924bc2
   FirebaseAnalytics: 228be2991cb28efb96cdafc4d62f64680e615c69
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
@@ -127,8 +127,8 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
-  SSZipArchive: bab21000ee11b7ba68d5880bcd87d80e4eb93e65
+  SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
+  SSZipArchive: 29daace2bccb90a47de2837744da397728ff9207
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIView+TKGeometry: bef0d7727753910d66d6fa51a3128ae6908047ef
