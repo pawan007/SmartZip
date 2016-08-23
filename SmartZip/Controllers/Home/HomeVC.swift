@@ -876,6 +876,20 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             alert -> Void in
             
             let firstTextField = alertController.textFields![0] as UITextField
+            
+            if(firstTextField.text?.length == 0){
+                
+                self.showAlert("Please enter folder name", assets: assets, type: type)
+                return
+            }
+            
+            if(firstTextField.text?.isValidName() == false){
+                
+                self.showAlert("Special characters are not allowed", assets: assets, type: type)
+                return
+            }
+            
+            
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(firstTextField.text!)"
             

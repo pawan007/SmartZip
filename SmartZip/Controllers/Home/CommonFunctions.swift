@@ -643,4 +643,19 @@ class CommonFunctions: NSObject {
         vc.presentViewController(alert, animated: true, completion: nil)
     }
     
+    
+    
+    
+}
+
+
+extension String{
+    
+    func isValidName () -> Bool {
+        
+        let emailFormat = "^[a-zA-Z0-9_-]{1,100}$"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluateWithObject(self)
+    }
+    
 }
