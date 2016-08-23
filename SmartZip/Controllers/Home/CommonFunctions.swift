@@ -412,6 +412,7 @@ class CommonFunctions: NSObject {
         
     }
     
+    
     func shareMyFile(zipPath:String, vc:UIViewController) -> Void {
         
         let fileDAta = NSURL(fileURLWithPath: zipPath)

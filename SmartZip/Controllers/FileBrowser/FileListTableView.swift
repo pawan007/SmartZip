@@ -133,6 +133,13 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
         print(filesForSharing)
         
+        
+        if filesForSharing.count == 1 && filesForSharing.last?.type == FBFileType.ZIP {
+            flagShowShareOptionOnly = true
+        }else{
+            flagShowShareOptionOnly = false
+        }
+        
         if filesForSharing.count == 1 && self.navigationItem.rightBarButtonItem?.title != "More"{
             
             let more = UIBarButtonItem(title: "More", style: .Done, target: self, action: #selector(FileListViewController.dismiss))
@@ -140,8 +147,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }else if filesForSharing.count == 0 {
             
-            let dismissButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.dismiss))
-            self.navigationItem.rightBarButtonItem = dismissButton
+            self.navigationItem.rightBarButtonItem = nil
             
         }
         
@@ -160,13 +166,28 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         actionSheetController.addAction(cancelAction)
         
         
-        //Create and add first option action
-        let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
-            //Code for launching the camera goes here
-            print("Apply Zip and Share code")
+        if flagShowShareOptionOnly {
             
+            //Create and add first option action
+            let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
+                //Code for launching the camera goes here
+                print("Apply Zip and Share code")
+                
+            }
+            actionSheetController.addAction(takePictureAction)
+        
+        }else{
+        
+            //Create and add first option action
+            let takePictureAction: UIAlertAction = UIAlertAction(title: "Zip and Share", style: .Default) { action -> Void in
+                //Code for launching the camera goes here
+                print("Apply Zip and Share code")
+                
+            }
+            actionSheetController.addAction(takePictureAction)
+        
         }
-        actionSheetController.addAction(takePictureAction)
+        
         //Create and add a second option action
         let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
             //Code for picking from camera roll goes here

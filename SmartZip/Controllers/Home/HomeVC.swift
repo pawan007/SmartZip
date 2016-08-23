@@ -37,6 +37,9 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     var currentFile = 0
     var nameIndex = 0
     
+    var isOpenedFromExternalResource = false
+    
+    
     @IBOutlet var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
     
@@ -44,13 +47,24 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: "check_slow_video", object: nil)
-        
+        if APPDELEGATE.isOpenedFromExternalResource {
+            isOpenedFromExternalResource = true
+        }
         self.setUpGoogleAds()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        if isOpenedFromExternalResource {
+            isOpenedFromExternalResource = false
+            self.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+        }
+        
     }
     
     
