@@ -177,25 +177,25 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 
                 
                 let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-                 
-                 importMenu.delegate = self
-                 
-                 self.presentViewController(importMenu, animated: true, completion: nil)
-                 
-                 let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-                 
-                 documentPicker.delegate = self
-                 
-                 documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-                 
-                 self.presentViewController(documentPicker, animated: true, completion: nil)
+                
+                importMenu.delegate = self
+                
+                self.presentViewController(importMenu, animated: true, completion: nil)
+                
+                let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+                
+                documentPicker.delegate = self
+                
+                documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+                
+                self.presentViewController(documentPicker, animated: true, completion: nil)
                 
                 
                 /*guard Reachability.isConnectedToNetwork()else{
-                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
-                    return
-                }
-                useMoreCloud()*/
+                 CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                 return
+                 }
+                 useMoreCloud()*/
             }
             
         }
@@ -845,14 +845,10 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
     func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
         
         print(url.path!)
+        let zipPath = "\(CommonFunctions.sharedInstance.docDirPath())/\((url.lastPathComponent)!).zip"
+        CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: url.path!, vc: self)
+        self.performSelector(#selector(HomeVC.handleLocalFile), withObject: nil, afterDelay: 1)
         
-        /*if controller.documentPickerMode == UIDocumentPickerMode.Open {
-         do {
-         try self.textLabel.text = url.path! // String(contentsOfFile: url.path!)
-         } catch {
-         print(error)
-         }
-         }*/
     }
     
     func documentMenu(documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {

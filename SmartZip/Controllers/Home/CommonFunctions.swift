@@ -403,6 +403,7 @@ class CommonFunctions: NSObject {
             return
         }
         
+        
         let success = SSZipArchive.createZipFileAtPath(newZipFile, withFilesAtPaths: [filePath])
         if success {
             try! kFileManager.removeItemAtPath(filePath)
@@ -416,13 +417,11 @@ class CommonFunctions: NSObject {
     func zipAllMyFiles(newZipFile:String , vc:UIViewController, files : [FBFile]) -> Bool {
         
         var arrayPaths = [String]()
-        let folderPath = newZipFile.stringByReplacingOccurrencesOfString(".zip", withString: "")
         for item in files {
             arrayPaths.append(item.filePath.path!)
         }
         
         do{
-            
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/test\(Timestamp)"
             
@@ -432,21 +431,24 @@ class CommonFunctions: NSObject {
                 print(e)
             }
             
-            
-            
             for item in arrayPaths {
                 
                 let newUrl = NSURL(fileURLWithPath: item)
                 let name = item.componentsSeparatedByString("/").last
                 let newPath = cacheDir+"/"+name!
                 let newUrlFile = NSURL(fileURLWithPath: newPath)
-                try kFileManager.copyItemAtURL(newUrl, toURL: newUrlFile)
+                
+                do{
+                    try kFileManager.copyItemAtURL(newUrl, toURL: newUrlFile)
+                }catch let e as NSError{
+                    print(e)
+                }
+                
             }
             
             let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: cacheDir)
             if success {
                 print("Zip file created successfully")
-                
                 try! kFileManager.removeItemAtPath(cacheDir)
                 self.shareMyFile(newZipFile, vc: vc)
                 return true
@@ -689,9 +691,10 @@ class CommonFunctions: NSObject {
         var fileSpace:CUnsignedLongLong = 0
         
         for item in path {
-            fileSpace = getFolderSize(item)
+            fileSpace += getFolderSize(item)
         }
         
+        fileSpace += fileSpace
         
         let difference = freeSpace - fileSpace
         if difference > 0 {

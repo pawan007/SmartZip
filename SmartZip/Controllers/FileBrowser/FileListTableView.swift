@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SSZipArchive
+import SwiftSpinner
 
 extension FileListViewController: UITableViewDataSource, UITableViewDelegate, FileBrowserCellDelegate {
     
@@ -329,6 +330,20 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
                 
             }else{
                 
+                
+                var arrayPaths = [String]()
+                for item in self.filesForSharing {
+                    arrayPaths.append(item.filePath.path!)
+                }
+                
+                if !CommonFunctions.sharedInstance.canCreateZip2(arrayPaths) {
+                    
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: self)
+                    return
+                }
+                
+                SwiftSpinner.show("Please Wait")
+                
                 let result = CommonFunctions.sharedInstance.zipAllMyFiles(zipFileName, vc: self, files: self.filesForSharing)
                 
                 if(result){
@@ -338,7 +353,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
                     self.indexFiles()
                     self.tableView.reloadData()
                 }
-                
+                SwiftSpinner.hide()
             }
             
             
