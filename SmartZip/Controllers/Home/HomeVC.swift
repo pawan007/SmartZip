@@ -176,7 +176,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             }else if indexPath.row == 2 {
                 
                 
-                /*let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+                let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
                  
                  importMenu.delegate = self
                  
@@ -188,14 +188,14 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                  
                  documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
                  
-                 self.presentViewController(documentPicker, animated: true, completion: nil)*/
+                 self.presentViewController(documentPicker, animated: true, completion: nil)
                 
                 
-                guard Reachability.isConnectedToNetwork()else{
+                /*guard Reachability.isConnectedToNetwork()else{
                     CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
                     return
                 }
-                useMoreCloud()
+                useMoreCloud()*/
             }
             
         }

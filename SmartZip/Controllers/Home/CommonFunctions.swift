@@ -413,6 +413,61 @@ class CommonFunctions: NSObject {
     }
     
     
+    func zipAllMyFiles(newZipFile:String , vc:UIViewController, files : [FBFile]) -> Bool {
+        
+        var arrayPaths = [String]()
+        let folderPath = newZipFile.stringByReplacingOccurrencesOfString(".zip", withString: "")
+        for item in files {
+            arrayPaths.append(item.filePath.path!)
+        }
+        
+        do{
+            
+            var cacheDir = CommonFunctions.sharedInstance.docDirPath()
+            cacheDir += "/test\(Timestamp)"
+            
+            do{
+                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+            }catch let e as NSError{
+                print(e)
+            }
+            
+            
+            
+            for item in arrayPaths {
+                
+                let newUrl = NSURL(fileURLWithPath: item)
+                let name = item.componentsSeparatedByString("/").last
+                let newPath = cacheDir+"/"+name!
+                let newUrlFile = NSURL(fileURLWithPath: newPath)
+                try kFileManager.copyItemAtURL(newUrl, toURL: newUrlFile)
+            }
+            
+            let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: cacheDir)
+            if success {
+                print("Zip file created successfully")
+                
+                try! kFileManager.removeItemAtPath(cacheDir)
+                self.shareMyFile(newZipFile, vc: vc)
+                return true
+            }
+            
+        }catch let error{
+            
+            print(error)
+        }
+        
+        
+        
+        /*if !CommonFunctions.sharedInstance.canCreateZip2(arrayPaths) {
+         CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: vc)
+         return false
+         }*/
+        
+        
+        return false
+    }
+    
     func shareMyFile(zipPath:String, vc:UIViewController) -> Void {
         
         let fileDAta = NSURL(fileURLWithPath: zipPath)
@@ -627,6 +682,24 @@ class CommonFunctions: NSObject {
         }
         return false
     }
+    
+    func canCreateZip2(path: [String]) -> Bool {
+        
+        let freeSpace = getFreeDiscSpase()
+        var fileSpace:CUnsignedLongLong = 0
+        
+        for item in path {
+            fileSpace = getFolderSize(item)
+        }
+        
+        
+        let difference = freeSpace - fileSpace
+        if difference > 0 {
+            return true
+        }
+        return false
+    }
+    
     
     // Helper for showing an alert
     func showAlert(title : String, message: String, vc:UIViewController) {
