@@ -104,6 +104,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
+        let docDir = CommonFunctions.sharedInstance.docDirPath()
+        if (sourceApplication! == "com.apple.mobilemail") || (url.path?.containsString(docDir))! {
+            
+            print(url)
+            let unzipClass = UnZipExternal()
+            unzipFilePath = unzipClass.unzipPath(url.path!)
+            //            isOpenedFromExternalResource = true
+            return true
+        }
+        
         if DBSession.sharedSession().handleOpenURL(url) {
             if DBSession.sharedSession().isLinked() {
                 NSNotificationCenter.defaultCenter().postNotificationName("didLinkToDropboxAccountNotification", object: nil)
