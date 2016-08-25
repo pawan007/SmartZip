@@ -35,12 +35,42 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     @IBOutlet var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
     
+    @IBOutlet weak var _bView: UIView!
+    var shared:GADMasterViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: "check_slow_video", object: nil)
         
-        self.setUpGoogleAds()
+        if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            //GADBannerView
+            // self.setUpGoogleAds()
+            shared = GADMasterViewController.singleton()
+            shared.resetAdView(self, andDisplayView: _bView)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)) {
+            if(interstitial != nil) {
+                interstitial = nil
+            }
+            interstitial = GADInterstitial(adUnitID: kGoogleInterstitialAd)
+            let request = GADRequest()
+            // Request test ads on devices you specify. Your test device ID is printed to the console when
+            // an ad request is made.
+            // request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
+            interstitial.loadRequest(request)
+        }
+        
+        if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            if(shared != nil) {
+               shared = nil
+            }
+            _bView.hidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,6 +78,45 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+        print("Ad changed")
+        /*
+         for(UIView *tempView in [adsView subviews]) {
+         [tempView removeFromSuperview];
+         }
+         [adsView addSubview:view];
+         */
+        
+        for tempView in _bView.subviews {
+            tempView.removeFromSuperview()
+        }
+        /*
+         UIView.animateWithDuration(0.25) { () -> Void in
+         bannerView.alpha = 1.0
+         self._bView.addSubview(bannerView)
+         }
+         */
+        self._bView.addSubview(bannerView)
+        // self.animation(bannerView)
+    }
+    
+    func animation(animationView:UIView) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_async(dispatch_get_main_queue()) {
+                let animation:CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.x")
+                animation.fromValue = 0;
+                animation.toValue = 2 * M_PI;
+                animation.repeatCount = 1;//INFINITY;
+                animation.duration = 0.5;
+                animationView.layer.addAnimation(animation, forKey: "rotation")
+            }
+        }
+        /*
+         var transform:CATransform3D = CATransform3DIdentity;
+         transform.m34 = 1.0 / 500.0;
+         animationView.layer.transform = transform;
+         */
+    }
     
     func setUpGoogleAds() {
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
@@ -55,56 +124,57 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         bannerView.rootViewController = self
         bannerView.loadRequest(GADRequest())
         
-        
         interstitial = GADInterstitial(adUnitID: kGoogleInterstitialAd)
         let request = GADRequest()
         // Request test ads on devices you specify. Your test device ID is printed to the console when
         // an ad request is made.
-       // request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
+        // request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
         interstitial.loadRequest(request)
     }
     
     func showFullPageAd() -> Bool {
         let str = "TipsPopupValue"
         var isShow = false
-        if var value:Int = NSUserDefaults.objectForKey(str)?.integerValue {
-            if(value == 0 || NSUserDefaults.objectForKey(str) == nil) {
+        if  NSUserDefaults.standardUserDefaults().objectForKey(str) != nil {
+            var val = NSUserDefaults.standardUserDefaults().objectForKey(str)?.integerValue
+            val = val! - 1
+            if(val == 0) {
                 isShow = true
-                let number = self.randomInt(1, max: 3)
+                let number = self.randomInt(1, max: 4)
                 NSUserDefaults.setObject(number, forKey: str)
             }
             else {
-                value = value - 1
-                NSUserDefaults.setObject(value, forKey: str)
+                NSUserDefaults.setObject(val, forKey: str)
             }
+            
         }
         else {
-            let number = self.randomInt(1, max: 3)
+            let number = self.randomInt(1, max: 4)
             NSUserDefaults.setObject(number, forKey: str)
         }
         
         if(isShow) {
-           
-            if interstitial.isReady {
+            if interstitial.isReady && (!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)){
                 interstitial.presentFromRootViewController(self)
             } else {
                 print("Ad wasn't ready")
+                isShow = false
             }
             
             /*
-            let viewsDictionary = ["subView":interstitial]
-            let view_constraint_H = NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|[subView]|",
-                options: NSLayoutFormatOptions(rawValue:0),
-                metrics: nil, views: viewsDictionary)
-            let view_constraint_V = NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|[subView]|",
-                options: NSLayoutFormatOptions.AlignAllLeading,
-                metrics: nil, views: viewsDictionary)
-            
-            APPDELEGATE.window?.addConstraints(view_constraint_H)
-            APPDELEGATE.window?.addConstraints(view_constraint_V)
-            */
+             let viewsDictionary = ["subView":interstitial]
+             let view_constraint_H = NSLayoutConstraint.constraintsWithVisualFormat(
+             "H:|[subView]|",
+             options: NSLayoutFormatOptions(rawValue:0),
+             metrics: nil, views: viewsDictionary)
+             let view_constraint_V = NSLayoutConstraint.constraintsWithVisualFormat(
+             "V:|[subView]|",
+             options: NSLayoutFormatOptions.AlignAllLeading,
+             metrics: nil, views: viewsDictionary)
+             
+             APPDELEGATE.window?.addConstraints(view_constraint_H)
+             APPDELEGATE.window?.addConstraints(view_constraint_V)
+             */
         }
         return isShow
     }

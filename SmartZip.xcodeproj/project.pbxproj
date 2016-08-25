@@ -48,6 +48,8 @@
 		87C921A61D50282F0099BC7B /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921911D50282F0099BC7B /* zip@2x.png */; };
 		87C921A71D50282F0099BC7B /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */; };
 		BDF725601D57909100C94836 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF7255F1D57909100C94836 /* GoogleService-Info.plist */; };
+		BDF725681D5B895D00C94836 /* BuyProVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF725671D5B895D00C94836 /* BuyProVC.swift */; };
+		BDF7256B1D6103FB00C94836 /* GADMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */; };
 		D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4016B261D3D4CF60029AB3F /* CloudKit.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
 		D4284CC81D1E4B9800E1BCA9 /* SmartZipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CC71D1E4B9800E1BCA9 /* SmartZipUITests.swift */; };
@@ -212,6 +214,9 @@
 		87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
 		9D2542D9809635CA3965CB5B /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF7255F1D57909100C94836 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDF725671D5B895D00C94836 /* BuyProVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyProVC.swift; sourceTree = "<group>"; };
+		BDF725691D6103FB00C94836 /* GADMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMasterViewController.h; sourceTree = "<group>"; };
+		BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMasterViewController.m; sourceTree = "<group>"; };
 		D4016B251D3D3F390029AB3F /* SmartZip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SmartZip.entitlements; sourceTree = "<group>"; };
 		D4016B261D3D4CF60029AB3F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D4284CA41D1E4B9800E1BCA9 /* SmartZip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartZip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -455,8 +460,18 @@
 			isa = PBXGroup;
 			children = (
 				BDF7255F1D57909100C94836 /* GoogleService-Info.plist */,
+				BDF725691D6103FB00C94836 /* GADMasterViewController.h */,
+				BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */,
 			);
 			path = GoogleAds;
+			sourceTree = "<group>";
+		};
+		BDF725661D5B893100C94836 /* Buy */ = {
+			isa = PBXGroup;
+			children = (
+				BDF725671D5B895D00C94836 /* BuyProVC.swift */,
+			);
+			path = Buy;
 			sourceTree = "<group>";
 		};
 		D4284C9B1D1E4B9800E1BCA9 = {
@@ -576,6 +591,7 @@
 		D44DF2C81D1E802E000C75B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BDF725661D5B893100C94836 /* Buy */,
 				87C9217B1D50282F0099BC7B /* FileBrowser */,
 				87902D061D41402400D475AC /* History */,
 				14837B5C1D3BD6F5007B52BB /* iRate */,
@@ -1235,6 +1251,7 @@
 				D436FD5D1D1FA77A00F2BE72 /* KIImagePager.m in Sources */,
 				D44DF3751D1E802E000C75B7 /* AboutViewController.swift in Sources */,
 				D44DF3D81D1E802E000C75B7 /* FeedCollectionCell.swift in Sources */,
+				BDF7256B1D6103FB00C94836 /* GADMasterViewController.m in Sources */,
 				D44DF3B61D1E802E000C75B7 /* UITextView+Additions.swift in Sources */,
 				D44DF3A91D1E802E000C75B7 /* NSUserDefaults+Additions.swift in Sources */,
 				14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */,
@@ -1307,6 +1324,7 @@
 				D44DF3D51D1E802E000C75B7 /* Location.swift in Sources */,
 				D44DF3A71D1E802E000C75B7 /* NSDate+Operators.swift in Sources */,
 				D436FD8E1D202B3300F2BE72 /* PasscodeVC.swift in Sources */,
+				BDF725681D5B895D00C94836 /* BuyProVC.swift in Sources */,
 				D44DF3C21D1E802E000C75B7 /* OneShotLocationManager.swift in Sources */,
 				D44DF3AD1D1E802E000C75B7 /* UIButton+Additions.swift in Sources */,
 				87C9219A1D50282F0099BC7B /* FileParser.swift in Sources */,
@@ -1399,7 +1417,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f4a6e590-0a98-4ff9-a455-d166266353a7";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1441,7 +1459,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "f4a6e590-0a98-4ff9-a455-d166266353a7";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1456,6 +1474,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1471,8 +1490,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.holidays.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.zip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};
 			name = Debug;
@@ -1484,6 +1504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1499,8 +1520,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.holidays.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.zip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};
 			name = Release;

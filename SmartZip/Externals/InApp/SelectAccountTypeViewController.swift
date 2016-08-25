@@ -7,12 +7,12 @@
 //  Copyright © 2016 Appster. All rights reserved.
 //
 
-/*
+
 
 import UIKit
 import AVFoundation
 import StoreKit
-
+/*
 
 class SelectAccountTypeViewController: BaseViewController {
     var currentPageIndex = 0
@@ -55,7 +55,7 @@ class SelectAccountTypeViewController: BaseViewController {
         if sender.tag == 10 {
             // 3 months
             for tempSkProduct in self.products {
-                if tempSkProduct.productIdentifier ==  "com.holidayhappenings.app.threemonthsdeal" {
+                if tempSkProduct.productIdentifier ==  "com.holidayhappenings.app.removeFullPageAds" {
                  print("PriceLOcal is \(tempSkProduct.priceLocale) and price is \(tempSkProduct.price)")
                  self.willPurchaseProduct(tempSkProduct)
                 }
@@ -65,7 +65,7 @@ class SelectAccountTypeViewController: BaseViewController {
         else if sender.tag == 20 {
             // 12 months
             for tempSkProduct in self.products {
-                if tempSkProduct.productIdentifier ==  "com.holidayhappenings.app.twelvemonthsdeal" {
+                if tempSkProduct.productIdentifier ==  "com.holidayhappenings.app.removeFullPageAds" {
                     self.willPurchaseProduct(tempSkProduct)
                 }
             }

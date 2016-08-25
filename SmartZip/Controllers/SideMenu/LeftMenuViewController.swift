@@ -76,9 +76,20 @@ extension LeftMenuViewController: UITableViewDelegate
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
             break
-        case "BuyProCell" : break
-        //TODO
-        case "RestoreCell" : break
+        case "BuyProCell" :
+            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("BuyProVC"))!
+            container!.centerViewController =  UINavigationController(rootViewController: center)
+            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            })
+            break
+        case "RestoreCell" :
+            let center = self.storyboard?.instantiateViewControllerWithIdentifier("BuyProVC") as? BuyProVC
+            container!.centerViewController =  UINavigationController(rootViewController: center!)
+            center!.isShowRestoreBtn = true
+            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            })
+
+            break
         //TODO
         case "PasswordCell" :
             container!.closeDrawerAnimated(true, completion: { (Bool) in

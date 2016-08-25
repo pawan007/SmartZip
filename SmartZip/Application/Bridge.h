@@ -18,4 +18,6 @@
 #import "MYIntroductionView.h"
 #import "iRate.h"
 
+#import "GADMasterViewController.h"
+
 #endif

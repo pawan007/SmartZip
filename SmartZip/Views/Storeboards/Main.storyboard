@@ -776,7 +776,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="3lg-UV-Rh8" customClass="GADBannerView">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="3lg-UV-Rh8">
                             <rect key="frame" x="0.0" y="428" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.99190481090000004" green="0.86150801809999999" blue="0.72450657890000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -1037,7 +1037,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="bannerView" destination="3lg-UV-Rh8" id="uy5-f0-LR3"/>
+                        <outlet property="_bView" destination="3lg-UV-Rh8" id="DEJ-XE-fao"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGM-Ku-kn7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1162,7 +1162,7 @@
                             <constraint firstItem="VFv-Fe-48o" firstAttribute="top" secondItem="Det-D5-0F5" secondAttribute="bottom" id="vUo-jq-Sng"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Smart Zip" id="2Mv-M5-HsB">
+                    <navigationItem key="navigationItem" title="Tutorial" id="2Mv-M5-HsB">
                         <barButtonItem key="leftBarButtonItem" image="Ic_Menu" id="JUX-Gw-SWv">
                             <connections>
                                 <action selector="menuButtonAction:" destination="beD-BD-grf" id="4qy-XM-ZSn"/>
@@ -1176,6 +1176,92 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dqt-Ze-3cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-231.5" y="1836.5"/>
+        </scene>
+        <!--BuyProVC-->
+        <scene sceneID="n83-uE-tbV">
+            <objects>
+                <viewController storyboardIdentifier="BuyProVC" title="Tutorial" id="tt5-y5-8Cx" userLabel="BuyProVC" customClass="BuyProVC" customModule="SmartZip" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="29s-ts-3IH"/>
+                        <viewControllerLayoutGuide type="bottom" id="w25-f2-3Je"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y1p-ki-8ph">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESE-ul-wWG">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkc-6c-JBN">
+                                        <rect key="frame" x="20" y="98" width="335" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="rm0-c0-Knc"/>
+                                        </constraints>
+                                        <state key="normal" title="Remove Full Page Ads"/>
+                                        <connections>
+                                            <action selector="removeFullPageAdsAction:" destination="tt5-y5-8Cx" eventType="touchUpInside" id="1Ah-hQ-oLa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONL-Tp-cyq">
+                                        <rect key="frame" x="20" y="219" width="335" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="b8L-hm-PqQ"/>
+                                        </constraints>
+                                        <state key="normal" title="Remove Footer Ads"/>
+                                        <connections>
+                                            <action selector="removeBannerAdsAction:" destination="tt5-y5-8Cx" eventType="touchUpInside" id="Ju8-wa-tOq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoW-3V-BKZ">
+                                        <rect key="frame" x="20" y="327" width="335" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="2WK-2n-2ak"/>
+                                        </constraints>
+                                        <state key="normal" title="Restore Purchase"/>
+                                        <connections>
+                                            <action selector="restorePurchasedAction:" destination="tt5-y5-8Cx" eventType="touchUpInside" id="fkB-ub-AFG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99190481090000004" green="0.86150801809999999" blue="0.72450657890000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="RoW-3V-BKZ" firstAttribute="top" secondItem="ONL-Tp-cyq" secondAttribute="bottom" constant="51" id="0xE-Zm-wi8"/>
+                                    <constraint firstItem="ONL-Tp-cyq" firstAttribute="top" secondItem="bkc-6c-JBN" secondAttribute="bottom" constant="64" id="HrX-GI-lR8"/>
+                                    <constraint firstItem="RoW-3V-BKZ" firstAttribute="leading" secondItem="ESE-ul-wWG" secondAttribute="leading" constant="20" id="Jx0-yp-c0N"/>
+                                    <constraint firstItem="ONL-Tp-cyq" firstAttribute="leading" secondItem="ESE-ul-wWG" secondAttribute="leading" constant="20" id="Ovt-nB-zaj"/>
+                                    <constraint firstItem="bkc-6c-JBN" firstAttribute="top" secondItem="ESE-ul-wWG" secondAttribute="top" constant="98" id="SQY-lI-zbG"/>
+                                    <constraint firstAttribute="trailing" secondItem="ONL-Tp-cyq" secondAttribute="trailing" constant="20" id="ZhQ-rt-gKY"/>
+                                    <constraint firstAttribute="trailing" secondItem="bkc-6c-JBN" secondAttribute="trailing" constant="20" id="gcl-Zf-Fq4"/>
+                                    <constraint firstAttribute="trailing" secondItem="RoW-3V-BKZ" secondAttribute="trailing" constant="20" id="nFd-nn-ELk"/>
+                                    <constraint firstItem="bkc-6c-JBN" firstAttribute="leading" secondItem="ESE-ul-wWG" secondAttribute="leading" constant="20" id="xgb-cG-Cnq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ESE-ul-wWG" secondAttribute="trailing" id="AJ3-xv-gXd"/>
+                            <constraint firstItem="w25-f2-3Je" firstAttribute="top" secondItem="ESE-ul-wWG" secondAttribute="bottom" id="CGT-Tr-wBC"/>
+                            <constraint firstItem="ESE-ul-wWG" firstAttribute="leading" secondItem="y1p-ki-8ph" secondAttribute="leading" id="S3R-NA-3kx"/>
+                            <constraint firstItem="ESE-ul-wWG" firstAttribute="top" secondItem="29s-ts-3IH" secondAttribute="bottom" id="vks-J8-YSB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Buy Pro Version" id="EYY-SI-SbC">
+                        <barButtonItem key="leftBarButtonItem" image="Ic_Menu" id="Hhh-A6-gTy">
+                            <connections>
+                                <action selector="menuButtonAction:" destination="tt5-y5-8Cx" id="5aG-Cc-He1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="bannerAdsBtn" destination="ONL-Tp-cyq" id="all-AX-2K8"/>
+                        <outlet property="fullPageAdsBtn" destination="bkc-6c-JBN" id="Mlp-Iu-43C"/>
+                        <outlet property="restoreBtn" destination="RoW-3V-BKZ" id="oZc-Q5-8FI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgB-x8-GDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-231.5" y="1836.5"/>
         </scene>

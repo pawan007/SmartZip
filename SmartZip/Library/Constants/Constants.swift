@@ -59,6 +59,9 @@ let kGoogleAdUnitId       = "ca-app-pub-7753603434154239/"
 let kGoogleBannerAdId     = "ca-app-pub-7753603434154239/4797926502"
 let kGoogleInterstitialAd = "ca-app-pub-7753603434154239/6274659704"
 
+let kIsRemovedFullPageAds = "removedFullPageAds"
+let kIsRemovedBannerAds   = "removedBannerPageAds"
+
 let APPDELEGATE = UIApplication.sharedApplication().delegate as! AppDelegate
 
 
