@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SSZipArchive
+import SwiftSpinner
 
 extension FileListViewController: UITableViewDataSource, UITableViewDelegate, FileBrowserCellDelegate {
     
@@ -133,6 +134,13 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
         print(filesForSharing)
         
+        
+        if filesForSharing.count == 1 && filesForSharing.last?.type == FBFileType.ZIP {
+            flagShowShareOptionOnly = true
+        }else{
+            flagShowShareOptionOnly = false
+        }
+        
         if filesForSharing.count == 1 && self.navigationItem.rightBarButtonItem?.title != "More"{
             
             let more = UIBarButtonItem(title: "More", style: .Done, target: self, action: #selector(FileListViewController.dismiss))
@@ -140,8 +148,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }else if filesForSharing.count == 0 {
             
-            let dismissButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.dismiss))
-            self.navigationItem.rightBarButtonItem = dismissButton
+            self.navigationItem.rightBarButtonItem = nil
             
         }
         
@@ -160,13 +167,29 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         actionSheetController.addAction(cancelAction)
         
         
-        //Create and add first option action
-        let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
-            //Code for launching the camera goes here
-            print("Apply Zip and Share code")
+        if flagShowShareOptionOnly {
+            
+            //Create and add first option action
+            let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
+                //Code for launching the camera goes here
+                print("Apply Share code")
+                CommonFunctions.sharedInstance.shareMyFile((self.filesForSharing.first?.filePath.path)!, vc: self)
+            }
+            actionSheetController.addAction(takePictureAction)
+            
+        }else{
+            
+            //Create and add first option action
+            let takePictureAction: UIAlertAction = UIAlertAction(title: "Zip and Share", style: .Default) { action -> Void in
+                //Code for launching the camera goes here
+                print("Apply Zip and Share code")
+                self.showEnterZipNameAlert()
+                
+            }
+            actionSheetController.addAction(takePictureAction)
             
         }
-        actionSheetController.addAction(takePictureAction)
+        
         //Create and add a second option action
         let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
             //Code for picking from camera roll goes here
@@ -191,6 +214,8 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
                     
                 }
             }
+            
+            self.filesForSharing.removeAll()
             self.files = self.parser.filesForDirectory(self.initialPath!)
             self.indexFiles()
             self.tableView.reloadData()
@@ -274,7 +299,103 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     }
     
     
+    func showEnterZipNameAlert(){
+        
+        let alertController = UIAlertController(title: "Wait", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+            let firstTextField = alertController.textFields![0] as UITextField
+            
+            if(firstTextField.text?.length == 0){
+                
+                self.showAlert("Please enter folder name")
+                return
+            }
+            
+            if(firstTextField.text?.isValidName() == false){
+                
+                self.showAlert("Special characters are not allowed")
+                return
+            }
+            
+            
+            let zipFileName = "\((self.initialPath?.path)!)/\(firstTextField.text!).zip"
+            let fileName = "\((self.initialPath?.path)!)/\(firstTextField.text!)"
+            
+            if(kFileManager.fileExistsAtPath(zipFileName) || kFileManager.fileExistsAtPath(fileName)){
+                
+                self.showAlert("Folder or file already exists, please provide new name")
+                
+            }else{
+                
+                
+                var arrayPaths = [String]()
+                for item in self.filesForSharing {
+                    arrayPaths.append(item.filePath.path!)
+                }
+                
+                if !CommonFunctions.sharedInstance.canCreateZip2(arrayPaths) {
+                    
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: self)
+                    return
+                }
+                
+                SwiftSpinner.show("Please Wait")
+                
+                let result = CommonFunctions.sharedInstance.zipAllMyFiles(zipFileName, vc: self, files: self.filesForSharing)
+                
+                if(result){
+                    
+                    self.filesForSharing.removeAll()
+                    self.files = self.parser.filesForDirectory(self.initialPath!)
+                    self.indexFiles()
+                    self.tableView.reloadData()
+                }
+                SwiftSpinner.hide()
+            }
+            
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+        })
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Please enter zip file name"
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
+    
+    func showAlert(name:String){
+        
+        let alertController = UIAlertController(title: "Wait", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+            self.showEnterZipNameAlert()
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+        })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     
 }

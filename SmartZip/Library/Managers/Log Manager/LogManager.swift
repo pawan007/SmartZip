@@ -69,7 +69,7 @@ class LogManager: NSObject {
     
     // MARK: - Write log
     private func writeLog(logLevel: XCGLogger.LogLevel, @autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-        self.log.logln(logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, closure: closure)
+        // self.log.logln(logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, closure: closure)
     }
 }
 

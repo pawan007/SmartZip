@@ -13,11 +13,14 @@ import AssetsLibrary
 import SSZipArchive
 import SwiftSpinner
 import QBImagePickerController
-import NADocumentPicker
-
-import NADocumentPicker
+//import NADocumentPicker
 
 import GoogleMobileAds
+
+
+let fileTypeImage = 1
+let fileTypeVideo = 2
+let fileTypeSong = 3
 
 
 class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
@@ -32,6 +35,9 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     var currentFile = 0
     var nameIndex = 0
     
+    var isOpenedFromExternalResource = false
+    
+    
     @IBOutlet var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
     
@@ -41,6 +47,10 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: "check_slow_video", object: nil)
+        
+        if APPDELEGATE.isOpenedFromExternalResource {
+            isOpenedFromExternalResource = true
+        }
         
         if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
             //GADBannerView
@@ -52,6 +62,11 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if isOpenedFromExternalResource {
+            isOpenedFromExternalResource = false
+            self.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+        }
         
         if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)) {
             if(interstitial != nil) {
@@ -71,6 +86,8 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             }
             _bView.hidden = true
         }
+        
+        // self.setUpGoogleAds()
     }
     
     override func didReceiveMemoryWarning() {
@@ -208,13 +225,45 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         }else{
             
             if indexPath.row == 0 {
+                
+                guard Reachability.isConnectedToNetwork()else{
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                    return
+                }
+                
                 useDropBox()
                 
             }else if indexPath.row == 1 {
+                
+                guard Reachability.isConnectedToNetwork()else{
+                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                    return
+                }
                 useGoogle()
                 
             }else if indexPath.row == 2 {
-                useMoreCloud()
+                
+                
+                let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+                
+                importMenu.delegate = self
+                
+                self.presentViewController(importMenu, animated: true, completion: nil)
+                
+                let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+                
+                documentPicker.delegate = self
+                
+                documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+                
+                self.presentViewController(documentPicker, animated: true, completion: nil)
+                
+                
+                /*guard Reachability.isConnectedToNetwork()else{
+                 CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                 return
+                 }
+                 useMoreCloud()*/
             }
             
         }
@@ -244,7 +293,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
          print(file.displayName)
          }*/
         
-        
+        FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
         let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController")
         self.navigationController?.pushViewController(fileListViewController, animated: true)
         
@@ -317,7 +366,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
         
     }
-    
+    /*
     func useMoreCloud( ) {
         // user url path..Please handle url
         let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
@@ -341,6 +390,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         let flurryParams = [ "Type" :"selectMoreCloud"]
         AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
     }
+    */
     
     func qb_imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
         
@@ -351,6 +401,9 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     }
     
     func qb_imagePickerController(imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
+        
+        
+        
         
         if flagImage {
             
@@ -365,12 +418,16 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
              }*/
             
             self.dismissViewControllerAnimated(true, completion: nil)
-            zipAndShareImages(assets)
+            showEnterNameAlert("Images-"+Timestamp,assets: assets, type: fileTypeImage)
+            //            
+            //            self.dismissViewControllerAnimated(true, completion: nil)
+            //            zipAndShareImages(assets)
             
         }else{
             
             self.dismissViewControllerAnimated(true, completion: nil)
-            zipAndShareVideos(assets)
+            showEnterNameAlert("Video-"+Timestamp,assets: assets, type: fileTypeImage)
+            //            zipAndShareVideos(assets)
         }
         
         flagVideo = false
@@ -379,16 +436,16 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     
     
-    func zipAndShareImages(assets: [AnyObject]!) {
+    func zipAndShareImages(assets: [AnyObject]!, folderName:String) {
         
-        var folderName = ""
+        //        var folderName = ""
         
         if assets.count > 0 {
             
             SwiftSpinner.show("Processing, please wait..")
             //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
-            folderName = "Images-\(Timestamp)"
+            //            folderName = "Images-\(Timestamp)"
             //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
@@ -413,8 +470,10 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                         let array = url?.path?.componentsSeparatedByString("/")
                         let name = array!.last! as String
                         let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
-                        try kFileManager.copyItemAtURL(url!, toURL: selectedVideo)
                         
+                        if(!kFileManager.fileExistsAtPath(selectedVideo.path!)){
+                            try kFileManager.copyItemAtURL(url!, toURL: selectedVideo)
+                        }
                         currentItem += 1
                         
                         if currentItem == totalItem{
@@ -440,9 +499,9 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     
-    func zipAndShareVideos(assets: [AnyObject]!) {
+    func zipAndShareVideos(assets: [AnyObject]!, folderName:String) {
         
-        var folderName = ""
+        //        var folderName = ""
         
         if assets.count > 0 {
             
@@ -452,7 +511,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             SwiftSpinner.show("Processing, please wait..")
             
             
-            folderName = "Videos-\(Timestamp)"
+            //            folderName = "Videos-\(Timestamp)"
             //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
@@ -602,7 +661,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         if !CommonFunctions.sharedInstance.canCreateZip(existingFolder) {
             
-            try! kFileManager.removeItemAtPath(existingFolder)
+            //            try! kFileManager.removeItemAtPath(existingFolder)
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: self)
             return
         }
@@ -611,9 +670,12 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: existingFolder)
         if success {
             
-            try! kFileManager.removeItemAtPath(existingFolder)
+            //            try! kFileManager.removeItemAtPath(existingFolder)
             print("Zip file created successfully")
+            handleLocalFile()
             self.shareMyFile(newZipFile)
+            
+            
             
             /*let vc:UnZipVC = UIStoryboard.unZipVC()!
              vc.zipFilePath = newZipFile
@@ -686,41 +748,46 @@ extension HomeVC : MPMediaPickerControllerDelegate {
     
     func getSongsAdvance(mediaItemCollection: MPMediaItemCollection) {
         
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
         var folderName = ""
         
         if mediaItemCollection.items.count > 0 {
             
-            //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+            /*//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
+             
+             folderName = "Song-\(Timestamp)"
+             //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
+             cacheDir += "/\(folderName)"
+             
+             do{
+             try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+             }catch let e as NSError{
+             print(e)
+             }
+             
+             for item in mediaItemCollection.items{
+             
+             if item ==  mediaItemCollection.items.last{
+             isLastIndex = true
+             }
+             
+             if item ==  mediaItemCollection.items.first{
+             SwiftSpinner.show("Processing, please wait..")
+             currentFile = 0
+             totalfileCount = mediaItemCollection.items.count
+             }
+             
+             print(item.assetURL)
+             let filePath = "\(cacheDir)/\(item.title!).m4a"
+             let myFileUrl = NSURL(fileURLWithPath: filePath)
+             saveAssetUrlToMp3(item.assetURL!, path: myFileUrl, title: item.title!, parentDir: cacheDir)
+             
+             }*/
             
-            folderName = "Song-\(Timestamp)"
-            //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-            var cacheDir = CommonFunctions.sharedInstance.docDirPath()
-            cacheDir += "/\(folderName)"
             
-            do{
-                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
-            }catch let e as NSError{
-                print(e)
-            }
-            
-            for item in mediaItemCollection.items{
-                
-                if item ==  mediaItemCollection.items.last{
-                    isLastIndex = true
-                }
-                
-                if item ==  mediaItemCollection.items.first{
-                    SwiftSpinner.show("Processing, please wait..")
-                    currentFile = 0
-                    totalfileCount = mediaItemCollection.items.count
-                }
-                
-                print(item.assetURL)
-                let filePath = "\(cacheDir)/\(item.title!).m4a"
-                let myFileUrl = NSURL(fileURLWithPath: filePath)
-                saveAssetUrlToMp3(item.assetURL!, path: myFileUrl, title: item.title!, parentDir: cacheDir)
-                
-            }
+            showEnterNameAlert("Songs-"+Timestamp,assets: mediaItemCollection.items, type: fileTypeSong)
             
             
         }else{
@@ -729,8 +796,43 @@ extension HomeVC : MPMediaPickerControllerDelegate {
             
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
         
+        
+        
+    }
+    
+    
+    func zipAndShareSongs(items: [AnyObject]!, folderName:String){
+        
+        var cacheDir = CommonFunctions.sharedInstance.docDirPath()
+        cacheDir += "/\(folderName)"
+        
+        do{
+            try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+        }catch let e as NSError{
+            print(e)
+        }
+        
+        
+        
+        for item in items as! [MPMediaItem]!{
+            
+            if item ==  (items as! [MPMediaItem]!).last{
+                isLastIndex = true
+            }
+            
+            if item ==  (items as! [MPMediaItem]!).first{
+                SwiftSpinner.show("Processing, please wait..")
+                currentFile = 0
+                totalfileCount = (items as! [MPMediaItem]!).count
+            }
+            
+            print(item.assetURL)
+            let filePath = "\(cacheDir)/\(item.title!).m4a"
+            let myFileUrl = NSURL(fileURLWithPath: filePath)
+            saveAssetUrlToMp3(item.assetURL!, path: myFileUrl, title: item.title!, parentDir: cacheDir)
+            
+        }
         
     }
     
@@ -803,3 +905,167 @@ extension HomeVC : MPMediaPickerControllerDelegate {
     
     
 }
+
+extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
+    
+    
+    
+    
+    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+        
+        print(url.path!)
+        let zipPath = "\(CommonFunctions.sharedInstance.docDirPath())/\((url.lastPathComponent)!).zip"
+        CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: url.path!, vc: self)
+        self.performSelector(#selector(HomeVC.handleLocalFile), withObject: nil, afterDelay: 1)
+        
+    }
+    
+    func documentMenu(documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        
+        documentPicker.delegate=self
+        self.presentViewController(documentPicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    @IBAction func pickerButtonPressed(sender1: UIButton) {
+        
+        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+        
+        importMenu.delegate = self
+        
+        self.presentViewController(importMenu, animated: true, completion: nil)
+        
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+        
+        documentPicker.delegate = self
+        
+        documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+        
+        self.presentViewController(documentPicker, animated: true, completion: nil)
+        
+    }
+    
+    func showEnterNameAlert(name:String ,assets: [AnyObject]!, type:Int){
+        
+        let alertController = UIAlertController(title: "Wait", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+            let firstTextField = alertController.textFields![0] as UITextField
+            
+            if(firstTextField.text?.length == 0){
+                
+                self.showAlert("Please enter folder name", assets: assets, type: type)
+                return
+            }
+            
+            if(firstTextField.text?.isValidName() == false){
+                
+                self.showAlert("Special characters are not allowed", assets: assets, type: type)
+                return
+            }
+            
+            
+            var cacheDir = CommonFunctions.sharedInstance.docDirPath()
+            cacheDir += "/\(firstTextField.text!)"
+            
+            if(kFileManager.fileExistsAtPath(cacheDir)){
+                
+                self.showAlert("Folder or file already exists, please provide new name", assets: assets, type: type)
+                
+            }else{
+                
+                
+                
+                if(type == fileTypeImage){
+                    
+                    
+                    //                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.zipAndShareImages(assets, folderName: firstTextField.text!)
+                    
+                    
+                }else if(type == fileTypeVideo){
+                    
+                    self.zipAndShareVideos(assets, folderName: firstTextField.text!)
+                    
+                }else if(type == fileTypeSong){
+                    
+                    self.zipAndShareSongs(assets, folderName: firstTextField.text!)
+                    
+                }else{
+                    
+                }
+                
+                
+                
+            }
+            
+            
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+        })
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.text = name
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+    func showAlert(name:String ,assets: [AnyObject]!, type:Int){
+        
+        let alertController = UIAlertController(title: "Wait", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+            var archiveName = ""
+            
+            if(type == fileTypeImage){
+                
+                archiveName = "Image-"+Timestamp
+                
+            }else if(type == fileTypeVideo){
+                
+                archiveName = "Video-"+Timestamp
+                
+            }else if(type == fileTypeSong){
+                
+                archiveName = "Song-"+Timestamp
+                
+            }else{
+                
+                archiveName = "Document-"+Timestamp
+            }
+            
+            self.showEnterNameAlert(archiveName ,assets: assets, type: type)
+            
+            
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+        })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+}
+

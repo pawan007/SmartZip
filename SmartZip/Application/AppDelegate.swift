@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var isOpenedFromExternalResource = false
+    var unzipFilePath = ""
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -28,19 +31,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dropboxSession = DBSession(appKey: appKey, appSecret: appSecret, root: kDBRootDropbox)
         DBSession.setSharedSession(dropboxSession)
         if let URL = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL {
-            if URL.isFileReferenceURL() {
-                
-            }
-            let vc = UIStoryboard.unZipVC()
-            vc!.zipFilePath = URL.path!
-            let navController:UINavigationController? = UINavigationController(rootViewController: vc!)
-            navController?.navigationBarHidden = true
-            self.window?.rootViewController = navController
-            self.window?.makeKeyAndVisible()
+            /*if URL.isFileReferenceURL() {
+             
+             }
+             let vc = UIStoryboard.unZipVC()
+             vc!.zipFilePath = URL.path!
+             let navController:UINavigationController? = UINavigationController(rootViewController: vc!)
+             navController?.navigationBarHidden = true
+             self.window?.rootViewController = navController
+             self.window?.makeKeyAndVisible()
+             
+             FIRApp.configure()
+             
+             return true*/
+            print(URL)
             
-            FIRApp.configure()
+            let unzipClass = UnZipExternal()
+            unzipFilePath = unzipClass.unzipPath(URL.path!)
+            isOpenedFromExternalResource = true
             
-            return true
         }
         AppDelegate.presentRootViewController()
         
@@ -94,6 +103,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        let docDir = CommonFunctions.sharedInstance.docDirPath()
+        if (sourceApplication! == "com.apple.mobilemail") || (url.path?.containsString(docDir))! {
+            
+            print(url)
+            let unzipClass = UnZipExternal()
+            unzipFilePath = unzipClass.unzipPath(url.path!)
+            //            isOpenedFromExternalResource = true
+            return true
+        }
         
         if DBSession.sharedSession().handleOpenURL(url) {
             if DBSession.sharedSession().isLinked() {

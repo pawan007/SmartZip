@@ -11,7 +11,7 @@ struct Constants {
     
     static let DEFAULT_SCREEN_RATIO: CGFloat = 375.0    
     static let PASSWORD_REGEX: String = "^[a-zA-Z0-9]{5,15}$"
-
+    
     // MARK: Tokens
     struct Tokens {
         static let MIX_PANNEL_TOKEN: String = "86c7fdce297bc1d025ea3d749a1e67da"
@@ -41,7 +41,7 @@ var Timestamp: String {
     
     let date = NSDate()
     let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "YYYY-MM-DD-HH-mm-ss"
+    dateFormatter.dateFormat = "ddMMYYYYHHmmss"
     return dateFormatter.stringFromDate(date)
 }
 

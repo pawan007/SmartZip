@@ -21,6 +21,12 @@ xcuserdata/
 *.moved-aside
 *.xcuserstate
 
+
+
+__MACOSX
+.DS_Store
+**/.DS_Store
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
@@ -63,3 +69,5 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+

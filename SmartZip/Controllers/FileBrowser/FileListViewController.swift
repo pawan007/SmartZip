@@ -35,6 +35,7 @@ class FileListViewController: UIViewController {
         return searchController
     }()
     
+    var flagShowShareOptionOnly = false
     
     //MARK: Lifecycle
     
@@ -53,10 +54,10 @@ class FileListViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.delegate = self
         
-        // Add dismiss button
-        let dismissButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.dismiss))
-        self.navigationItem.rightBarButtonItem = dismissButton
-        
+        /*// Add dismiss button
+         let dismissButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.dismiss))
+         self.navigationItem.rightBarButtonItem = dismissButton*/
+        self.navigationItem.rightBarButtonItem = nil
     }
     
     
@@ -90,8 +91,8 @@ class FileListViewController: UIViewController {
         searchController.delegate = self
         
         // Add dismiss button
-        let dismissButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.dismiss))
-        self.navigationItem.rightBarButtonItem = dismissButton
+        //        let dismissButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.dismiss))
+        //        self.navigationItem.rightBarButtonItem = dismissButton
         
         if let initialPath = initialPath {
             files = parser.filesForDirectory(initialPath)
@@ -103,6 +104,24 @@ class FileListViewController: UIViewController {
         
         // Register for 3D touch
         self.registerFor3DTouch()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
+        tableView.tableFooterView = UIView()
+        
+        
+        
+        if APPDELEGATE.isOpenedFromExternalResource {
+            APPDELEGATE.isOpenedFromExternalResource = false
+            FileParser.sharedInstance.currentPath = NSURL(string: APPDELEGATE.unzipFilePath)
+            let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController") as! FileListViewController
+            self.navigationController?.pushViewController(fileListViewController, animated: true)
+        }
+        
+        
     }
     
     
@@ -134,6 +153,8 @@ class FileListViewController: UIViewController {
         
     }
     
+    
+    
     //MARK: Data
     
     func indexFiles() {
@@ -164,6 +185,7 @@ class FileListViewController: UIViewController {
         })
         tableView.reloadData()
     }
+    
     
 }
 

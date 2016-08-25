@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var file2: UILabel!
     @IBOutlet weak var file3: UILabel!
     
+    @IBOutlet weak var textLabel: UILabel!
+    
     var zipPath: String?
     
     override func viewDidLoad() {
@@ -136,3 +138,5 @@ class ViewController: UIViewController {
     }
     
 }
+
+
