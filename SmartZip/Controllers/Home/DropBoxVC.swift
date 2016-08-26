@@ -18,6 +18,9 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     @IBOutlet weak var progressBar: UIProgressView!
     
+    @IBOutlet weak var btnRefresh: UIBarButtonItem!
+    
+    
     var arrayDropboxMetaData = NSMutableArray()
     
     var dropboxMetadata: DBMetadata!
@@ -43,6 +46,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         if DBSession.sharedSession().isLinked() {
             bbiConnect.title = "Disconnect"
             initDropboxRestClient()
+            
         }else{
             
             connectToDropbox(self)
@@ -129,7 +133,18 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     
     @IBAction func reloadFiles(sender: AnyObject) {
-        dbRestClient.loadMetadata("/")
+        
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
+        
+        if !DBSession.sharedSession().isLinked() {
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle , message: "Please connect with dropbox first", vc: self)
+        }else{
+            dbRestClient.loadMetadata("/")
+        }
+        
     }
     
     
@@ -203,6 +218,10 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
         
         let selectedFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         if(selectedFile.icon == "folder" || selectedFile.icon == "folder_app"){
@@ -246,6 +265,11 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     func initDropboxRestClient() {
         
         SwiftSpinner.show("Processing, please wait..")
+        
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
         
         dbRestClient = DBRestClient(session: DBSession.sharedSession())
         dbRestClient.delegate = self

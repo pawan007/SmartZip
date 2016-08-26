@@ -85,6 +85,12 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Construct a query to get names and IDs of 10 files using the Google Drive API
     func fetchFiles() {
         //        output.text = "Getting files..."
+        
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
+        
         SwiftSpinner.show("Processing, please wait..")
         let query = GTLQueryDrive.queryForFilesList()
         query.pageSize = 1000
@@ -98,6 +104,11 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Construct a query to get names and IDs of 10 files using the Google Drive API
     func fetchAnptherListFiles(token:String) {
+        
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
         
         //        output.text = "Getting files..."
         let query = GTLQueryDrive.queryForFilesList()
@@ -115,6 +126,11 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Construct a query to get names and IDs of 10 files using the Google Drive API
     func fetchFolderFiles(folderId:String) {
+        
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
         
         let query = GTLQueryDrive.queryForFilesGetWithFileId(folderId)
         query.q = "\(folderId) IN parents"
@@ -260,6 +276,11 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You tapped cell number \(indexPath.row).")
         
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
+        
         let file = self.files[indexPath.row] as GTLDriveFile
         
         if(file.mimeType == "application/vnd.google-apps.folder"){
@@ -328,6 +349,11 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func downloadExportDocument(file:GTLDriveFile) -> Void {
         
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
+        
         SwiftSpinner.show("Processing, please wait..")
         
         let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)/export?alt=media&mimeType=\(file.mimeType)"
@@ -355,6 +381,11 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func downloadNormalDocument(file:GTLDriveFile) -> Void {
+        
+        guard Reachability.isConnectedToNetwork()else{
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+            return
+        }
         
         SwiftSpinner.show("Processing, please wait..")
         
