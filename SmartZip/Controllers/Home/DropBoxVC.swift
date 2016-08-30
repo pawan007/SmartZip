@@ -200,7 +200,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         
         if(currentFile.icon == "folder" || currentFile.icon == "folder_app"){
             
-            cell.imageView?.image = UIImage(named: "folderIcon")
+            cell.imageView?.image = UIImage(named: "myfolder")
             
         }else{
             

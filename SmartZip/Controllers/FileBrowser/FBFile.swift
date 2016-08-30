@@ -63,19 +63,45 @@ public enum FBFileType: String {
     /// Directory
     case Directory = "directory"
     /// GIF file
-    case GIF = "gif"
+    case gif = "gif"
+    case GIF = "GIF"
     /// JPG file
-    case JPG = "jpg"
+    case jpg = "jpg"
+    case JPG = "JPG"
+    case jpeg = "jpeg"
+    case JPEG = "JPEG"
     /// PLIST file
-    case JSON = "json"
+    case json = "json"
+    case JSON = "JSON"
     /// PDF file
-    case PDF = "pdf"
+    case pdf = "pdf"
+    case PDF = "PDF"
     /// PLIST file
-    case PLIST = "plist"
+    case plist = "plist"
+    case PLIST = "PLIST"
     /// PNG file
-    case PNG = "png"
+    case png = "png"
+    case PNG = "PNG"
+    case doc = "doc"
+    case DOC = "DOC"
+    case txt = "txt"
+    case TXT = "TXT"
     /// ZIP file
-    case ZIP = "zip"
+    case zip = "zip"
+    case ZIP = "ZIP"
+    
+    case mp3 = "mp3"
+    case wav = "wav"
+    case MP3 = "MP3"
+    case WAV = "WAV"
+    
+    case m4v = "m4v"
+    case mp4 = "mp4"
+    case mov = "mov"
+    case M4V = "M4V"
+    case MP4 = "MP4"
+    case MOV = "MOV"
+    
     /// Any file
     case Default = "file"
     
@@ -88,11 +114,17 @@ public enum FBFileType: String {
         let bundle =  NSBundle(forClass: FileParser.self)
         var fileName = String()
         switch self {
-        case Directory: fileName = "folder@2x.png"
-        case JPG, PNG, GIF: fileName = "image@2x.png"
-        case PDF: fileName = "pdf@2x.png"
-        case ZIP: fileName = "zip@2x.png"
-        default: fileName = "file@2x.png"
+        case Directory: fileName = "myfolder"
+        case JPG, jpg, JPEG, jpeg, PNG, png, GIF, gif: fileName = "image"
+        case PDF, pdf: fileName = "pdf"
+        case DOC, doc, TXT, txt: fileName = "doc"
+        case ZIP, zip: fileName = "zip@2x.png"
+            
+        case mp3, MP3,WAV,wav: fileName = "music"
+        case m4v, M4V, mp4, MP4, MOV, mov: fileName = "video"
+            
+            
+        default: fileName = "fileIcon"
         }
         let file = UIImage(named: fileName, inBundle: bundle, compatibleWithTraitCollection: nil)
         return file

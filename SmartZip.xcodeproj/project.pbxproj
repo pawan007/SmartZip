@@ -39,12 +39,7 @@
 		87C9219B1D50282F0099BC7B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87C921851D50282F0099BC7B /* Info.plist */; };
 		87C9219C1D50282F0099BC7B /* PreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921861D50282F0099BC7B /* PreviewManager.swift */; };
 		87C9219D1D50282F0099BC7B /* PreviewTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921871D50282F0099BC7B /* PreviewTransitionViewController.swift */; };
-		87C9219E1D50282F0099BC7B /* documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921891D50282F0099BC7B /* documents@2x.png */; };
-		87C9219F1D50282F0099BC7B /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218A1D50282F0099BC7B /* file@2x.png */; };
 		87C921A01D50282F0099BC7B /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218B1D50282F0099BC7B /* FileBrowser.xib */; };
-		87C921A11D50282F0099BC7B /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218C1D50282F0099BC7B /* folder@2x.png */; };
-		87C921A21D50282F0099BC7B /* image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218D1D50282F0099BC7B /* image@2x.png */; };
-		87C921A31D50282F0099BC7B /* pdf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218E1D50282F0099BC7B /* pdf@2x.png */; };
 		87C921A41D50282F0099BC7B /* PreviewTransitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */; };
 		87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */; };
 		87C921A61D50282F0099BC7B /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921911D50282F0099BC7B /* zip@2x.png */; };
@@ -145,7 +140,6 @@
 		D44DF3DD1D1E802E000C75B7 /* ExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF3641D1E802E000C75B7 /* ExtendedView.swift */; };
 		D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44DF3E11D1EE15E000C75B7 /* Launch Screen.storyboard */; };
 		D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = D44DF3E31D1EE393000C75B7 /* ReadMe.txt */; };
-		D48D5B481D2FFDB200483BA6 /* folderIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D48D5B471D2FFDB200483BA6 /* folderIcon.png */; };
 		D48D5B4A1D2FFDC000483BA6 /* GoogleDriveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D5B491D2FFDC000483BA6 /* GoogleDriveVC.swift */; };
 		FF78327D673ED6D3A2C60937 /* Pods_SmartZip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2542D9809635CA3965CB5B /* Pods_SmartZip.framework */; };
 /* End PBXBuildFile section */
@@ -206,12 +200,7 @@
 		87C921851D50282F0099BC7B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87C921861D50282F0099BC7B /* PreviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewManager.swift; sourceTree = "<group>"; };
 		87C921871D50282F0099BC7B /* PreviewTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewTransitionViewController.swift; sourceTree = "<group>"; };
-		87C921891D50282F0099BC7B /* documents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "documents@2x.png"; sourceTree = "<group>"; };
-		87C9218A1D50282F0099BC7B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
 		87C9218B1D50282F0099BC7B /* FileBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileBrowser.xib; sourceTree = "<group>"; };
-		87C9218C1D50282F0099BC7B /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
-		87C9218D1D50282F0099BC7B /* image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image@2x.png"; sourceTree = "<group>"; };
-		87C9218E1D50282F0099BC7B /* pdf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pdf@2x.png"; sourceTree = "<group>"; };
 		87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewTransitionViewController.xib; sourceTree = "<group>"; };
 		87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
 		87C921911D50282F0099BC7B /* zip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zip@2x.png"; sourceTree = "<group>"; };
@@ -324,7 +313,6 @@
 		D44DF3641D1E802E000C75B7 /* ExtendedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ExtendedView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF3E11D1EE15E000C75B7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D44DF3E31D1EE393000C75B7 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
-		D48D5B471D2FFDB200483BA6 /* folderIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folderIcon.png; sourceTree = "<group>"; };
 		D48D5B491D2FFDC000483BA6 /* GoogleDriveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -437,12 +425,7 @@
 		87C921881D50282F0099BC7B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				87C921891D50282F0099BC7B /* documents@2x.png */,
-				87C9218A1D50282F0099BC7B /* file@2x.png */,
 				87C9218B1D50282F0099BC7B /* FileBrowser.xib */,
-				87C9218C1D50282F0099BC7B /* folder@2x.png */,
-				87C9218D1D50282F0099BC7B /* image@2x.png */,
-				87C9218E1D50282F0099BC7B /* pdf@2x.png */,
 				87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */,
 				87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */,
 				87C921911D50282F0099BC7B /* zip@2x.png */,
@@ -567,7 +550,6 @@
 		D44DF2B91D1E802E000C75B7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				D48D5B471D2FFDB200483BA6 /* folderIcon.png */,
 				D44DF2BA1D1E802E000C75B7 /* AppDelegate+Notification.swift */,
 				D44DF2BB1D1E802E000C75B7 /* AppDelegate.swift */,
 				D44DF2BC1D1E802E000C75B7 /* Assets.xcassets */,
@@ -1067,10 +1049,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				14837B531D3B5B2E007B52BB /* tutorial_background_00@2x.jpg in Resources */,
-				87C921A31D50282F0099BC7B /* pdf@2x.png in Resources */,
 				D44DF3711D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Regular.ttf in Resources */,
 				D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */,
-				87C921A11D50282F0099BC7B /* folder@2x.png in Resources */,
 				D44DF3731D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Thin.ttf in Resources */,
 				87C921A01D50282F0099BC7B /* FileBrowser.xib in Resources */,
 				D44DF36C1D1E802E000C75B7 /* Assets.xcassets in Resources */,
@@ -1087,14 +1067,12 @@
 				D44DF3701D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Light.ttf in Resources */,
 				D44DF3721D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Semibold.ttf in Resources */,
 				D436FD5C1D1FA77A00F2BE72 /* KICamera@2x.png in Resources */,
-				87C921A21D50282F0099BC7B /* image@2x.png in Resources */,
 				87C9219B1D50282F0099BC7B /* Info.plist in Resources */,
 				87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */,
 				14837B4F1D3B5B2E007B52BB /* background-gradient@2x.png in Resources */,
 				D44DF36E1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf in Resources */,
 				BDF725601D57909100C94836 /* GoogleService-Info.plist in Resources */,
 				D44DF36D1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf in Resources */,
-				87C9219F1D50282F0099BC7B /* file@2x.png in Resources */,
 				D44DF3D91D1E802E000C75B7 /* FeedCollectionCell.xib in Resources */,
 				D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */,
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
@@ -1102,8 +1080,6 @@
 				14837B511D3B5B2E007B52BB /* button-background@2x.png in Resources */,
 				14837B561D3B5B2E007B52BB /* tutorial_background_03@2x.jpg in Resources */,
 				D436FD861D201CC700F2BE72 /* Main.storyboard in Resources */,
-				87C9219E1D50282F0099BC7B /* documents@2x.png in Resources */,
-				D48D5B481D2FFDB200483BA6 /* folderIcon.png in Resources */,
 				D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -267,7 +267,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // create a new cell if needed or reuse an old one
         let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let file = self.files[indexPath.row] as GTLDriveFile
-        cell.imageView?.sd_setImageWithURL(NSURL(string: file.iconLink), placeholderImage: UIImage(named: "folderIcon.png") )
+        cell.imageView?.sd_setImageWithURL(NSURL(string: file.iconLink), placeholderImage: UIImage(named: "myfolder") )
         cell.textLabel?.text = file.name
         return cell
     }
