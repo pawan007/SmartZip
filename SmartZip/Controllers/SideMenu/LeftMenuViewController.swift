@@ -15,7 +15,7 @@ import MessageUI
 class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDelegate{
     
     @IBOutlet weak var topTableView: UITableView!
-     private var topTableIDs = ["HomeCell","HistoryCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
+    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
     
     
     override func viewDidLoad() {
@@ -88,7 +88,7 @@ extension LeftMenuViewController: UITableViewDelegate
             center!.isShowRestoreBtn = true
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
-
+            
             break
         //TODO
         case "PasswordCell" :
