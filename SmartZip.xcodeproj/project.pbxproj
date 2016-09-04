@@ -12,11 +12,6 @@
 		14837B501D3B5B2E007B52BB /* button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B421D3B5B2E007B52BB /* button-background.png */; };
 		14837B511D3B5B2E007B52BB /* button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B431D3B5B2E007B52BB /* button-background@2x.png */; };
 		14837B521D3B5B2E007B52BB /* SampleHeaderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 14837B441D3B5B2E007B52BB /* SampleHeaderImage.png */; };
-		14837B531D3B5B2E007B52BB /* tutorial_background_00@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B451D3B5B2E007B52BB /* tutorial_background_00@2x.jpg */; };
-		14837B541D3B5B2E007B52BB /* tutorial_background_01@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B461D3B5B2E007B52BB /* tutorial_background_01@2x.jpg */; };
-		14837B551D3B5B2E007B52BB /* tutorial_background_02@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B471D3B5B2E007B52BB /* tutorial_background_02@2x.jpg */; };
-		14837B561D3B5B2E007B52BB /* tutorial_background_03@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B481D3B5B2E007B52BB /* tutorial_background_03@2x.jpg */; };
-		14837B571D3B5B2E007B52BB /* tutorial_background_04@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14837B491D3B5B2E007B52BB /* tutorial_background_04@2x.jpg */; };
 		14837B581D3B5B2E007B52BB /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B4B1D3B5B2E007B52BB /* MYIntroductionPanel.m */; };
 		14837B591D3B5B2E007B52BB /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14837B4D1D3B5B2E007B52BB /* MYIntroductionView.m */; };
 		14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14837B5A1D3B5DDD007B52BB /* TutorialVC.swift */; };
@@ -44,6 +39,14 @@
 		87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */; };
 		87C921A61D50282F0099BC7B /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921911D50282F0099BC7B /* zip@2x.png */; };
 		87C921A71D50282F0099BC7B /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */; };
+		87DC11A11D7B03DE0015213B /* tut_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119A1D7B03DE0015213B /* tut_1.png */; };
+		87DC11A21D7B03DE0015213B /* tut_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119B1D7B03DE0015213B /* tut_2.png */; };
+		87DC11A31D7B03DE0015213B /* tut_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119C1D7B03DE0015213B /* tut_3.png */; };
+		87DC11A41D7B03DE0015213B /* tut_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119D1D7B03DE0015213B /* tut_4.png */; };
+		87DC11A51D7B03DE0015213B /* tut_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119E1D7B03DE0015213B /* tut_5.png */; };
+		87DC11A61D7B03DE0015213B /* tut_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119F1D7B03DE0015213B /* tut_6.png */; };
+		87DC11A71D7B03DE0015213B /* tut_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC11A01D7B03DE0015213B /* tut_8.png */; };
+		87DC11A91D7C7A7F0015213B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87DC11A81D7C7A7F0015213B /* Assets.xcassets */; };
 		BDF725601D57909100C94836 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF7255F1D57909100C94836 /* GoogleService-Info.plist */; };
 		BDF725681D5B895D00C94836 /* BuyProVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF725671D5B895D00C94836 /* BuyProVC.swift */; };
 		BDF7256B1D6103FB00C94836 /* GADMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */; };
@@ -66,7 +69,6 @@
 		D436FD8E1D202B3300F2BE72 /* PasscodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD8D1D202B3300F2BE72 /* PasscodeVC.swift */; };
 		D44DF36A1D1E802E000C75B7 /* AppDelegate+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF2BA1D1E802E000C75B7 /* AppDelegate+Notification.swift */; };
 		D44DF36B1D1E802E000C75B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF2BB1D1E802E000C75B7 /* AppDelegate.swift */; };
-		D44DF36C1D1E802E000C75B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D44DF2BC1D1E802E000C75B7 /* Assets.xcassets */; };
 		D44DF36D1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D44DF2BE1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf */; };
 		D44DF36E1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D44DF2BF1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf */; };
 		D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D44DF2C01D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf */; };
@@ -167,11 +169,6 @@
 		14837B421D3B5B2E007B52BB /* button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background.png"; sourceTree = "<group>"; };
 		14837B431D3B5B2E007B52BB /* button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background@2x.png"; sourceTree = "<group>"; };
 		14837B441D3B5B2E007B52BB /* SampleHeaderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleHeaderImage.png; sourceTree = "<group>"; };
-		14837B451D3B5B2E007B52BB /* tutorial_background_00@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_00@2x.jpg"; sourceTree = "<group>"; };
-		14837B461D3B5B2E007B52BB /* tutorial_background_01@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_01@2x.jpg"; sourceTree = "<group>"; };
-		14837B471D3B5B2E007B52BB /* tutorial_background_02@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_02@2x.jpg"; sourceTree = "<group>"; };
-		14837B481D3B5B2E007B52BB /* tutorial_background_03@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_03@2x.jpg"; sourceTree = "<group>"; };
-		14837B491D3B5B2E007B52BB /* tutorial_background_04@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_04@2x.jpg"; sourceTree = "<group>"; };
 		14837B4A1D3B5B2E007B52BB /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
 		14837B4B1D3B5B2E007B52BB /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
 		14837B4C1D3B5B2E007B52BB /* MYIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionView.h; sourceTree = "<group>"; };
@@ -205,6 +202,14 @@
 		87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
 		87C921911D50282F0099BC7B /* zip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zip@2x.png"; sourceTree = "<group>"; };
 		87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
+		87DC119A1D7B03DE0015213B /* tut_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_1.png; sourceTree = "<group>"; };
+		87DC119B1D7B03DE0015213B /* tut_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_2.png; sourceTree = "<group>"; };
+		87DC119C1D7B03DE0015213B /* tut_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_3.png; sourceTree = "<group>"; };
+		87DC119D1D7B03DE0015213B /* tut_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_4.png; sourceTree = "<group>"; };
+		87DC119E1D7B03DE0015213B /* tut_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_5.png; sourceTree = "<group>"; };
+		87DC119F1D7B03DE0015213B /* tut_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_6.png; sourceTree = "<group>"; };
+		87DC11A01D7B03DE0015213B /* tut_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_8.png; sourceTree = "<group>"; };
+		87DC11A81D7C7A7F0015213B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D2542D9809635CA3965CB5B /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF7255F1D57909100C94836 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDF725671D5B895D00C94836 /* BuyProVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyProVC.swift; sourceTree = "<group>"; };
@@ -237,7 +242,6 @@
 		D436FD8D1D202B3300F2BE72 /* PasscodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeVC.swift; sourceTree = "<group>"; };
 		D44DF2BA1D1E802E000C75B7 /* AppDelegate+Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "AppDelegate+Notification.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF2BB1D1E802E000C75B7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D44DF2BC1D1E802E000C75B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D44DF2BE1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Simonson - Proxima Nova Alt Black.ttf"; sourceTree = "<group>"; };
 		D44DF2BF1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Simonson - Proxima Nova Alt Bold.ttf"; sourceTree = "<group>"; };
 		D44DF2C01D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark Simonson - Proxima Nova Alt Extrabold.ttf"; sourceTree = "<group>"; };
@@ -365,11 +369,13 @@
 				14837B421D3B5B2E007B52BB /* button-background.png */,
 				14837B431D3B5B2E007B52BB /* button-background@2x.png */,
 				14837B441D3B5B2E007B52BB /* SampleHeaderImage.png */,
-				14837B451D3B5B2E007B52BB /* tutorial_background_00@2x.jpg */,
-				14837B461D3B5B2E007B52BB /* tutorial_background_01@2x.jpg */,
-				14837B471D3B5B2E007B52BB /* tutorial_background_02@2x.jpg */,
-				14837B481D3B5B2E007B52BB /* tutorial_background_03@2x.jpg */,
-				14837B491D3B5B2E007B52BB /* tutorial_background_04@2x.jpg */,
+				87DC119A1D7B03DE0015213B /* tut_1.png */,
+				87DC119B1D7B03DE0015213B /* tut_2.png */,
+				87DC119C1D7B03DE0015213B /* tut_3.png */,
+				87DC119D1D7B03DE0015213B /* tut_4.png */,
+				87DC119E1D7B03DE0015213B /* tut_5.png */,
+				87DC119F1D7B03DE0015213B /* tut_6.png */,
+				87DC11A01D7B03DE0015213B /* tut_8.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -486,6 +492,7 @@
 		D4284CA61D1E4B9800E1BCA9 /* SmartZip */ = {
 			isa = PBXGroup;
 			children = (
+				87DC11A81D7C7A7F0015213B /* Assets.xcassets */,
 				D4016B251D3D3F390029AB3F /* SmartZip.entitlements */,
 				D44DF2B91D1E802E000C75B7 /* Application */,
 				D44DF2C81D1E802E000C75B7 /* Controllers */,
@@ -552,7 +559,6 @@
 			children = (
 				D44DF2BA1D1E802E000C75B7 /* AppDelegate+Notification.swift */,
 				D44DF2BB1D1E802E000C75B7 /* AppDelegate.swift */,
-				D44DF2BC1D1E802E000C75B7 /* Assets.xcassets */,
 				D44DF2BD1D1E802E000C75B7 /* fonts */,
 				D44DF2C51D1E802E000C75B7 /* Info.plist */,
 				D44DF2C61D1E802E000C75B7 /* Bridge.h */,
@@ -1048,25 +1054,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14837B531D3B5B2E007B52BB /* tutorial_background_00@2x.jpg in Resources */,
+				87DC11A21D7B03DE0015213B /* tut_2.png in Resources */,
 				D44DF3711D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Regular.ttf in Resources */,
+				87DC11A51D7B03DE0015213B /* tut_5.png in Resources */,
 				D44DF3E21D1EE15E000C75B7 /* Launch Screen.storyboard in Resources */,
+				87DC11A91D7C7A7F0015213B /* Assets.xcassets in Resources */,
 				D44DF3731D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Thin.ttf in Resources */,
 				87C921A01D50282F0099BC7B /* FileBrowser.xib in Resources */,
-				D44DF36C1D1E802E000C75B7 /* Assets.xcassets in Resources */,
 				D44DF3D71D1E802E000C75B7 /* FeedCell.xib in Resources */,
-				14837B541D3B5B2E007B52BB /* tutorial_background_01@2x.jpg in Resources */,
 				14837B4E1D3B5B2E007B52BB /* background-gradient.png in Resources */,
-				14837B551D3B5B2E007B52BB /* tutorial_background_02@2x.jpg in Resources */,
+				87DC11A11D7B03DE0015213B /* tut_1.png in Resources */,
+				87DC11A41D7B03DE0015213B /* tut_4.png in Resources */,
 				D436FD5B1D1FA77A00F2BE72 /* KICamera.png in Resources */,
 				14837B501D3B5B2E007B52BB /* button-background.png in Resources */,
 				87C921A61D50282F0099BC7B /* zip@2x.png in Resources */,
+				87DC11A61D7B03DE0015213B /* tut_6.png in Resources */,
 				14837B521D3B5B2E007B52BB /* SampleHeaderImage.png in Resources */,
-				14837B571D3B5B2E007B52BB /* tutorial_background_04@2x.jpg in Resources */,
 				87C921A41D50282F0099BC7B /* PreviewTransitionViewController.xib in Resources */,
 				D44DF3701D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Light.ttf in Resources */,
 				D44DF3721D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Semibold.ttf in Resources */,
 				D436FD5C1D1FA77A00F2BE72 /* KICamera@2x.png in Resources */,
+				87DC11A71D7B03DE0015213B /* tut_8.png in Resources */,
 				87C9219B1D50282F0099BC7B /* Info.plist in Resources */,
 				87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */,
 				14837B4F1D3B5B2E007B52BB /* background-gradient@2x.png in Resources */,
@@ -1078,9 +1086,9 @@
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
 				D44DF3741D1E802E000C75B7 /* Info.plist in Resources */,
 				14837B511D3B5B2E007B52BB /* button-background@2x.png in Resources */,
-				14837B561D3B5B2E007B52BB /* tutorial_background_03@2x.jpg in Resources */,
 				D436FD861D201CC700F2BE72 /* Main.storyboard in Resources */,
 				D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */,
+				87DC11A31D7B03DE0015213B /* tut_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

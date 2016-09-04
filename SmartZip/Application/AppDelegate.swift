@@ -206,12 +206,31 @@ extension AppDelegate {
         let storyboard = UIStoryboard.mainStoryboard()
         
         let leftDrawer = storyboard.instantiateViewControllerWithIdentifier("LeftMenuViewController")
-        let center = storyboard.instantiateViewControllerWithIdentifier("HomeMenuContainer")
+        
+        let flagFirstTime = NSUserDefaults.standardUserDefaults().boolForKey("OpenFirstTime")
+        
+        var viewController:UINavigationController?
+        
+        if flagFirstTime == false {
+            // Show Tutorial
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "OpenFirstTime")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            viewController = storyboard.instantiateViewControllerWithIdentifier("TutorialContainer") as? UINavigationController
+            
+        }else{
+            // show Home
+            
+            viewController = storyboard.instantiateViewControllerWithIdentifier("HomeMenuContainer") as? UINavigationController
+            
+        }
+        
+        
         
         let menuManager = SideMenuManager.sharedManager()
         menuManager.setValues { (drawer: MMDrawerController) -> () in
             drawer.leftDrawerViewController = leftDrawer
-            drawer.centerViewController = center
+            drawer.centerViewController = viewController
         }
         return SideMenuManager.sharedManager().container!
     }

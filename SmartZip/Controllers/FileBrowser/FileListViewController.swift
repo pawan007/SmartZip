@@ -101,6 +101,7 @@ class FileListViewController: UIViewController {
         
         // Set search bar
         tableView.tableHeaderView = searchController.searchBar
+        tableView.tableFooterView = UIView()
         
         // Register for 3D touch
         self.registerFor3DTouch()
@@ -110,7 +111,7 @@ class FileListViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
-        tableView.tableFooterView = UIView()
+        
         
         
         
