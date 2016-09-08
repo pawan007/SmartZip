@@ -34,8 +34,13 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     var totalfileCount = 0
     var currentFile = 0
     var nameIndex = 0
+    var slowMotionVideoCount = 0
+    var isCalledVideoCheck = false
+    
     
     var isOpenedFromExternalResource = false
+    
+    var selectVideo:[AnyObject]?
     
     
     @IBOutlet var bannerView: GADBannerView!
@@ -82,7 +87,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
             if(shared != nil) {
-               shared = nil
+                shared = nil
             }
             _bView.hidden = true
         }
@@ -367,30 +372,30 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     /*
-    func useMoreCloud( ) {
-        // user url path..Please handle url
-        let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
-        urlPickedfuture.onSuccess { url in
-            print("URL: \(url)")
-            if let urlCloud = NSURL(string: String(url)) {
-                let dataFromURL = NSData(contentsOfURL: urlCloud)
-                print(urlCloud.lastPathComponent ?? "")
-                let filemanager = NSFileManager.defaultManager()
-                let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-                let destinationPath:NSString = documentsPath.stringByAppendingString(urlCloud.lastPathComponent!)
-                if (!filemanager.fileExistsAtPath(destinationPath as String)) {
-                    dataFromURL?.writeToFile(destinationPath as String, atomically:true)
-                    CommonFunctions.sharedInstance.zipMyFiles("\(destinationPath).zip", filePath: destinationPath as String, vc: self)
-                } else {
-                    print("The files already exist")
-                }
-            }
-        }
-        
-        let flurryParams = [ "Type" :"selectMoreCloud"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
-    }
-    */
+     func useMoreCloud( ) {
+     // user url path..Please handle url
+     let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
+     urlPickedfuture.onSuccess { url in
+     print("URL: \(url)")
+     if let urlCloud = NSURL(string: String(url)) {
+     let dataFromURL = NSData(contentsOfURL: urlCloud)
+     print(urlCloud.lastPathComponent ?? "")
+     let filemanager = NSFileManager.defaultManager()
+     let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+     let destinationPath:NSString = documentsPath.stringByAppendingString(urlCloud.lastPathComponent!)
+     if (!filemanager.fileExistsAtPath(destinationPath as String)) {
+     dataFromURL?.writeToFile(destinationPath as String, atomically:true)
+     CommonFunctions.sharedInstance.zipMyFiles("\(destinationPath).zip", filePath: destinationPath as String, vc: self)
+     } else {
+     print("The files already exist")
+     }
+     }
+     }
+     
+     let flurryParams = [ "Type" :"selectMoreCloud"]
+     AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+     }
+     */
     
     func qb_imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
         
@@ -425,9 +430,11 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             
         }else{
             
+            
             self.dismissViewControllerAnimated(true, completion: nil)
-            showEnterNameAlert("Video-"+Timestamp,assets: assets, type: fileTypeImage)
-            //            zipAndShareVideos(assets)
+            selectVideo = assets
+            canCreateVideo(selectVideo)
+            
         }
         
         flagVideo = false
@@ -506,13 +513,10 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         if assets.count > 0 {
             
             
-            //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             SwiftSpinner.show("Processing, please wait..")
             
             
-            //            folderName = "Videos-\(Timestamp)"
-            //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(folderName)"
             
@@ -569,7 +573,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                         
                     }else if (asset != nil &&  asset!.isKindOfClass(AVComposition.classForCoder()) ){
                         
-                        let path = "\(cacheDir)/mergeSlowMoVideo_\(self.nameIndex).mov"
+                        let path = "\(cacheDir)/SlowMotionVideo_\(self.nameIndex).mov"
                         self.folderDir = cacheDir
                         self.getSlowMotionVideo(asset!, filePath: path,cacheDir: cacheDir,totalItem: self.totalItem, currentItem: self.currentItem)
                         
@@ -587,6 +591,84 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         
         
+        
+    }
+    
+    
+    
+    
+    func canCreateVideo(assets: [AnyObject]!){
+        
+        totalItem = assets.count
+        currentItem = 0
+        self.slowMotionVideoCount = 0
+        self.isCalledVideoCheck = false
+        
+        for item in assets{
+            
+            let asset = item as! PHAsset
+            
+            PHImageManager.defaultManager().requestAVAssetForVideo(asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
+                
+                if (asset != nil &&  asset!.isKindOfClass(AVURLAsset.classForCoder()) ){
+                    
+                    self.currentItem += 1
+                    print("in normal Video cur item = \(self.currentItem)")
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        if self.currentItem == self.totalItem{
+                            if (self.isCalledVideoCheck == false){
+                                self.isCalledVideoCheck = true
+                                self.currentItem = 0
+                                self.totalItem = 0
+                                self.videoCheck()
+                            }
+                        }
+                    })
+                    
+                }else if (asset != nil &&  asset!.isKindOfClass(AVComposition.classForCoder()) ){
+                    
+                    self.currentItem += 1
+                    self.slowMotionVideoCount += 1
+                    print("in slow video cur item = \(self.currentItem)")
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        if self.currentItem == self.totalItem{
+                            
+                            if (self.isCalledVideoCheck == false){
+                                self.isCalledVideoCheck = true
+                                self.currentItem = 0
+                                self.totalItem = 0
+                                self.videoCheck()
+                            }
+                            
+                            
+                        }
+                        
+                    })
+                    
+                }
+                
+            })
+            
+        }
+        
+    }
+    
+    
+    func videoCheck() {
+        
+        
+        if self.slowMotionVideoCount > 1 {
+            
+            showAlertViewWithMessage("Note", message: "You can not zip more than 1 slow motion video at a time.")
+            
+        }else{
+            
+            showEnterNameAlert("Video-"+Timestamp,assets: selectVideo, type: fileTypeVideo)
+            
+        }
         
     }
     

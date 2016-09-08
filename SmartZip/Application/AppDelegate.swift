@@ -109,8 +109,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             print(url)
             let unzipClass = UnZipExternal()
-            unzipFilePath = unzipClass.unzipPath(url.path!)
+            //            unzipFilePath = unzipClass.unzipPath(url.path!)
+            unzipClass.unzipPath(url.path!)
             //            isOpenedFromExternalResource = true
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: (self.window?.rootViewController)!)
             return true
         }
         
