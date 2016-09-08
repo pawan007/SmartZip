@@ -112,7 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //            unzipFilePath = unzipClass.unzipPath(url.path!)
             unzipClass.unzipPath(url.path!)
             //            isOpenedFromExternalResource = true
-            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: (self.window?.rootViewController)!)
+            //            let fileName = newFilePath.componentsSeparatedByString("/").last
+            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A zip fie has been imported and unzipped in My Files", vc: (self.window?.rootViewController)!)
             return true
         }
         
