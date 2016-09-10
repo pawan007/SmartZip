@@ -50,6 +50,10 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 Pods/
+a/b/c/*
+!a/b/c/foo
+Pods/GTMOAuth2/Source/*
+!Pods/GTMOAuth2/Source/Touch
 
 # Carthage
 #

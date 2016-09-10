@@ -16,6 +16,9 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     private let kKeychainItemName = "Drive API"
     private let kClientID = "250150690669-f40jbqpnvvd4sjeui1id07507ds4hvcq.apps.googleusercontent.com"
     
+    var forFirstTime = true
+    
+    
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
     private let scopes = [kGTLAuthScopeDriveFile, kGTLAuthScopeDriveReadonly, kGTLAuthScopeDrive]
@@ -70,16 +73,30 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // When the view appears, ensure that the Drive API service is authorized
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
-        if let authorizer = service.authorizer,
-            canAuth = authorizer.canAuthorize where canAuth {
-            fetchFiles()
-        } else {
-            presentViewController(
-                createAuthController(),
-                animated: true,
-                completion: nil
-            )
+        
+        if forFirstTime || service.authorizer != nil {
+            
+            forFirstTime = false
+            if let authorizer = service.authorizer,
+                canAuth = authorizer.canAuthorize where canAuth {
+                fetchFiles()
+            } else {
+                presentViewController(
+                    createAuthController(),
+                    animated: true,
+                    completion: nil
+                )
+            }
+        }else{
+            
+            if service.authorizer == nil {
+                
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            
         }
+        
+        
     }
     
     // Construct a query to get names and IDs of 10 files using the Google Drive API
@@ -220,7 +237,8 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         if let error = error {
             service.authorizer = nil
-            showAlert("Authentication Error", message: error.localizedDescription)
+            //            showAlert("Authentication Error", message: error.localizedDescription)
+            print(error.localizedDescription)
             return
         }
         

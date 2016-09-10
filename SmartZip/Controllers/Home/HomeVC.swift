@@ -832,55 +832,15 @@ extension HomeVC : MPMediaPickerControllerDelegate {
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        var folderName = ""
-        
         if mediaItemCollection.items.count > 0 {
             
-            /*//            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
-             
-             folderName = "Song-\(Timestamp)"
-             //            var cacheDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
-             cacheDir += "/\(folderName)"
-             
-             do{
-             try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
-             }catch let e as NSError{
-             print(e)
-             }
-             
-             for item in mediaItemCollection.items{
-             
-             if item ==  mediaItemCollection.items.last{
-             isLastIndex = true
-             }
-             
-             if item ==  mediaItemCollection.items.first{
-             SwiftSpinner.show("Processing, please wait..")
-             currentFile = 0
-             totalfileCount = mediaItemCollection.items.count
-             }
-             
-             print(item.assetURL)
-             let filePath = "\(cacheDir)/\(item.title!).m4a"
-             let myFileUrl = NSURL(fileURLWithPath: filePath)
-             saveAssetUrlToMp3(item.assetURL!, path: myFileUrl, title: item.title!, parentDir: cacheDir)
-             
-             }*/
-            
-            
             showEnterNameAlert("Songs-"+Timestamp,assets: mediaItemCollection.items, type: fileTypeSong)
-            
             
         }else{
             
             print("Song not selected")
             
         }
-        
-        
-        
-        
     }
     
     
@@ -894,8 +854,6 @@ extension HomeVC : MPMediaPickerControllerDelegate {
         }catch let e as NSError{
             print(e)
         }
-        
-        
         
         for item in items as! [MPMediaItem]!{
             
