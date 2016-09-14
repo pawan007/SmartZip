@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "dorpbox@2x.png",
+      "filename" : "dropbox@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "dorpbox@3x.png",
+      "filename" : "dropbox@3x.png",
       "scale" : "3x"
     }
   ],

@@ -49,11 +49,13 @@ playground.xcworkspace
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
+
 Pods/
-a/b/c/*
-!a/b/c/foo
-Pods/GTMOAuth2/Source/*
-!Pods/GTMOAuth2/Source/Touch
+
+
+Pods/GTMOAuth2/*
+!Pods/GTMOAuth2/Source/*
+
 
 # Carthage
 #
@@ -74,4 +76,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
+node_modules/
+        Pods/GTMOAuth2/Source/
 
