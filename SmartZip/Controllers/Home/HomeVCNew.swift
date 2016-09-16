@@ -1,8 +1,8 @@
 //
-//  HomeVC.swift
+//  HomeVCNew.swift
 //  SmartZip
 //
-//  Created by Pawan Kumar on 26/06/16.
+//  Created by Pawan Dhawan on 15/09/16.
 //  Copyright © 2016 Pawan Kumar. All rights reserved.
 //
 
@@ -18,12 +18,7 @@ import QBImagePickerController
 import GoogleMobileAds
 
 
-let fileTypeImage = 1
-let fileTypeVideo = 2
-let fileTypeSong = 3
-
-
-class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
+class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
     
     var flagImage = false
     var flagVideo = false
@@ -75,7 +70,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         if isOpenedFromExternalResource {
             isOpenedFromExternalResource = false
-            self.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+            //            self.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
         }
         
         if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)) {
@@ -210,77 +205,80 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("didSelectRowAtIndexPath\(indexPath.row)")
-        
-        if indexPath.section == 0 {
-            
-            if indexPath.row == 0 {
-                // File
-                handleLocalFile()
-                
-            }else if indexPath.row == 1 {
-                // photos
-                selectPhotos()
-                
-            }else if indexPath.row == 2 {
-                // videos
-                selectVideos()
-                
-            }else if indexPath.row == 3 {
-                // Audio
-                selectAudio()
-            }
-            
-        }else{
-            
-            if indexPath.row == 0 {
-                
-                guard Reachability.isConnectedToNetwork()else{
-                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
-                    return
-                }
-                
-                useDropBox()
-                
-            }else if indexPath.row == 1 {
-                
-                guard Reachability.isConnectedToNetwork()else{
-                    CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
-                    return
-                }
-                useGoogle()
-                
-            }else if indexPath.row == 2 {
-                
-                
-                let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-                
-                importMenu.delegate = self
-                
-                self.presentViewController(importMenu, animated: true, completion: nil)
-                
-                let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-                
-                documentPicker.delegate = self
-                
-                documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-                
-                self.presentViewController(documentPicker, animated: true, completion: nil)
-                
-                
-                /*guard Reachability.isConnectedToNetwork()else{
-                 CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
-                 return
-                 }
-                 useMoreCloud()*/
-            }
-            
-        }
-        
-        
-        
-    }
+    /*override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     print("didSelectRowAtIndexPath\(indexPath.row)")
+     
+     if indexPath.section == 0 {
+     
+     if indexPath.row == 0 {
+     // File
+     handleLocalFile()
+     
+     }else if indexPath.row == 1 {
+     // photos
+     selectPhotos()
+     
+     }else if indexPath.row == 2 {
+     // videos
+     selectVideos()
+     
+     }else if indexPath.row == 3 {
+     // Audio
+     selectAudio()
+     }
+     
+     }else{
+     
+     if indexPath.row == 0 {
+     
+     guard Reachability.isConnectedToNetwork()else{
+     CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+     return
+     }
+     
+     useDropBox()
+     
+     }else if indexPath.row == 1 {
+     
+     guard Reachability.isConnectedToNetwork()else{
+     CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+     return
+     }
+     useGoogle()
+     
+     }else if indexPath.row == 2 {
+     
+     
+     let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+     
+     importMenu.delegate = self
+     
+     self.presentViewController(importMenu, animated: true, completion: nil)
+     
+     let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+     
+     documentPicker.delegate = self
+     
+     documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+     
+     self.presentViewController(documentPicker, animated: true, completion: nil)
+     
+     
+     guard Reachability.isConnectedToNetwork()else{
+     CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+     return
+     }
+     useMoreCloud()
+     }
+     
+     }
+     
+     
+     
+     }*/
+    
+    
+    
     @IBAction   func menuButtonAction(sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
@@ -429,7 +427,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             
             self.dismissViewControllerAnimated(true, completion: nil)
             showEnterNameAlert("Images-"+Timestamp,assets: assets, type: fileTypeImage)
-            //            
+            //
             //            self.dismissViewControllerAnimated(true, completion: nil)
             //            zipAndShareImages(assets)
             
@@ -815,7 +813,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
 }
 
-extension HomeVC{
+extension HomeVCNew{
     
     @IBAction func btnMyFilesTapped(sender: AnyObject) {
         handleLocalFile()
@@ -849,23 +847,16 @@ extension HomeVC{
             return
         }
         useGoogle()
-        
     }
     
     @IBAction func btnMoreCloudTapped(sender: AnyObject) {
         
         let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-        
         importMenu.delegate = self
-        
         self.presentViewController(importMenu, animated: true, completion: nil)
-        
         let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-        
         documentPicker.delegate = self
-        
         documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-        
         self.presentViewController(documentPicker, animated: true, completion: nil)
         
     }
@@ -874,7 +865,7 @@ extension HomeVC{
 }
 
 
-extension HomeVC : MPMediaPickerControllerDelegate {
+extension HomeVCNew : MPMediaPickerControllerDelegate {
     // must implement these, as there is no automatic dismissal
     
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
@@ -1009,7 +1000,7 @@ extension HomeVC : MPMediaPickerControllerDelegate {
     
 }
 
-extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
+extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
     
     
     
@@ -1019,7 +1010,7 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
         print(url.path!)
         let zipPath = "\(CommonFunctions.sharedInstance.docDirPath())/\((url.lastPathComponent)!).zip"
         CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: url.path!, vc: self)
-        self.performSelector(#selector(HomeVC.handleLocalFile), withObject: nil, afterDelay: 1)
+        self.performSelector(#selector(HomeVCNew.handleLocalFile), withObject: nil, afterDelay: 1)
         
     }
     

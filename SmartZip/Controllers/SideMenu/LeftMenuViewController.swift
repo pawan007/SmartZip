@@ -15,7 +15,7 @@ import MessageUI
 class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDelegate{
     
     @IBOutlet weak var topTableView: UITableView!
-    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","EmailCell"]
+    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
     
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ extension LeftMenuViewController: UITableViewDelegate
         
         switch identifier {
         case "HomeCell" :
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HomeVC"))!
+            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HomeVCNew"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
@@ -109,6 +109,12 @@ extension LeftMenuViewController: UITableViewDelegate
             })
             iRate.sharedInstance().openRatingsPageInAppStore()
             break
+        case "AboutCompany" :
+            self.openAboutCompanyVC();
+            break
+        case "AboutProduct" :
+            self.openAboutProductVC();
+            break
         case "EmailCell" :
             self.sendEmail();
             break
@@ -121,6 +127,22 @@ extension LeftMenuViewController: UITableViewDelegate
         default: break
             
         }
+    }
+    
+    func openAboutCompanyVC() {
+        let container = SideMenuManager.sharedManager().container
+        let center = (self.storyboard?.instantiateViewControllerWithIdentifier("AboutCompany"))!
+        container!.centerViewController =  UINavigationController(rootViewController: center)
+        container!.closeDrawerAnimated(true, completion: { (Bool) in
+        })
+    }
+    
+    func openAboutProductVC() {
+        let container = SideMenuManager.sharedManager().container
+        let center = (self.storyboard?.instantiateViewControllerWithIdentifier("AboutProduct"))!
+        container!.centerViewController =  UINavigationController(rootViewController: center)
+        container!.closeDrawerAnimated(true, completion: { (Bool) in
+        })
     }
     
     func shareApp() {
