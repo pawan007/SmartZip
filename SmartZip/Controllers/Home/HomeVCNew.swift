@@ -303,6 +303,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
         FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
         let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController")
+        APPDELEGATE.flvc = fileListViewController as? FileListViewController
         self.navigationController?.pushViewController(fileListViewController, animated: true)
         
         let flurryParams = [ "Type" :"handleLocalFile"]

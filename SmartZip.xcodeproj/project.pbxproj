@@ -40,7 +40,6 @@
 		87C921A01D50282F0099BC7B /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218B1D50282F0099BC7B /* FileBrowser.xib */; };
 		87C921A41D50282F0099BC7B /* PreviewTransitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */; };
 		87C921A51D50282F0099BC7B /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */; };
-		87C921A61D50282F0099BC7B /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C921911D50282F0099BC7B /* zip@2x.png */; };
 		87C921A71D50282F0099BC7B /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */; };
 		87DC11A11D7B03DE0015213B /* tut_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119A1D7B03DE0015213B /* tut_1.png */; };
 		87DC11A21D7B03DE0015213B /* tut_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119B1D7B03DE0015213B /* tut_2.png */; };
@@ -206,7 +205,6 @@
 		87C9218B1D50282F0099BC7B /* FileBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileBrowser.xib; sourceTree = "<group>"; };
 		87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewTransitionViewController.xib; sourceTree = "<group>"; };
 		87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
-		87C921911D50282F0099BC7B /* zip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zip@2x.png"; sourceTree = "<group>"; };
 		87C921921D50282F0099BC7B /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
 		87DC119A1D7B03DE0015213B /* tut_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_1.png; sourceTree = "<group>"; };
 		87DC119B1D7B03DE0015213B /* tut_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_2.png; sourceTree = "<group>"; };
@@ -440,7 +438,6 @@
 				87C9218B1D50282F0099BC7B /* FileBrowser.xib */,
 				87C9218F1D50282F0099BC7B /* PreviewTransitionViewController.xib */,
 				87C921901D50282F0099BC7B /* WebviewPreviewViewContoller.xib */,
-				87C921911D50282F0099BC7B /* zip@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1077,7 +1074,6 @@
 				87DC11A41D7B03DE0015213B /* tut_4.png in Resources */,
 				D436FD5B1D1FA77A00F2BE72 /* KICamera.png in Resources */,
 				14837B501D3B5B2E007B52BB /* button-background.png in Resources */,
-				87C921A61D50282F0099BC7B /* zip@2x.png in Resources */,
 				87DC11A61D7B03DE0015213B /* tut_6.png in Resources */,
 				14837B521D3B5B2E007B52BB /* SampleHeaderImage.png in Resources */,
 				87C921A41D50282F0099BC7B /* PreviewTransitionViewController.xib in Resources */,

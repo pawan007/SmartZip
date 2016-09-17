@@ -80,6 +80,7 @@ class FileListViewController: UIViewController {
         if  FileParser.sharedInstance.currentPath == nil{
             self.initialPath = FileParser.sharedInstance.documentsURL()
             FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
+            
         }else{
             self.initialPath = FileParser.sharedInstance.currentPath
         }
@@ -111,22 +112,17 @@ class FileListViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
-        
-        
-        
-        
-        if APPDELEGATE.isOpenedFromExternalResource {
-            APPDELEGATE.isOpenedFromExternalResource = false
-            FileParser.sharedInstance.currentPath = NSURL(string: APPDELEGATE.unzipFilePath)
-            let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController") as! FileListViewController
-            self.navigationController?.pushViewController(fileListViewController, animated: true)
-        }
-        
-        
     }
     
     
     func setFolderPathAndReloadTableView(path:NSURL) {
+        
+        files = parser.filesForDirectory(initialPath!)
+        indexFiles()
+        
+    }
+    
+    func setFolderPathAndReloadTableView() {
         
         files = parser.filesForDirectory(initialPath!)
         indexFiles()

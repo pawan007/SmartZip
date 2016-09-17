@@ -115,10 +115,14 @@ public enum FBFileType: String {
         var fileName = String()
         switch self {
         case Directory: fileName = "myfolder"
-        case JPG, jpg, JPEG, jpeg, PNG, png, GIF, gif: fileName = "image"
+//        case JPG, jpg, JPEG, jpeg, PNG, png, GIF, gif: fileName = "image"
+        case JPG, jpg : fileName = "jpg"
+        case PNG, png : fileName = "png"
+        case GIF, gif : fileName = "gif"
         case PDF, pdf: fileName = "pdf"
-        case DOC, doc, TXT, txt: fileName = "doc"
-        case ZIP, zip: fileName = "zip@2x.png"
+        case DOC, doc: fileName = "doc"
+            case TXT, txt: fileName = "txt"
+        case ZIP, zip: fileName = "zip"
             
         case mp3, MP3,WAV,wav: fileName = "music"
         case m4v, M4V, mp4, MP4, MOV, mov: fileName = "video"

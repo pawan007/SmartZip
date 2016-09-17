@@ -21,12 +21,12 @@ class UnZipExternal: NSObject {
     
     func unzipPath(zipPath:String) -> String {
         
-        /*guard let unzipPath = tempUnzipPath(zipPath) else {
-         return ""
-         }*/
+        guard let unzipPath = tempUnzipPath(zipPath) else {
+            return ""
+        }
         
-        //        unZipFilePath = unzipPath
-        unZipFilePath = CommonFunctions.sharedInstance.docDirPath()
+        unZipFilePath = unzipPath
+        //        unZipFilePath = CommonFunctions.sharedInstance.docDirPath()
         
         let success = SSZipArchive.unzipFileAtPath(zipPath, toDestination: unZipFilePath)
         
@@ -55,7 +55,7 @@ class UnZipExternal: NSObject {
         do {
             try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            return nil
+            return CommonFunctions.sharedInstance.docDirPath()
         }
         
         if let path = url.path {

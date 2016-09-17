@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var isOpenedFromExternalResource = false
     var unzipFilePath = ""
+    weak var flvc:FileListViewController?
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -111,9 +113,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let unzipClass = UnZipExternal()
             //            unzipFilePath = unzipClass.unzipPath(url.path!)
             unzipClass.unzipPath(url.path!)
-            //            isOpenedFromExternalResource = true
+            isOpenedFromExternalResource = true 
             //            let fileName = newFilePath.componentsSeparatedByString("/").last
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A zip fie has been imported and unzipped in My Files", vc: (self.window?.rootViewController)!)
+            
+            if APPDELEGATE.isOpenedFromExternalResource && FileParser.sharedInstance.currentPath == FileParser.sharedInstance.documentsURL() {
+                APPDELEGATE.isOpenedFromExternalResource = false
+                
+                if flvc != nil {
+                    flvc!.files = flvc!.parser.filesForDirectory(flvc!.initialPath!)
+                    flvc!.indexFiles()
+                    flvc!.tableView.reloadData()
+                }
+                
+            }
+            
+            
             return true
         }
         
@@ -224,7 +239,7 @@ extension AppDelegate {
         }else{
             // show Home
             
-            viewController = storyboard.instantiateViewControllerWithIdentifier("HomeMenuContainer") as? UINavigationController
+            viewController = storyboard.instantiateViewControllerWithIdentifier("HomeMenuContainerNew") as? UINavigationController
             
         }
         

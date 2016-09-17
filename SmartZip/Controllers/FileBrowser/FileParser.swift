@@ -51,7 +51,16 @@ class FileParser {
             if let excludesFileExtensions = excludesFileExtensions, let fileExtensions = file.fileExtension where excludesFileExtensions.contains(fileExtensions) {
                 continue
             }
+            
+            let path = "\(CommonFunctions.sharedInstance.docDirPath())/Inbox"
+            if file.filePath.path!.containsString(path){
+                continue
+            }
+            
             if let excludesFilepaths = excludesFilepaths where excludesFilepaths.contains(file.filePath) {
+                
+                print(excludesFilepaths)
+                print(file.filePath)
                 continue
             }
             if file.displayName.isEmpty == false {
