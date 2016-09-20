@@ -145,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func iRateSetUp () {
         iRate.sharedInstance().applicationBundleID = "com.mobirizer.smartzip"
         iRate.sharedInstance().appStoreID = 1141913794
-        iRate.sharedInstance().ratingsURL = NSURL(string: "https://itunes.apple.com/in/app/candy-crush-saga/id1141913794?mt=8")
+        iRate.sharedInstance().ratingsURL = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
         iRate.sharedInstance().onlyPromptIfLatestVersion = false
         iRate.sharedInstance().previewMode = false
         iRate.sharedInstance().daysUntilPrompt = 1
