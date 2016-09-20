@@ -234,7 +234,11 @@ extension AppDelegate {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "OpenFirstTime")
             NSUserDefaults.standardUserDefaults().synchronize()
             
-            viewController = storyboard.instantiateViewControllerWithIdentifier("TutorialContainer") as? UINavigationController
+            //            viewController = storyboard.instantiateViewControllerWithIdentifier("TutorialContainer") as? UINavigationController
+            
+            let center = storyboard.instantiateViewControllerWithIdentifier("WLCTutorialVC")
+            viewController =   UINavigationController(rootViewController: center)
+            
             
         }else{
             // show Home

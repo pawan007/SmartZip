@@ -21,6 +21,8 @@
 		14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */; };
 		8706C57D1D5A2F8C006C560D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706C57C1D5A2F8C006C560D /* Reachability.swift */; };
 		870744931D6CA9B60001B353 /* UnZipExternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870744921D6CA9B60001B353 /* UnZipExternal.swift */; };
+		8709B7AF1D9192DE0006DCCC /* WLCTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */; };
+		8709B7B11D9193CC0006DCCC /* TutorialCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */; };
 		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		879A2A0D1D899BA3003283C3 /* AboutCompanyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */; };
 		87A307F51D899C0D00161454 /* AboutProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A307F41D899C0D00161454 /* AboutProductVC.swift */; };
@@ -185,6 +187,8 @@
 		3CF85270DD85DDFA247D418C /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
 		8706C57C1D5A2F8C006C560D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		870744921D6CA9B60001B353 /* UnZipExternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnZipExternal.swift; sourceTree = "<group>"; };
+		8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WLCTutorialVC.swift; sourceTree = "<group>"; };
+		8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialCollectionViewCell.swift; sourceTree = "<group>"; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCompanyVC.swift; sourceTree = "<group>"; };
 		87A307F41D899C0D00161454 /* AboutProductVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutProductVC.swift; sourceTree = "<group>"; };
@@ -368,6 +372,8 @@
 		14837B3F1D3B5B2E007B52BB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */,
+				8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */,
 				14837B401D3B5B2E007B52BB /* background-gradient.png */,
 				14837B411D3B5B2E007B52BB /* background-gradient@2x.png */,
 				14837B421D3B5B2E007B52BB /* button-background.png */,
@@ -1243,10 +1249,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44DF3A21D1E802E000C75B7 /* NSData+Additions.swift in Sources */,
+				8709B7AF1D9192DE0006DCCC /* WLCTutorialVC.swift in Sources */,
 				D44DF3921D1E802E000C75B7 /* DesignableLabel.swift in Sources */,
 				D436FD5D1D1FA77A00F2BE72 /* KIImagePager.m in Sources */,
 				D44DF3751D1E802E000C75B7 /* AboutViewController.swift in Sources */,
 				D44DF3D81D1E802E000C75B7 /* FeedCollectionCell.swift in Sources */,
+				8709B7B11D9193CC0006DCCC /* TutorialCollectionViewCell.swift in Sources */,
 				BDF7256B1D6103FB00C94836 /* GADMasterViewController.m in Sources */,
 				D44DF3B61D1E802E000C75B7 /* UITextView+Additions.swift in Sources */,
 				D44DF3A91D1E802E000C75B7 /* NSUserDefaults+Additions.swift in Sources */,

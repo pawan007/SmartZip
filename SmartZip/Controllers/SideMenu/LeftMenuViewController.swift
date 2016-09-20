@@ -71,7 +71,7 @@ extension LeftMenuViewController: UITableViewDelegate
             break
         case "TutorialCell" :
             //TODO
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("TutorialVC"))!
+            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("WLCTutorialVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
