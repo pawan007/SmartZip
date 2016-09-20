@@ -819,18 +819,22 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
 extension HomeVC{
     
     @IBAction func btnMyFilesTapped(sender: AnyObject) {
+        showFullPageAd()
         handleLocalFile()
     }
     
     @IBAction func btnPhotosTapped(sender: AnyObject) {
+        showFullPageAd()
         selectPhotos()
     }
     
     @IBAction func btnVideoTapped(sender: AnyObject) {
+        showFullPageAd()
         selectVideos()
     }
     
     @IBAction func btnMusicTapped(sender: AnyObject) {
+        showFullPageAd()
         selectAudio()
     }
     

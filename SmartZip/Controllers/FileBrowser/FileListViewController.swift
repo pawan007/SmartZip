@@ -12,6 +12,10 @@ import UIKit
 
 class FileListViewController: UIViewController {
     
+    
+    @IBOutlet weak var bannerAdView: UIView!
+    var shared:GADMasterViewController!
+    
     // TableView
     @IBOutlet weak var tableView: UITableView!
     let collation = UILocalizedIndexedCollation.currentCollation()
@@ -107,12 +111,35 @@ class FileListViewController: UIViewController {
         // Register for 3D touch
         self.registerFor3DTouch()
         
+        if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            //GADBannerView
+            // self.setUpGoogleAds()
+            shared = GADMasterViewController.singleton()
+            shared.resetAdView(self, andDisplayView: bannerAdView)
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
+        
+        if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            if(shared != nil) {
+                shared = nil
+            }
+            bannerAdView.hidden = true
+        }
     }
+    
+    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+        print("FileListViewController Ad changed")
+        for tempView in bannerAdView.subviews {
+            tempView.removeFromSuperview()
+        }
+        self.bannerAdView.addSubview(bannerView)
+    }
+
     
     
     func setFolderPathAndReloadTableView(path:NSURL) {
