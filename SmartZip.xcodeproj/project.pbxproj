@@ -187,8 +187,8 @@
 		3CF85270DD85DDFA247D418C /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
 		8706C57C1D5A2F8C006C560D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		870744921D6CA9B60001B353 /* UnZipExternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnZipExternal.swift; sourceTree = "<group>"; };
-		8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WLCTutorialVC.swift; sourceTree = "<group>"; };
-		8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialCollectionViewCell.swift; sourceTree = "<group>"; };
+		8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WLCTutorialVC.swift; path = Images/WLCTutorialVC.swift; sourceTree = "<group>"; };
+		8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialCollectionViewCell.swift; path = Images/TutorialCollectionViewCell.swift; sourceTree = "<group>"; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCompanyVC.swift; sourceTree = "<group>"; };
 		87A307F41D899C0D00161454 /* AboutProductVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutProductVC.swift; sourceTree = "<group>"; };
@@ -359,6 +359,8 @@
 		14837B3E1D3B5B2E007B52BB /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */,
+				8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */,
 				14837B3F1D3B5B2E007B52BB /* Images */,
 				14837B4A1D3B5B2E007B52BB /* MYIntroductionPanel.h */,
 				14837B4B1D3B5B2E007B52BB /* MYIntroductionPanel.m */,
@@ -372,8 +374,6 @@
 		14837B3F1D3B5B2E007B52BB /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */,
-				8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */,
 				14837B401D3B5B2E007B52BB /* background-gradient.png */,
 				14837B411D3B5B2E007B52BB /* background-gradient@2x.png */,
 				14837B421D3B5B2E007B52BB /* button-background.png */,

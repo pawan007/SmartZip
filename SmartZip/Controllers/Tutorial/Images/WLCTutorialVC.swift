@@ -36,6 +36,8 @@ class WLCTutorialVC: UIViewController,UICollectionViewDataSource,UICollectionVie
     //This method work for both skip and done button
     @IBAction func doneButtonTapped(sender: AnyObject) {
         
+        UIView.setAnimationsEnabled(false)
+        
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 
@@ -56,41 +58,40 @@ class WLCTutorialVC: UIViewController,UICollectionViewDataSource,UICollectionVie
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! TutorialCollectionViewCell
         // Configure the cell
-        if indexPath.row == 2 {
-            
-            cell.lblPageDescription.text = "See your shift and appointments in day, week or month view"
+        if indexPath.row == 0 {
+            cell.lblPageDescription.text = "This is the home screen of SmartZip app. In this screen user has options to work with local files as well as cloud files. In local, user can explore, share, zip, unzip and delete files. In cloud, user can download files and share with other devices."
+            cell.lblPageTitle.text = "Select sharing"
             cell.lblPageDescription.hidden = false
-            cell.topHeightDescription.constant = 42
-            cell.btnDone.hidden = false
-            cell.btnSkip.hidden = true
-            cell.imageViewTutorialCell.image = UIImage(named: "tut-3")
-            
-        }else if indexPath.row == 0 {
-            cell.lblPageDescription.text = "Create a roster with unlimited shift combinations and then share it."
-            cell.lblPageDescription.hidden = false
-            cell.topHeightDescription.constant = 42
-            cell.btnDone.hidden = true
+            cell.lblPageTitle.hidden = false
+            //            cell.topHeightDescription.constant = 42
+            //            cell.btnDone.hidden = true
             cell.btnSkip.hidden = false
+            cell.btnSkip.setTitle("Skip", forState: .Normal)
             cell.imageViewTutorialCell.image = UIImage(named: "tut-1")
             
         }else if indexPath.row == 1 {
-            cell.lblPageDescription.text = "Compare your roster with others, side by side"
+            cell.lblPageDescription.text = "Zip and share images, videos, slow-motion videos, songs, and other files in one click"
+            cell.lblPageTitle.text = "Share anything"
             cell.lblPageDescription.hidden = false
-            cell.topHeightDescription.constant = 42
-            cell.btnDone.hidden = true
+            cell.lblPageTitle.hidden = false
+            //            cell.topHeightDescription.constant = 42
+            //            cell.btnDone.hidden = true
             cell.btnSkip.hidden = false
+            cell.btnSkip.setTitle("Skip", forState: .Normal)
             cell.imageViewTutorialCell.image = UIImage(named: "tut-2")
-        }
-        else {
             
-            cell.lblPageDescription.text = "See what events are on so you can plan a fun day off"
-            cell.btnDone.hidden = false
-            cell.topHeightDescription.constant = 10
-            cell.btnDone.layer.cornerRadius = 3
-            cell.btnDone.clipsToBounds = true
-            //cell.lblPageDescription.hidden = true
-            cell.btnSkip.hidden = true
-            cell.imageViewTutorialCell.image = UIImage(named: "R7S2new")
+        }else {
+            
+            cell.lblPageDescription.text = "Zip files are shared with other device via Mail, Airdrop, Gmail, Facebook and other social apps."
+            cell.lblPageTitle.text = "Share with anyone"
+            cell.lblPageDescription.hidden = false
+            cell.lblPageTitle.hidden = false
+            //            cell.topHeightDescription.constant = 42
+            //            cell.btnDone.hidden = false
+            cell.btnSkip.hidden = false
+            cell.btnSkip.setTitle("Done", forState: .Normal)
+            cell.imageViewTutorialCell.image = UIImage(named: "tut-3")
+            
         }
         return cell
     }

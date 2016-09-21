@@ -13,5 +13,7 @@ class TutorialCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var btnDone: UIButton!
     @IBOutlet weak var btnSkip: UIButton!
     @IBOutlet weak var topHeightDescription: NSLayoutConstraint!
+    @IBOutlet weak var lblPageTitle: UILabel!
+    
     
 }

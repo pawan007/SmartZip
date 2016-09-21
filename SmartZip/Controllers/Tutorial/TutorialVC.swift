@@ -19,7 +19,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBarHidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
