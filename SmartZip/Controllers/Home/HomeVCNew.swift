@@ -817,19 +817,31 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
 extension HomeVCNew{
     
     @IBAction func btnMyFilesTapped(sender: AnyObject) {
-        handleLocalFile()
+        if showFullPageAd() {
+        }else{
+            handleLocalFile()
+        }
     }
     
     @IBAction func btnPhotosTapped(sender: AnyObject) {
-        selectPhotos()
+        if showFullPageAd() {
+        }else{
+            selectPhotos()
+        }
     }
     
     @IBAction func btnVideoTapped(sender: AnyObject) {
-        selectVideos()
+        if showFullPageAd() {
+        }else{
+            selectVideos()
+        }
     }
     
     @IBAction func btnMusicTapped(sender: AnyObject) {
-        selectAudio()
+        if showFullPageAd() {
+        }else{
+            selectAudio()
+        }
     }
     
     @IBAction func btnDropboxTapped(sender: AnyObject) {
@@ -838,7 +850,10 @@ extension HomeVCNew{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
-        useDropBox()
+        if showFullPageAd() {
+        }else{
+            useDropBox()
+        }
     }
     
     @IBAction func btnGoogleDriveTapped(sender: AnyObject) {
@@ -847,18 +862,28 @@ extension HomeVCNew{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
-        useGoogle()
+        if showFullPageAd() {
+        }else{
+            useGoogle()
+        }
     }
     
     @IBAction func btnMoreCloudTapped(sender: AnyObject) {
         
-        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-        importMenu.delegate = self
-        self.presentViewController(importMenu, animated: true, completion: nil)
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-        documentPicker.delegate = self
-        documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-        self.presentViewController(documentPicker, animated: true, completion: nil)
+        if showFullPageAd() {
+            
+        }else{
+            
+            let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+            importMenu.delegate = self
+            self.presentViewController(importMenu, animated: true, completion: nil)
+            let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+            documentPicker.delegate = self
+            documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+            self.presentViewController(documentPicker, animated: true, completion: nil)
+        }
+        
+        
         
     }
     
