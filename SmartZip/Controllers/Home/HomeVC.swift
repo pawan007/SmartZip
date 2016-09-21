@@ -816,62 +816,84 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
 }
 
-extension HomeVC{
+extension HomeVC {
     
     @IBAction func btnMyFilesTapped(sender: AnyObject) {
-        showFullPageAd()
-        handleLocalFile()
+        if (self.showFullPageAd()) {
+            return;
+        }
+        else {
+            handleLocalFile()
+        }
     }
     
     @IBAction func btnPhotosTapped(sender: AnyObject) {
-        showFullPageAd()
-        selectPhotos()
+        if (self.showFullPageAd()) {
+            return;
+        }
+        else {
+            selectPhotos()
+        }
     }
     
     @IBAction func btnVideoTapped(sender: AnyObject) {
-        showFullPageAd()
-        selectVideos()
+        if (self.showFullPageAd()) {
+            return;
+        }
+        else {
+            selectVideos()
+        }
     }
     
     @IBAction func btnMusicTapped(sender: AnyObject) {
-        showFullPageAd()
-        selectAudio()
+        if (self.showFullPageAd()) {
+            return;
+        }
+        else {
+            selectAudio()
+        }
     }
     
     @IBAction func btnDropboxTapped(sender: AnyObject) {
         
-        guard Reachability.isConnectedToNetwork()else{
-            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
-            return
+        if (self.showFullPageAd()) {
+            return;
         }
-        useDropBox()
+        else {
+            guard Reachability.isConnectedToNetwork()else{
+                CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                return
+            }
+            useDropBox()
+        }
     }
     
     @IBAction func btnGoogleDriveTapped(sender: AnyObject) {
-        
-        guard Reachability.isConnectedToNetwork()else{
-            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
-            return
+        if (self.showFullPageAd()) {
+            return;
         }
-        useGoogle()
-        
+        else {
+            guard Reachability.isConnectedToNetwork()else{
+                CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
+                return
+            }
+            useGoogle()
+        }
     }
     
     @IBAction func btnMoreCloudTapped(sender: AnyObject) {
-        
-        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-        
-        importMenu.delegate = self
-        
-        self.presentViewController(importMenu, animated: true, completion: nil)
-        
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
-        
-        documentPicker.delegate = self
-        
-        documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-        
-        self.presentViewController(documentPicker, animated: true, completion: nil)
+        if (self.showFullPageAd()) {
+            return;
+        }
+        else {
+            let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+            importMenu.delegate = self
+            self.presentViewController(importMenu, animated: true, completion: nil)
+            let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+            documentPicker.delegate = self
+            documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+            self.presentViewController(documentPicker, animated: true, completion: nil)
+        }
         
     }
     
