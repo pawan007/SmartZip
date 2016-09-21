@@ -52,13 +52,6 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             isOpenedFromExternalResource = true
         }
         
-        if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
-            //GADBannerView
-            // self.setUpGoogleAds()
-            shared = GADMasterViewController.singleton()
-            shared.resetAdView(self, andDisplayView: _bView)
-        }
-        
         //        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "Ic_Back"), style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
@@ -89,6 +82,14 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             if(shared != nil) {
                 shared = nil
             }
+            //GADBannerView
+            // self.setUpGoogleAds()
+            if(shared != nil) {
+                shared = nil
+            }
+            shared = GADMasterViewController.singleton()
+            shared.resetAdView(self, andDisplayView: _bView)
+            
             _bView.hidden = true
         }
         
