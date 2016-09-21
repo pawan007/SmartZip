@@ -89,6 +89,14 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             if(shared != nil) {
                 shared = nil
             }
+            //GADBannerView
+            // self.setUpGoogleAds()
+            if(shared != nil) {
+                shared = nil
+            }
+            shared = GADMasterViewController.singleton()
+            shared.resetAdView(self, andDisplayView: _bView)
+            
             _bView.hidden = true
         }
         
