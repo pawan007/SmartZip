@@ -74,8 +74,35 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }else if selectedFile.fileExtension == "zip" {
             
-            self.unzipFile(selectedFile)
+            //            self.unzipFile(selectedFile)
             
+            
+            
+            let unzipClass = UnZipExternal()
+            
+            
+            
+            unzipClass.unzipPathInner(selectedFile.filePath.path!)
+            
+            
+            /*guard let unzipPath = getUnzipPath(selectedFile.filePath.path!) else {
+             return
+             }
+             
+             if !NSFileManager.defaultManager().fileExistsAtPath(unzipPath) {
+             
+             unzipClass.unzipPathInner(selectedFile.filePath.path!,unzipPath: unzipPath)
+             
+             }else{
+             
+             let incCount = getFileCopiesCount(unzipPath)
+             let newPath = "\(unzipPath)-\(incCount)"
+             unzipClass.unzipPathInner(selectedFile.filePath.path!,unzipPath: newPath)
+             }*/
+            
+            self.files = self.parser.filesForDirectory(self.initialPath!)
+            self.indexFiles()
+            self.tableView.reloadData()
             
         }
         else {
@@ -135,7 +162,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         print(filesForSharing)
         
         
-        if filesForSharing.count == 1 && filesForSharing.last?.type == FBFileType.ZIP {
+        if filesForSharing.count == 1 && filesForSharing.last?.type == FBFileType.zip {
             flagShowShareOptionOnly = true
         }else{
             flagShowShareOptionOnly = false

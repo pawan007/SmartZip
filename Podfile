@@ -26,20 +26,15 @@ target 'SmartZip' do
     pod 'SSZipArchive'
     pod 'QBImagePickerController'
     pod 'XCGLogger', '~> 3.3'
-    #    pod 'FileBrowser', '~> 0.1'
-    # pod 'NADocumentPicker'
-    #pod 'NACommonUtils', '~> 1.3.2'
-    
-    #   pod 'RxSwift', '~> 2.5'
-    # pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
-    
-    
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
     
     
-    
-    
+    #    pod 'FileBrowser', '~> 0.1'
+    # pod 'NADocumentPicker'
+    #pod 'NACommonUtils', '~> 1.3.2'
+    #   pod 'RxSwift', '~> 2.5'
+    # pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
     #There are some alternets of these pods, so lets try that first
     #pod 'Google/Analytics'
     #pod 'SDWebImage'

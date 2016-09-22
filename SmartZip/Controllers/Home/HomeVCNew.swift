@@ -785,7 +785,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
         let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
         ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
-        ac.setValue("My file", forKey: "Subject")
+        ac.setValue("Zip file from SmartZip", forKey: "Subject")
         
         
         if let popoverPresentationController = ac.popoverPresentationController {
