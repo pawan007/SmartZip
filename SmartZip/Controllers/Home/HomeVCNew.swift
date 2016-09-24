@@ -32,11 +32,18 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
     var slowMotionVideoCount = 0
     var isCalledVideoCheck = false
     
+    @IBOutlet weak var barButtonItemLeft: UIBarButtonItem!
     
     var isOpenedFromExternalResource = false
     
     var selectVideo:[AnyObject]?
     
+    enum UIUserInterfaceIdiom : Int {
+        case Unspecified
+        
+        case Phone // iPhone and iPod touch style UI
+        case Pad // iPad style UI
+    }
     
     @IBOutlet var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
@@ -371,6 +378,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
     
     func selectAudio() {
         
+        
         let picker = MPMediaPickerController(mediaTypes:.Music)
         picker.showsCloudItems = false
         picker.delegate = self
@@ -379,8 +387,28 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         picker.preferredContentSize = CGSizeMake(500,600)
         self.presentViewController(picker, animated: true, completion: nil)
         
-        let flurryParams = [ "Type" :"selectAudio"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            
+            let flurryParams = [ "Type" :"selectAudio"]
+            AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+            break
+        case .Pad:
+            
+            if let pop = picker.popoverPresentationController {
+                pop.barButtonItem = barButtonItemLeft
+            }
+            
+            let flurryParams = [ "Type" :"selectAudio"]
+            AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+            break
+        case .Unspecified:
+            break
+        default:
+            print("default")
+        }
+        
+        
         
     }
     /*
@@ -435,7 +463,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
              }*/
             
             self.dismissViewControllerAnimated(true, completion: nil)
-            showEnterNameAlert("Images-"+Timestamp,assets: assets, type: fileTypeImage)
+            showEnterNameAlert("Images_"+Timestamp,assets: assets, type: fileTypeImage)
             //
             //            self.dismissViewControllerAnimated(true, completion: nil)
             //            zipAndShareImages(assets)
@@ -678,7 +706,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             
         }else{
             
-            showEnterNameAlert("Video-"+Timestamp,assets: selectVideo, type: fileTypeVideo)
+            showEnterNameAlert("Video_"+Timestamp,assets: selectVideo, type: fileTypeVideo)
             
         }
         
@@ -884,10 +912,26 @@ extension HomeVCNew{
             
             let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
             importMenu.delegate = self
+            
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                importMenu.modalPresentationStyle = .Popover
+                if let pop = importMenu.popoverPresentationController {
+                    pop.barButtonItem = barButtonItemLeft
+                }
+            }
+            
             self.presentViewController(importMenu, animated: true, completion: nil)
             let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
             documentPicker.delegate = self
             documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+            
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                documentPicker.modalPresentationStyle = .Popover
+                if let pop = importMenu.popoverPresentationController {
+                    pop.barButtonItem = barButtonItemLeft
+                    
+                }
+            }
             self.presentViewController(documentPicker, animated: true, completion: nil)
         }
         
@@ -922,7 +966,7 @@ extension HomeVCNew : MPMediaPickerControllerDelegate {
         
         if mediaItemCollection.items.count > 0 {
             
-            showEnterNameAlert("Songs-"+Timestamp,assets: mediaItemCollection.items, type: fileTypeSong)
+            showEnterNameAlert("Songs_"+Timestamp,assets: mediaItemCollection.items, type: fileTypeSong)
             
         }else{
             
@@ -1162,19 +1206,19 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             
             if(type == fileTypeImage){
                 
-                archiveName = "Image-"+Timestamp
+                archiveName = "Image_"+Timestamp
                 
             }else if(type == fileTypeVideo){
                 
-                archiveName = "Video-"+Timestamp
+                archiveName = "Video_"+Timestamp
                 
             }else if(type == fileTypeSong){
                 
-                archiveName = "Song-"+Timestamp
+                archiveName = "Song_"+Timestamp
                 
             }else{
                 
-                archiveName = "Document-"+Timestamp
+                archiveName = "Document_"+Timestamp
             }
             
             self.showEnterNameAlert(archiveName ,assets: assets, type: type)

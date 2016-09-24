@@ -41,7 +41,7 @@ var Timestamp: String {
     
     let date = NSDate()
     let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "ddMMYYYYHHmmss"
+    dateFormatter.dateFormat = "dd-MM-YYYY_HH-mm"
     return dateFormatter.stringFromDate(date)
 }
 

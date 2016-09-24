@@ -13,6 +13,10 @@ import SwiftSpinner
 
 class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    @IBOutlet weak var bannerAdView: UIView!
+    var shared:GADMasterViewController!
+    
     private let kKeychainItemName = "Drive API"
     private let kClientID = "250150690669-f40jbqpnvvd4sjeui1id07507ds4hvcq.apps.googleusercontent.com"
     
@@ -67,6 +71,12 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             service.authorizer = auth
         }
         
+        if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            //GADBannerView
+            // self.setUpGoogleAds()
+            shared = GADMasterViewController.singleton()
+            shared.resetAdView(self, andDisplayView: bannerAdView)
+        }
         
     }
     
@@ -96,7 +106,22 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
         }
         
+        if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            if(shared != nil) {
+                shared = nil
+            }
+            bannerAdView.hidden = true
+        }
         
+    }
+    
+    
+    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+        print("FileListViewController Ad changed")
+        for tempView in bannerAdView.subviews {
+            tempView.removeFromSuperview()
+        }
+        self.bannerAdView.addSubview(bannerView)
     }
     
     // Construct a query to get names and IDs of 10 files using the Google Drive API

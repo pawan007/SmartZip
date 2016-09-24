@@ -20,6 +20,8 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     @IBOutlet weak var btnRefresh: UIBarButtonItem!
     
+    @IBOutlet weak var bannerAdView: UIView!
+    var shared:GADMasterViewController!
     
     var arrayDropboxMetaData = NSMutableArray()
     
@@ -53,6 +55,13 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             
         }
         
+        if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            //GADBannerView
+            // self.setUpGoogleAds()
+            shared = GADMasterViewController.singleton()
+            shared.resetAdView(self, andDisplayView: bannerAdView)
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,8 +78,21 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         //            self.btnBackTapped(self)
         //        }
         
+        if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
+            if(shared != nil) {
+                shared = nil
+            }
+            bannerAdView.hidden = true
+        }
     }
     
+    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+        print("FileListViewController Ad changed")
+        for tempView in bannerAdView.subviews {
+            tempView.removeFromSuperview()
+        }
+        self.bannerAdView.addSubview(bannerView)
+    }
     
     // MARK: IBAction method implementation
     
