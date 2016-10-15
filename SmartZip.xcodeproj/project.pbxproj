@@ -23,6 +23,7 @@
 		870744931D6CA9B60001B353 /* UnZipExternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870744921D6CA9B60001B353 /* UnZipExternal.swift */; };
 		8709B7AF1D9192DE0006DCCC /* WLCTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */; };
 		8709B7B11D9193CC0006DCCC /* TutorialCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */; };
+		8786ADC11DA0F9710027BE20 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8786ADC01DA0F9710027BE20 /* CloudKit.framework */; };
 		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		879A2A0D1D899BA3003283C3 /* AboutCompanyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */; };
 		87A307F51D899C0D00161454 /* AboutProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A307F41D899C0D00161454 /* AboutProductVC.swift */; };
@@ -54,7 +55,6 @@
 		BDF725601D57909100C94836 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF7255F1D57909100C94836 /* GoogleService-Info.plist */; };
 		BDF725681D5B895D00C94836 /* BuyProVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF725671D5B895D00C94836 /* BuyProVC.swift */; };
 		BDF7256B1D6103FB00C94836 /* GADMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */; };
-		D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4016B261D3D4CF60029AB3F /* CloudKit.framework */; };
 		D4284CBD1D1E4B9800E1BCA9 /* SmartZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */; };
 		D4284CC81D1E4B9800E1BCA9 /* SmartZipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4284CC71D1E4B9800E1BCA9 /* SmartZipUITests.swift */; };
 		D436FD261D1F8C1000F2BE72 /* DropBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D436FD211D1F8C1000F2BE72 /* DropBoxVC.swift */; };
@@ -133,7 +133,6 @@
 		D44DF3BA1D1E802E000C75B7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF32F1D1E802E000C75B7 /* Helper.swift */; };
 		D44DF3BB1D1E802E000C75B7 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF3321D1E802E000C75B7 /* AnalyticsManager.swift */; };
 		D44DF3BE1D1E802E000C75B7 /* MailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF3371D1E802E000C75B7 /* MailManager.swift */; };
-		D44DF3BF1D1E802E000C75B7 /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF3391D1E802E000C75B7 /* InAppPurchaseManager.swift */; };
 		D44DF3C01D1E802E000C75B7 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF33B1D1E802E000C75B7 /* LanguageManager.swift */; };
 		D44DF3C11D1E802E000C75B7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF33D1D1E802E000C75B7 /* LocationManager.swift */; };
 		D44DF3C21D1E802E000C75B7 /* OneShotLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44DF33E1D1E802E000C75B7 /* OneShotLocationManager.swift */; };
@@ -189,6 +188,7 @@
 		870744921D6CA9B60001B353 /* UnZipExternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnZipExternal.swift; sourceTree = "<group>"; };
 		8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WLCTutorialVC.swift; path = Images/WLCTutorialVC.swift; sourceTree = "<group>"; };
 		8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialCollectionViewCell.swift; path = Images/TutorialCollectionViewCell.swift; sourceTree = "<group>"; };
+		8786ADC01DA0F9710027BE20 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCompanyVC.swift; sourceTree = "<group>"; };
 		87A307F41D899C0D00161454 /* AboutProductVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutProductVC.swift; sourceTree = "<group>"; };
@@ -224,7 +224,6 @@
 		BDF725691D6103FB00C94836 /* GADMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMasterViewController.h; sourceTree = "<group>"; };
 		BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMasterViewController.m; sourceTree = "<group>"; };
 		D4016B251D3D3F390029AB3F /* SmartZip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SmartZip.entitlements; sourceTree = "<group>"; };
-		D4016B261D3D4CF60029AB3F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D4284CA41D1E4B9800E1BCA9 /* SmartZip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartZip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CB81D1E4B9800E1BCA9 /* SmartZipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartZipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4284CBC1D1E4B9800E1BCA9 /* SmartZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartZipTests.swift; sourceTree = "<group>"; };
@@ -312,7 +311,6 @@
 		D44DF32F1D1E802E000C75B7 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Helper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF3321D1E802E000C75B7 /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF3371D1E802E000C75B7 /* MailManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailManager.swift; sourceTree = "<group>"; };
-		D44DF3391D1E802E000C75B7 /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = InAppPurchaseManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF33B1D1E802E000C75B7 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LanguageManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D44DF33D1D1E802E000C75B7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D44DF33E1D1E802E000C75B7 /* OneShotLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneShotLocationManager.swift; sourceTree = "<group>"; };
@@ -333,8 +331,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4016B271D3D4CF60029AB3F /* CloudKit.framework in Frameworks */,
 				D436FD521D1FA6E800F2BE72 /* DropboxSDK.framework in Frameworks */,
+				8786ADC11DA0F9710027BE20 /* CloudKit.framework in Frameworks */,
 				FF78327D673ED6D3A2C60937 /* Pods_SmartZip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,7 +532,7 @@
 		D436FD501D1FA6E800F2BE72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D4016B261D3D4CF60029AB3F /* CloudKit.framework */,
+				8786ADC01DA0F9710027BE20 /* CloudKit.framework */,
 				D436FD511D1FA6E800F2BE72 /* DropboxSDK.framework */,
 				9D2542D9809635CA3965CB5B /* Pods_SmartZip.framework */,
 			);
@@ -854,7 +852,6 @@
 		D44DF3381D1E802E000C75B7 /* InAppPurchase Manager */ = {
 			isa = PBXGroup;
 			children = (
-				D44DF3391D1E802E000C75B7 /* InAppPurchaseManager.swift */,
 			);
 			path = "InAppPurchase Manager";
 			sourceTree = "<group>";
@@ -1024,6 +1021,9 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 9YG7G7YB2J;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -1314,7 +1314,6 @@
 				870744931D6CA9B60001B353 /* UnZipExternal.swift in Sources */,
 				87C921951D50282F0099BC7B /* FileBrowserCell.swift in Sources */,
 				D436FD281D1F8C1000F2BE72 /* PhotoPickerVC.swift in Sources */,
-				D44DF3BF1D1E802E000C75B7 /* InAppPurchaseManager.swift in Sources */,
 				14837B581D3B5B2E007B52BB /* MYIntroductionPanel.m in Sources */,
 				D44DF3941D1E802E000C75B7 /* DesignableTextView.swift in Sources */,
 				D44DF39D1D1E802E000C75B7 /* Dictionary+Additions.swift in Sources */,
@@ -1403,8 +1402,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: priyanka singh (54K7HLD85Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: priyanka singh (54K7HLD85Q)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1427,7 +1426,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a8378ac5-c763-495e-97f0-16df729a002a";
+				PROVISIONING_PROFILE = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1484,8 +1483,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: priyanka singh (54K7HLD85Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: priyanka singh (54K7HLD85Q)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1503,7 +1502,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.smartzip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8378ac5-c763-495e-97f0-16df729a002a";
+				PROVISIONING_PROFILE = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 			};
 			name = Debug;
@@ -1565,10 +1564,12 @@
 		D4284CD31D1E4B9800E1BCA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: priyanka singh (54K7HLD85Q)";
 				INFOPLIST_FILE = SmartZipUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modi.SmartZipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
 				TEST_TARGET_NAME = SmartZip;
 			};
 			name = Debug;

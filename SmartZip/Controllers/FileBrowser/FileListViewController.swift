@@ -15,6 +15,7 @@ class FileListViewController: UIViewController {
     
     @IBOutlet weak var bannerAdView: UIView!
     var shared:GADMasterViewController!
+    var lblNoContent:UILabel?
     
     // TableView
     @IBOutlet weak var tableView: UITableView!
@@ -139,7 +140,7 @@ class FileListViewController: UIViewController {
         }
         self.bannerAdView.addSubview(bannerView)
     }
-
+    
     
     
     func setFolderPathAndReloadTableView(path:NSURL) {
@@ -189,6 +190,19 @@ class FileListViewController: UIViewController {
                 let sectionNumber = collation.sectionForObject(object, collationStringSelector: selector)
                 sections[sectionNumber].append(object)
             }
+        }
+        
+        if self.files.count == 0 {
+            if lblNoContent == nil {
+                lblNoContent = UILabel(frame: CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height))
+                lblNoContent?.text = "No Content"
+                lblNoContent?.backgroundColor = UIColor.whiteColor()
+                lblNoContent?.textAlignment = .Center
+                self.view.addSubview(lblNoContent!)
+            }
+            lblNoContent?.hidden = false
+        }else{
+            lblNoContent?.hidden = true
         }
     }
     

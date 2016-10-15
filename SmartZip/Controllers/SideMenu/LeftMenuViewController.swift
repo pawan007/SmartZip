@@ -15,8 +15,8 @@ import MessageUI
 class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDelegate{
     
     @IBOutlet weak var topTableView: UITableView!
-    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
-    
+    //    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
+    private var topTableIDs = ["HomeCell","TutorialCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,16 +147,16 @@ extension LeftMenuViewController: UITableViewDelegate
     
     func shareApp() {
         
-        let textToShare = "I love this app."
+        let textToShare = "Quick and smart way for zip file management. SmartZip is user friendly app for iPhone. It can easily zip our files and upload/share it on cloud and social media. Its a most useful and fast Zip utility for professional and business persons. It has very interesting features : 1) It can compress files, photos, videos, music into Zip file. 2) You can send zip file by email, messenger, Gmail. 3) Open and extract files from Zip format. 4) Save your zipped files in MyFiles section for future use. 5) Upload your zip files on cloud like Dropbox, Google drive, iCloud drive. So friends what are you waiting for! Use SmartZip be smart !!"
         
-        if let myWebsite = NSURL(string: "http://www.codingexplorer.com/") {
+        if let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8") {
             
             let objectsToShare = [textToShare, myWebsite]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             //New Excluded Activities Code
-            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypeMessage]
-            //      
+            //            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList]
+            //
             
             if let popoverPresentationController = activityVC.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
@@ -173,7 +173,7 @@ extension LeftMenuViewController: UITableViewDelegate
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients(["admin@mobirizer.com"])
-            mail.setSubject("Smart Zip - Feedback to Admin")
+            mail.setSubject("SmartZip - Feedback to Admin")
             mail.setMessageBody("<p>Dear Admin</p>", isHTML: true)
             presentViewController(mail, animated: true, completion: nil)
         } else {

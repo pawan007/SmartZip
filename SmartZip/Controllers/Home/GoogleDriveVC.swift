@@ -77,7 +77,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             shared = GADMasterViewController.singleton()
             shared.resetAdView(self, andDisplayView: bannerAdView)
         }
-        
+        tableView.tableFooterView = UIView()
     }
     
     // When the view appears, ensure that the Drive API service is authorized

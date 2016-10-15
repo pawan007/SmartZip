@@ -9,7 +9,7 @@ import UIKit
 import StoreKit
 
 class ProductsViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var products: [SKProduct]! = []
@@ -21,7 +21,7 @@ class ProductsViewController: BaseViewController {
     override internal func viewDidLoad() {
         super.viewDidLoad()
         
-               
+        
         self.navigationItem.title = NSLocalizedString("Available Products", comment: "Available Products")
         self.tableView.tableFooterView = UIView()
         
@@ -32,21 +32,21 @@ class ProductsViewController: BaseViewController {
         addObservers()
         
         let productIdentifiers = NSSet(array: ["com.Modi.test.free_product_1","com.Modi.test.free_product_2"])
-        InAppPurchaseManager.sharedManager().requestProducts(productIdentifiers) { (error, products) -> () in
-            
-            if (error == nil) {
-                if (products?.count > 0) {
-                    self.products = products!
-                    self.navigationItem.rightBarButtonItem = restoreButton
-                    self.tableView.reloadData()
-                } else {
-                    LogManager.logInfo("No products found for identifiers = \(productIdentifiers)")
-                    self.navigationItem.rightBarButtonItem = nil
-                }
-            } else {
-                LogManager.logError("error in requesting products = \(error)")
-            }
-        }
+        //        InAppPurchaseManager.sharedManager().requestProducts(productIdentifiers) { (error, products) -> () in
+        //
+        //            if (error == nil) {
+        //                if (products?.count > 0) {
+        //                    self.products = products!
+        //                    self.navigationItem.rightBarButtonItem = restoreButton
+        //                    self.tableView.reloadData()
+        //                } else {
+        //                    LogManager.logInfo("No products found for identifiers = \(productIdentifiers)")
+        //                    self.navigationItem.rightBarButtonItem = nil
+        //                }
+        //            } else {
+        //                LogManager.logError("error in requesting products = \(error)")
+        //            }
+        //        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,21 +60,21 @@ class ProductsViewController: BaseViewController {
     
     private func addObservers() {
         // Subscribe to a notification that fires when a product is purchased.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.productPurchased(_:)), name: InAppPurchaseManager.Notifications.InAppProductPurchasedSuccessNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.purchaseFailed(_:)), name: InAppPurchaseManager.Notifications.InAppProductPurchasedFailedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.productsRestored(_:)), name: InAppPurchaseManager.Notifications.InAppProductRestoreSuccessNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.restoreFailed(_:)), name: InAppPurchaseManager.Notifications.InAppProductRestoreFailedNotification, object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.productPurchased(_:)), name: InAppPurchaseManager.Notifications.InAppProductPurchasedSuccessNotification, object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.purchaseFailed(_:)), name: InAppPurchaseManager.Notifications.InAppProductPurchasedFailedNotification, object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.productsRestored(_:)), name: InAppPurchaseManager.Notifications.InAppProductRestoreSuccessNotification, object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.restoreFailed(_:)), name: InAppPurchaseManager.Notifications.InAppProductRestoreFailedNotification, object: nil)
     }
     
     
     // MARK: Navigation Method
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == productDetailSegueIdentifier {
-//            if let destination = segue.destinationViewController as? ProductDetailVC {
-//                let indexPath:NSIndexPath! = sender as? NSIndexPath
-//                destination.productName = self.products[indexPath.row] as String
-//                destination.delegate = self
-//            }
+            //            if let destination = segue.destinationViewController as? ProductDetailVC {
+            //                let indexPath:NSIndexPath! = sender as? NSIndexPath
+            //                destination.productName = self.products[indexPath.row] as String
+            //                destination.delegate = self
+            //            }
         }
     }
     
@@ -82,16 +82,16 @@ class ProductsViewController: BaseViewController {
     // MARK: - Private Actions
     // MARK: Purchase
     internal func beginPurchase(index: NSInteger) {
-        if let _: Bool! = InAppPurchaseManager.sharedManager().canMakePurchases() {
-            let product = self.products[index]
-            LogManager.logInfo("selected product is = \(product.localizedTitle)")
-            
-            InAppPurchaseManager.sharedManager().buyProduct(product, result: { (error) in
-                
-            })
-        } else {
-            self.showAlertViewWithMessage("Whoops!", message: "Your device is not eligible for this purchase.")
-        }
+        //        if let _: Bool! = InAppPurchaseManager.sharedManager().canMakePurchases() {
+        //            let product = self.products[index]
+        //            LogManager.logInfo("selected product is = \(product.localizedTitle)")
+        //
+        //            InAppPurchaseManager.sharedManager().buyProduct(product, result: { (error) in
+        //
+        //            })
+        //        } else {
+        //            self.showAlertViewWithMessage("Whoops!", message: "Your device is not eligible for this purchase.")
+        //        }
     }
     
     func productPurchased(notification: NSNotification) {
@@ -109,7 +109,7 @@ class ProductsViewController: BaseViewController {
     // MARK: Restore
     func restoreTapped(sender: AnyObject?) {
         LogManager.logInfo("restore products...")
-        InAppPurchaseManager.sharedManager().restorePurchases()
+        // InAppPurchaseManager.sharedManager().restorePurchases()
     }
     
     func productsRestored(notification: NSNotification) {
@@ -131,10 +131,10 @@ extension ProductsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: FeedCell! = self.tableView.dequeueReusableCellWithIdentifier(productCellIdentifier, forIndexPath: indexPath) as! FeedCell
-//        cell.delegate = self
-//        cell.index = indexPath.row
-//        let product = self.products[indexPath.row]
-//        cell.name.text = "\(product.localizedTitle) :Rs. \(product.price)"
+        //        cell.delegate = self
+        //        cell.index = indexPath.row
+        //        let product = self.products[indexPath.row]
+        //        cell.name.text = "\(product.localizedTitle) :Rs. \(product.price)"
         return cell;
     }
 }

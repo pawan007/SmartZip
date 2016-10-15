@@ -61,7 +61,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             shared = GADMasterViewController.singleton()
             shared.resetAdView(self, andDisplayView: bannerAdView)
         }
-        
+        tblFiles.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
