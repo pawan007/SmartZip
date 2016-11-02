@@ -17,6 +17,10 @@ import QBImagePickerController
 
 import GoogleMobileAds
 
+let fileTypeImage = 1
+let fileTypeVideo = 2
+let fileTypeSong = 3
+
 
 class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
     
@@ -31,6 +35,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
     var nameIndex = 0
     var slowMotionVideoCount = 0
     var isCalledVideoCheck = false
+    var adCounter = 0
     
     @IBOutlet weak var barButtonItemLeft: UIBarButtonItem!
     
@@ -169,52 +174,60 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         interstitial.loadRequest(request)
     }
     
+    /*func showFullPageAd() -> Bool {
+     let str = "TipsPopupValue"
+     var isShow = false
+     if  NSUserDefaults.standardUserDefaults().objectForKey(str) != nil {
+     var val = NSUserDefaults.standardUserDefaults().objectForKey(str)?.integerValue
+     val = val! - 1
+     if(val == 0) {
+     isShow = true
+     let number = self.randomInt(1, max: 4)
+     NSUserDefaults.setObject(number, forKey: str)
+     }
+     else {
+     NSUserDefaults.setObject(val, forKey: str)
+     }
+     
+     }
+     else {
+     let number = self.randomInt(1, max: 4)
+     NSUserDefaults.setObject(number, forKey: str)
+     }
+     
+     if(isShow) {
+     if interstitial.isReady && (!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)){
+     interstitial.presentFromRootViewController(self)
+     } else {
+     print("Ad wasn't ready")
+     isShow = false
+     }
+     }
+     return isShow
+     }*/
+    
     func showFullPageAd() -> Bool {
-        let str = "TipsPopupValue"
-        var isShow = false
-        if  NSUserDefaults.standardUserDefaults().objectForKey(str) != nil {
-            var val = NSUserDefaults.standardUserDefaults().objectForKey(str)?.integerValue
-            val = val! - 1
-            if(val == 0) {
-                isShow = true
-                let number = self.randomInt(1, max: 4)
-                NSUserDefaults.setObject(number, forKey: str)
-            }
-            else {
-                NSUserDefaults.setObject(val, forKey: str)
-            }
-            
-        }
-        else {
-            let number = self.randomInt(1, max: 4)
-            NSUserDefaults.setObject(number, forKey: str)
-        }
         
-        if(isShow) {
+        var isShow = false
+        if adCounter == 5 {
+            //show ad
+            adCounter = 0
             if interstitial.isReady && (!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)){
                 interstitial.presentFromRootViewController(self)
+                isShow = true
             } else {
-                print("Ad wasn't ready")
+                adCounter = 5
                 isShow = false
             }
             
-            /*
-             let viewsDictionary = ["subView":interstitial]
-             let view_constraint_H = NSLayoutConstraint.constraintsWithVisualFormat(
-             "H:|[subView]|",
-             options: NSLayoutFormatOptions(rawValue:0),
-             metrics: nil, views: viewsDictionary)
-             let view_constraint_V = NSLayoutConstraint.constraintsWithVisualFormat(
-             "V:|[subView]|",
-             options: NSLayoutFormatOptions.AlignAllLeading,
-             metrics: nil, views: viewsDictionary)
-             
-             APPDELEGATE.window?.addConstraints(view_constraint_H)
-             APPDELEGATE.window?.addConstraints(view_constraint_V)
-             */
+        }else{
+            //continue
+            adCounter = adCounter + 1
+            isShow = false
         }
         return isShow
     }
+    
     
     func randomInt(min: Int, max:Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
@@ -1128,13 +1141,15 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             
             let firstTextField = alertController.textFields![0] as UITextField
             
-            if(firstTextField.text?.length == 0){
+            let valueName = CommonFunctions.sharedInstance.trim(firstTextField.text!)
+            
+            if(valueName.length == 0){
                 
                 self.showAlert("Please enter folder name", assets: assets, type: type)
                 return
             }
             
-            if(firstTextField.text?.isValidName() == false){
+            if(CommonFunctions.sharedInstance.validateName(valueName) == false){
                 
                 self.showAlert("Special characters are not allowed", assets: assets, type: type)
                 return
@@ -1142,7 +1157,7 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             
             
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
-            cacheDir += "/\(firstTextField.text!)"
+            cacheDir += "/\(valueName)"
             
             if(kFileManager.fileExistsAtPath(cacheDir)){
                 
@@ -1156,16 +1171,16 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
                     
                     
                     //                    self.dismissViewControllerAnimated(true, completion: nil)
-                    self.zipAndShareImages(assets, folderName: firstTextField.text!)
+                    self.zipAndShareImages(assets, folderName: valueName)
                     
                     
                 }else if(type == fileTypeVideo){
                     
-                    self.zipAndShareVideos(assets, folderName: firstTextField.text!)
+                    self.zipAndShareVideos(assets, folderName: valueName)
                     
                 }else if(type == fileTypeSong){
                     
-                    self.zipAndShareSongs(assets, folderName: firstTextField.text!)
+                    self.zipAndShareSongs(assets, folderName: valueName)
                     
                 }else{
                     

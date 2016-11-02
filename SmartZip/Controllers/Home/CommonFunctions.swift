@@ -720,6 +720,19 @@ class CommonFunctions: NSObject {
         vc.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func validateName(value:String) -> Bool{
+        
+        let names = value.componentsSeparatedByString(" ")
+        
+        for name in names {
+            
+            if !name.isValidName() {
+                return false
+            }
+        }
+        return true
+    }
+    
     
     
     
@@ -730,7 +743,7 @@ extension String{
     
     func isValidName () -> Bool {
         
-        let emailFormat = "^[a-zA-Z0-9_-]{1,100}$"
+        let emailFormat = "^[a-zA-Z0-9]{1,50}$"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluateWithObject(self)
     }

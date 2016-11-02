@@ -36,7 +36,7 @@ class WLCTutorialVC: UIViewController,UICollectionViewDataSource,UICollectionVie
     //This method work for both skip and done button
     @IBAction func doneButtonTapped(sender: AnyObject) {
         
-        UIView.setAnimationsEnabled(false)
+        /*UIView.setAnimationsEnabled(false)
         
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
@@ -45,7 +45,8 @@ class WLCTutorialVC: UIViewController,UICollectionViewDataSource,UICollectionVie
                 vc.tableView(vc.topTableView, didSelectRowAtIndexPath:  NSIndexPath(forRow: 0, inSection: 0))
                 
             }
-        }
+        }*/
+        AppDelegate.presentRootViewController()
         
     }
     

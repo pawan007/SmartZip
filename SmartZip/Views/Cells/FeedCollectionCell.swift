@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 protocol FeedCellDelegate: class {
     func heartClick(index: NSInteger)
@@ -32,20 +32,20 @@ class FeedCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     /*
-    func setUpUIWithData (eventObj : Event!) {
-        
-        self.title1.text = eventObj.product_title
-        self.title2.text = eventObj.business_title
-        self.title3.text = eventObj.location_name
-        self.distance.text = String(format: "%.2f KM(s)", Double(eventObj.distance!)! )
-        self.heart.selected = eventObj.is_favourite == "0" ? false : true
-        self.activityLoader.alpha = 0
-        self.activityLoader.stopAnimating()
-        self.deal.hidden = true
-        //let url:NSURL? = NSURL(string: eventObj.event_img!)
-        //feedImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "img_shadow"))
-        feedImage.kf_setImageWithURL(NSURL(string: eventObj.event_img!)!, placeholderImage: UIImage(named: "img_shadow"))
-    }*/
+     func setUpUIWithData (eventObj : Event!) {
+     
+     self.title1.text = eventObj.product_title
+     self.title2.text = eventObj.business_title
+     self.title3.text = eventObj.location_name
+     self.distance.text = String(format: "%.2f KM(s)", Double(eventObj.distance!)! )
+     self.heart.selected = eventObj.is_favourite == "0" ? false : true
+     self.activityLoader.alpha = 0
+     self.activityLoader.stopAnimating()
+     self.deal.hidden = true
+     //let url:NSURL? = NSURL(string: eventObj.event_img!)
+     //feedImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "img_shadow"))
+     feedImage.kf_setImageWithURL(NSURL(string: eventObj.event_img!)!, placeholderImage: UIImage(named: "img_shadow"))
+     }*/
     // MARK: Control Actions
     @IBAction private func heartClick(sender: UIButton) {
         // sender.selected  = !sender.selected;

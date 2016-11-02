@@ -43,7 +43,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         let cell = tableView.dequeueReusableCellWithIdentifier("FileBrowserCell", forIndexPath: indexPath) as! FileBrowserCell
         
         cell.delgate = self
-        cell.selectionStyle = .Blue
+        cell.selectionStyle = .None
         let selectedFile = fileForIndexPath(indexPath)
         //        cell.textLabel?.text = selectedFile.displayName
         //        cell.imageView?.image = selectedFile.type.image()
@@ -63,6 +63,13 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedFile = fileForIndexPath(indexPath)
         searchController.active = false
+        
+        if flagShowEditView {
+            //            let cell = tableView.dequeueReusableCellWithIdentifier("FileBrowserCell", forIndexPath: indexPath) as! FileBrowserCell
+            //            cell.btnCheck.sendActionsForControlEvents(.TouchUpInside)
+            return
+        }
+        
         if selectedFile.isDirectory {
             
             //            let fileListViewController = FileListViewController(initialPath: selectedFile.filePath)
@@ -70,7 +77,15 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             //            self.navigationController?.pushViewController(fileListViewController, animated: true)
             FileParser.sharedInstance.currentPath = selectedFile.filePath
             let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController") as! FileListViewController
+            
+            if flagMoveItem {
+                fileListViewController.delegate = self
+                fileListViewController.flagMoveItem = true
+                fileListViewController.moveItemPaths = moveItemPaths
+            }
+            
             self.navigationController?.pushViewController(fileListViewController, animated: true)
+            
             
         }else if selectedFile.fileExtension == "zip" {
             
@@ -161,23 +176,22 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
         print(filesForSharing)
         
-        
-        if filesForSharing.count == 1 && filesForSharing.last?.type == FBFileType.zip {
-            flagShowShareOptionOnly = true
-        }else{
-            flagShowShareOptionOnly = false
-        }
-        
-        if filesForSharing.count == 1 && self.navigationItem.rightBarButtonItem?.title != "More"{
-            
-            let more = UIBarButtonItem(title: "More", style: .Done, target: self, action: #selector(FileListViewController.dismiss))
-            self.navigationItem.rightBarButtonItem = more
-            
-        }else if filesForSharing.count == 0 {
-            
-            self.navigationItem.rightBarButtonItem = nil
-            
-        }
+        /*if filesForSharing.count == 1 && filesForSharing.last?.type == FBFileType.zip {
+         flagShowShareOptionOnly = true
+         }else{
+         flagShowShareOptionOnly = false
+         }
+         
+         if filesForSharing.count == 1 && self.navigationItem.rightBarButtonItem?.title != "More"{
+         
+         let more = UIBarButtonItem(title: "More", style: .Done, target: self, action: #selector(FileListViewController.dismiss))
+         self.navigationItem.rightBarButtonItem = more
+         
+         }else if filesForSharing.count == 0 {
+         
+         self.navigationItem.rightBarButtonItem = nil
+         
+         }*/
         
         
     }
@@ -217,35 +231,12 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }
         
+        
         //Create and add a second option action
         let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
             //Code for picking from camera roll goes here
             print("Delete File")
-            
-            if self.filesForSharing.count > 0{
-                
-                for item in self.filesForSharing {
-                    if let index = self.files.indexOf(item){
-                        
-                        self.files.removeAtIndex(index)
-                        //                       let file  = item
-                        do{  try NSFileManager.defaultManager().removeItemAtPath(item.filePath.path!)
-                            
-                        }catch let error{
-                            
-                            print(error)
-                        }
-                    }
-                    
-                    
-                    
-                }
-            }
-            
-            self.filesForSharing.removeAll()
-            self.files = self.parser.filesForDirectory(self.initialPath!)
-            self.indexFiles()
-            self.tableView.reloadData()
+            self.deleteFiles()
         }
         actionSheetController.addAction(choosePictureAction)
         
@@ -268,6 +259,250 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
+    func deleteFiles() {
+        
+        if filesForSharing.count == 0 {
+            
+            self.showAlertViewWithMessage("", message: "Please select atleast one file that you would like to delete.")
+            return
+        }
+        
+        if self.filesForSharing.count > 0{
+            for item in self.filesForSharing {
+                if let index = self.files.indexOf(item){
+                    self.files.removeAtIndex(index)
+                    do{  try NSFileManager.defaultManager().removeItemAtPath(item.filePath.path!)
+                    }catch let error{
+                        print(error)
+                    }
+                }
+            }
+        }
+        
+        self.filesForSharing.removeAll()
+        self.files = self.parser.filesForDirectory(self.initialPath!)
+        self.indexFiles()
+        self.tableView.reloadData()
+    }
+    
+    
+    func selectAllFiles(onOffValue:Bool) {
+        
+        filesForSharing.removeAll()
+        let sectionCount = tableView.numberOfSections
+        for i in 0 ..< sectionCount {
+            let rowsCount = tableView.numberOfRowsInSection(i)
+            for j in 0 ..< rowsCount {
+                let indexPath = NSIndexPath(forRow: j, inSection: i)
+                let selectedFile = fileForIndexPath(indexPath)
+                selectedFile.isChecked = onOffValue
+                
+                if onOffValue {
+                    filesForSharing.append(selectedFile)
+                }
+            }
+        }
+        self.tableView.reloadData()
+    }
+    
+    func createNewFolder(folderPath:String) -> Bool {
+        
+        if(!kFileManager.fileExistsAtPath(folderPath)){
+            
+            do{
+                try kFileManager.createDirectoryAtPath(folderPath, withIntermediateDirectories: false, attributes: nil)
+                return true
+            }catch let e as NSError{
+                print(e)
+            }
+            
+        }else{
+            
+            self.showAlertViewWithMessage("", message: "Foldername already exists, please provide another name.")
+            
+        }
+        
+        return false
+        
+    }
+    
+    
+    func moveFileAtPath(folderPath:String) -> Bool {
+        
+        if(!kFileManager.fileExistsAtPath(folderPath)){
+            
+            do{
+                
+                if filesForSharing.first!.isDirectory {
+                    
+                    try kFileManager.moveItemAtPath((filesForSharing.first?.filePath.path)!, toPath: folderPath)
+                    return true
+                    
+                }else{
+                    
+                    let fileExtension = (filesForSharing.first!.fileExtension)!
+                    try kFileManager.moveItemAtPath((filesForSharing.first?.filePath.path)!, toPath: "\(folderPath).\(fileExtension)")
+                    return true
+                    
+                }
+                
+            }catch let e as NSError{
+                print(e)
+            }
+            
+            
+            
+        }else{
+            
+            self.showAlertViewWithMessage("", message: "Foldername already exists, please provide another name.")
+            
+        }
+        
+        return false
+        
+    }
+    
+    func showNewFolderNameAlert(name:String, customMessage:String?){
+        
+        var msgText = ""
+        if customMessage != nil {
+            msgText = customMessage!
+        }else{
+            msgText = "Please enter new folder name"
+            
+        }
+        
+        let alertController = UIAlertController(title: "", message: msgText, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+            let firstTextField = alertController.textFields![0] as UITextField
+            
+            let name = CommonFunctions.sharedInstance.trim(firstTextField.text!)
+            
+            if(name.length == 0){
+                self.showNewFolderNameAlert(name, customMessage:"Please enter folder name")
+                return
+            }
+            
+            if(CommonFunctions.sharedInstance.validateName(name) == false){
+                self.showNewFolderNameAlert(name, customMessage:"Special characters are not allowed")
+                return
+            }
+            
+            
+            let path = "\((self.initialPath?.path)!)/\(name)"
+            if(kFileManager.fileExistsAtPath(path)){
+                self.showNewFolderNameAlert(name, customMessage:"Folder exists, please provide new name")
+            }else{
+                
+                if self.createNewFolder(path){
+                    self.files = self.parser.filesForDirectory(self.initialPath!)
+                    self.indexFiles()
+                    self.tableView.reloadData()
+                }else{
+                    self.showAlertViewWithMessage("", message: "Error occured")
+                    
+                }
+                
+            }
+            
+            
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+        })
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.text = name
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+    
+    func showRenameFolderAlert(name:String, customMessage:String?){
+        
+        var msgText = ""
+        if customMessage != nil {
+            msgText = customMessage!
+        }else{
+            msgText = "Please enter new name"
+            
+        }
+        
+        let alertController = UIAlertController(title: "", message: msgText, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+            let firstTextField = alertController.textFields![0] as UITextField
+            
+            let name = CommonFunctions.sharedInstance.trim(firstTextField.text!)
+            
+            if(name.length == 0){
+                self.showRenameFolderAlert(name, customMessage:"Please enter folder name")
+                return
+            }
+            
+            if(CommonFunctions.sharedInstance.validateName(name) == false){
+                self.showRenameFolderAlert(name, customMessage:"Special characters are not allowed")
+                return
+            }
+            
+            
+            let path = "\((self.initialPath?.path)!)/\(name)"
+            if(kFileManager.fileExistsAtPath(path)){
+                self.showRenameFolderAlert(name, customMessage:"Folder exists, please provide new name")
+            }else{
+                
+                if self.moveFileAtPath(path){
+                    self.files = self.parser.filesForDirectory(self.initialPath!)
+                    self.indexFiles()
+                    self.tableView.reloadData()
+                    self.filesForSharing.removeAll()
+                }else{
+                    self.showRenameFolderAlert("", customMessage: "There is some problem with this name, please try with another name.")
+                    
+                }
+                
+            }
+            
+            
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+        })
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            
+            if name.containsString("."){
+                
+                let  newName = name.componentsSeparatedByString(".").first
+                textField.text = newName
+            }else{
+                textField.text = name
+            }
+            
+            
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     
     func unzipFile(zipFie:FBFile) {
