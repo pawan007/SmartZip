@@ -288,16 +288,17 @@
                         <viewControllerLayoutGuide type="bottom" id="x0H-98-3Cz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tlJ-IT-B8B">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ykW-T0-mMB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ykW-T0-mMB">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeCell" id="yCS-9P-xZH">
-                                        <rect key="frame" x="0.0" y="28" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yCS-9P-xZH" id="twA-Au-G8g">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -339,7 +340,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" id="rif-d6-v4J">
-                                        <rect key="frame" x="0.0" y="72" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rif-d6-v4J" id="PGb-wT-GQJ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -381,7 +382,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BuyProCell" id="eHt-lX-2Cs">
-                                        <rect key="frame" x="0.0" y="116" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHt-lX-2Cs" id="fGl-g5-co2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -423,7 +424,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestoreCell" id="gWk-bb-H8D">
-                                        <rect key="frame" x="0.0" y="160" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gWk-bb-H8D" id="07P-5H-tdj">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -465,7 +466,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShareAppCell" id="07c-Z0-Nyf">
-                                        <rect key="frame" x="0.0" y="204" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="07c-Z0-Nyf" id="HMz-De-R2L">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -507,7 +508,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RateAppCell" id="ihY-QZ-YVo">
-                                        <rect key="frame" x="0.0" y="248" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="248" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ihY-QZ-YVo" id="3ng-Wy-AaM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -549,7 +550,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AboutCompany" id="eKl-Je-TBb">
-                                        <rect key="frame" x="0.0" y="292" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="292" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eKl-Je-TBb" id="usf-4b-uIp">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -591,7 +592,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AboutProduct" id="utV-Yc-qwo">
-                                        <rect key="frame" x="0.0" y="336" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="336" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="utV-Yc-qwo" id="190-l5-T4d">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -633,7 +634,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmailCell" id="Sd6-Fe-Tve">
-                                        <rect key="frame" x="0.0" y="380" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="380" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sd6-Fe-Tve" id="2C8-UH-W99">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -675,7 +676,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TutorialCell" id="VNG-4R-rs0">
-                                        <rect key="frame" x="0.0" y="424" width="0.0" height="44"/>
+                                        <rect key="frame" x="0.0" y="424" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VNG-4R-rs0" id="au4-2s-kc4">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -724,7 +725,14 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ykW-T0-mMB" firstAttribute="leading" secondItem="tlJ-IT-B8B" secondAttribute="leading" id="2gO-7P-SkP"/>
+                            <constraint firstAttribute="trailing" secondItem="ykW-T0-mMB" secondAttribute="trailing" id="5gS-Vo-0xG"/>
+                            <constraint firstItem="x0H-98-3Cz" firstAttribute="top" secondItem="ykW-T0-mMB" secondAttribute="bottom" id="LG0-E4-eU4"/>
+                            <constraint firstItem="ykW-T0-mMB" firstAttribute="top" secondItem="tlJ-IT-B8B" secondAttribute="top" constant="20" id="NT1-8H-xYa"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="topTableView" destination="ykW-T0-mMB" id="zG5-uP-piG"/>
                     </connections>
@@ -2000,21 +2008,21 @@
         <image name="AboutCompany" width="360" height="640"/>
         <image name="AboutProduct" width="360" height="640"/>
         <image name="Ic_Menu" width="13" height="13"/>
-        <image name="about_comp" width="19" height="18"/>
-        <image name="about_prod" width="19" height="18"/>
+        <image name="about_comp" width="50" height="47"/>
+        <image name="about_prod" width="50" height="47"/>
         <image name="bottom-left" width="101" height="110"/>
         <image name="dorpbox" width="20" height="18"/>
         <image name="emailICN" width="17" height="16"/>
         <image name="errow" width="4" height="7"/>
         <image name="folderIcon" width="21" height="17"/>
-        <image name="googledrive" width="20" height="18"/>
-        <image name="ic_Share_new" width="17" height="16"/>
-        <image name="ic_home" width="17" height="16"/>
-        <image name="ic_lock" width="17" height="16"/>
+        <image name="googledrive" width="33" height="30"/>
+        <image name="ic_Share_new" width="50" height="47"/>
+        <image name="ic_home" width="50" height="47"/>
+        <image name="ic_lock" width="50" height="47"/>
         <image name="ic_star" width="17" height="16"/>
         <image name="ic_tut" width="17" height="16"/>
-        <image name="ic_wallet" width="17" height="16"/>
-        <image name="icloud" width="20" height="18"/>
+        <image name="ic_wallet" width="50" height="47"/>
+        <image name="icloud" width="33" height="30"/>
         <image name="icon_unchecked" width="14" height="14"/>
         <image name="image" width="36" height="36"/>
         <image name="music" width="21" height="17"/>

@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "about_prod@2x.png",
+      "filename" : "about_comp-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "about_prod@3x.png",
+      "filename" : "about_comp.png",
       "scale" : "3x"
     }
   ],
