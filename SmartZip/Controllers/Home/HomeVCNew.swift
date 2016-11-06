@@ -823,8 +823,10 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
     func shareMyFile(zipPath:String) -> Void {
         
         let fileDAta = NSURL(fileURLWithPath: zipPath)
+        let name = (zipPath.componentsSeparatedByString("/").last)!
+        let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
         
-        let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
+        let ac = UIActivityViewController(activityItems: [fileDAta,"SmartZip File \(name)", myWebsite!] , applicationActivities: nil)
         ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
         ac.setValue("Zip file from SmartZip", forKey: "Subject")
         
@@ -1134,7 +1136,7 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
     
     func showEnterNameAlert(name:String ,assets: [AnyObject]!, type:Int){
         
-        let alertController = UIAlertController(title: "Wait", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
         
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
             alert -> Void in
@@ -1212,7 +1214,7 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
     
     func showAlert(name:String ,assets: [AnyObject]!, type:Int){
         
-        let alertController = UIAlertController(title: "Wait", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: name, preferredStyle: UIAlertControllerStyle.Alert)
         
         let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
             alert -> Void in

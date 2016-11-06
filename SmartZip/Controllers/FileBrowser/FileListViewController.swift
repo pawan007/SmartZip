@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SwiftSpinner
 
 protocol MoveFileDelegate {
     func cancelMoveFile()
@@ -23,11 +23,12 @@ class FileListViewController: UIViewController {
     var lblNoContent:UILabel?
     
     @IBOutlet weak var editView: UIView!
+    @IBOutlet weak var normalView: UIView!
     
     @IBOutlet weak var selectAllInEditViewBtn: UIButton!
     @IBOutlet weak var newFolderBtn: UIButton!
     @IBOutlet weak var renameBtn: UIButton!
-    @IBOutlet weak var sortBtn: UIButton!
+    //    @IBOutlet weak var sortBtn: UIButton!
     @IBOutlet weak var moveBtn: UIButton!
     @IBOutlet weak var deleteBtn: UIButton!
     
@@ -75,7 +76,8 @@ class FileListViewController: UIViewController {
     var delegate:MoveFileDelegate?
     var moveItemPaths = [NSURL]()
     
-    
+    var imageOpenCounter = 0
+    var imageCloseCounter = 0
     
     convenience init (initialPath: NSURL) {
         
@@ -142,6 +144,8 @@ class FileListViewController: UIViewController {
                 self.title = "Move To"
             }
             
+            normalView.hidden = true
+            
         }
         
         
@@ -171,8 +175,7 @@ class FileListViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
-        self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
-        
+        tableView.setContentOffset(CGPoint.zero, animated: true)
         if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
             if(shared != nil) {
                 shared = nil
@@ -247,7 +250,7 @@ class FileListViewController: UIViewController {
         }else{
             
             flagShowEditView = true
-            selectAllFiles(false)
+            //            selectAllFiles(false)
             self.navigationItem.rightBarButtonItem = doneButton
             UIView.animateWithDuration(Double(0.5), animations: {
                 self.bottomHeightConstant.constant = 0
@@ -384,8 +387,6 @@ extension FileListViewController{
             }
             
             
-        }else if sender as! NSObject == sortBtn {
-            print("sortBtn")
         }else if sender as! NSObject == moveBtn {
             print("moveBtn")
             
@@ -420,29 +421,247 @@ extension FileListViewController{
     
     
     @IBAction func normalViewButtonTapped(sender: AnyObject){
-    
+        
         if sender as! NSObject == selectAllBtn {
             
+            print("selectAllBtn")
+            let title = selectAllBtn.titleForState(.Normal)
             
+            if title == "Select All" {
+                
+                selectAllBtn.setTitle("Deselect All", forState: .Normal)
+                selectAllFiles(true)
+                
+            }else{
+                
+                selectAllBtn.setTitle("Select All", forState: .Normal)
+                selectAllFiles(false)
+            }
             
         }else if sender as! NSObject == zipBtn {
             
+            print("zipBtn")
             
+            if filesForSharing.count == 0 {
+                self.showAlertViewWithMessage("", message: "Please select atleast one file that you would like to compress.")
+            }else{
+                //TODO
+                showEnterZipNameAlert(false)
+            }
             
         }else if sender as! NSObject == shareBtn {
             
-            
+            print("shareBtn")
+            if filesForSharing.count == 0 {
+                self.showAlertViewWithMessage("", message: "Please select atleast one file that you want to share.")
+            }else{
+                //TODO
+                
+                if filesForSharing.count == 1 {
+                    
+                    if filesForSharing.first?.type == .zip || filesForSharing.first?.type == .ZIP {
+                        //Share Only
+                        CommonFunctions.sharedInstance.shareMyFile((self.filesForSharing.first?.filePath.path)!, vc: self)
+                    }else{
+                        //Compress and Share
+                        compressAndShareSingleFile()
+                    }
+                    
+                }else{
+                    
+                    compressAndShareMultipleFiles()
+                    
+                }
+            }
             
         }else if sender as! NSObject == openInBtn {
             
+            print("openInBtn")
+            
+            
+            /*NSURL *url = [NSURL fileURLWithPath:filePath];
+             UIDocumentInteractionController *popup = [UIDocumentInteractionController interactionControllerWithURL:url];
+             [popup setDelegate:self];
+             [popup presentPreviewAnimated:YES];*/
+            
+            if filesForSharing.count == 0 {
+                
+                self.showAlertViewWithMessage("", message: "Please select atleast one file that you would like to open in another app.")
+                
+            }else if filesForSharing.count > 1 {
+                
+                self.showAlertViewWithMessage("", message: "Please select only one file that you would like to open in another app.")
+                
+            }else{
+                
+                let popup = UIDocumentInteractionController(URL: (filesForSharing.first?.filePath)!)
+                popup.delegate = self
+                popup.presentOpenInMenuFromRect(openInBtn.frame, inView: self.view, animated: true)
+                
+            }
             
         }else if sender as! NSObject == saveBtn {
             
+            print("saveBtn")
             
+            if filesForSharing.count == 0 {
+                
+                self.showAlertViewWithMessage("", message: "Please select atleast one photo/video file that you would like to save to your album")
+                
+            }else if CommonFunctions.sharedInstance.containsImageOrVideoFile(filesForSharing) == false{
+                
+                self.showAlertViewWithMessage("", message: "Please select only one file that you would like to open in another app.")
+                
+            }else{
+                
+                
+                for file in filesForSharing {
+                    
+                    print(file.type)
+                    
+                    if file.type == .JPEG || file.type  == .jpeg || file.type == .JPG || file.type  == .jpg || file.type == .PNG || file.type  == .png || file.type == .gif || file.type  == .GIF {
+                        
+                        imageOpenCounter += 1
+                        
+                        if imageOpenCounter == 1 {
+                            SwiftSpinner.show("Please wait...", animated: true)
+                        }
+                        
+                        let image = UIImage(contentsOfFile: (file.filePath.path)!)
+                        
+                        UIImageWriteToSavedPhotosAlbum(image!, self, #selector(FileListViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                        
+                    }else if file.type == .M4V || file.type  == .MOV || file.type == .mp4 || file.type  == .mov {
+                        
+                        imageOpenCounter += 1
+                        
+                        if imageOpenCounter == 1 {
+                            SwiftSpinner.show("Please wait...", animated: true)
+                        }
+                        
+                        UISaveVideoAtPathToSavedPhotosAlbum((file.filePath.path)!, self, #selector(FileListViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+            }
             
         }
+        
+        
+    }
+    
+    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+        
+        imageCloseCounter += 1
+        
+        guard error == nil else {
+            //Error saving image
+            if imageOpenCounter == imageCloseCounter {
+                SwiftSpinner.hide()
+                self.showAlertViewWithMessage("", message: "We are unable to save your photos/videos to your album.")
+                imageOpenCounter = 0
+                imageCloseCounter = 0
+            }
+            return
+        }
+        
+        
+        
+        if imageOpenCounter == imageCloseCounter {
+            SwiftSpinner.hide()
+            self.showAlertViewWithMessage("", message: "Your photos/videos have been saved to your album.")
+            imageOpenCounter = 0
+            imageCloseCounter = 0
+        }
+        
+        //Image saved successfully
+    }
+    
+    func video(videoPath: String, didFinishSavingWithError error: NSError?, contextInfo info: UnsafeMutablePointer<Void>) {
+        // your completion code handled here
+        
+        imageCloseCounter += 1
+        
+        guard error == nil else {
+            //Error saving image
+            if imageOpenCounter == imageCloseCounter {
+                SwiftSpinner.hide()
+                self.showAlertViewWithMessage("", message: "We are unable to save your photos/videos to your album.")
+                imageOpenCounter = 0
+                imageCloseCounter = 0
+            }
+            return
+        }
+        
+        
+        
+        if imageOpenCounter == imageCloseCounter {
+            SwiftSpinner.hide()
+            self.showAlertViewWithMessage("", message: "Your photos/videos have been saved to your album.")
+            imageOpenCounter = 0
+            imageCloseCounter = 0
+        }
+        
+        //Image saved successfully
+    }
     
     
+    func compressAndShareSingleFile(){
+        
+        let msg = "You've selected a file or folder. The file/folder will be compressed first before it can be shared. Do you want to continue?"
+        
+        let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+            self.showEnterZipNameAlert(true)
+            
+        })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func compressAndShareMultipleFiles(){
+        
+        let msg = "You've selected multiple files or folders or both. The files/folders will be compressed first before they can be shared. Do you want to continue?"
+        
+        let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+            CommonFunctions.sharedInstance.shareAllMyFile( self , files: self.filesForSharing)
+            
+        })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     
@@ -463,6 +682,15 @@ extension FileListViewController : MoveFileDelegate{
         self.files = self.parser.filesForDirectory(self.initialPath!)
         self.indexFiles()
         self.tableView.reloadData()
+    }
+    
+    
+}
+
+extension FileListViewController : UIDocumentInteractionControllerDelegate{
+    
+    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
     
     

@@ -414,7 +414,7 @@ class CommonFunctions: NSObject {
     }
     
     
-    func zipAllMyFiles(newZipFile:String , vc:UIViewController, files : [FBFile]) -> Bool {
+    func zipAllMyFiles(newZipFile:String , vc:UIViewController, files : [FBFile], canShare:Bool) -> Bool {
         
         var arrayPaths = [String]()
         for item in files {
@@ -450,7 +450,9 @@ class CommonFunctions: NSObject {
             if success {
                 print("Zip file created successfully")
                 try! kFileManager.removeItemAtPath(cacheDir)
-                self.shareMyFile(newZipFile, vc: vc)
+                if canShare {
+                    self.shareMyFile(newZipFile, vc: vc)
+                }
                 return true
             }
             
@@ -473,8 +475,11 @@ class CommonFunctions: NSObject {
     func shareMyFile(zipPath:String, vc:UIViewController) -> Void {
         
         let fileDAta = NSURL(fileURLWithPath: zipPath)
+        let name = (zipPath.componentsSeparatedByString("/").last)!
         
-        let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
+        let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
+        
+        let ac = UIActivityViewController(activityItems: [fileDAta,"SmartZip File \(name)", myWebsite!] , applicationActivities: nil)
         ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
         ac.setValue("My file", forKey: "Subject")
         
@@ -486,6 +491,94 @@ class CommonFunctions: NSObject {
         }
         vc.presentViewController(ac, animated: true, completion: nil)
         
+    }
+    
+    func shareMultipleZipFile(filesPath:[AnyObject], vc:UIViewController) -> Void {
+        
+        let ac = UIActivityViewController(activityItems: filesPath , applicationActivities: nil)
+        ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
+        ac.setValue("My file", forKey: "Subject")
+        
+        if let popoverPresentationController = ac.popoverPresentationController {
+            popoverPresentationController.sourceView = vc.view
+            var rect=vc.view.frame
+            rect.origin.y = rect.height
+            popoverPresentationController.sourceRect = rect
+        }
+        vc.presentViewController(ac, animated: true, completion: nil)
+        
+    }
+    
+    func shareAllMyFile(vc:FileListViewController, files : [FBFile] ) -> Void {
+        
+        if isAllZipFiles(files) {
+            let name = "You've selected multiple files. Do you want to compress them first?"
+            showAlertToCombineZipFiles(name, vc: vc , files: files)
+            
+        }else{
+            
+            vc.showEnterZipNameAlert(true)
+            
+        }
+        
+    }
+    
+    
+    func showAlertToCombineZipFiles(name:String, vc:FileListViewController, files : [FBFile]){
+        
+        let alertController = UIAlertController(title: "", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            //            let fileDAta = NSURL(fileURLWithPath: zipPath)
+            var zipFiles = [NSURL]()
+            for file in files {
+                zipFiles.append(file.filePath)
+            }
+            let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
+            zipFiles.append(myWebsite!)
+            self.shareMultipleZipFile(zipFiles, vc: vc)
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            
+            vc.showEnterZipNameAlert(true)
+            
+        })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        vc.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+    func isAllZipFiles(files : [FBFile]) -> Bool {
+        
+        for file in files {
+            
+            if file.type  != .zip && file.type  != .ZIP {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func containsImageOrVideoFile(files : [FBFile]) -> Bool {
+        
+        for file in files {
+            
+            if file.type == .M4V || file.type  == .MOV || file.type == .mp4 || file.type  == .mov {
+            return true
+            }
+            
+            if file.type == .JPEG || file.type  == .jpeg || file.type == .JPG || file.type  == .jpg || file.type == .PNG || file.type  == .png || file.type == .gif || file.type  == .GIF {
+                return true
+            }
+        }
+        return false
     }
     
     
@@ -743,7 +836,7 @@ extension String{
     
     func isValidName () -> Bool {
         
-        let emailFormat = "^[a-zA-Z0-9]{1,50}$"
+        let emailFormat = "^[a-zA-Z0-9_-]{1,50}$"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluateWithObject(self)
     }

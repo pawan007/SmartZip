@@ -750,7 +750,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rRb-gi-jcD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aIJ-VV-i8J">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Local" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bK-Kq-mD8">
@@ -764,7 +764,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5U-TQ-I95" userLabel="View MyFolder">
-                                <rect key="frame" x="10" y="105" width="285" height="60"/>
+                                <rect key="frame" x="10" y="105" width="145" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folderIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yAn-I0-9g0">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
@@ -784,7 +784,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-TJ-E2D">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
                                         <connections>
                                             <action selector="btnMyFilesTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="LrB-3u-mVF"/>
                                         </connections>
@@ -817,7 +817,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2LN-Gd-UGh" userLabel="View Photos">
-                                <rect key="frame" x="305" y="105" width="285" height="60"/>
+                                <rect key="frame" x="165" y="105" width="145" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="Vqb-f9-fTl">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
@@ -837,7 +837,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ML8-Jw-NFI">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
                                         <connections>
                                             <action selector="btnPhotosTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="SJi-7d-kpM"/>
                                         </connections>
@@ -870,7 +870,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYZ-l4-0Zd" userLabel="View Videos">
-                                <rect key="frame" x="10" y="175" width="285" height="60"/>
+                                <rect key="frame" x="10" y="175" width="145" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" translatesAutoresizingMaskIntoConstraints="NO" id="HvG-ZM-jbm">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
@@ -890,7 +890,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvr-7V-n1H">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
                                         <connections>
                                             <action selector="btnVideoTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="fT6-6w-ALo"/>
                                         </connections>
@@ -923,7 +923,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sl-24-NLX" userLabel="View Music">
-                                <rect key="frame" x="305" y="175" width="285" height="60"/>
+                                <rect key="frame" x="165" y="175" width="145" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music" translatesAutoresizingMaskIntoConstraints="NO" id="evo-ay-w14">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
@@ -943,7 +943,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akE-cd-RcC">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
                                         <connections>
                                             <action selector="btnMusicTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="VEm-fs-Grl"/>
                                         </connections>
@@ -986,7 +986,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFP-Il-CHO" userLabel="View Dropbox">
-                                <rect key="frame" x="10" y="275" width="580" height="50"/>
+                                <rect key="frame" x="10" y="275" width="300" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dorpbox" translatesAutoresizingMaskIntoConstraints="NO" id="vPg-Xf-mQ3">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -996,7 +996,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errow" translatesAutoresizingMaskIntoConstraints="NO" id="Rg0-cV-ihw">
-                                        <rect key="frame" x="550" y="15" width="20" height="20"/>
+                                        <rect key="frame" x="270" y="15" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="TCS-sM-7MM"/>
                                             <constraint firstAttribute="height" constant="20" id="g4p-lu-UA5"/>
@@ -1013,7 +1013,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBo-YP-8nj">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <connections>
                                             <action selector="btnDropboxTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="no4-lI-oKa"/>
                                         </connections>
@@ -1048,7 +1048,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fem-O6-3EJ" userLabel="View Dropbox">
-                                <rect key="frame" x="10" y="335" width="580" height="50"/>
+                                <rect key="frame" x="10" y="335" width="300" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="googledrive" translatesAutoresizingMaskIntoConstraints="NO" id="gMu-PH-aLB">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -1058,7 +1058,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errow" translatesAutoresizingMaskIntoConstraints="NO" id="Ho2-g6-yuR">
-                                        <rect key="frame" x="550" y="15" width="20" height="20"/>
+                                        <rect key="frame" x="270" y="15" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="cim-g9-Y7O"/>
                                             <constraint firstAttribute="height" constant="20" id="onW-7X-OLU"/>
@@ -1075,7 +1075,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-IC-O6T">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <connections>
                                             <action selector="btnGoogleDriveTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="T3W-mh-eO3"/>
                                         </connections>
@@ -1111,7 +1111,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okM-Jz-UB4" userLabel="View Dropbox">
-                                <rect key="frame" x="10" y="395" width="580" height="50"/>
+                                <rect key="frame" x="10" y="395" width="300" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icloud" translatesAutoresizingMaskIntoConstraints="NO" id="iWX-q8-lju">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -1121,7 +1121,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errow" translatesAutoresizingMaskIntoConstraints="NO" id="evc-EP-JNa">
-                                        <rect key="frame" x="550" y="15" width="20" height="20"/>
+                                        <rect key="frame" x="270" y="15" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="El5-oM-hGz"/>
                                             <constraint firstAttribute="width" constant="20" id="qR4-Pq-uYN"/>
@@ -1138,7 +1138,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPg-Bs-EdL">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <connections>
                                             <action selector="btnMoreCloudTapped:" destination="FtF-wV-J4l" eventType="touchUpInside" id="Q8g-5V-3sZ"/>
                                         </connections>
@@ -1174,13 +1174,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQ8-dw-p1k">
-                                <rect key="frame" x="0.0" y="455" width="600" height="145"/>
+                                <rect key="frame" x="0.0" y="455" width="320" height="113"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMj-XI-dhF">
-                                        <rect key="frame" x="0.0" y="95" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="63" width="320" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6n5-T8-KZh"/>
+                                            <constraint firstAttribute="width" constant="320" id="GPY-Ts-C2O"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1238,6 +1239,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="_bView" destination="vMj-XI-dhF" id="ndG-dx-4fg"/>
                         <outlet property="barButtonItemLeft" destination="nxQ-33-Uij" id="gLK-HZ-sWO"/>
@@ -1529,7 +1531,6 @@
                                                     <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="editViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="K8B-CV-rXf"/>
                                                     <action selector="normalViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="Qcp-GS-p3S"/>
                                                 </connections>
                                             </button>
@@ -1544,7 +1545,6 @@
                                                     <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="editViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="ajJ-p3-vOo"/>
                                                     <action selector="normalViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="L5x-dg-fr6"/>
                                                 </connections>
                                             </button>
@@ -1559,7 +1559,6 @@
                                                     <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="editViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="YO0-Bf-ew2"/>
                                                     <action selector="normalViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="PWK-ml-ipk"/>
                                                 </connections>
                                             </button>
@@ -1574,7 +1573,6 @@
                                                     <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="editViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="iNg-dr-lZM"/>
                                                     <action selector="normalViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="ss0-zi-HGO"/>
                                                 </connections>
                                             </button>
@@ -1589,7 +1587,6 @@
                                                     <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="editViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="oka-WE-cH5"/>
                                                     <action selector="normalViewButtonTapped:" destination="1Ai-M8-D0O" eventType="touchUpInside" id="Bbs-Pn-25z"/>
                                                 </connections>
                                             </button>
@@ -1613,8 +1610,8 @@
                                             <constraint firstItem="Mqd-5F-WhQ" firstAttribute="leading" secondItem="vEn-sU-YN7" secondAttribute="trailing" id="xnN-80-sp7"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nE-oc-Uwa">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="50"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9nE-oc-Uwa">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nny-lQ-wZq">
                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="50"/>
@@ -1741,6 +1738,7 @@
                         <outlet property="editView" destination="9nE-oc-Uwa" id="nfh-lS-arg"/>
                         <outlet property="moveBtn" destination="Y39-Co-2aY" id="KIR-ap-rIk"/>
                         <outlet property="newFolderBtn" destination="N5U-q7-QhJ" id="Byl-9Q-cyY"/>
+                        <outlet property="normalView" destination="UGm-2L-MT9" id="3d3-zw-Izb"/>
                         <outlet property="openInBtn" destination="vEn-sU-YN7" id="LGs-GO-1Za"/>
                         <outlet property="renameBtn" destination="OHH-gr-6Av" id="gEs-5p-9zi"/>
                         <outlet property="saveBtn" destination="Mqd-5F-WhQ" id="ZU1-GL-kQ7"/>
@@ -2012,22 +2010,22 @@
         <image name="about_prod" width="50" height="47"/>
         <image name="bottom-left" width="101" height="110"/>
         <image name="dorpbox" width="20" height="18"/>
-        <image name="emailICN" width="17" height="16"/>
-        <image name="errow" width="4" height="7"/>
+        <image name="emailICN" width="50" height="47"/>
+        <image name="errow" width="90" height="90"/>
         <image name="folderIcon" width="21" height="17"/>
         <image name="googledrive" width="33" height="30"/>
         <image name="ic_Share_new" width="50" height="47"/>
         <image name="ic_home" width="50" height="47"/>
         <image name="ic_lock" width="50" height="47"/>
-        <image name="ic_star" width="17" height="16"/>
-        <image name="ic_tut" width="17" height="16"/>
+        <image name="ic_star" width="50" height="47"/>
+        <image name="ic_tut" width="50" height="47"/>
         <image name="ic_wallet" width="50" height="47"/>
         <image name="icloud" width="33" height="30"/>
         <image name="icon_unchecked" width="14" height="14"/>
         <image name="image" width="36" height="36"/>
-        <image name="music" width="21" height="17"/>
+        <image name="music" width="73" height="59"/>
         <image name="top-right" width="101" height="110"/>
         <image name="tut-1" width="300" height="300"/>
-        <image name="video" width="21" height="17"/>
+        <image name="video" width="73" height="59"/>
     </resources>
 </document>

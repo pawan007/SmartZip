@@ -381,7 +381,9 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
         let fileDAta = NSURL(fileURLWithPath: zipPath)
         
-        let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
+        let name = (zipPath.componentsSeparatedByString("/").last)!
+        let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
+        let ac = UIActivityViewController(activityItems: [fileDAta,"SmartZip File \(name)", myWebsite!] , applicationActivities: nil)
         ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
         ac.setValue("My file", forKey: "Subject")
         

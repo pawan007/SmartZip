@@ -224,7 +224,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             let takePictureAction: UIAlertAction = UIAlertAction(title: "Zip and Share", style: .Default) { action -> Void in
                 //Code for launching the camera goes here
                 print("Apply Zip and Share code")
-                self.showEnterZipNameAlert()
+                self.showEnterZipNameAlert(false)
                 
             }
             actionSheetController.addAction(takePictureAction)
@@ -520,7 +520,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }else{
             
-            var incCount = getFileCopiesCount(unzipPath) + 1
+            let incCount = getFileCopiesCount(unzipPath) + 1
             let newPath = "\(unzipPath)(\(incCount))"
             let success = SSZipArchive.unzipFileAtPath(zipFie.filePath.path!, toDestination: newPath)
             if !success {
@@ -561,9 +561,9 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     }
     
     
-    func showEnterZipNameAlert(){
+    func showEnterZipNameAlert(canShare:Bool){
         
-        let alertController = UIAlertController(title: "Wait", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
         
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
             alert -> Void in
@@ -572,23 +572,24 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
             if(firstTextField.text?.length == 0){
                 
-                self.showAlert("Please enter folder name")
+                self.showAlert("Please enter folder name", canShare: canShare)
                 return
             }
             
-            if(firstTextField.text?.isValidName() == false){
+            let newName = CommonFunctions.sharedInstance.trim((firstTextField.text)!)
+            
+            if(CommonFunctions.sharedInstance.validateName(newName) == false){
                 
-                self.showAlert("Special characters are not allowed")
+                self.showAlert("Special characters are not allowed", canShare: canShare)
                 return
             }
             
-            
-            let zipFileName = "\((self.initialPath?.path)!)/\(firstTextField.text!).zip"
-            let fileName = "\((self.initialPath?.path)!)/\(firstTextField.text!)"
+            let zipFileName = "\((self.initialPath?.path)!)/\(newName).zip"
+            let fileName = "\((self.initialPath?.path)!)/\(newName)"
             
             if(kFileManager.fileExistsAtPath(zipFileName) || kFileManager.fileExistsAtPath(fileName)){
                 
-                self.showAlert("Folder or file already exists, please provide new name")
+                self.showAlert("Folder or file already exists, please provide new name", canShare: canShare)
                 
             }else{
                 
@@ -606,7 +607,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
                 
                 SwiftSpinner.show("Please Wait")
                 
-                let result = CommonFunctions.sharedInstance.zipAllMyFiles(zipFileName, vc: self, files: self.filesForSharing)
+                let result = CommonFunctions.sharedInstance.zipAllMyFiles(zipFileName, vc: self, files: self.filesForSharing ,canShare: canShare)
                 
                 if(result){
                     
@@ -637,14 +638,14 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     }
     
     
-    func showAlert(name:String){
+    func showAlert(name:String, canShare:Bool){
         
-        let alertController = UIAlertController(title: "Wait", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: name, preferredStyle: UIAlertControllerStyle.Alert)
         
         let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
             alert -> Void in
             
-            self.showEnterZipNameAlert()
+            self.showEnterZipNameAlert(canShare)
             
         })
         
