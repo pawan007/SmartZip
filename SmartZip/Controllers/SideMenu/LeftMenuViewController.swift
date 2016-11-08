@@ -100,13 +100,13 @@ extension LeftMenuViewController: UITableViewDelegate
             break
         //TODO
         case "ShareAppCell" :
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
-            })
+            //            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            //            })
             self.shareApp()
             break
         case "RateAppCell" :
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
-            })
+            //            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            //            })
             iRate.sharedInstance().openRatingsPageInAppStore()
             break
         case "AboutCompany" :
