@@ -409,7 +409,9 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         case .Pad:
             
             if let pop = picker.popoverPresentationController {
-                pop.barButtonItem = barButtonItemLeft
+//                pop.barButtonItem = barButtonItemLeft
+                pop.sourceView = self.view;
+                pop.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
             }
             
             let flurryParams = [ "Type" :"selectAudio"]
@@ -931,7 +933,9 @@ extension HomeVCNew{
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 importMenu.modalPresentationStyle = .Popover
                 if let pop = importMenu.popoverPresentationController {
-                    pop.barButtonItem = barButtonItemLeft
+//                    pop.barButtonItem = barButtonItemLeft
+                    pop.sourceView = self.view;
+                    pop.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
                 }
             }
             
@@ -943,9 +947,12 @@ extension HomeVCNew{
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 documentPicker.modalPresentationStyle = .Popover
                 if let pop = importMenu.popoverPresentationController {
-                    pop.barButtonItem = barButtonItemLeft
-                    
+//                    pop.barButtonItem = barButtonItemLeft
+                    pop.sourceView = self.view;
+                    pop.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
                 }
+                
+                
             }
             self.presentViewController(documentPicker, animated: true, completion: nil)
         }

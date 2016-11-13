@@ -51,6 +51,12 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         cell.fbName.text = selectedFile.displayName
         cell.checkedStatus = selectedFile.isChecked
         
+        if flagShowEditView {
+            cell.btnTop.hidden = false
+        }else{
+            cell.btnTop.hidden = true
+        }
+        
         if selectedFile.isChecked {
             cell.btnCheck.setImage(UIImage(named: "icon_checked"), forState: .Normal)
         }else{

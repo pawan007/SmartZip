@@ -169,6 +169,18 @@ class FileListViewController: UIViewController {
             shared.resetAdView(self, andDisplayView: bannerAdView)
         }
         
+        
+        selectAllInEditViewBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        zipBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        shareBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        openInBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        saveBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        newFolderBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        renameBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        moveBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        deleteBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        selectAllBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
     
@@ -218,6 +230,7 @@ class FileListViewController: UIViewController {
         self.navigationController?.navigationBarHidden = false
         
         if let initialPath = initialPath {
+            
             files = parser.filesForDirectory(initialPath)
             indexFiles()
             tableView.reloadData()
@@ -241,9 +254,10 @@ class FileListViewController: UIViewController {
         if flagShowEditView {
             flagShowEditView = false
             self.navigationItem.rightBarButtonItem = editButton
+            self.tableView.reloadData()
             editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(FileListViewController.showEditView))
             UIView.animateWithDuration(Double(0.5), animations: {
-                self.bottomHeightConstant.constant = -50
+                self.bottomHeightConstant.constant = 50
                 self.view.layoutIfNeeded()
             })
             
@@ -252,6 +266,7 @@ class FileListViewController: UIViewController {
             flagShowEditView = true
             //            selectAllFiles(false)
             self.navigationItem.rightBarButtonItem = doneButton
+            self.tableView.reloadData()
             UIView.animateWithDuration(Double(0.5), animations: {
                 self.bottomHeightConstant.constant = 0
                 self.view.layoutIfNeeded()
@@ -496,8 +511,29 @@ extension FileListViewController{
                 
                 let popup = UIDocumentInteractionController(URL: (filesForSharing.first?.filePath)!)
                 popup.delegate = self
-                popup.presentOpenInMenuFromRect(openInBtn.frame, inView: self.view, animated: true)
                 
+                
+                
+                //                CGRect rectForAppearing = [sender.superview convertRect:sender.frame toView:self.view];
+                //                [interactionController presentOptionsMenuFromRect:rect inView:self.view animated:YES];
+                
+                switch UIDevice.currentDevice().userInterfaceIdiom {
+                    
+                case .Phone:
+                    
+                    popup.presentOpenInMenuFromRect(openInBtn.frame, inView: self.view, animated: true)
+                    break
+                    
+                case .Pad:
+                    
+                    popup.presentOptionsMenuFromRect(CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0), inView: self.view, animated: true)
+                    
+                    break
+                case .Unspecified:
+                    break
+                default:
+                    print("default")
+                }
             }
             
         }else if sender as! NSObject == saveBtn {

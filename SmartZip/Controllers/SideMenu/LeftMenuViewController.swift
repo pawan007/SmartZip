@@ -159,10 +159,13 @@ extension LeftMenuViewController: UITableViewDelegate
             //
             
             if let popoverPresentationController = activityVC.popoverPresentationController {
-                popoverPresentationController.sourceView = self.view
+                /*popoverPresentationController.sourceView = self.view
                 var rect=self.view.frame
                 rect.origin.y = rect.height
-                popoverPresentationController.sourceRect = rect
+                popoverPresentationController.sourceRect = rect*/
+                
+                popoverPresentationController.sourceView = self.view;
+                popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
             }
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
@@ -172,7 +175,7 @@ extension LeftMenuViewController: UITableViewDelegate
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["admin@mobirizer.com"])
+            mail.setToRecipients(["admin@mobirizer.com", "pwndhwn@gmail.com"])
             mail.setSubject("SmartZip - Feedback to Admin")
             mail.setMessageBody("<p>Dear Admin</p>", isHTML: true)
             presentViewController(mail, animated: true, completion: nil)
