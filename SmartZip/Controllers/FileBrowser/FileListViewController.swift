@@ -32,6 +32,10 @@ class FileListViewController: UIViewController {
     @IBOutlet weak var moveBtn: UIButton!
     @IBOutlet weak var deleteBtn: UIButton!
     
+    @IBOutlet weak var selectAllLabel: UILabel!
+    
+    @IBOutlet weak var selectAllInEditViewLabel: UILabel!
+    
     
     @IBOutlet weak var selectAllBtn: UIButton!
     @IBOutlet weak var zipBtn: UIButton!
@@ -374,16 +378,18 @@ extension FileListViewController{
         
         if sender as! NSObject == selectAllInEditViewBtn {
             print("SelectAllInEditViewBtn")
-            let title = selectAllInEditViewBtn.titleForState(.Normal)
+            let title = selectAllInEditViewLabel.text
             
             if title == "Select All" {
                 
-                selectAllInEditViewBtn.setTitle("Deselect All", forState: .Normal)
+                selectAllInEditViewLabel.text = "Deselect All"
+                selectAllLabel.text = "Deselect All"
                 selectAllFiles(true)
                 
             }else{
                 
-                selectAllInEditViewBtn.setTitle("Select All", forState: .Normal)
+                selectAllInEditViewLabel.text = "Select All"
+                selectAllLabel.text = "Select All"
                 selectAllFiles(false)
             }
             
@@ -440,16 +446,18 @@ extension FileListViewController{
         if sender as! NSObject == selectAllBtn {
             
             print("selectAllBtn")
-            let title = selectAllBtn.titleForState(.Normal)
+            let title = selectAllLabel.text
             
             if title == "Select All" {
                 
-                selectAllBtn.setTitle("Deselect All", forState: .Normal)
+                selectAllLabel.text = "Deselect All"
+                selectAllInEditViewLabel.text = "Deselect All"
                 selectAllFiles(true)
                 
             }else{
                 
-                selectAllBtn.setTitle("Select All", forState: .Normal)
+                selectAllLabel.text = "Select All"
+                selectAllInEditViewLabel.text = "Select All"
                 selectAllFiles(false)
             }
             
@@ -546,7 +554,7 @@ extension FileListViewController{
                 
             }else if CommonFunctions.sharedInstance.containsImageOrVideoFile(filesForSharing) == false{
                 
-                self.showAlertViewWithMessage("", message: "Please select only one file that you would like to open in another app.")
+                self.showAlertViewWithMessage("", message: "Please select atleast one photo/video file that you would like to save to your album")
                 
             }else{
                 
