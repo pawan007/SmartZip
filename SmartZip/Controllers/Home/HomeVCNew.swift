@@ -11,7 +11,7 @@ import MediaPlayer
 import MobileCoreServices
 import AssetsLibrary
 import SSZipArchive
-import SwiftSpinner
+//import SwiftSpinner
 import QBImagePickerController
 //import NADocumentPicker
 

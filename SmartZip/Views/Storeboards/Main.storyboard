@@ -2058,7 +2058,9 @@
                         <outlet property="renameBtn" destination="6uF-7F-Mqv" id="JQa-Q0-LQd"/>
                         <outlet property="saveBtn" destination="Mqd-5F-WhQ" id="ZU1-GL-kQ7"/>
                         <outlet property="selectAllBtn" destination="sCc-9w-ehF" id="md9-zY-ZwM"/>
+                        <outlet property="selectAllImage" destination="2Pk-F3-tUj" id="03C-tF-ill"/>
                         <outlet property="selectAllInEditViewBtn" destination="hX0-11-GB9" id="3QY-0M-aRJ"/>
+                        <outlet property="selectAllInEditViewImage" destination="1KO-bI-2gz" id="7ZW-Wa-Yhq"/>
                         <outlet property="selectAllInEditViewLabel" destination="Uas-Y7-7g7" id="pFj-Qi-AhY"/>
                         <outlet property="selectAllLabel" destination="Plv-NN-n0d" id="TvR-pd-gXZ"/>
                         <outlet property="shareBtn" destination="Euf-1e-cA9" id="bY0-kY-Xdg"/>

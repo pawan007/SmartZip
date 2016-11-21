@@ -24,6 +24,7 @@
 		8709B7AF1D9192DE0006DCCC /* WLCTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */; };
 		8709B7B11D9193CC0006DCCC /* TutorialCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */; };
 		874AA99F1DBA710A00B455BD /* ExtraWork.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 874AA99E1DBA710A00B455BD /* ExtraWork.storyboard */; };
+		8760B0BE1DE3724500B52391 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8760B0BD1DE3724500B52391 /* SwiftSpinner.swift */; };
 		8786ADC11DA0F9710027BE20 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8786ADC01DA0F9710027BE20 /* CloudKit.framework */; };
 		87902D081D41403700D475AC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87902D071D41403700D475AC /* HistoryVC.swift */; };
 		879A2A0D1D899BA3003283C3 /* AboutCompanyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */; };
@@ -189,6 +190,7 @@
 		8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WLCTutorialVC.swift; path = Images/WLCTutorialVC.swift; sourceTree = "<group>"; };
 		8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialCollectionViewCell.swift; path = Images/TutorialCollectionViewCell.swift; sourceTree = "<group>"; };
 		874AA99E1DBA710A00B455BD /* ExtraWork.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExtraWork.storyboard; sourceTree = "<group>"; };
+		8760B0BD1DE3724500B52391 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		8786ADC01DA0F9710027BE20 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		87902D071D41403700D475AC /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCompanyVC.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 		D44DF2B91D1E802E000C75B7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				8760B0BD1DE3724500B52391 /* SwiftSpinner.swift */,
 				D44DF2BA1D1E802E000C75B7 /* AppDelegate+Notification.swift */,
 				D44DF2BB1D1E802E000C75B7 /* AppDelegate.swift */,
 				D44DF2BD1D1E802E000C75B7 /* fonts */,
@@ -970,12 +973,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4284CCF1D1E4B9800E1BCA9 /* Build configuration list for PBXNativeTarget "SmartZipTests" */;
 			buildPhases = (
-				7B1704A0368B4AE0BF6176D7 /* [CP] Check Pods Manifest.lock */,
 				D4284CB41D1E4B9800E1BCA9 /* Sources */,
 				D4284CB51D1E4B9800E1BCA9 /* Frameworks */,
 				D4284CB61D1E4B9800E1BCA9 /* Resources */,
-				732CF205F55F6B2CFB01DB50 /* [CP] Embed Pods Frameworks */,
-				F77AA0578C1834748492EA9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -991,11 +991,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4284CD21D1E4B9800E1BCA9 /* Build configuration list for PBXNativeTarget "SmartZipUITests" */;
 			buildPhases = (
-				4FBBBBFD75ADC66C3D5422C3 /* [CP] Check Pods Manifest.lock */,
 				D4284CBF1D1E4B9800E1BCA9 /* Sources */,
 				D4284CC01D1E4B9800E1BCA9 /* Frameworks */,
 				D4284CC11D1E4B9800E1BCA9 /* Resources */,
-				1B03CC697C247C3C7E13704C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1137,21 +1135,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1B03CC697C247C3C7E13704C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZipUITests/Pods-SmartZipUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1D985E1B950B5C22E201D672 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1167,66 +1150,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4FBBBBFD75ADC66C3D5422C3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		732CF205F55F6B2CFB01DB50 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B1704A0368B4AE0BF6176D7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F77AA0578C1834748492EA9B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartZipTests/Pods-SmartZipTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F788B5F2C938A25C3BA51A8D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1239,7 +1162,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1309,6 +1232,7 @@
 				D44DF3791D1E802E000C75B7 /* NotificationViewController.swift in Sources */,
 				14C2CBEA1D43C95200F7472A /* IAPHelper.swift in Sources */,
 				D44DF3951D1E802E000C75B7 /* DesignableView.swift in Sources */,
+				8760B0BE1DE3724500B52391 /* SwiftSpinner.swift in Sources */,
 				D44DF3911D1E802E000C75B7 /* DesignableButton.swift in Sources */,
 				D44DF39E1D1E802E000C75B7 /* Double+Additions.swift in Sources */,
 				870744931D6CA9B60001B353 /* UnZipExternal.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SwiftSpinner
+//import SwiftSpinner
 
 protocol MoveFileDelegate {
     func cancelMoveFile()
@@ -42,6 +42,9 @@ class FileListViewController: UIViewController {
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var openInBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
+    
+    @IBOutlet weak var selectAllImage: UIImageView!
+    @IBOutlet weak var selectAllInEditViewImage: UIImageView!
     
     
     @IBOutlet weak var bottomHeightConstant: NSLayoutConstraint!
@@ -384,12 +387,16 @@ extension FileListViewController{
                 
                 selectAllInEditViewLabel.text = "Deselect All"
                 selectAllLabel.text = "Deselect All"
+                selectAllImage.image = UIImage(named: "icon-deselect-all")
+                selectAllInEditViewImage.image = UIImage(named: "icon-deselect-all")
                 selectAllFiles(true)
                 
             }else{
                 
                 selectAllInEditViewLabel.text = "Select All"
                 selectAllLabel.text = "Select All"
+                selectAllImage.image = UIImage(named: "icon-select-all")
+                selectAllInEditViewImage.image = UIImage(named: "icon-select-all")
                 selectAllFiles(false)
             }
             
@@ -452,12 +459,16 @@ extension FileListViewController{
                 
                 selectAllLabel.text = "Deselect All"
                 selectAllInEditViewLabel.text = "Deselect All"
+                selectAllImage.image = UIImage(named: "icon-deselect-all")
+                selectAllInEditViewImage.image = UIImage(named: "icon-deselect-all")
                 selectAllFiles(true)
                 
             }else{
                 
                 selectAllLabel.text = "Select All"
                 selectAllInEditViewLabel.text = "Select All"
+                selectAllImage.image = UIImage(named: "icon-select-all")
+                selectAllInEditViewImage.image = UIImage(named: "icon-select-all")
                 selectAllFiles(false)
             }
             
