@@ -10,21 +10,21 @@ import Foundation
 import UIKit
 
 /// FBFile is a class representing a file in FileBrowser
-public class FBFile: NSObject {
+open class FBFile: NSObject {
     /// Display name. String.
-    public let displayName: String
+    open let displayName: String
     // is Directory. Bool.
-    public let isDirectory: Bool
+    open let isDirectory: Bool
     /// File extension.
-    public let fileExtension: String?
+    open let fileExtension: String?
     /// File attributes (including size, creation date etc).
-    public let fileAttributes: NSDictionary?
+    open let fileAttributes: NSDictionary?
     /// NSURL file path.
-    public let filePath: NSURL
+    open let filePath: URL
     // FBFileType
-    public let type: FBFileType
+    open let type: FBFileType
     
-    public var isChecked = false
+    open var isChecked = false
     
     /**
      Initialize an FBFile object with a filePath
@@ -33,7 +33,7 @@ public class FBFile: NSObject {
      
      - returns: FBFile object.
      */
-    init(filePath: NSURL) {
+    init(filePath: URL) {
         self.filePath = filePath
         let isDirectory = checkDirectory(filePath)
         self.isDirectory = isDirectory
@@ -111,26 +111,26 @@ public enum FBFileType: String {
      - returns: UIImage for file type
      */
     public func image() -> UIImage? {
-        let bundle =  NSBundle(forClass: FileParser.self)
+        let bundle =  Bundle(for: FileParser.self)
         var fileName = String()
         switch self {
-        case Directory: fileName = "myfolder"
+        case .Directory: fileName = "myfolder"
 //        case JPG, jpg, JPEG, jpeg, PNG, png, GIF, gif: fileName = "image"
-        case JPG, jpg : fileName = "jpg"
-        case PNG, png : fileName = "png"
-        case GIF, gif : fileName = "gif"
-        case PDF, pdf: fileName = "pdf"
-        case DOC, doc: fileName = "doc"
-            case TXT, txt: fileName = "txt"
-        case ZIP, zip: fileName = "zip"
+        case .JPG, .jpg : fileName = "jpg"
+        case .PNG, .png : fileName = "png"
+        case .GIF, .gif : fileName = "gif"
+        case .PDF, .pdf: fileName = "pdf"
+        case .DOC, .doc: fileName = "doc"
+            case .TXT, .txt: fileName = "txt"
+        case .ZIP, .zip: fileName = "zip"
             
-        case mp3, MP3,WAV,wav: fileName = "music"
-        case m4v, M4V, mp4, MP4, MOV, mov: fileName = "video"
+        case .mp3, .MP3,.WAV,.wav: fileName = "music"
+        case .m4v, .M4V, .mp4, .MP4, .MOV, .mov: fileName = "video"
             
             
         default: fileName = "fileIcon"
         }
-        let file = UIImage(named: fileName, inBundle: bundle, compatibleWithTraitCollection: nil)
+        let file = UIImage(named: fileName, in: bundle, compatibleWith: nil)
         return file
     }
 }
@@ -142,12 +142,12 @@ public enum FBFileType: String {
  
  - returns: isDirectory Bool.
  */
-func checkDirectory(filePath: NSURL) -> Bool {
+func checkDirectory(_ filePath: URL) -> Bool {
     var isDirectory = false
     do {
         var resourceValue: AnyObject?
-        try filePath.getResourceValue(&resourceValue, forKey: NSURLIsDirectoryKey)
-        if let number = resourceValue as? NSNumber where number == true {
+        try (filePath as NSURL).getResourceValue(&resourceValue, forKey: URLResourceKey.isDirectoryKey)
+        if let number = resourceValue as? NSNumber, number == true {
             isDirectory = true
         }
     }
@@ -155,13 +155,13 @@ func checkDirectory(filePath: NSURL) -> Bool {
     return isDirectory
 }
 
-func getFileAttributes(filePath: NSURL) -> NSDictionary? {
+func getFileAttributes(_ filePath: URL) -> NSDictionary? {
     guard let path = filePath.path else {
         return nil
     }
     let fileManager = FileParser.sharedInstance.fileManager
     do {
-        let attributes = try fileManager.attributesOfItemAtPath(path) as NSDictionary
+        let attributes = try fileManager.attributesOfItem(atPath: path) as NSDictionary
         return attributes
     } catch {}
     return nil

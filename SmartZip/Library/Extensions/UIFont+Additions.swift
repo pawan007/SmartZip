@@ -8,11 +8,11 @@
 import Foundation
 // MARK: - UIFont Extension
 extension UIFont {
-    func helvaticaNewBold(size: CGFloat) -> UIFont {
+    func helvaticaNewBold(_ size: CGFloat) -> UIFont {
         return UIFont(name: "helvetica", size: size)!
     }
     
-    func proximaRegular(size: CGFloat) -> UIFont {
+    func proximaRegular(_ size: CGFloat) -> UIFont {
         return UIFont(name: "ProximaNovaA-Regular", size: size)!
     }
 }

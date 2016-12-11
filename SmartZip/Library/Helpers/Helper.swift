@@ -19,7 +19,7 @@ let ACCESS_TOKEN_KEY = "accessToken"
  
  - returns: true if initialized
  */
-public func isObjectInitialized (value: AnyObject?) -> Bool {
+public func isObjectInitialized (_ value: AnyObject?) -> Bool {
     guard let _ = value else {
         return false
     }
@@ -27,36 +27,36 @@ public func isObjectInitialized (value: AnyObject?) -> Bool {
 }
 
 public func documentsDirectoryPath () -> String? {
-    return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+    return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
 }
 
-public let documentsDirectoryURL: NSURL = {
-    let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+public let documentsDirectoryURL: URL = {
+    let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return urls[urls.endIndex - 1]
 }()
 
-public let cacheDirectoryURL: NSURL = {
-    let urls = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)
+public let cacheDirectoryURL: URL = {
+    let urls = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
     return urls[urls.endIndex - 1]
 }()
 
 public func deviceId () -> String {
     
-    if let deviceID = NSUserDefaults.objectForKey(DEVICE_ID_KEY) {
+    if let deviceID = UserDefaults.objectForKey(DEVICE_ID_KEY) {
         return deviceID as! String
     } else {
         let deviceID = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? ""
-        NSUserDefaults.setObject(deviceID, forKey: DEVICE_ID_KEY)
+        UserDefaults.setObject(deviceID, forKey: DEVICE_ID_KEY)
         return deviceID
     }
 }
 
 public func accessToken () -> String? {
-    return NSUserDefaults.objectForKey(ACCESS_TOKEN_KEY) as? String
+    return UserDefaults.objectForKey(ACCESS_TOKEN_KEY) as? String
 }
 
-public func saveAccessToken (token: String) {
-    NSUserDefaults.setObject(token, forKey: ACCESS_TOKEN_KEY)
+public func saveAccessToken (_ token: String) {
+    UserDefaults.setObject(token, forKey: ACCESS_TOKEN_KEY)
 }
 
 public func deviceInfo () -> [String: String] {
@@ -69,10 +69,10 @@ public func deviceInfo () -> [String: String] {
     return deviceInfo
 }
 
-public func addAdditionalParameters (params: [String: AnyObject]) -> [String: AnyObject] {
+public func addAdditionalParameters (_ params: [String: AnyObject]) -> [String: AnyObject] {
     
     var finalParams = params
-    finalParams["deviceInfo"] = deviceInfo()
+    finalParams["deviceInfo"] = deviceInfo() as AnyObject?
     return finalParams
 }
 
@@ -82,8 +82,8 @@ public func addAdditionalParameters (params: [String: AnyObject]) -> [String: An
  - returns: Version of app
  */
 public func applicationVersion () -> String {
-    let info: NSDictionary = NSBundle.mainBundle().infoDictionary!
-    return  info.objectForKey("CFBundleVersion") as! String
+    let info: NSDictionary = Bundle.main.infoDictionary! as NSDictionary
+    return  info.object(forKey: "CFBundleVersion") as! String
 }
 
 /**
@@ -92,7 +92,7 @@ public func applicationVersion () -> String {
  - returns: NSBundle identifier of app
  */
 func applicationBundleIdentifier () -> NSString {
-    return NSBundle.mainBundle().bundleIdentifier!
+    return Bundle.main.bundleIdentifier! as NSString
 }
 
 /**
@@ -101,6 +101,6 @@ func applicationBundleIdentifier () -> NSString {
  - returns: Name of app
  */
 func applicationName () -> String {
-    let info:NSDictionary = NSBundle.mainBundle().infoDictionary!
-    return  info.objectForKey("CFBundleDisplayName") as! String
+    let info:NSDictionary = Bundle.main.infoDictionary! as NSDictionary
+    return  info.object(forKey: "CFBundleDisplayName") as! String
 }

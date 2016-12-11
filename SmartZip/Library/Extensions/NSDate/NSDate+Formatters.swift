@@ -7,43 +7,43 @@
 
 import Foundation
 
-public extension NSDate {
+public extension Date {
     
-    public class func dateFormatCCCCDDMMMYYYY() ->String {
+    public static func dateFormatCCCCDDMMMYYYY() ->String {
         return "cccc, dd MMM yyyy"
     }
-    public class func dateFormatCCCCDDMMMMYYYY() ->String {
+    public static func dateFormatCCCCDDMMMMYYYY() ->String {
         return "cccc, dd MMMM yyyy"
     }
-    public class func dateFormatDDMMMYYYY() ->String {
+    public static func dateFormatDDMMMYYYY() ->String {
         return "dd MMM yyyy"
     }
-    public class func dateFormatDDMMYYYYDashed() ->String {
+    public static func dateFormatDDMMYYYYDashed() ->String {
         return "dd-MM-yyyy"
     }
-    public class func dateFormatDDMMYYYYSlashed() ->String {
+    public static func dateFormatDDMMYYYYSlashed() ->String {
         return "dd/MM/yyyy"
     }
-    public class func dateFormatDDMMMYYYYSlashed() ->String {
+    public static func dateFormatDDMMMYYYYSlashed() ->String {
         return "dd/MMM/yyyy"
     }
-    public class func dateFormatMMMDDYYYY() ->String {
+    public static func dateFormatMMMDDYYYY() ->String {
         return "MMM dd, yyyy"
     }
-    public class func dateFormatYYYYMMDDDashed() ->String {
+    public static func dateFormatYYYYMMDDDashed() ->String {
         return "yyyy-MM-dd"
     }
     
     public func formattedString() -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = NSDate.dateFormatDDMMYYYYDashed()
-        return formatter.stringFromDate(self)
+        let formatter = DateFormatter()
+        formatter.dateFormat = Date.dateFormatDDMMYYYYDashed()
+        return formatter.string(from: self)
     }
     
-    public func formattedStringUsingFormat(format: String) -> String {
-        let formatter = NSDateFormatter()
+    public func formattedStringUsingFormat(_ format: String) -> String {
+        let formatter = DateFormatter()
         formatter.dateFormat = format
-        return formatter.stringFromDate(self)
+        return formatter.string(from: self)
     }
     
 }

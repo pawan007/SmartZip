@@ -24,53 +24,53 @@ class HistoryVC: UIViewController {
     
     override func viewDidLoad() {
         // Register the table view cell class and its reuse id
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         //        self.navigationController?.navigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         getZipFileList()
     }
     
     // number of rows in table view
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.fileNames.count
     }
     
     // create a cell for each table view row
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
         // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
+        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         cell.textLabel?.text = fileNames[indexPath.row]
         return cell
     }
     
     // method to run when table view cell is tapped
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         
         print("You tapped cell number \(indexPath.row).")
         showActionSheet(indexPath.row)
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool{
+    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool{
         
         return false
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath){
         
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             
             let path = filePaths[indexPath.row]
             print(path)
-            try! kFileManager.removeItemAtPath(filePaths[indexPath.row])
-            filePaths.removeAtIndex(indexPath.row)
-            fileNames.removeAtIndex(indexPath.row)
+            try! kFileManager.removeItem(atPath: filePaths[indexPath.row])
+            filePaths.remove(at: indexPath.row)
+            fileNames.remove(at: indexPath.row)
             tableView.reloadData()
         }
         
     }
     
-    @IBAction   func menuButtonAction(sender: AnyObject) {
+    @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 
@@ -80,12 +80,12 @@ class HistoryVC: UIViewController {
     
     func getZipFileList() -> Void {
         
-        let directoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+        let directoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
         
-        if let enumerator = kFileManager.enumeratorAtPath(directoryPath!) {
+        if let enumerator = kFileManager.enumerator(atPath: directoryPath!) {
             while let fileName = enumerator.nextObject() as? String {
                 
-                if fileName.containsString(".zip") {
+                if fileName.contains(".zip") {
                     
                     fileNames.append(fileName)
                     filePaths.append("\(directoryPath!)/\(fileName)")
@@ -100,19 +100,19 @@ class HistoryVC: UIViewController {
     
     
     
-    func showActionSheet(index:Int) {
+    func showActionSheet(_ index:Int) {
         //Create the AlertController
-        let actionSheetController: UIAlertController = UIAlertController(title: kAlertTitle, message: "", preferredStyle: .ActionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: kAlertTitle, message: "", preferredStyle: .actionSheet)
         
         //Create and add the Cancel action
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
             //Just dismiss the action sheet
             CommonFunctions.sharedInstance.getFreeDiscSpase()
             
         }
         actionSheetController.addAction(cancelAction)
         //Create and add first option action
-        let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
+        let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { action -> Void in
             //Code for launching the camera goes here
             let path = self.filePaths[index]
             print(path)
@@ -121,13 +121,13 @@ class HistoryVC: UIViewController {
         }
         actionSheetController.addAction(takePictureAction)
         //Create and add a second option action
-        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
+        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .default) { action -> Void in
             //Code for picking from camera roll goes here
             let path = self.filePaths[index]
             print(path)
-            try! kFileManager.removeItemAtPath(self.filePaths[index])
-            self.filePaths.removeAtIndex(index)
-            self.fileNames.removeAtIndex(index)
+            try! kFileManager.removeItem(atPath: self.filePaths[index])
+            self.filePaths.remove(at: index)
+            self.fileNames.remove(at: index)
             self.tableView.reloadData()
         }
         actionSheetController.addAction(choosePictureAction)
@@ -139,6 +139,6 @@ class HistoryVC: UIViewController {
             popoverPresentationController.sourceRect = rect
         }
         //Present the AlertController
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
 }

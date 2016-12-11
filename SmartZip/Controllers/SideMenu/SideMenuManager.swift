@@ -13,7 +13,7 @@ import MMDrawerController
 class SideMenuManager: NSObject {
     
     // MARK: - Singleton Instance
-    private static let _sharedManager = SideMenuManager()
+    fileprivate static let _sharedManager = SideMenuManager()
     
     var container: MMDrawerController? = MMDrawerController()
     var center: UIViewController {
@@ -27,7 +27,7 @@ class SideMenuManager: NSObject {
         }
     }
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
@@ -36,7 +36,7 @@ class SideMenuManager: NSObject {
      
      - parameter block: drawer object
      */
-    func setValues(block: (MMDrawerController)->()) {
+    func setValues(_ block: (MMDrawerController)->()) {
         assert(container != nil, "Container(Drawer) must be set")
         block(container!)
     }

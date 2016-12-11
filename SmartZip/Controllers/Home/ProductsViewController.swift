@@ -26,7 +26,7 @@ class ProductsViewController: BaseViewController {
         self.tableView.tableFooterView = UIView()
         
         // Create a Restore Purchases button and hook it up to restoreTapped
-        let restoreButton = UIBarButtonItem(title: "Restore", style: .Plain, target: self, action: #selector(self.restoreTapped(_:)))
+        let restoreButton = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(self.restoreTapped(_:)))
         
         // Enable view controller to listen observers
         addObservers()
@@ -55,10 +55,10 @@ class ProductsViewController: BaseViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    private func addObservers() {
+    fileprivate func addObservers() {
         // Subscribe to a notification that fires when a product is purchased.
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.productPurchased(_:)), name: InAppPurchaseManager.Notifications.InAppProductPurchasedSuccessNotification, object: nil)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProductsViewController.purchaseFailed(_:)), name: InAppPurchaseManager.Notifications.InAppProductPurchasedFailedNotification, object: nil)
@@ -68,7 +68,7 @@ class ProductsViewController: BaseViewController {
     
     
     // MARK: Navigation Method
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == productDetailSegueIdentifier {
             //            if let destination = segue.destinationViewController as? ProductDetailVC {
             //                let indexPath:NSIndexPath! = sender as? NSIndexPath
@@ -81,7 +81,7 @@ class ProductsViewController: BaseViewController {
     
     // MARK: - Private Actions
     // MARK: Purchase
-    internal func beginPurchase(index: NSInteger) {
+    internal func beginPurchase(_ index: NSInteger) {
         //        if let _: Bool! = InAppPurchaseManager.sharedManager().canMakePurchases() {
         //            let product = self.products[index]
         //            LogManager.logInfo("selected product is = \(product.localizedTitle)")
@@ -94,29 +94,29 @@ class ProductsViewController: BaseViewController {
         //        }
     }
     
-    func productPurchased(notification: NSNotification) {
+    func productPurchased(_ notification: Notification) {
         LogManager.logInfo("Success !! product purchased")
         
         // give user credits for the purchase
         // hit api to update server, if needed
     }
     
-    func purchaseFailed(notification: NSNotification) {
+    func purchaseFailed(_ notification: Notification) {
         let error: NSError? = notification.object as! NSError?
         LogManager.logError("Failure !! purchase failed = \(error)")
     }
     
     // MARK: Restore
-    func restoreTapped(sender: AnyObject?) {
+    func restoreTapped(_ sender: AnyObject?) {
         LogManager.logInfo("restore products...")
         // InAppPurchaseManager.sharedManager().restorePurchases()
     }
     
-    func productsRestored(notification: NSNotification) {
+    func productsRestored(_ notification: Notification) {
         LogManager.logInfo("Success !! products restored")
     }
     
-    func restoreFailed(notification: NSNotification) {
+    func restoreFailed(_ notification: Notification) {
         let error: NSError? = notification.object as! NSError?
         LogManager.logError("Failure !! restore failed = \(error)")
     }
@@ -125,12 +125,12 @@ class ProductsViewController: BaseViewController {
 extension ProductsViewController: UITableViewDataSource {
     
     // MARK: TableView DataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.products.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: FeedCell! = self.tableView.dequeueReusableCellWithIdentifier(productCellIdentifier, forIndexPath: indexPath) as! FeedCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: productCellIdentifier, for: indexPath) as! UITableViewCell
         //        cell.delegate = self
         //        cell.index = indexPath.row
         //        let product = self.products[indexPath.row]

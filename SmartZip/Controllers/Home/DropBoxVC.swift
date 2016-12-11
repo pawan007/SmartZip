@@ -36,15 +36,15 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
         tblFiles.delegate = self
         tblFiles.dataSource = self
         
-        progressBar.hidden = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DropBoxVC.handleDidLinkNotification(_:)), name: "didLinkToDropboxAccountNotification", object: nil)
+        progressBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(DropBoxVC.handleDidLinkNotification(_:)), name: NSNotification.Name(rawValue: "didLinkToDropboxAccountNotification"), object: nil)
         
-        if DBSession.sharedSession().isLinked() {
+        if DBSession.shared().isLinked() {
             bbiConnect.title = "Disconnect"
             initDropboxRestClient()
             
@@ -58,7 +58,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             //GADBannerView
             // self.setUpGoogleAds()
             shared = GADMasterViewController.singleton()
-            shared.resetAdView(self, andDisplayView: bannerAdView)
+            shared.resetAdView(self, andDisplay: bannerAdView)
         }
         tblFiles.tableFooterView = UIView()
     }
@@ -68,7 +68,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //        if !viewLoadedFirstTime {
@@ -81,11 +81,11 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             if(shared != nil) {
                 shared = nil
             }
-            bannerAdView.hidden = true
+            bannerAdView.isHidden = true
         }
     }
     
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
         print("FileListViewController Ad changed")
         for tempView in bannerAdView.subviews {
             tempView.removeFromSuperview()
@@ -95,13 +95,13 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     // MARK: IBAction method implementation
     
-    @IBAction func connectToDropbox(sender: AnyObject) {
+    @IBAction func connectToDropbox(_ sender: AnyObject) {
         
-        if !DBSession.sharedSession().isLinked() {
-            DBSession.sharedSession().linkFromController(self)
+        if !DBSession.shared().isLinked() {
+            DBSession.shared().link(from: self)
         }
         else {
-            DBSession.sharedSession().unlinkAll()
+            DBSession.shared().unlinkAll()
             bbiConnect.title = "Connect"
             dbRestClient = nil
             arrayDropboxMetaData.removeAllObjects()
@@ -111,35 +111,35 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     }
     
     
-    @IBAction func performAction(sender: AnyObject) {
+    @IBAction func performAction(_ sender: AnyObject) {
         
-        if !DBSession.sharedSession().isLinked() {
+        if !DBSession.shared().isLinked() {
             print("You're not connected to Dropbox")
             return
         }
         
-        let actionSheet = UIAlertController(title: "Upload file", message: "Select file to upload", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let actionSheet = UIAlertController(title: "Upload file", message: "Select file to upload", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        let uploadTextFileAction = UIAlertAction(title: "Upload text file", style: UIAlertActionStyle.Default) { (action) -> Void in
+        let uploadTextFileAction = UIAlertAction(title: "Upload text file", style: UIAlertActionStyle.default) { (action) -> Void in
             
             let uploadFilename = "testtext.txt"
-            let sourcePath = NSBundle.mainBundle().pathForResource("testtext", ofType: "txt")
+            let sourcePath = Bundle.main.path(forResource: "testtext", ofType: "txt")
             let destinationPath = "/"
             self.showProgressBar()
             self.dbRestClient.uploadFile(uploadFilename, toPath: destinationPath, withParentRev: nil, fromPath: sourcePath)
             
         }
         
-        let uploadImageFileAction = UIAlertAction(title: "Upload image", style: UIAlertActionStyle.Default) { (action) -> Void in
+        let uploadImageFileAction = UIAlertAction(title: "Upload image", style: UIAlertActionStyle.default) { (action) -> Void in
             
             let uploadFilename = "nature.jpg"
-            let sourcePath = NSBundle.mainBundle().pathForResource("nature", ofType: "jpg")
+            let sourcePath = Bundle.main.path(forResource: "nature", ofType: "jpg")
             let destinationPath = "/"
             self.showProgressBar()
             self.dbRestClient.uploadFile(uploadFilename, toPath: destinationPath, withParentRev: nil, fromPath: sourcePath)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (action) -> Void in
             
         }
         
@@ -147,20 +147,20 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         actionSheet.addAction(uploadImageFileAction)
         actionSheet.addAction(cancelAction)
         
-        presentViewController(actionSheet, animated: true, completion: nil)
+        present(actionSheet, animated: true, completion: nil)
         
     }
     
     
     
-    @IBAction func reloadFiles(sender: AnyObject) {
+    @IBAction func reloadFiles(_ sender: AnyObject) {
         
         guard Reachability.isConnectedToNetwork()else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
         
-        if !DBSession.sharedSession().isLinked() {
+        if !DBSession.shared().isLinked() {
             CommonFunctions.sharedInstance.showAlert(kAlertTitle , message: "Please connect with dropbox first", vc: self)
         }else{
             dbRestClient.loadMetadata("/")
@@ -169,14 +169,14 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     }
     
     
-    @IBAction func btnBackTapped(sender: AnyObject) {
+    @IBAction func btnBackTapped(_ sender: AnyObject) {
         
-        if DBSession.sharedSession().isLinked() {
+        if DBSession.shared().isLinked() {
             
             if arrayDropboxMetaData.count == 1 {
                 
-                self.navigationController?.navigationBarHidden = false
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.isNavigationBarHidden = false
+                self.navigationController?.popViewController(animated: true)
                 
             }else{
                 
@@ -188,8 +188,8 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             
         }else{
             
-            self.navigationController?.navigationBarHidden = false
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.isNavigationBarHidden = false
+            self.navigationController?.popViewController(animated: true)
         }
         
     }
@@ -197,11 +197,11 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     // MARK: UITableview method implementation
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
         
@@ -214,8 +214,8 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         return 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCellFile", for: indexPath)
         let currentFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         cell.textLabel?.text = currentFile.filename
         
@@ -233,11 +233,11 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard Reachability.isConnectedToNetwork()else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
@@ -265,20 +265,20 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         
         let tempDirectoryTemplate = "\(NSTemporaryDirectory())/thumbnails"
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        if fileManager.fileExistsAtPath(tempDirectoryTemplate) {
-            try! fileManager.removeItemAtPath(tempDirectoryTemplate)
+        if fileManager.fileExists(atPath: tempDirectoryTemplate) {
+            try! fileManager.removeItem(atPath: tempDirectoryTemplate)
         }
         
-        try! fileManager.createDirectoryAtPath(tempDirectoryTemplate, withIntermediateDirectories: true, attributes: nil)
+        try! fileManager.createDirectory(atPath: tempDirectoryTemplate, withIntermediateDirectories: true, attributes: nil)
         
         return tempDirectoryTemplate
         
     }
     
     
-    func handleDidLinkNotification(notification: NSNotification) {
+    func handleDidLinkNotification(_ notification: Notification) {
         initDropboxRestClient()
         bbiConnect.title = "Disconnect"
     }
@@ -292,59 +292,59 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
             return
         }
         
-        dbRestClient = DBRestClient(session: DBSession.sharedSession())
+        dbRestClient = DBRestClient(session: DBSession.shared())
         dbRestClient.delegate = self
         dbRestClient.loadMetadata("/")
     }
     
-    func restClient(client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
+    func restClient(_ client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
         print("The file has been uploaded.")
         print(metadata.path)
-        progressBar.hidden = true
+        progressBar.isHidden = true
         dbRestClient.loadMetadata("/")
     }
     
-    func restClient(client: DBRestClient!, uploadFileFailedWithError error: NSError!) {
+    func restClient(_ client: DBRestClient!, uploadFileFailedWithError error: NSError!) {
         print("File upload failed.")
         print(error.description)
-        progressBar.hidden = true
+        progressBar.isHidden = true
         SwiftSpinner.hide()
     }
     
-    func restClient(client: DBRestClient!, uploadProgress progress: CGFloat, forFile destPath: String!, from srcPath: String!) {
+    func restClient(_ client: DBRestClient!, uploadProgress progress: CGFloat, forFile destPath: String!, from srcPath: String!) {
         progressBar.progress = Float(progress)
     }
     
     func showProgressBar() {
         progressBar.progress = 0.0
-        progressBar.hidden = false
+        progressBar.isHidden = false
         
         SwiftSpinner.show("Processing, please wait..")
         
     }
     
-    func restClient(client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
+    func restClient(_ client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
         
         SwiftSpinner.hide()
         
         dropboxMetadata = metadata;
         
-        arrayDropboxMetaData.addObject(metadata)
+        arrayDropboxMetaData.add(metadata)
         
         tblFiles.reloadData()
     }
     
-    func restClient(client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
+    func restClient(_ client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
         print(error.description)
         SwiftSpinner.hide()
     }
     
-    func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
+    func restClient(_ client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
         
         SwiftSpinner.hide()
         
         print("The file \(metadata.filename) was downloaded. Content type: \(contentType)")
-        progressBar.hidden = true
+        progressBar.isHidden = true
         
         let zipPath = "\(currentFilePath).zip"
         CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: currentFilePath, vc: self)
@@ -352,13 +352,13 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         
     }
     
-    func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
+    func restClient(_ client: DBRestClient!, loadFileFailedWithError error: NSError!) {
         print(error.description)
-        progressBar.hidden = true
+        progressBar.isHidden = true
         SwiftSpinner.hide()
     }
     
-    func restClient(client: DBRestClient!, loadProgress progress: CGFloat, forFile destPath: String!) {
+    func restClient(_ client: DBRestClient!, loadProgress progress: CGFloat, forFile destPath: String!) {
         progressBar.progress = Float(progress)
         let val:Int = Int(progress * 100)
         print(val)
@@ -366,12 +366,12 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     }
     
     
-    func restClient(client: DBRestClient!, loadedThumbnail destPath: String!) {
+    func restClient(_ client: DBRestClient!, loadedThumbnail destPath: String!) {
         
         print(destPath)
     }
     
-    func restClient(client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
+    func restClient(_ client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
         
         print(error.description)
         

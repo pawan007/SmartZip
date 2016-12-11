@@ -39,10 +39,10 @@ struct Constants {
 
 var Timestamp: String {
     
-    let date = NSDate()
-    let dateFormatter = NSDateFormatter()
+    let date = Date()
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd-MM-YYYY_HH-mm"
-    return dateFormatter.stringFromDate(date)
+    return dateFormatter.string(from: date)
 }
 
 let ResTypeAudio = "audio"
@@ -51,7 +51,7 @@ let ResTypeImage = "image"
 let ResTypeDoc = "document"
 
 let kAlertTitle = "SmartZip"
-let kFileManager = NSFileManager.defaultManager()
+let kFileManager = FileManager.default
 
 // narender.mobirizer@gmail.com
 // narender@mobirizer
@@ -62,7 +62,7 @@ let kGoogleInterstitialAd = "ca-app-pub-7753603434154239/6274659704"
 let kIsRemovedFullPageAds = "removedFullPageAds"
 let kIsRemovedBannerAds   = "removedBannerPageAds"
 
-let APPDELEGATE = UIApplication.sharedApplication().delegate as! AppDelegate
+let APPDELEGATE = UIApplication.shared.delegate as! AppDelegate
 
 
 

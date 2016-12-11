@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol FeedCellDelegate1: class {
-    func heartClick(index: NSInteger)
+    func heartClick(_ index: NSInteger)
 }
 
 class FeedCell: UITableViewCell {
@@ -24,7 +24,7 @@ class FeedCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        let screenRatio = (UIScreen.mainScreen().bounds.size.width / CGFloat(Constants.DEFAULT_SCREEN_RATIO))
+        let screenRatio = (UIScreen.main.bounds.size.width / CGFloat(Constants.DEFAULT_SCREEN_RATIO))
         let imgHight = 200 * screenRatio
         self.imageHighConst.constant=imgHight
         
@@ -43,12 +43,12 @@ class FeedCell: UITableViewCell {
          
          */
         
-        let url:NSURL? = NSURL(string: "http://www.blueevents-agency.com/wp-content/uploads/2013/11/explore-events-food-and-wine-events.jpg")
+        let url:URL? = URL(string: "http://www.blueevents-agency.com/wp-content/uploads/2013/11/explore-events-food-and-wine-events.jpg")
         imageView!.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "img_shadow"))
 
      }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -56,8 +56,8 @@ class FeedCell: UITableViewCell {
     
     
     // MARK: Control Actions
-    @IBAction private func heartClick(sender: UIButton) {
-        sender.selected  = !sender.selected;
+    @IBAction fileprivate func heartClick(_ sender: UIButton) {
+        sender.isSelected  = !sender.isSelected;
         if (self.delegate != nil) {
             self.delegate?.heartClick(index)
         }

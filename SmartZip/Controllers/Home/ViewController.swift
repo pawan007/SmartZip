@@ -39,13 +39,13 @@ class ViewController: UIViewController {
     }
     
     
-    override internal func viewWillAppear(animated: Bool) {
+    override internal func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.isHidden = false
         self.automaticallyAdjustsScrollViewInsets = false
         
     }    // MARK:- IBActions
-    @IBAction   func menuButtonAction(sender: AnyObject) {
+    @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 
@@ -54,13 +54,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func zipPressed(_: UIButton) {
-        let sampleDataPath = NSBundle.mainBundle().bundleURL.URLByAppendingPathComponent("Sample Data").path
+        let sampleDataPath = Bundle.main.bundleURL.appendingPathComponent("Sample Data").path
         zipPath = tempZipPath()
         
         let success = SSZipArchive.createZipFileAtPath(zipPath!, withContentsOfDirectory: sampleDataPath!)
         if success {
-            unzipButton.enabled = true
-            zipButton.enabled = false
+            unzipButton.isEnabled = true
+            zipButton.isEnabled = false
         }
     }
     
@@ -80,12 +80,12 @@ class ViewController: UIViewController {
         
         var items: [String]
         do {
-            items = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(unzipPath)
+            items = try FileManager.default.contentsOfDirectory(atPath: unzipPath)
         } catch {
             return
         }
         
-        for (index, item) in items.enumerate() {
+        for (index, item) in items.enumerated() {
             switch index {
             case 0:
                 file1.text = item
@@ -98,34 +98,34 @@ class ViewController: UIViewController {
             }
         }
         
-        unzipButton.enabled = false
-        resetButton.enabled = true
+        unzipButton.isEnabled = false
+        resetButton.isEnabled = true
     }
     
     @IBAction func resetPressed(_: UIButton) {
         file1.text = ""
         file2.text = ""
         file3.text = ""
-        zipButton.enabled = true
-        unzipButton.enabled = false
-        resetButton.enabled = false
+        zipButton.isEnabled = true
+        unzipButton.isEnabled = false
+        resetButton.isEnabled = false
     }
     
     // MARK: Private
     
     func tempZipPath() -> String {
-        var path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-        path += "/\(NSUUID().UUIDString).zip"
+        var path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        path += "/\(UUID().uuidString).zip"
         return path
     }
     
     func tempUnzipPath() -> String? {
-        var path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-        path += "/\(NSUUID().UUIDString)"
-        let url = NSURL(fileURLWithPath: path)
+        var path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        path += "/\(UUID().uuidString)"
+        let url = URL(fileURLWithPath: path)
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
             return nil
         }

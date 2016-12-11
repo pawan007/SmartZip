@@ -22,7 +22,7 @@ class WebViewController: BaseViewController {
             self.title = self.navigationItem.title
         }
         
-        self.webView.loadRequest(NSURLRequest(URL: NSURL(string: self.urlString)!))
+        self.webView.loadRequest(URLRequest(url: URL(string: self.urlString)!))
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,11 +44,11 @@ class WebViewController: BaseViewController {
 
 extension WebViewController : UIWebViewDelegate {
     
-    func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(_ webView: UIWebView) {
         self.activityView.startAnimating()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         self.activityView.stopAnimating()
     }
 }

@@ -51,13 +51,13 @@ class FileListViewController: UIViewController {
     
     // TableView
     @IBOutlet weak var tableView: UITableView!
-    let collation = UILocalizedIndexedCollation.currentCollation()
+    let collation = UILocalizedIndexedCollation.current()
     
     /// Data
     var didSelectFile: ((FBFile) -> ())?
     var files = [FBFile]()
     var filesForSharing = [FBFile]()
-    var initialPath: NSURL?
+    var initialPath: URL?
     let parser = FileParser.sharedInstance
     let previewManager = PreviewManager()
     var sections: [[FBFile]] = []
@@ -70,8 +70,8 @@ class FileListViewController: UIViewController {
     var filteredFiles = [FBFile]()
     let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.searchBar.backgroundColor = UIColor.whiteColor()
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.backgroundColor = UIColor.white
         searchController.dimsBackgroundDuringPresentation = false
         return searchController
     }()
@@ -81,16 +81,16 @@ class FileListViewController: UIViewController {
     var flagMoveItem = false
     
     var delegate:MoveFileDelegate?
-    var moveItemPaths = [NSURL]()
+    var moveItemPaths = [URL]()
     
     var imageOpenCounter = 0
     var imageCloseCounter = 0
     
-    convenience init (initialPath: NSURL) {
+    convenience init (initialPath: URL) {
         
         //        self.init(nibName: "FileBrowser", bundle: NSBundle(forClass: FileListViewController.self))
         self.init()
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         // Set initial path
         self.initialPath = initialPath
@@ -119,14 +119,14 @@ class FileListViewController: UIViewController {
     override func viewDidLoad() {
         
         // Prepare data
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         if  FileParser.sharedInstance.currentPath == nil{
-            self.initialPath = FileParser.sharedInstance.documentsURL()
+            self.initialPath = FileParser.sharedInstance.documentsURL() as URL
             FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
             
         }else{
-            self.initialPath = FileParser.sharedInstance.currentPath
+            self.initialPath = FileParser.sharedInstance.currentPath as URL?
         }
         
         self.title = initialPath!.lastPathComponent
@@ -137,21 +137,21 @@ class FileListViewController: UIViewController {
         
         if flagMoveItem == false {
             
-            editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(FileListViewController.showEditView))
-            doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(FileListViewController.showEditView))
+            editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(FileListViewController.showEditView))
+            doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(FileListViewController.showEditView))
             self.navigationItem.rightBarButtonItem = editButton
             
         }else{
             
-            doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(FileListViewController.performMoveItemAction))
-            cancelButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(FileListViewController.cancelMoveItemAction))
+            doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(FileListViewController.performMoveItemAction))
+            cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(FileListViewController.cancelMoveItemAction))
             self.navigationItem.setRightBarButtonItems([doneButton!,cancelButton!], animated: true)
             
-            if self.initialPath == FileParser.sharedInstance.documentsURL() {
+            if self.initialPath! == FileParser.sharedInstance.documentsURL() as URL {
                 self.title = "Move To"
             }
             
-            normalView.hidden = true
+            normalView.isHidden = true
             
         }
         
@@ -177,33 +177,33 @@ class FileListViewController: UIViewController {
         }
         
         
-        selectAllInEditViewBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        zipBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        shareBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        openInBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        saveBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        selectAllInEditViewBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        zipBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        shareBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        openInBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        saveBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
-        newFolderBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        renameBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        moveBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        deleteBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        selectAllBtn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        newFolderBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        renameBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        moveBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        deleteBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        selectAllBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
     
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.setContentOffset(CGPoint.zero, animated: true)
         if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
             if(shared != nil) {
                 shared = nil
             }
-            bannerAdView.hidden = true
+            bannerAdView.isHidden = true
         }
     }
     
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
         print("FileListViewController Ad changed")
         for tempView in bannerAdView.subviews {
             tempView.removeFromSuperview()
@@ -213,7 +213,7 @@ class FileListViewController: UIViewController {
     
     
     
-    func setFolderPathAndReloadTableView(path:NSURL) {
+    func setFolderPathAndReloadTableView(_ path:URL) {
         
         files = parser.filesForDirectory(initialPath!)
         indexFiles()
@@ -227,14 +227,14 @@ class FileListViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Scroll to hide search bar
-        self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
+        self.tableView.contentOffset = CGPoint(x: 0, y: searchController.searchBar.frame.size.height)
         
         // Make sure navigation bar is visible
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         
         if let initialPath = initialPath {
             
@@ -249,7 +249,7 @@ class FileListViewController: UIViewController {
         if filesForSharing.count > 0 {
             showActionSheet(0)
         }else{
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         
@@ -262,8 +262,8 @@ class FileListViewController: UIViewController {
             flagShowEditView = false
             self.navigationItem.rightBarButtonItem = editButton
             self.tableView.reloadData()
-            editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(FileListViewController.showEditView))
-            UIView.animateWithDuration(Double(0.5), animations: {
+            editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(FileListViewController.showEditView))
+            UIView.animate(withDuration: Double(0.5), animations: {
                 self.bottomHeightConstant.constant = 50
                 self.view.layoutIfNeeded()
             })
@@ -274,7 +274,7 @@ class FileListViewController: UIViewController {
             //            selectAllFiles(false)
             self.navigationItem.rightBarButtonItem = doneButton
             self.tableView.reloadData()
-            UIView.animateWithDuration(Double(0.5), animations: {
+            UIView.animate(withDuration: Double(0.5), animations: {
                 self.bottomHeightConstant.constant = 0
                 self.view.layoutIfNeeded()
             })
@@ -284,7 +284,7 @@ class FileListViewController: UIViewController {
     
     func cancelMoveItemAction() {
         self.delegate?.cancelMoveFile()
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     func performMoveItemAction() {
@@ -297,27 +297,27 @@ class FileListViewController: UIViewController {
             }
         }
         self.delegate?.successMoveFile()
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.dismiss(animated: true, completion: nil)
         
     }
     
-    func moveFileToPath(folderPath:String) -> Bool {
+    func moveFileToPath(_ folderPath:String) -> Bool {
         
         do{
-            let fileName = (folderPath.componentsSeparatedByString("/").last)!
+            let fileName = (folderPath.components(separatedBy: "/").last)!
             let destinationPath = "\((self.initialPath?.path)!)/\(fileName)"
             
             print("folderpath = \(folderPath)")
             print("destinationPath = \(destinationPath)")
             
-            if !kFileManager.fileExistsAtPath(folderPath) {
+            if !kFileManager.fileExists(atPath: folderPath) {
                 return true
             }
             
             if folderPath == destinationPath {
                 return true
             }
-            try kFileManager.moveItemAtPath(folderPath, toPath: destinationPath)
+            try kFileManager.moveItem(atPath: folderPath, toPath: destinationPath)
             return true
             
         }catch let e as NSError{
@@ -331,32 +331,32 @@ class FileListViewController: UIViewController {
     //MARK: Data
     
     func indexFiles() {
-        let selector: Selector = Selector("displayName")
-        sections = Array(count: collation.sectionTitles.count, repeatedValue: [])
-        if let sortedObjects = collation.sortedArrayFromArray(files, collationStringSelector: selector) as? [FBFile]{
+        let selector: Selector = #selector(getter: UIPrinter.displayName)
+        sections = Array(repeating: [], count: collation.sectionTitles.count)
+        if let sortedObjects = collation.sortedArray(from: files, collationStringSelector: selector) as? [FBFile]{
             for object in sortedObjects {
-                let sectionNumber = collation.sectionForObject(object, collationStringSelector: selector)
+                let sectionNumber = collation.section(for: object, collationStringSelector: selector)
                 sections[sectionNumber].append(object)
             }
         }
         
         if self.files.count == 0 {
             if lblNoContent == nil {
-                lblNoContent = UILabel(frame: CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height))
+                lblNoContent = UILabel(frame: CGRect(x: 0,y: 0,width: self.view.frame.size.width,height: self.view.frame.size.height))
                 lblNoContent?.text = "No Content"
-                lblNoContent?.backgroundColor = UIColor.whiteColor()
-                lblNoContent?.textAlignment = .Center
+                lblNoContent?.backgroundColor = UIColor.white
+                lblNoContent?.textAlignment = .center
                 self.view.addSubview(lblNoContent!)
             }
-            lblNoContent?.hidden = false
+            lblNoContent?.isHidden = false
         }else{
-            lblNoContent?.hidden = true
+            lblNoContent?.isHidden = true
         }
     }
     
-    func fileForIndexPath(indexPath: NSIndexPath) -> FBFile {
+    func fileForIndexPath(_ indexPath: IndexPath) -> FBFile {
         var file: FBFile
-        if searchController.active {
+        if searchController.isActive {
             file = filteredFiles[indexPath.row]
         }
         else {
@@ -365,9 +365,9 @@ class FileListViewController: UIViewController {
         return file
     }
     
-    func filterContentForSearchText(searchText: String) {
+    func filterContentForSearchText(_ searchText: String) {
         filteredFiles = files.filter({ (file: FBFile) -> Bool in
-            return file.displayName.lowercaseString.containsString(searchText.lowercaseString)
+            return file.displayName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
@@ -377,7 +377,7 @@ class FileListViewController: UIViewController {
 
 extension FileListViewController{
     
-    @IBAction func editViewButtonTapped(sender: AnyObject) {
+    @IBAction func editViewButtonTapped(_ sender: AnyObject) {
         
         if sender as! NSObject == selectAllInEditViewBtn {
             print("SelectAllInEditViewBtn")
@@ -419,7 +419,7 @@ extension FileListViewController{
             print("moveBtn")
             
             if filesForSharing.count > 0 {
-                var moveItemLocalUrlPaths = [NSURL]()
+                var moveItemLocalUrlPaths = [URL]()
                 for i in 0 ..< filesForSharing.count {
                     let file =  filesForSharing[i]
                     moveItemLocalUrlPaths.append(file.filePath)
@@ -427,12 +427,12 @@ extension FileListViewController{
                 filesForSharing.removeAll()
                 FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
                 FileParser.sharedInstance.excludesFilepaths = moveItemLocalUrlPaths
-                let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController") as! FileListViewController
+                let fileListViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FileListViewController") as! FileListViewController
                 fileListViewController.delegate = self
                 fileListViewController.flagMoveItem = true
                 fileListViewController.moveItemPaths = moveItemLocalUrlPaths
                 let navController = UINavigationController(rootViewController: fileListViewController)
-                self.presentViewController(navController, animated: true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
                 
             }else{
                 
@@ -448,7 +448,7 @@ extension FileListViewController{
     }
     
     
-    @IBAction func normalViewButtonTapped(sender: AnyObject){
+    @IBAction func normalViewButtonTapped(_ sender: AnyObject){
         
         if sender as! NSObject == selectAllBtn {
             
@@ -528,7 +528,7 @@ extension FileListViewController{
                 
             }else{
                 
-                let popup = UIDocumentInteractionController(URL: (filesForSharing.first?.filePath)!)
+                let popup = UIDocumentInteractionController(url: (filesForSharing.first?.filePath)! as URL)
                 popup.delegate = self
                 
                 
@@ -536,19 +536,19 @@ extension FileListViewController{
                 //                CGRect rectForAppearing = [sender.superview convertRect:sender.frame toView:self.view];
                 //                [interactionController presentOptionsMenuFromRect:rect inView:self.view animated:YES];
                 
-                switch UIDevice.currentDevice().userInterfaceIdiom {
+                switch UIDevice.current.userInterfaceIdiom {
                     
-                case .Phone:
+                case .phone:
                     
-                    popup.presentOpenInMenuFromRect(openInBtn.frame, inView: self.view, animated: true)
+                    popup.presentOpenInMenu(from: openInBtn.frame, in: self.view, animated: true)
                     break
                     
-                case .Pad:
+                case .pad:
                     
-                    popup.presentOptionsMenuFromRect(CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0), inView: self.view, animated: true)
+                    popup.presentOptionsMenu(from: CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY,width: 0,height: 0), in: self.view, animated: true)
                     
                     break
-                case .Unspecified:
+                case .unspecified:
                     break
                 default:
                     print("default")
@@ -613,7 +613,7 @@ extension FileListViewController{
         
     }
     
-    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         
         imageCloseCounter += 1
         
@@ -640,7 +640,7 @@ extension FileListViewController{
         //Image saved successfully
     }
     
-    func video(videoPath: String, didFinishSavingWithError error: NSError?, contextInfo info: UnsafeMutablePointer<Void>) {
+    func video(_ videoPath: String, didFinishSavingWithError error: NSError?, contextInfo info: UnsafeMutableRawPointer) {
         // your completion code handled here
         
         imageCloseCounter += 1
@@ -673,14 +673,14 @@ extension FileListViewController{
         
         let msg = "You've selected a file or folder. The file/folder will be compressed first before it can be shared. Do you want to continue?"
         
-        let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
         })
         
-        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
             self.showEnterZipNameAlert(true)
@@ -690,7 +690,7 @@ extension FileListViewController{
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
@@ -698,14 +698,14 @@ extension FileListViewController{
         
         let msg = "You've selected multiple files or folders or both. The files/folders will be compressed first before they can be shared. Do you want to continue?"
         
-        let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
         })
         
-        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
             CommonFunctions.sharedInstance.shareAllMyFile( self , files: self.filesForSharing)
@@ -715,7 +715,7 @@ extension FileListViewController{
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
@@ -744,7 +744,7 @@ extension FileListViewController : MoveFileDelegate{
 
 extension FileListViewController : UIDocumentInteractionControllerDelegate{
     
-    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self
     }
     

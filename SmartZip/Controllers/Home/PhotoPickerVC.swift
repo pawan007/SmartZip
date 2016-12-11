@@ -28,12 +28,12 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     
     override func viewDidLoad() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: "check_slow_video", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: NSNotification.Name(rawValue: "check_slow_video"), object: nil)
         
     }
     
     
-    @IBAction func selectPhotos (sender:AnyObject!) {
+    @IBAction func selectPhotos (_ sender:AnyObject!) {
         
         let imagePicker = QBImagePickerController()
         imagePicker.delegate = self
@@ -47,14 +47,14 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     }
     
     
-    @IBAction func useDropBox(sender:AnyObject!) {
+    @IBAction func useDropBox(_ sender:AnyObject!) {
         
         let vc = UIStoryboard.dropBoxVC()
         self.navigationController?.pushViewController(vc!, animated: true)
         
     }
     
-    @IBAction func selectVideos (sender:AnyObject!) {
+    @IBAction func selectVideos (_ sender:AnyObject!) {
         
         let imagePicker = QBImagePickerController()
         imagePicker.delegate = self
@@ -66,15 +66,15 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
     }
     
-    @IBAction func selectAudio(sender: AnyObject) {
+    @IBAction func selectAudio(_ sender: AnyObject) {
         
-        let picker = MPMediaPickerController(mediaTypes:.Music)
+        let picker = MPMediaPickerController(mediaTypes:.music)
         picker.showsCloudItems = false
         picker.delegate = self
         picker.allowsPickingMultipleItems = true
-        picker.modalPresentationStyle = .Popover
-        picker.preferredContentSize = CGSizeMake(500,600)
-        self.presentViewController(picker, animated: true, completion: nil)
+        picker.modalPresentationStyle = .popover
+        picker.preferredContentSize = CGSize(width: 500,height: 600)
+        self.present(picker, animated: true, completion: nil)
         if let pop = picker.popoverPresentationController {
             if let b = sender as? UIBarButtonItem {
                 pop.barButtonItem = b
@@ -85,18 +85,18 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     
     
     
-    func qb_imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
+    func qb_imagePickerControllerDidCancel(_ imagePickerController: QBImagePickerController!) {
         
         flagVideo = false
         flagImage = false
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
     
-    func qb_imagePickerController(imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
+    func qb_imagePickerController(_ imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         
         print(assets)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         if flagImage {
             
@@ -110,12 +110,12 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
              }
              }*/
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             zipAndShareImages(assets)
             
         }else{
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             zipAndShareVideos(assets)
         }
         
@@ -125,7 +125,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     
     
     
-    func zipAndShareImages(assets: [AnyObject]!) {
+    func zipAndShareImages(_ assets: [AnyObject]!) {
         
         var folderName = ""
         
@@ -139,7 +139,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
             cacheDir += "/\(folderName)"
             
             do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.default.createDirectory(atPath: cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -183,7 +183,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
     }
     
-    func zipAndShareVideos(assets: [AnyObject]!) {
+    func zipAndShareVideos(_ assets: [AnyObject]!) {
         
         var folderName = ""
         
@@ -201,7 +201,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
             cacheDir += "/\(folderName)"
             
             do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.default.createDirectory(atPath: cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -275,11 +275,11 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     
     
     
-    func getSlowMotionVideo(asset:AVAsset , filePath:String, cacheDir:String , totalItem:Int, currentItem:Int) -> Void {
+    func getSlowMotionVideo(_ asset:AVAsset , filePath:String, cacheDir:String , totalItem:Int, currentItem:Int) -> Void {
         
         objc_sync_enter(self)
         
-        let fileUrl = NSURL(fileURLWithPath: filePath)
+        let fileUrl = URL(fileURLWithPath: filePath)
         
         let exporter = AVAssetExportSession(asset: asset, presetName:AVAssetExportPresetHighestQuality)
         exporter?.outputURL = fileUrl
@@ -288,15 +288,15 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
         objc_sync_exit(self)
         
-        exporter?.exportAsynchronouslyWithCompletionHandler({ () -> Void in
+        exporter?.exportAsynchronously(completionHandler: { () -> Void in
             
             objc_sync_enter(self)
             
-            if exporter?.status == AVAssetExportSessionStatus.Completed{
+            if exporter?.status == AVAssetExportSessionStatus.completed{
                 
                 objc_sync_exit(self)
                 print(exporter?.outputURL)
-                NSNotificationCenter.defaultCenter().postNotificationName("check_slow_video", object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "check_slow_video"), object: nil)
                 
                 
             }else{
@@ -304,7 +304,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
                 print("Error occured while generating video zip")
                 objc_sync_exit(self)
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     SwiftSpinner.hide()
                     
@@ -320,7 +320,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
     func updateVideoStatus() {
         
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             self.currentItem += 1
             
@@ -353,19 +353,19 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
      
      }*/
     
-    func zipMyFiles(newZipFile:String, existingFolder:String) {
+    func zipMyFiles(_ newZipFile:String, existingFolder:String) {
         
         
         if !CommonFunctions.sharedInstance.canCreateZip(existingFolder) {
             
-            try! kFileManager.removeItemAtPath(existingFolder)
+            try! kFileManager.removeItem(atPath: existingFolder)
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "You do not have enough space to create zip file", vc: self)
             return
         }
         
         let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: existingFolder)
         if success {
-            try! NSFileManager.defaultManager().removeItemAtPath(existingFolder)
+            try! FileManager.default.removeItem(atPath: existingFolder)
             print("Zip file created successfully")
             self.shareMyFile(newZipFile)
             
@@ -377,14 +377,14 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
     }
     
-    func shareMyFile(zipPath:String) -> Void {
+    func shareMyFile(_ zipPath:String) -> Void {
         
-        let fileDAta = NSURL(fileURLWithPath: zipPath)
+        let fileDAta = URL(fileURLWithPath: zipPath)
         
-        let name = (zipPath.componentsSeparatedByString("/").last)!
-        let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
+        let name = (zipPath.components(separatedBy: "/").last)!
+        let myWebsite = URL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8")
         let ac = UIActivityViewController(activityItems: [fileDAta,"SmartZip File \(name)", myWebsite!] , applicationActivities: nil)
-        ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
+        ac.excludedActivityTypes = [UIActivityType.print, UIActivityType.copyToPasteboard,UIActivityType.assignToContact, UIActivityType.saveToCameraRoll]
         ac.setValue("My file", forKey: "Subject")
         
         if let popoverPresentationController = ac.popoverPresentationController {
@@ -393,16 +393,16 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
             rect.origin.y = rect.height
             popoverPresentationController.sourceRect = rect
         }
-        self.presentViewController(ac, animated: true, completion: nil)
+        self.present(ac, animated: true, completion: nil)
         
     }
     
-    func deleteAllFilesInDirectory(directoryPath:String) -> Void {
+    func deleteAllFilesInDirectory(_ directoryPath:String) -> Void {
         
-        if let enumerator = NSFileManager.defaultManager().enumeratorAtPath(directoryPath) {
+        if let enumerator = FileManager.default.enumerator(atPath: directoryPath) {
             while let fileName = enumerator.nextObject() as? String {
                 do {
-                    try NSFileManager.defaultManager().removeItemAtPath("\(directoryPath)\(fileName)")
+                    try FileManager.default.removeItem(atPath: "\(directoryPath)\(fileName)")
                 }
                 catch let e as NSError {
                     print(e)
@@ -422,21 +422,21 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
 extension PhotoPickerVC : MPMediaPickerControllerDelegate {
     // must implement these, as there is no automatic dismissal
     
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         
         print("did pick")
         getSongsAdvance(mediaItemCollection)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         return
         
     }
     
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         print("cancel")
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func getSongsAdvance(mediaItemCollection: MPMediaItemCollection) {
+    func getSongsAdvance(_ mediaItemCollection: MPMediaItemCollection) {
     
         var folderName = ""
         
@@ -450,7 +450,7 @@ extension PhotoPickerVC : MPMediaPickerControllerDelegate {
             cacheDir += "/\(folderName)"
             
             do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.default.createDirectory(atPath: cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -469,7 +469,7 @@ extension PhotoPickerVC : MPMediaPickerControllerDelegate {
                 
                 print(item.assetURL)
                 let filePath = "\(cacheDir)/\(item.title!).m4a"
-                let myFileUrl = NSURL(fileURLWithPath: filePath)
+                let myFileUrl = URL(fileURLWithPath: filePath)
                 saveAssetUrlToMp3(item.assetURL!, path: myFileUrl, title: item.title!, parentDir: cacheDir)
                 
             }
@@ -481,44 +481,44 @@ extension PhotoPickerVC : MPMediaPickerControllerDelegate {
             
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         
     }
     
-    func saveAssetUrlToMp3(assetUrl:NSURL, path:NSURL, title:String, parentDir:String) {
+    func saveAssetUrlToMp3(_ assetUrl:URL, path:URL, title:String, parentDir:String) {
         
-        let songAsset = AVURLAsset(URL: assetUrl, options: nil)
+        let songAsset = AVURLAsset(url: assetUrl, options: nil)
         let exporter = AVAssetExportSession(asset: songAsset, presetName: AVAssetExportPresetPassthrough)
         exporter!.outputFileType = "com.apple.quicktime-movie";
         exporter?.outputURL = path
         exporter?.shouldOptimizeForNetworkUse = true
         
-        exporter?.exportAsynchronouslyWithCompletionHandler( { () -> Void in
+        exporter?.exportAsynchronously( completionHandler: { () -> Void in
             
-            if(exporter?.status == AVAssetExportSessionStatus.Completed){
+            if(exporter?.status == AVAssetExportSessionStatus.completed){
                 
                 let filePath = "\(parentDir)/\(title).m4a"
                 var fileSize : UInt64 = 0
                 do {
-                    let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
+                    let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: filePath) as NSDictionary?
                     if let _attr = attr {
                         fileSize = _attr.fileSize();
                         print("fileSize: \(fileSize)")
                     }
                     var newFilePath = ""
-                    if title.containsString(".mp3"){
-                        newFilePath = filePath.stringByReplacingOccurrencesOfString(".m4a", withString: "")
+                    if title.contains(".mp3"){
+                        newFilePath = filePath.replacingOccurrences(of: ".m4a", with: "")
                     }else{
-                        newFilePath = filePath.stringByReplacingOccurrencesOfString(".m4a", withString: ".mp3")
+                        newFilePath = filePath.replacingOccurrences(of: ".m4a", with: ".mp3")
                     }
-                    try! NSFileManager.defaultManager().moveItemAtPath(filePath, toPath: newFilePath)
+                    try! FileManager.default.moveItem(atPath: filePath, toPath: newFilePath)
                     
                 } catch {
                     print("Error: \(error)")
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     self.currentFile += 1
                     if self.currentFile == self.totalfileCount {
@@ -539,7 +539,7 @@ extension PhotoPickerVC : MPMediaPickerControllerDelegate {
                 
                 print("error: \(exporter?.error?.localizedFailureReason)")
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     self.currentFile += 1
                     if self.currentFile == self.totalfileCount {

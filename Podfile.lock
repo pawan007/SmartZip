@@ -1,6 +1,5 @@
 PODS:
   - ActionSheetPicker-3.0 (2.0.5)
-  - Alamofire (3.5.1)
   - CCBottomRefreshControl (0.5.1):
     - Masonry (~> 0.6.2)
   - Crashlytics (3.8.3):
@@ -41,7 +40,6 @@ PODS:
   - GTMSessionFetcher/Core (1.1.7)
   - GTMSessionFetcher/Full (1.1.7):
     - GTMSessionFetcher/Core (= 1.1.7)
-  - Kingfisher (2.6.1)
   - Masonry (0.6.4)
   - Mixpanel (3.0.6):
     - Mixpanel/Mixpanel (= 3.0.6)
@@ -63,36 +61,33 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SnapKit (0.22.0)
   - SSZipArchive (1.6.2)
   - TTTAttributedLabel (2.0.0)
   - UIView+TKGeometry (0.2)
-  - XCGLogger (3.6.0)
+  - XCGLogger (4.0.0):
+    - XCGLogger/Core (= 4.0.0)
+  - XCGLogger/Core (4.0.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.0.5)
-  - Alamofire (~> 3.4)
   - CCBottomRefreshControl
   - Crashlytics
   - Firebase/AdMob
   - Firebase/Core
   - GoogleAPIClient/Drive (~> 1.0.2)
   - GTMOAuth2 (~> 1.1.0)
-  - Kingfisher (~> 2.4)
   - Mixpanel
   - MMDrawerController (~> 0.5.7)
   - QBImagePickerController
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7)
-  - SnapKit (~> 0.21)
   - SSZipArchive
   - TTTAttributedLabel
   - UIView+TKGeometry
-  - XCGLogger (~> 3.3)
+  - XCGLogger (~> 4.0.0)
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
@@ -107,19 +102,17 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
-  Kingfisher: 7e5515bf6c4f2acad91f6400955d2257549cab7b
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   Mixpanel: c462992e6fe84d74a8d0408c0b25852ddd067e4b
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   SSZipArchive: 428eb1ac8d37dd133404d30f422b23958c1f9acc
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIView+TKGeometry: bef0d7727753910d66d6fa51a3128ae6908047ef
-  XCGLogger: 53a3efe22e228e8b25ed8184bc074c2b06d48490
+  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: 050b2fadc23c39ded4d02e21d2583c37a3ecc4c0
+PODFILE CHECKSUM: f2328a5e1f25d54711028dc724c21562ad63fb6e
 
 COCOAPODS: 1.1.1

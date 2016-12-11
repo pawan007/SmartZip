@@ -30,7 +30,7 @@ class MailManager: NSObject, MFMailComposeViewControllerDelegate {
      - parameter image:          UIImage
      - parameter viewcontroller: UIViewController
      */
-    func configuredMailComposeViewController(subject: String, body: String, recipients: [String], image: UIImage, imageURL:String, viewcontroller:UIViewController,completion:((response: AnyObject?, error: NSError?) -> Void)?) {
+    func configuredMailComposeViewController(_ subject: String, body: String, recipients: [String], image: UIImage, imageURL:String, viewcontroller:UIViewController,completion:((_ response: AnyObject?, _ error: NSError?) -> Void)?) {
         
         var error: NSError? = nil
         
@@ -48,24 +48,24 @@ class MailManager: NSObject, MFMailComposeViewControllerDelegate {
 //            let aStr = String(format:"<p>I just crushed this workout:</p><br><img src= \'%@'><br><p>Want a workout app actually worth using? <a href=%@>%@</a></p>", imageURL, StringConstants.GetStackAppDomain,"Click here to check out STACKED. It's free.")
             
             //mailComposerVC.setMessageBody(aStr, isHTML: true)
-            viewcontroller.presentViewController(mailComposerVC, animated: true, completion:nil)
+            viewcontroller.present(mailComposerVC, animated: true, completion:nil)
             
             if let block = completion {
-                block(response:MFMailComposeViewController.canSendMail(), error:error)
+                block(MFMailComposeViewController.canSendMail() as AnyObject?, error)
             }
         }
         else {
             //            showSendMailErrorAlert()
             error = NSError(domain: "somedomain", code: 123, userInfo: nil)
             if let block = completion {
-                block(response:false, error:error)
+                block(false as AnyObject?, error)
             }
             
         }
     }
     
     
-    func configuredFeedBackMail(viewcontroller:UIViewController,completion:((response: AnyObject?, error: NSError?) -> Void)?) {
+    func configuredFeedBackMail(_ viewcontroller:UIViewController,completion:((_ response: AnyObject?, _ error: NSError?) -> Void)?) {
         
         var error: NSError? = nil
         
@@ -75,23 +75,23 @@ class MailManager: NSObject, MFMailComposeViewControllerDelegate {
             mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
             
-            mailComposerVC.navigationBar.tintColor = UIColor.redColor()
+            mailComposerVC.navigationBar.tintColor = UIColor.red
             
             mailComposerVC.setSubject("")
             //            mailComposerVC.addAttachmentData(UIImageJPEGRepresentation(image, 0.5)!, mimeType: "image/png", fileName:  StringConstants.WorkoutSummaryFileName)
             
             mailComposerVC.setToRecipients(["pawan.kumar@Modi.iin"])
-            viewcontroller.presentViewController(mailComposerVC, animated: true, completion:nil)
+            viewcontroller.present(mailComposerVC, animated: true, completion:nil)
             
             if let block = completion {
-                block(response:MFMailComposeViewController.canSendMail(), error:error)
+                block(MFMailComposeViewController.canSendMail() as AnyObject?, error)
             }
         }
         else {
             //            showSendMailErrorAlert()
             error = NSError(domain: "somedomain", code: 123, userInfo: nil)
             if let block = completion {
-                block(response:false, error:error)
+                block(false as AnyObject?, error)
             }
             
         }
@@ -102,27 +102,27 @@ class MailManager: NSObject, MFMailComposeViewControllerDelegate {
     
     //MARK:
     func showSendMailErrorAlert() {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         //self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
         switch result {
-        case MFMailComposeResultCancelled:
+        case MFMailComposeResult.cancelled:
             print("Mail cancelled")
-        case MFMailComposeResultSaved:
+        case MFMailComposeResult.saved:
             print("Mail saved")
-        case MFMailComposeResultSent:
+        case MFMailComposeResult.sent:
             print("Mail sent")
-        case MFMailComposeResultFailed:
+        case MFMailComposeResult.failed:
             print("Mail sent failure: \(error!.localizedDescription)")
         default:
             break
         }
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 }

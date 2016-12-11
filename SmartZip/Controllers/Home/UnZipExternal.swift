@@ -19,7 +19,7 @@ class UnZipExternal: NSObject {
     
     // MARK: UITableview method implementation
     
-    func unzipPath(zipPath:String) -> String {
+    func unzipPath(_ zipPath:String) -> String {
         
         guard let unzipPath = tempUnzipPath(zipPath) else {
             return ""
@@ -43,17 +43,17 @@ class UnZipExternal: NSObject {
     }
     
     
-    func tempUnzipPath(zipPath:String) -> String? {
+    func tempUnzipPath(_ zipPath:String) -> String? {
         
         
-        let zipName = zipPath.componentsSeparatedByString("/").last?.replace(".zip", replacementString: "")
+        let zipName = zipPath.components(separatedBy: "/").last?.replace(".zip", replacementString: "")
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         path += "/\(zipName!)"
-        let url = NSURL(fileURLWithPath: path)
+        let url = URL(fileURLWithPath: path)
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
             return CommonFunctions.sharedInstance.docDirPath()
         }
@@ -66,7 +66,7 @@ class UnZipExternal: NSObject {
     }
     
     
-    func unzipPathInner(zipPath:String) -> String {
+    func unzipPathInner(_ zipPath:String) -> String {
         
         guard let unzipPath = tempUnzipPathInner(zipPath) else {
             return ""
@@ -90,7 +90,7 @@ class UnZipExternal: NSObject {
     }
     
     
-    func unzipPathInner(zipPath:String, unzipPath:String) -> String {
+    func unzipPathInner(_ zipPath:String, unzipPath:String) -> String {
         
         unZipFilePath = unzipPath
         let success = SSZipArchive.unzipFileAtPath(zipPath, toDestination: unZipFilePath)
@@ -103,11 +103,11 @@ class UnZipExternal: NSObject {
     }
     
     
-    func tempUnzipPathInner(zipPath:String) -> String? {
+    func tempUnzipPathInner(_ zipPath:String) -> String? {
         
         
 //        let zipName = zipPath.componentsSeparatedByString("/").last?.replace(".zip", replacementString: "")
-        let folderPath = zipPath.stringByReplacingOccurrencesOfString(".zip", withString: "")
+        let folderPath = zipPath.replacingOccurrences(of: ".zip", with: "")
 //        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(zipName)
         print(folderPath)
@@ -115,11 +115,11 @@ class UnZipExternal: NSObject {
 //        folderPath += "/\(zipName!)"
         
         
-        if !NSFileManager.defaultManager().fileExistsAtPath(folderPath) {
+        if !FileManager.default.fileExists(atPath: folderPath) {
             
-            let url = NSURL(fileURLWithPath: folderPath)
+            let url = URL(fileURLWithPath: folderPath)
             do {
-                try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 return CommonFunctions.sharedInstance.docDirPath()
             }
@@ -131,9 +131,9 @@ class UnZipExternal: NSObject {
             
             let incCount = getFileCopiesCount(folderPath)
             let newPath = "\(folderPath)-\(incCount)"
-            let url = NSURL(fileURLWithPath: newPath)
+            let url = URL(fileURLWithPath: newPath)
             do {
-                try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 return CommonFunctions.sharedInstance.docDirPath()
             }
@@ -149,17 +149,17 @@ class UnZipExternal: NSObject {
         return nil
     }
     
-    func getFileCopiesCount(path:String) -> Int {
+    func getFileCopiesCount(_ path:String) -> Int {
         
-        var folderHierarchy = path.componentsSeparatedByString("/")
+        var folderHierarchy = path.components(separatedBy: "/")
         folderHierarchy.removeLast()
-        let pathParent = folderHierarchy.joinWithSeparator("/")
+        let pathParent = folderHierarchy.joined(separator: "/")
         var count = 0
-        if let enumerator = NSFileManager.defaultManager().enumeratorAtPath(pathParent) {
+        if let enumerator = FileManager.default.enumerator(atPath: pathParent) {
             while let fileName = enumerator.nextObject() as? String {
                 
                 let filePath = "\(pathParent)/\(fileName)"
-                if filePath.containsString(path) && path.componentsSeparatedByString("/").count == filePath.componentsSeparatedByString("/").count{
+                if filePath.contains(path) && path.components(separatedBy: "/").count == filePath.components(separatedBy: "/").count{
                     print(filePath)
                     count = count + 1
                 }

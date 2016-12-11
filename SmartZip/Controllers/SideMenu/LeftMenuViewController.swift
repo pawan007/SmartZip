@@ -16,13 +16,13 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var topTableView: UITableView!
     //    private var topTableIDs = ["HomeCell","TutorialCell","BuyProCell","RestoreCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
-    private var topTableIDs = ["HomeCell","TutorialCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
+    fileprivate var topTableIDs = ["HomeCell","TutorialCell","ShareAppCell","RateAppCell","AboutCompany","AboutProduct","EmailCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override internal func viewWillAppear(animated: Bool) {
+    override internal func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.topTableView.reloadData()
     }
@@ -35,14 +35,14 @@ class LeftMenuViewController: UIViewController ,MFMailComposeViewControllerDeleg
 
 extension LeftMenuViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  topTableIDs.count
         
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(topTableIDs[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: topTableIDs[indexPath.row])
         return cell!
     }
 }
@@ -53,37 +53,37 @@ extension LeftMenuViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension LeftMenuViewController: UITableViewDelegate
 {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.topTableViewSelected(tableView, didSelectRowAtIndexPath: indexPath)
     }
     
-    func topTableViewSelected(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    private func topTableViewSelected(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         
         let container = SideMenuManager.sharedManager().container
         let identifier  = topTableIDs[indexPath.row]
         
         switch identifier {
         case "HomeCell" :
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HomeVCNew"))!
+            let center = (self.storyboard?.instantiateViewController(withIdentifier: "HomeVCNew"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            container!.closeDrawerAnimated(animated: true, completion: { (Bool) in
             })
             break
         case "TutorialCell" :
             //TODO
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("WLCTutorialVC"))!
+            let center = (self.storyboard?.instantiateViewController(withIdentifier: "WLCTutorialVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            container!.closeDrawerAnimated(animated: true, completion: { (Bool) in
             })
             break
         case "BuyProCell" :
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("BuyProVC"))!
+            let center = (self.storyboard?.instantiateViewController(withIdentifier: "BuyProVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
             break
         case "RestoreCell" :
-            let center = self.storyboard?.instantiateViewControllerWithIdentifier("BuyProVC") as? BuyProVC
+            let center = self.storyboard?.instantiateViewController(withIdentifier: "BuyProVC") as? BuyProVC
             container!.centerViewController =  UINavigationController(rootViewController: center!)
             center!.isShowRestoreBtn = true
             container!.closeDrawerAnimated(true, completion: { (Bool) in
@@ -119,7 +119,7 @@ extension LeftMenuViewController: UITableViewDelegate
             self.sendEmail();
             break
         case "HistoryCell" :
-            let center = (self.storyboard?.instantiateViewControllerWithIdentifier("HistoryVC"))!
+            let center = (self.storyboard?.instantiateViewController(withIdentifier: "HistoryVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
             container!.closeDrawerAnimated(true, completion: { (Bool) in
             })
@@ -131,7 +131,7 @@ extension LeftMenuViewController: UITableViewDelegate
     
     func openAboutCompanyVC() {
         let container = SideMenuManager.sharedManager().container
-        let center = (self.storyboard?.instantiateViewControllerWithIdentifier("AboutCompany"))!
+        let center = (self.storyboard?.instantiateViewController(withIdentifier: "AboutCompany"))!
         container!.centerViewController =  UINavigationController(rootViewController: center)
         container!.closeDrawerAnimated(true, completion: { (Bool) in
         })
@@ -139,7 +139,7 @@ extension LeftMenuViewController: UITableViewDelegate
     
     func openAboutProductVC() {
         let container = SideMenuManager.sharedManager().container
-        let center = (self.storyboard?.instantiateViewControllerWithIdentifier("AboutProduct"))!
+        let center = (self.storyboard?.instantiateViewController(withIdentifier: "AboutProduct"))!
         container!.centerViewController =  UINavigationController(rootViewController: center)
         container!.closeDrawerAnimated(true, completion: { (Bool) in
         })
@@ -149,9 +149,9 @@ extension LeftMenuViewController: UITableViewDelegate
         
         let textToShare = "Quick and smart way for zip file management. SmartZip is user friendly app for iPhone. It can easily zip our files and upload/share it on cloud and social media. Its a most useful and fast Zip utility for professional and business persons. It has very interesting features : 1) It can compress files, photos, videos, music into Zip file. 2) You can send zip file by email, messenger, Gmail. 3) Open and extract files from Zip format. 4) Save your zipped files in MyFiles section for future use. 5) Upload your zip files on cloud like Dropbox, Google drive, iCloud drive. So friends what are you waiting for! Use SmartZip be smart !!"
         
-        if let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8") {
+        if let myWebsite = URL(string: "https://itunes.apple.com/us/app/smartzip/id1141913794?ls=1&mt=8") {
             
-            let objectsToShare = [textToShare, myWebsite]
+            let objectsToShare = [textToShare, myWebsite] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             //New Excluded Activities Code
@@ -165,9 +165,9 @@ extension LeftMenuViewController: UITableViewDelegate
                 popoverPresentationController.sourceRect = rect*/
                 
                 popoverPresentationController.sourceView = self.view;
-                popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
+                popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY,width: 0,height: 0)
             }
-            self.presentViewController(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: nil)
         }
     }
     
@@ -178,37 +178,37 @@ extension LeftMenuViewController: UITableViewDelegate
             mail.setToRecipients(["admin@mobirizer.com", "pwndhwn@gmail.com"])
             mail.setSubject("SmartZip - Feedback to Admin")
             mail.setMessageBody("<p>Dear Admin</p>", isHTML: true)
-            presentViewController(mail, animated: true, completion: nil)
+            present(mail, animated: true, completion: nil)
         } else {
             // show failure alert
             self.showAlertViewWithMessage("Error", message: Constants.UserMessages.missingEmail)
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     func contactAdmin() {
         
-        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        actionSheetController.view.tintColor = UIColor.blackColor()
+        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheetController.view.tintColor = UIColor.black
         
-        let cancelActionButton: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelActionButton: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
         }
         actionSheetController.addAction(cancelActionButton)
         
-        let webActionButton: UIAlertAction = UIAlertAction(title: "View Website", style: .Default)
+        let webActionButton: UIAlertAction = UIAlertAction(title: "View Website", style: .default)
         { action -> Void in
             
-            let url:NSURL? = NSURL(string: "http://www.SmartZip.com.au/")
-            UIApplication.sharedApplication().openURL(url!)
+            let url:URL? = URL(string: "http://www.SmartZip.com.au/")
+            UIApplication.shared.openURL(url!)
             
         }
         actionSheetController.addAction(webActionButton)
         
         
-        let feedbackActionButton: UIAlertAction = UIAlertAction(title: "Give Feedback", style: .Default)
+        let feedbackActionButton: UIAlertAction = UIAlertAction(title: "Give Feedback", style: .default)
         { action -> Void in
             
             self.sendEmail()
@@ -217,7 +217,7 @@ extension LeftMenuViewController: UITableViewDelegate
         actionSheetController.addAction(feedbackActionButton)
         
         
-        let callActionButton: UIAlertAction = UIAlertAction(title: " Call Admin", style: .Default)
+        let callActionButton: UIAlertAction = UIAlertAction(title: " Call Admin", style: .default)
         { action -> Void in
             self.callNumber("0450 663 654")
         }
@@ -227,12 +227,12 @@ extension LeftMenuViewController: UITableViewDelegate
             popoverPresentationController.sourceView = self.view
             popoverPresentationController.sourceRect = self.topTableView.frame
         }
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
-    private func callNumber(phoneNumber:String) {
-        if let phoneCallURL:NSURL = NSURL(string:"tel://"+"\(phoneNumber)") {
-            let application:UIApplication = UIApplication.sharedApplication()
+    fileprivate func callNumber(_ phoneNumber:String) {
+        if let phoneCallURL:URL = URL(string:"tel://"+"\(phoneNumber)") {
+            let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
                 application.openURL(phoneCallURL);
             }

@@ -12,19 +12,19 @@ import Foundation
 
 public extension Int {
     
-    var seconds: NSTimeInterval {
-        return NSTimeInterval(self)
+    var seconds: TimeInterval {
+        return TimeInterval(self)
     }
-    var minutes: NSTimeInterval {
+    var minutes: TimeInterval {
         return 60 * self.seconds
     }
-    var hours: NSTimeInterval {
+    var hours: TimeInterval {
         return 60 * self.minutes
     }
-    var days: NSTimeInterval {
+    var days: TimeInterval {
         return 24 * self.hours
     }
-    var years: NSTimeInterval {
+    var years: TimeInterval {
         return 365 * self.days
     }
 }

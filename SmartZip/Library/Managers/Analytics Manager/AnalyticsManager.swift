@@ -10,23 +10,23 @@ import Mixpanel
 //import Flurry_iOS_SDK
 
 enum PlatformType {
-    case MixPannel
-    case Flurry
-    case GoogleAnalytics
+    case mixPannel
+    case flurry
+    case googleAnalytics
 }
 
 class AnalyticsManager: NSObject {
     
-    var platformType: PlatformType = .MixPannel
+    var platformType: PlatformType = .mixPannel
     
     // MARK: - Singleton Instance
-    private static let _sharedManager = AnalyticsManager()
+    fileprivate static let _sharedManager = AnalyticsManager()
     
     class func sharedManager() -> AnalyticsManager {
         return _sharedManager
     }    
     
-    private override init() {
+    fileprivate override init() {
         super.init()
         
         // customize initialization
@@ -41,11 +41,11 @@ class AnalyticsManager: NSObject {
         
         switch self.platformType {
             
-        case .Flurry: break
+        case .flurry: break
 //            Flurry.startSession(Constants.Tokens.FLURRY_APP_ID);
 //            Flurry.setCrashReportingEnabled(true)
             
-        case .GoogleAnalytics:
+        case .googleAnalytics:
             self.googleAnalyserInitialize()
             
         default: break // .MixPannel:
@@ -61,14 +61,14 @@ class AnalyticsManager: NSObject {
      - parameter tool:       track tool which contain type of tool which we want to prefer for tracking
      - parameter screenName: A String is a screen name
      */
-    func trackEvent(eventName: String, attributes: NSDictionary?, screenName: String?) {
+    func trackEvent(_ eventName: String, attributes: NSDictionary?, screenName: String?) {
         
         switch self.platformType {
             
-        case .Flurry: break
+        case .flurry: break
            // Flurry.logEvent(eventName, withParameters: attributes as! [NSObject : AnyObject])
             
-        case .GoogleAnalytics: break
+        case .googleAnalytics: break
 //            let tracker = GAI.sharedInstance().defaultTracker
 //            tracker.set(kGAIEvent, value: eventName)
 //
@@ -76,7 +76,7 @@ class AnalyticsManager: NSObject {
 //            tracker.send(builder.build() as [NSObject : AnyObject])
             
         default: // .MixPannel:
-            Mixpanel.sharedInstance().track(eventName, properties: (attributes as! [NSObject : AnyObject])) //Plan selected)
+            Mixpanel.sharedInstance().track(eventName, properties: (attributes as! [AnyHashable: Any])) //Plan selected)
         }
     }
     

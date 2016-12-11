@@ -9,21 +9,21 @@
 import SystemConfiguration
 
 public enum ReachabilityType {
-    case WWAN,
-    WiFi,
-    NotConnected
+    case wwan,
+    wiFi,
+    notConnected
 }
 
-public class Reachability {
+open class Reachability {
     
     /**
      :see: Original post - http://www.chrisdanielson.com/2009/07/22/iphone-network-connectivity-test-example/
      */
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
-        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
             SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
         }
         var flags = SCNetworkReachabilityFlags()

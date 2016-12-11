@@ -16,7 +16,7 @@ extension UIImageView {
      - parameter string : string whose initials has to be created
      - returns : new UIImage created from string value supplied
      */
-    func setImageWithString(string: String) {
+    func setImageWithString(_ string: String) {
         self.setImageWithString(string, color: nil, isCircular: true, textAttributes: nil)
     }
 
@@ -28,11 +28,11 @@ extension UIImageView {
      - parameter textAttributes : attributes for string inside image 
      - returns : new UIImage created from string value supplied
      */
-    func setImageWithString(txtString: String, color: UIColor?, isCircular: Bool, textAttributes: [String : AnyObject]?) {
+    func setImageWithString(_ txtString: String, color: UIColor?, isCircular: Bool, textAttributes: [String : AnyObject]?) {
         
         var textAttr:[String : AnyObject]?
         if textAttributes == nil {
-            textAttr = [NSFontAttributeName:self.fontForFontName(nil)!,NSForegroundColorAttributeName:UIColor.whiteColor()]
+            textAttr = [NSFontAttributeName:self.fontForFontName(nil)!,NSForegroundColorAttributeName:UIColor.white]
         } else {
             textAttr = textAttributes
         }
@@ -40,14 +40,14 @@ extension UIImageView {
         let string : NSString = NSString(string: txtString)
         let displayString:NSMutableString = NSMutableString(string: "")
         
-        let words : NSMutableArray = NSMutableArray(array: string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))
+        let words : NSMutableArray = NSMutableArray(array: string.components(separatedBy: CharacterSet.whitespacesAndNewlines))
         
         if words.count > 0 {
             let firstWord : NSString = words.firstObject as! NSString
             if firstWord.length > 0 {
-                let firstLetterRange:NSRange = firstWord.rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, 1))
+                let firstLetterRange:NSRange = firstWord.rangeOfComposedCharacterSequences(for: NSMakeRange(0, 1))
                 
-                displayString.appendString(String(firstWord.substringWithRange(firstLetterRange)))
+                displayString.append(String(firstWord.substring(with: firstLetterRange)))
             }
             
             if words.count >= 2 {
@@ -58,31 +58,31 @@ extension UIImageView {
                 }
                 
                 if words.count > 1 {
-                    let lastLetterRange:NSRange = lastWord.rangeOfComposedCharacterSequencesForRange(NSMakeRange(0, 1));
-                    displayString.appendString(String(lastWord.substringWithRange(lastLetterRange)))
+                    let lastLetterRange:NSRange = lastWord.rangeOfComposedCharacterSequences(for: NSMakeRange(0, 1));
+                    displayString.append(String(lastWord.substring(with: lastLetterRange)))
                 }
             }
         }
         
         let backgroundColor : UIColor = self.randomColor()
         
-        self.image = self.imageSnapshotFrom(Text: displayString.uppercaseString, BackgroundColor: backgroundColor, Circular: isCircular, TextAttributes: textAttr!)
+        self.image = self.imageSnapshotFrom(Text: displayString.uppercased, BackgroundColor: backgroundColor, Circular: isCircular, TextAttributes: textAttr!)
     }
     
     
     // MARK: - Private functions
     
-    private func fontForFontName(fontName:String?) -> UIFont? {
-        let fontSize:CGFloat = (CGRectGetWidth(self.bounds)) * CGFloat(kFontResizingProportion)
+    fileprivate func fontForFontName(_ fontName:String?) -> UIFont? {
+        let fontSize:CGFloat = (self.bounds.width) * CGFloat(kFontResizingProportion)
         if fontName == nil {
-            return UIFont.systemFontOfSize(fontSize)
+            return UIFont.systemFont(ofSize: fontSize)
         } else {
             let rVal : UIFont = UIFont(name: fontName!, size: fontSize)!
             return rVal
         }
     }
     
-    private func randomColor() -> UIColor {
+    fileprivate func randomColor() -> UIColor {
         var red = 0.0
         while red < 0.1 || red > 0.84 {
             red = drand48()
@@ -101,49 +101,49 @@ extension UIImageView {
         return UIColor.init(colorLiteralRed: Float(red), green: Float(green), blue: Float(blue), alpha: 1.0)
     }
     
-    private func imageSnapshotFrom(Text text: String, BackgroundColor color: UIColor, Circular isCircular: Bool, TextAttributes textAttributes: [String : AnyObject]) -> UIImage? {
-        let scale:CGFloat = UIScreen.mainScreen().scale
+    fileprivate func imageSnapshotFrom(Text text: String, BackgroundColor color: UIColor, Circular isCircular: Bool, TextAttributes textAttributes: [String : AnyObject]) -> UIImage? {
+        let scale:CGFloat = UIScreen.main.scale
         
         var size:CGSize = self.bounds.size
         
-        if self.contentMode == UIViewContentMode.ScaleToFill || self.contentMode == UIViewContentMode.ScaleAspectFill || self.contentMode == UIViewContentMode.ScaleAspectFit || self.contentMode == UIViewContentMode.Redraw {
+        if self.contentMode == UIViewContentMode.scaleToFill || self.contentMode == UIViewContentMode.scaleAspectFill || self.contentMode == UIViewContentMode.scaleAspectFit || self.contentMode == UIViewContentMode.redraw {
             size.width = CGFloat(floorf(Float(size.width) * Float(scale)) / Float(scale));
             size.height = CGFloat(floorf(Float(size.height) * Float(scale)) / Float(scale));
         }
         
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         
-        let context:CGContextRef = UIGraphicsGetCurrentContext()!
+        let context:CGContext = UIGraphicsGetCurrentContext()!
         
         if isCircular {
             //
             // Clip context to a circle
             //
-            let path:CGPathRef = CGPathCreateWithEllipseInRect(self.bounds, nil)
-            CGContextAddPath(context, path)
-            CGContextClip(context)
+            let path:CGPath = CGPath(ellipseIn: self.bounds, transform: nil)
+            context.addPath(path)
+            context.clip()
         }
         
         //
         // Fill background of context
         //
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
+        context.setFillColor(color.cgColor)
+        context.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
         
         //
         // Draw text in the context
         //
         let str = NSString(string: text)
         
-        let textSize:CGSize = str.sizeWithAttributes(textAttributes)
+        let textSize:CGSize = str.size(attributes: textAttributes)
         let bounds:CGRect = self.bounds
         
-        str.drawInRect(CGRectMake(bounds.size.width/2 - textSize.width/2,
-            bounds.size.height/2 - textSize.height/2,
-            textSize.width,
-            textSize.height), withAttributes: textAttributes)
+        str.draw(in: CGRect(x: bounds.size.width/2 - textSize.width/2,
+            y: bounds.size.height/2 - textSize.height/2,
+            width: textSize.width,
+            height: textSize.height), withAttributes: textAttributes)
         
-        let snapShot:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let snapShot:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return snapShot
     }

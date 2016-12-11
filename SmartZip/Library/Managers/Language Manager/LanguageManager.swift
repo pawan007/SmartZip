@@ -21,13 +21,13 @@ class LanguageManager: NSObject {
     var availableLocales: NSArray!
     
     // MARK: - Singleton Instance
-    private static let _sharedManager = LanguageManager()
+    fileprivate static let _sharedManager = LanguageManager()
     
     class func sharedManager() -> LanguageManager {
         return _sharedManager
     }
     
-    private override init() {
+    fileprivate override init() {
         super.init()
         
         // customize initialization
@@ -42,12 +42,12 @@ class LanguageManager: NSObject {
     var languageCode: NSString {
         
         get {
-            let languageCode: String = NSUserDefaults.standardUserDefaults().stringForKey(LanguageManager.Constants.languageCodeKey)!
-            return languageCode
+            let languageCode: String = UserDefaults.standard.string(forKey: LanguageManager.Constants.languageCodeKey)!
+            return languageCode as NSString
         }
         set {
-            NSUserDefaults.standardUserDefaults().setObject(languageCode, forKey: LanguageManager.Constants.languageCodeKey)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(languageCode, forKey: LanguageManager.Constants.languageCodeKey)
+            UserDefaults.standard.synchronize()
         }
     }
     
@@ -59,7 +59,7 @@ class LanguageManager: NSObject {
      
      - returns: A String which contain updated value of string
      */
-    func localizedString(key: String, comment: String) -> String {
+    func localizedString(_ key: String, comment: String) -> String {
         return self.translationForKey(key)
     }
     
@@ -70,14 +70,14 @@ class LanguageManager: NSObject {
      
      - returns: A translate string which is resultant of given key
      */
-    func translationForKey(key: String) -> String {
+    func translationForKey(_ key: String) -> String {
         
         // Get the relevant language bundle.
-        let bundlePath: String = NSBundle.mainBundle().pathForResource(self.languageCode as String, ofType: "lproj")!
-        let languageBundle: NSBundle = NSBundle(path: bundlePath)!
+        let bundlePath: String = Bundle.main.path(forResource: self.languageCode as String, ofType: "lproj")!
+        let languageBundle: Bundle = Bundle(path: bundlePath)!
         
         // Get the translated string using the language bundle.
-        if let translatedString: String = languageBundle.localizedStringForKey(key, value: key, table: nil) {
+        if let translatedString: String = languageBundle.localizedString(forKey: key, value: key, table: nil) {
             return translatedString
         } else {
             return key
@@ -89,21 +89,21 @@ class LanguageManager: NSObject {
     */
     func initializeLanguageIfNeeded() {
         
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults: UserDefaults = UserDefaults.standard
         
         // Check whether the language code has already been set.
-        guard let _ = userDefaults.stringForKey(LanguageManager.Constants.languageCodeKey) else  {
+        guard let _ = userDefaults.string(forKey: LanguageManager.Constants.languageCodeKey) else  {
             
             //Get current locale language form device
-            let currentLocale: NSLocale = NSLocale.currentLocale()
+            let currentLocale: Locale = Locale.current
             
             // Get language code form device
-            let localeLanguageCode: String = currentLocale.objectForKey(NSLocaleLanguageCode) as! String
+            let localeLanguageCode: String = (currentLocale as NSLocale).object(forKey: NSLocale.Key.languageCode) as! String
             
             // Iterate through available localisations to find the matching one for the device locale.
             for language in self.availableLocales  {
                 
-                if (language.caseInsensitiveCompare(localeLanguageCode) == NSComparisonResult.OrderedSame)   {
+                if ((language as AnyObject).caseInsensitiveCompare(localeLanguageCode) == ComparisonResult.orderedSame)   {
                     
                     // Set language in user default
                     self.languageCode = language as! NSString
@@ -112,10 +112,10 @@ class LanguageManager: NSObject {
             }
             
             // If the device locale doesn't match any of the available ones, just pick the first one.
-            guard let _ = userDefaults.stringForKey(LanguageManager.Constants.languageCodeKey) else  {
+            guard let _ = userDefaults.string(forKey: LanguageManager.Constants.languageCodeKey) else  {
                 
                 print("Couldn't find the right localisation - using default.")
-                self.languageCode = LanguageManager.Constants.defaultLanguageCode // by default english language.
+                self.languageCode = LanguageManager.Constants.defaultLanguageCode as NSString // by default english language.
                 return
             }
             

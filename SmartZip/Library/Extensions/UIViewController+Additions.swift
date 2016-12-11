@@ -16,11 +16,11 @@ extension UIViewController {
      - parameter title:   title for alerview
      - parameter message: message to be shown
      */
-    func showAlertViewWithMessage(title: String, message: String) {
+    func showAlertViewWithMessage(_ title: String, message: String) {
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: nil))
-        presentViewController(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
       /**
@@ -30,17 +30,17 @@ extension UIViewController {
      - parameter message:       message description
      - parameter actionHandler: actionHandler code/closer/block
      */
-    func showAlertViewWithMessageAndActionHandler(title: String, message: String, actionHandler:(() -> Void)?) {
+    func showAlertViewWithMessageAndActionHandler(_ title: String, message: String, actionHandler:(() -> Void)?) {
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let alAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default) { (action) in
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default) { (action) in
             
             if let _ = actionHandler {
                 actionHandler!()
             }
         }
         alertController.addAction(alAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     /**
@@ -51,26 +51,26 @@ extension UIViewController {
      - parameter textFieldPlaceholder: placeholder text for text field in alert view
      - parameter submitActionHandler:  submitActionHandler block/closer/code
      */
-    func showAlertViewWithTextField(title: String, message: String, textFieldPlaceholder:String, submitActionHandler:(textFromTextField:String?) -> Void) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+    func showAlertViewWithTextField(_ title: String, message: String, textFieldPlaceholder:String, submitActionHandler:@escaping (_ textFromTextField:String?) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
             textField.placeholder = textFieldPlaceholder
-            textField.borderStyle = UITextBorderStyle.None
+            textField.borderStyle = UITextBorderStyle.none
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit"), style: .Default) {  (action: UIAlertAction!) in
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit"), style: .default) {  (action: UIAlertAction!) in
             let answerTF = alertController.textFields![0]
             let text = answerTF.text
             submitActionHandler(textFromTextField: text)
         }
         alertController.addAction(submitAction)
         
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Cancel) {  (action: UIAlertAction!) in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel) {  (action: UIAlertAction!) in
 
         }
         alertController.addAction(cancelAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     /**
@@ -81,25 +81,25 @@ extension UIViewController {
      - parameter textFieldPlaceholder: placeholder text for text field in alert view
      - parameter submitActionHandler:  submitActionHandler block/closer/code
      */
-    func showAlertViewWithSecureTextField(title: String, message: String, textFieldPlaceholder:String, submitActionHandler:(textFromTextField:String) -> Void) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+    func showAlertViewWithSecureTextField(_ title: String, message: String, textFieldPlaceholder:String, submitActionHandler:@escaping (_ textFromTextField:String) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
             textField.placeholder = textFieldPlaceholder
-            textField.secureTextEntry = true
+            textField.isSecureTextEntry = true
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit"), style: .Default) {  (action: UIAlertAction!) in
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit"), style: .default) {  (action: UIAlertAction!) in
             let answer = alertController.textFields![0]
             submitActionHandler(textFromTextField: answer.text!)
         }
         alertController.addAction(submitAction)
         
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Cancel) {  (action: UIAlertAction!) in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel) {  (action: UIAlertAction!) in
             
         }
         alertController.addAction(cancelAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     /**
@@ -110,7 +110,7 @@ extension UIViewController {
      - parameter url:        url to be shared
      - parameter activities: array of UIActivity which you want to show in controller. nil value will show every available active by default
      */
-    func showActivityController(image: UIImage?, text: String?, url: String?, activities: [UIActivity]? = nil ) {
+    func showActivityController(_ image: UIImage?, text: String?, url: String?, activities: [UIActivity]? = nil ) {
         
         var array = [AnyObject]()
         
@@ -118,10 +118,10 @@ extension UIViewController {
             array.append(image!)
         }
         if text != nil {
-            array.append(text!)
+            array.append(text! as AnyObject)
         }
         if url != nil {
-            array.append(NSURL(string: url!)!)
+            array.append(URL(string: url!)! as AnyObject)
         }
         assert(array.count != 0, "Please specify at least element to share among image, text or url")
         
@@ -133,6 +133,6 @@ extension UIViewController {
             rect.origin.y = rect.height
             popoverPresentationController.sourceRect = rect
         }
-        presentViewController(activityController, animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
     }
 }

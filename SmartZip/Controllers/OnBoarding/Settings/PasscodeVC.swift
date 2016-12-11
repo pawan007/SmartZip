@@ -12,13 +12,13 @@ class PasscodeVC: UIViewController {
     
     @IBOutlet weak var topTableView: UITableView!
     
-    private var topTableIDs = ["PasscodeCell","ChangePasscodeCell"]
+    fileprivate var topTableIDs = ["PasscodeCell","ChangePasscodeCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override internal func viewWillAppear(animated: Bool) {
+    override internal func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.topTableView.reloadData()
     }
@@ -28,14 +28,14 @@ class PasscodeVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func backClick(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true) {
+    @IBAction func backClick(_ sender: AnyObject) {
+        self.dismiss(animated: true) {
             
         }
         
         
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         let identifier  = topTableIDs[indexPath.row]
         
         switch identifier {
@@ -47,14 +47,14 @@ class PasscodeVC: UIViewController {
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  topTableIDs.count
         
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(topTableIDs[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: topTableIDs[indexPath.row])
         return cell!
     }
     

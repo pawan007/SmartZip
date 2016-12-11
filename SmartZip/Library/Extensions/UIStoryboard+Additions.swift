@@ -19,7 +19,7 @@ extension UIStoryboard {
      
      - returns: A Storyboard object
      */
-    convenience init(storyboard: String, bundle: NSBundle? = nil) {
+    convenience init(storyboard: String, bundle: Bundle? = nil) {
         self.init(name: storyboard, bundle: bundle)
     }
     
@@ -31,11 +31,11 @@ extension UIStoryboard {
      */
     func instantiateViewController<T: UIViewController>() -> T {
         var fullName: String = NSStringFromClass(T.self)
-        if let range = fullName.rangeOfString(".", options: .BackwardsSearch) {
-            fullName = fullName.substringFromIndex(range.endIndex)
+        if let range = fullName.range(of: ".", options: .backwards) {
+            fullName = fullName.substring(from: range.upperBound)
         }
         
-        guard let viewController = self.instantiateViewControllerWithIdentifier(fullName) as? T else {
+        guard let viewController = self.instantiateViewController(withIdentifier: fullName) as? T else {
             fatalError("Couldn't instantiate view controller with identifier \(fullName) ")
         }
         

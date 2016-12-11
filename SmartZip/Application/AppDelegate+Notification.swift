@@ -16,20 +16,20 @@ extension AppDelegate {
     }
     
     // MARK: - UIApplicationDelegate Methods
-    func application (application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        LogManager.logDebug("Device Push Token \(String(data: deviceToken, encoding: NSUTF8StringEncoding))")
+    func application (_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        LogManager.logDebug("Device Push Token \(String(data: deviceToken, encoding: String.Encoding.utf8))")
         // Prepare the Device Token for Registration (remove spaces and < >)
         
         self.setDeviceToken(deviceToken)
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    @nonobjc func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         LogManager.logError(error.localizedDescription)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
-        self.recievedRemoteNotification(userInfo)
+        self.recievedRemoteNotification(userInfo as NSDictionary)
     }
     
     
@@ -40,30 +40,30 @@ extension AppDelegate {
     func registerRemoteNotification () {
         
         let settings = UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.shared.registerUserNotificationSettings(settings)
         
         // This is an asynchronous method to retrieve a Device Token
         // Callbacks are in AppDelegate.swift
         
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+        UIApplication.shared.registerForRemoteNotifications()
     }
     
     /**
      Deregister remote notification
      */
     func deregisterRemoteNotification () {
-        UIApplication.sharedApplication().unregisterForRemoteNotifications()
+        UIApplication.shared.unregisterForRemoteNotifications()
     }
     
-    func setDeviceToken (token: NSData) {
-        let deviceToken = token.description.stringByReplacingOccurrencesOfString("<", withString: "").stringByReplacingOccurrencesOfString(">", withString: "").stringByReplacingOccurrencesOfString(" ", withString: "") ?? ""
-        NSUserDefaults.setObject(deviceToken, forKey: Keys.deviceToken)
+    func setDeviceToken (_ token: Data) {
+        let deviceToken = token.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: "") ?? ""
+        UserDefaults.setObject(deviceToken, forKey: Keys.deviceToken)
     }
     
     func deviceToken () -> String {
-        let deviceToken: String? = NSUserDefaults.objectForKey(Keys.deviceToken) as? String
+        let deviceToken: String? = UserDefaults.objectForKey(Keys.deviceToken) as? String
         
-        if isObjectInitialized(deviceToken) {
+        if isObjectInitialized(deviceToken as AnyObject?) {
             return deviceToken!
         }
         
@@ -72,12 +72,12 @@ extension AppDelegate {
     
     
     func setRigisterDevice () {
-             NSUserDefaults.setObject("register", forKey: Keys.deviceToken)
+             UserDefaults.setObject("register" as AnyObject?, forKey: Keys.deviceToken)
     }
     
     func getRigisterDevice () -> String {
-        let deviceIsRegister: String? = NSUserDefaults.objectForKey(Keys.deviceIsRegister) as? String
-        if isObjectInitialized(deviceIsRegister) {
+        let deviceIsRegister: String? = UserDefaults.objectForKey(Keys.deviceIsRegister) as? String
+        if isObjectInitialized(deviceIsRegister as AnyObject?) {
             return deviceIsRegister!
         }
         return ""
@@ -88,11 +88,11 @@ extension AppDelegate {
      
      - parameter userInfo: Response from server
      */
-    func recievedRemoteNotification (userInfo: NSDictionary) {
+    func recievedRemoteNotification (_ userInfo: NSDictionary) {
         
         let dictioaryUserInfo: NSDictionary = userInfo["aps"] as! NSDictionary
         
-        if UIApplication.sharedApplication().applicationState == UIApplicationState.Active {
+        if UIApplication.shared.applicationState == UIApplicationState.active {
             if let _ = dictioaryUserInfo["alert"] {
                 
                 let dictionaryData: NSDictionary = dictioaryUserInfo["data"] as! NSDictionary
@@ -103,7 +103,7 @@ extension AppDelegate {
                 if let userInfo = dictionaryData["user_info"] {
                     
                     // get data as per requirement
-                    LogManager.logDebug(userInfo.description)
+                    LogManager.logDebug((userInfo as AnyObject).description)
                 }
             }
         }

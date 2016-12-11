@@ -7,11 +7,11 @@
 
 import Foundation
 // MARK: - NSURLResponse Extension
-extension NSURLResponse {
+extension URLResponse {
     
     func isHTTPResponseValid() -> Bool {
         
-        if let response = self as? NSHTTPURLResponse {
+        if let response = self as? HTTPURLResponse {
             return (response.statusCode >= 200 && response.statusCode <= 299)
         }
         return false

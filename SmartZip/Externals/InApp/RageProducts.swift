@@ -25,13 +25,13 @@ import Foundation
 public struct RageProducts {
     
     // TODO:  Change this to the BundleID chosen when registering this app's App ID in the Apple Member Center.
-    private static let Prefix = "com.mobirizer.smartzip.app."
+    fileprivate static let Prefix = "com.mobirizer.smartzip.app."
     
     public static let removeBannerAds   = Prefix + "removebannerads"
     public static let removeFullPageAds  = Prefix + "removefullpageads"
     
     
-    private static let productIdentifiers: Set<ProductIdentifier> = [
+    fileprivate static let productIdentifiers: Set<ProductIdentifier> = [
         RageProducts.removeBannerAds,
         RageProducts.removeFullPageAds,
         ]
@@ -39,6 +39,6 @@ public struct RageProducts {
     public static let store = IAPHelper(productIds: RageProducts.productIdentifiers)
 }
 
-func resourceNameForProductIdentifier(productIdentifier: String) -> String? {
-    return productIdentifier.componentsSeparatedByString(".").last
+func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
+    return productIdentifier.components(separatedBy: ".").last
 }

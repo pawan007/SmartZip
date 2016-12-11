@@ -18,21 +18,21 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if searchController.active {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if searchController.isActive {
             return 1
         }
         return sections.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive {
             return filteredFiles.count
         }
         return sections[section].count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         /*let cellIdentifier = "FileCell"
          var cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdentifier)
@@ -40,10 +40,10 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
          cell = reuseCell
          }*/
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("FileBrowserCell", forIndexPath: indexPath) as! FileBrowserCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FileBrowserCell", for: indexPath) as! FileBrowserCell
         
         cell.delgate = self
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         let selectedFile = fileForIndexPath(indexPath)
         //        cell.textLabel?.text = selectedFile.displayName
         //        cell.imageView?.image = selectedFile.type.image()
@@ -52,23 +52,23 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         cell.checkedStatus = selectedFile.isChecked
         
         if flagShowEditView {
-            cell.btnTop.hidden = false
+            cell.btnTop.isHidden = false
         }else{
-            cell.btnTop.hidden = true
+            cell.btnTop.isHidden = true
         }
         
         if selectedFile.isChecked {
-            cell.btnCheck.setImage(UIImage(named: "icon_checked"), forState: .Normal)
+            cell.btnCheck.setImage(UIImage(named: "icon_checked"), for: UIControlState())
         }else{
-            cell.btnCheck.setImage(UIImage(named: "icon_unchecked"), forState: .Normal)
+            cell.btnCheck.setImage(UIImage(named: "icon_unchecked"), for: UIControlState())
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFile = fileForIndexPath(indexPath)
-        searchController.active = false
+        searchController.isActive = false
         
         if flagShowEditView {
             //            let cell = tableView.dequeueReusableCellWithIdentifier("FileBrowserCell", forIndexPath: indexPath) as! FileBrowserCell
@@ -82,7 +82,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             //            fileListViewController.didSelectFile = didSelectFile
             //            self.navigationController?.pushViewController(fileListViewController, animated: true)
             FileParser.sharedInstance.currentPath = selectedFile.filePath
-            let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController") as! FileListViewController
+            let fileListViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FileListViewController") as! FileListViewController
             
             if flagMoveItem {
                 fileListViewController.delegate = self
@@ -103,7 +103,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
             
             
-            unzipClass.unzipPathInner(selectedFile.filePath.path!)
+            unzipClass.unzipPathInner(selectedFile.filePath.path)
             
             
             /*guard let unzipPath = getUnzipPath(selectedFile.filePath.path!) else {
@@ -136,11 +136,11 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
                 self.navigationController?.pushViewController(filePreview, animated: true)
             }
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if searchController.active {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if searchController.isActive {
             return nil
         }
         if sections[section].count > 0 {
@@ -151,23 +151,23 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         }
     }
     
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-        if searchController.active {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if searchController.isActive {
             return nil
         }
         return collation.sectionIndexTitles
     }
     
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        if searchController.active {
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        if searchController.isActive {
             return 0
         }
-        return collation.sectionForSectionIndexTitleAtIndex(index)
+        return collation.section(forSectionIndexTitle: index)
     }
     
-    func checkUnCheckBtn(cell: FileBrowserCell, value: Bool) {
+    func checkUnCheckBtn(_ cell: FileBrowserCell, value: Bool) {
         
-        let indexPath = tableView.indexPathForCell(cell)
+        let indexPath = tableView.indexPath(for: cell)
         let selectedFile = fileForIndexPath(indexPath!)
         
         if value {
@@ -176,8 +176,8 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             filesForSharing.append(selectedFile)
         }else{
             selectedFile.isChecked = false
-            let index = filesForSharing.indexOf(selectedFile)
-            filesForSharing.removeAtIndex(index!)
+            let index = filesForSharing.index(of: selectedFile)
+            filesForSharing.remove(at: index!)
         }
         
         print(filesForSharing)
@@ -202,12 +202,12 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
     }
     
-    func showActionSheet(index:Int) {
+    func showActionSheet(_ index:Int) {
         //Create the AlertController
-        let actionSheetController: UIAlertController = UIAlertController(title: "More", message: "", preferredStyle: .ActionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: "More", message: "", preferredStyle: .actionSheet)
         
         //Create and add the Cancel action
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
             //Just dismiss the action sheet
             
         }
@@ -217,7 +217,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         if flagShowShareOptionOnly {
             
             //Create and add first option action
-            let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .Default) { action -> Void in
+            let takePictureAction: UIAlertAction = UIAlertAction(title: "Share", style: .default) { action -> Void in
                 //Code for launching the camera goes here
                 print("Apply Share code")
                 CommonFunctions.sharedInstance.shareMyFile((self.filesForSharing.first?.filePath.path)!, vc: self)
@@ -227,7 +227,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         }else{
             
             //Create and add first option action
-            let takePictureAction: UIAlertAction = UIAlertAction(title: "Zip and Share", style: .Default) { action -> Void in
+            let takePictureAction: UIAlertAction = UIAlertAction(title: "Zip and Share", style: .default) { action -> Void in
                 //Code for launching the camera goes here
                 print("Apply Zip and Share code")
                 self.showEnterZipNameAlert(false)
@@ -239,16 +239,16 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
         
         //Create and add a second option action
-        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
+        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Delete", style: .default) { action -> Void in
             //Code for picking from camera roll goes here
             print("Delete File")
             self.deleteFiles()
         }
         actionSheetController.addAction(choosePictureAction)
         
-        if searchController.active {
+        if searchController.isActive {
             //Create and add first option action
-            let cancelSearch: UIAlertAction = UIAlertAction(title: "Cancel Search", style: .Default) { action -> Void in
+            let cancelSearch: UIAlertAction = UIAlertAction(title: "Cancel Search", style: .default) { action -> Void in
                 //Code for launching the camera goes here
                 print("Cancel Search")
             }
@@ -262,7 +262,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             popoverPresentationController.sourceRect = rect
         }
         //Present the AlertController
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
     func deleteFiles() {
@@ -275,9 +275,9 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
         if self.filesForSharing.count > 0{
             for item in self.filesForSharing {
-                if let index = self.files.indexOf(item){
-                    self.files.removeAtIndex(index)
-                    do{  try NSFileManager.defaultManager().removeItemAtPath(item.filePath.path!)
+                if let index = self.files.index(of: item){
+                    self.files.remove(at: index)
+                    do{  try FileManager.default.removeItem(atPath: item.filePath.path)
                     }catch let error{
                         print(error)
                     }
@@ -292,14 +292,14 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     }
     
     
-    func selectAllFiles(onOffValue:Bool) {
+    func selectAllFiles(_ onOffValue:Bool) {
         
         filesForSharing.removeAll()
         let sectionCount = tableView.numberOfSections
         for i in 0 ..< sectionCount {
-            let rowsCount = tableView.numberOfRowsInSection(i)
+            let rowsCount = tableView.numberOfRows(inSection: i)
             for j in 0 ..< rowsCount {
-                let indexPath = NSIndexPath(forRow: j, inSection: i)
+                let indexPath = IndexPath(row: j, section: i)
                 let selectedFile = fileForIndexPath(indexPath)
                 selectedFile.isChecked = onOffValue
                 
@@ -311,12 +311,12 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         self.tableView.reloadData()
     }
     
-    func createNewFolder(folderPath:String) -> Bool {
+    func createNewFolder(_ folderPath:String) -> Bool {
         
-        if(!kFileManager.fileExistsAtPath(folderPath)){
+        if(!kFileManager.fileExists(atPath: folderPath)){
             
             do{
-                try kFileManager.createDirectoryAtPath(folderPath, withIntermediateDirectories: false, attributes: nil)
+                try kFileManager.createDirectory(atPath: folderPath, withIntermediateDirectories: false, attributes: nil)
                 return true
             }catch let e as NSError{
                 print(e)
@@ -333,21 +333,21 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     }
     
     
-    func moveFileAtPath(folderPath:String) -> Bool {
+    func moveFileAtPath(_ folderPath:String) -> Bool {
         
-        if(!kFileManager.fileExistsAtPath(folderPath)){
+        if(!kFileManager.fileExists(atPath: folderPath)){
             
             do{
                 
                 if filesForSharing.first!.isDirectory {
                     
-                    try kFileManager.moveItemAtPath((filesForSharing.first?.filePath.path)!, toPath: folderPath)
+                    try kFileManager.moveItem(atPath: (filesForSharing.first?.filePath.path)!, toPath: folderPath)
                     return true
                     
                 }else{
                     
                     let fileExtension = (filesForSharing.first!.fileExtension)!
-                    try kFileManager.moveItemAtPath((filesForSharing.first?.filePath.path)!, toPath: "\(folderPath).\(fileExtension)")
+                    try kFileManager.moveItem(atPath: (filesForSharing.first?.filePath.path)!, toPath: "\(folderPath).\(fileExtension)")
                     return true
                     
                 }
@@ -368,7 +368,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
     }
     
-    func showNewFolderNameAlert(name:String, customMessage:String?){
+    func showNewFolderNameAlert(_ name:String, customMessage:String?){
         
         var msgText = ""
         if customMessage != nil {
@@ -378,9 +378,9 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }
         
-        let alertController = UIAlertController(title: "", message: msgText, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: msgText, preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
             let firstTextField = alertController.textFields![0] as UITextField
@@ -399,7 +399,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
             
             let path = "\((self.initialPath?.path)!)/\(name)"
-            if(kFileManager.fileExistsAtPath(path)){
+            if(kFileManager.fileExists(atPath: path)){
                 self.showNewFolderNameAlert(name, customMessage:"Folder exists, please provide new name")
             }else{
                 
@@ -418,24 +418,24 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
         
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+        alertController.addTextField { (textField : UITextField!) -> Void in
             textField.text = name
         }
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
     
-    func showRenameFolderAlert(name:String, customMessage:String?){
+    func showRenameFolderAlert(_ name:String, customMessage:String?){
         
         var msgText = ""
         if customMessage != nil {
@@ -445,9 +445,9 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }
         
-        let alertController = UIAlertController(title: "", message: msgText, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: msgText, preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
             let firstTextField = alertController.textFields![0] as UITextField
@@ -466,7 +466,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
             
             let path = "\((self.initialPath?.path)!)/\(name)"
-            if(kFileManager.fileExistsAtPath(path)){
+            if(kFileManager.fileExists(atPath: path)){
                 self.showRenameFolderAlert(name, customMessage:"Folder exists, please provide new name")
             }else{
                 
@@ -486,16 +486,16 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
         
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+        alertController.addTextField { (textField : UITextField!) -> Void in
             
-            if name.containsString("."){
+            if name.contains("."){
                 
-                let  newName = name.componentsSeparatedByString(".").first
+                let  newName = name.components(separatedBy: ".").first
                 textField.text = newName
             }else{
                 textField.text = name
@@ -507,19 +507,19 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
-    func unzipFile(zipFie:FBFile) {
+    func unzipFile(_ zipFie:FBFile) {
         
-        guard let unzipPath = getUnzipPath(zipFie.filePath.path!) else {
+        guard let unzipPath = getUnzipPath(zipFie.filePath.path) else {
             return
         }
         
-        if !NSFileManager.defaultManager().fileExistsAtPath(unzipPath) {
+        if !FileManager.default.fileExists(atPath: unzipPath) {
             
-            let success = SSZipArchive.unzipFileAtPath(zipFie.filePath.path!, toDestination: unzipPath)
+            let success = SSZipArchive.unzipFile(atPath: zipFie.filePath.path, toDestination: unzipPath)
             if !success {
                 return
             }
@@ -528,7 +528,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
             let incCount = getFileCopiesCount(unzipPath) + 1
             let newPath = "\(unzipPath)(\(incCount))"
-            let success = SSZipArchive.unzipFileAtPath(zipFie.filePath.path!, toDestination: newPath)
+            let success = SSZipArchive.unzipFile(atPath: zipFie.filePath.path, toDestination: newPath)
             if !success {
                 return
             }
@@ -540,17 +540,17 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
     }
     
-    func getFileCopiesCount(path:String) -> Int {
+    func getFileCopiesCount(_ path:String) -> Int {
         
-        var folderHierarchy = path.componentsSeparatedByString("/")
+        var folderHierarchy = path.components(separatedBy: "/")
         folderHierarchy.removeLast()
-        let pathParent = folderHierarchy.joinWithSeparator("/")
+        let pathParent = folderHierarchy.joined(separator: "/")
         var count = 0
-        if let enumerator = NSFileManager.defaultManager().enumeratorAtPath(pathParent) {
+        if let enumerator = FileManager.default.enumerator(atPath: pathParent) {
             while let fileName = enumerator.nextObject() as? String {
                 
                 let filePath = "\(pathParent)/\(fileName)"
-                if filePath.containsString(path) && path.componentsSeparatedByString("/").count == filePath.componentsSeparatedByString("/").count{
+                if filePath.contains(path) && path.components(separatedBy: "/").count == filePath.components(separatedBy: "/").count{
                     print(filePath)
                     count = count + 1
                 }
@@ -560,18 +560,18 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
     }
     
     
-    func getUnzipPath(zipPath:String) -> String? {
+    func getUnzipPath(_ zipPath:String) -> String? {
         
-        let array = zipPath.componentsSeparatedByString(".")
+        let array = zipPath.components(separatedBy: ".")
         return array.first
     }
     
     
-    func showEnterZipNameAlert(canShare:Bool){
+    func showEnterZipNameAlert(_ canShare:Bool){
         
-        let alertController = UIAlertController(title: "", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
             let firstTextField = alertController.textFields![0] as UITextField
@@ -593,7 +593,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             let zipFileName = "\((self.initialPath?.path)!)/\(newName).zip"
             let fileName = "\((self.initialPath?.path)!)/\(newName)"
             
-            if(kFileManager.fileExistsAtPath(zipFileName) || kFileManager.fileExistsAtPath(fileName)){
+            if(kFileManager.fileExists(atPath: zipFileName) || kFileManager.fileExists(atPath: fileName)){
                 
                 self.showAlert("Folder or file already exists, please provide new name", canShare: canShare)
                 
@@ -602,7 +602,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
                 
                 var arrayPaths = [String]()
                 for item in self.filesForSharing {
-                    arrayPaths.append(item.filePath.path!)
+                    arrayPaths.append(item.filePath.path)
                 }
                 
                 if !CommonFunctions.sharedInstance.canCreateZip2(arrayPaths) {
@@ -628,34 +628,34 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
         
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+        alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Please enter zip file name"
         }
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
-    func showAlert(name:String, canShare:Bool){
+    func showAlert(_ name:String, canShare:Bool){
         
-        let alertController = UIAlertController(title: "", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: name, preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
             self.showEnterZipNameAlert(canShare)
             
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
@@ -663,7 +663,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     

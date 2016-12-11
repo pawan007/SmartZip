@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - NSUserDefaults Extension
-extension NSUserDefaults {
+extension UserDefaults {
     
     // MARK: - User Defaults
     /**
@@ -17,9 +17,9 @@ extension NSUserDefaults {
      - parameter aObject: object to be stored
      - parameter defaultName: key for object
      */
-    class func setObject(value: AnyObject?, forKey defaultName: String) {
-        NSUserDefaults.standardUserDefaults().setObject(value, forKey: defaultName)
-        NSUserDefaults.standardUserDefaults().synchronize()
+    class func setObject(_ value: AnyObject?, forKey defaultName: String) {
+        UserDefaults.standard.set(value, forKey: defaultName)
+        UserDefaults.standard.synchronize()
     }
     
     /**
@@ -29,8 +29,8 @@ extension NSUserDefaults {
      
      - returns: stored object for key
      */
-    class func objectForKey(defaultName: String) -> AnyObject? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(defaultName)
+    class func objectForKey(_ defaultName: String) -> AnyObject? {
+        return UserDefaults.standard.object(forKey: defaultName) as AnyObject?
     }
     
     /**
@@ -38,8 +38,8 @@ extension NSUserDefaults {
      
      - parameter defaultName: key for object
      */
-    class func removeObjectForKey(defaultName: String) {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(defaultName)
-        NSUserDefaults.standardUserDefaults().synchronize()
+    class func removeObjectForKey(_ defaultName: String) {
+        UserDefaults.standard.removeObject(forKey: defaultName)
+        UserDefaults.standard.synchronize()
     }
 }
