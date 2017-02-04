@@ -54,7 +54,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func zipPressed(_: UIButton) {
-        let sampleDataPath = NSBundle.mainBundle().bundleURL.URLByAppendingPathComponent("Sample Data").path
+        let sampleDataPath = NSBundle.mainBundle().bundleURL.URLByAppendingPathComponent("Sample Data")!.path
         zipPath = tempZipPath()
         
         let success = SSZipArchive.createZipFileAtPath(zipPath!, withContentsOfDirectory: sampleDataPath!)

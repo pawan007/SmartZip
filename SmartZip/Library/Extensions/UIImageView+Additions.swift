@@ -143,7 +143,7 @@ extension UIImageView {
             textSize.width,
             textSize.height), withAttributes: textAttributes)
         
-        let snapShot:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let snapShot:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return snapShot
     }

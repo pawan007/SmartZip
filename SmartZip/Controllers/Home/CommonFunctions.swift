@@ -243,7 +243,7 @@ class CommonFunctions: NSObject {
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return screenshot
+        return screenshot!
     }
     
     

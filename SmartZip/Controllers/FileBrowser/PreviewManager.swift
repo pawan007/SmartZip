@@ -41,6 +41,8 @@ class PreviewManager: NSObject, QLPreviewControllerDataSource {
         let item = PreviewItem()
         if let filePath = filePath {
             item.filePath = filePath
+        }else{
+            item.filePath = NSURL()
         }
         return item
     }
@@ -51,11 +53,16 @@ class PreviewItem: NSObject, QLPreviewItem {
     
     var filePath: NSURL?
     
-    internal var previewItemURL: NSURL {
-        if let filePath = filePath {
-            return filePath
-        }
-        return NSURL()
-    }
+//    internal var previewItemURL: NSURL {
+//        if let filePath = filePath {
+//            return filePath
+//        }
+//        return NSURL()
+//    }
+    
+    
+    internal var previewItemURL: NSURL?
+    
+    
     
 }
