@@ -64,8 +64,8 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.dataSource = self
         self.title = "Google Drive"
         
-        if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
-            kKeychainItemName,
+        if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychain(
+            forName: kKeychainItemName,
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
@@ -75,7 +75,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //GADBannerView
             // self.setUpGoogleAds()
             shared = GADMasterViewController.singleton()
-            shared.resetAdView(self, andDisplayView: bannerAdView)
+            shared.resetAdView(self, andDisplay: bannerAdView)
         }
         tableView.tableFooterView = UIView()
     }
@@ -91,7 +91,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 let canAuth = authorizer.canAuthorize, canAuth {
                 fetchFiles()
             } else {
-                presentViewController(
+                present(
                     createAuthController(),
                     animated: true,
                     completion: nil
@@ -135,12 +135,12 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         SwiftSpinner.show("Processing, please wait..")
         let query = GTLQueryDrive.queryForFilesList()
-        query.pageSize = 1000
-        query.fields = "nextPageToken, files(id, name, mimeType, iconLink)"
+        query?.pageSize = 1000
+        query?.fields = "nextPageToken, files(id, name, mimeType, iconLink)"
         service.executeQuery(
-            query,
+            query!,
             delegate: self,
-            didFinishSelector: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
+            didFinish: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
         )
     }
     
@@ -154,13 +154,13 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //        output.text = "Getting files..."
         let query = GTLQueryDrive.queryForFilesList()
-        query.pageToken = token
-        query.pageSize = 50
-        query.fields = "nextPageToken, files(id, name, mimeType, iconLink)"
+        query?.pageToken = token
+        query?.pageSize = 50
+        query?.fields = "nextPageToken, files(id, name, mimeType, iconLink)"
         service.executeQuery(
-            query,
+            query!,
             delegate: self,
-            didFinishSelector: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
+            didFinish: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
         )
         
     }
@@ -174,14 +174,14 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             return
         }
         
-        let query = GTLQueryDrive.queryForFilesGetWithFileId(folderId)
-        query.q = "\(folderId) IN parents"
+        let query = GTLQueryDrive.queryForFilesGet(withFileId: folderId)
+        query?.q = "\(folderId) IN parents"
         //        query.pageSize = 50
         //        query.fields = "nextPageToken, files(id, name, mimeType, iconLink)"
         service.executeQuery(
-            query,
+            query!,
             delegate: self,
-            didFinishSelector: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
+            didFinish: #selector(GoogleDriveVC.displayResultWithTicket(_:finishedWithObject:error:))
         )
         
     }
@@ -244,7 +244,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Creates the auth controller for authorizing access to Drive API
     fileprivate func createAuthController() -> GTMOAuth2ViewControllerTouch {
-        let scopeString = scopes.joinWithSeparator(" ")
+        let scopeString = scopes.joined(separator: " ")
         return GTMOAuth2ViewControllerTouch(
             scope: scopeString,
             clientID: kClientID,
@@ -310,7 +310,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // create a new cell if needed or reuse an old one
         let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         let file = self.files[indexPath.row] as GTLDriveFile
-        cell.imageView?.sd_setImageWithURL(URL(string: file.iconLink), placeholderImage: UIImage(named: "myfolder") )
+        cell.imageView?.sd_setImage(with: URL(string: file.iconLink), placeholderImage: UIImage(named: "myfolder") )
         cell.textLabel?.text = file.name
         return cell
     }
@@ -336,16 +336,16 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             let file = self.files[indexPath.row] as GTLDriveFile
             let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)/export?alt=media&mimeType=application/pdf"
-            let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
+            let fetcher = self.service.fetcherService.fetcher(withURLString: filePath)
             
-            fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
+            fetcher.beginFetch(completionHandler: { (data, error) -> Void in
                 
                 SwiftSpinner.hide()
                 
                 if(error == nil){
                     
                     let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
-                    data?.writeToFile(exactPath, atomically: true)
+                    try! data?.write(to: URL(string: exactPath)!)
                     let zipPath = "\(exactPath).zip"
                     CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                     
@@ -363,17 +363,16 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             SwiftSpinner.show("Processing, please wait..")
             
             let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)?alt=media"
-            let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
+            let fetcher = self.service.fetcherService.fetcher(withURLString: filePath)
             
-            fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
+            fetcher.beginFetch(completionHandler: { (data, error) -> Void in
                 
                 SwiftSpinner.hide()
                 
                 if(error == nil){
                     
-                    //                    data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
                     let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
-                    data?.writeToFile(exactPath, atomically: true)
+                    try! data?.write(to: URL(string: exactPath)!)
                     let zipPath = "\(exactPath).zip"
                     CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                     
@@ -401,16 +400,16 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)/export?alt=media&mimeType=\(file.mimeType)"
         
-        let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
+        let fetcher = self.service.fetcherService.fetcher(withURLString: filePath)
         
-        fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
+        fetcher.beginFetch(completionHandler: { (data, error) -> Void in
             
             SwiftSpinner.hide()
             
             if(error == nil){
                 
                 let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
-                data?.writeToFile(exactPath, atomically: true)
+                try! data?.write(to: URL(string: exactPath)!)
                 let zipPath = "\(exactPath).zip"
                 CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                 
@@ -433,17 +432,16 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         SwiftSpinner.show("Processing, please wait..")
         
         let filePath = "https://www.googleapis.com/drive/v3/files/\(file.identifier)?alt=media"
-        let fetcher = self.service.fetcherService.fetcherWithURLString(filePath)
+        let fetcher = self.service.fetcherService.fetcher(withURLString: filePath)
         
-        fetcher.beginFetchWithCompletionHandler({ (data, error) -> Void in
+        fetcher.beginFetch(completionHandler: { (data, error) -> Void in
             
             SwiftSpinner.hide()
             
             if(error == nil){
                 
-                //                data?.writeToFile("\(NSTemporaryDirectory())/\(file.name)", atomically: true)
                 let exactPath = "\(CommonFunctions.sharedInstance.docDirPath())/\(file.name)"
-                data?.writeToFile(exactPath, atomically: true)
+                try! data?.write(to: URL(string: exactPath)!)
                 let zipPath = "\(exactPath).zip"
                 CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: exactPath, vc: self)
                 

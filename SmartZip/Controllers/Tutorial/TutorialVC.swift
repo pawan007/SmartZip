@@ -46,19 +46,19 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
             introductionView = MYIntroductionView(frame: CGRect(x: 0, y: 0, width: introView.frame.size.width, height: introView.frame.size.height), headerImage: UIImage(named: "SampleHeaderImage")!, panels: [panel, panel2, panel3])
             
             introductionView!.setHeaderText("SmartZip")
-            introductionView!.HeaderImageView.autoresizingMask = .FlexibleWidth
-            introductionView!.HeaderLabel.autoresizingMask = .FlexibleWidth
-            introductionView!.HeaderView.autoresizingMask = .FlexibleWidth
-            introductionView!.PageControl.autoresizingMask = .FlexibleWidth
-            introductionView!.SkipButton.autoresizingMask = .FlexibleWidth
-            introductionView!.SkipButton.hidden = true
+            introductionView!.headerImageView.autoresizingMask = .flexibleWidth
+            introductionView!.headerLabel.autoresizingMask = .flexibleWidth
+            introductionView!.headerView.autoresizingMask = .flexibleWidth
+            introductionView!.pageControl.autoresizingMask = .flexibleWidth
+            introductionView!.skipButton.autoresizingMask = .flexibleWidth
+            introductionView!.skipButton.isHidden = true
             
             introductionView!.delegate = self
-            introductionView!.showInView(introView, animateDuration: 0.1)
+            introductionView!.show(in: introView, animateDuration: 0.1)
         }
     }
     
-    func introductionDidFinishWithType(_ finishType: MYFinishType) {
+    func introductionDidFinish(with finishType: MYFinishType) {
         //
         if(introductionView != nil) {
             introductionView?.removeFromSuperview()
@@ -67,7 +67,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
         }
     }
     
-    func introductionDidChangeToPanel(_ panel: MYIntroductionPanel!, withIndex panelIndex: Int) {
+    func introductionDidChange(to panel: MYIntroductionPanel!, with panelIndex: Int) {
         //
         
         print(panelIndex)
@@ -86,7 +86,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
     
     @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
-            container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
+            container.toggle(.left, animated: true) { (val) -> Void in
                 
             }
         }
@@ -95,14 +95,14 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
     
     @IBAction func btnSkipTapped(_ sender: AnyObject) {
         
-        if let container = SideMenuManager.sharedManager().container {
-            container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
-                
-                let vc = container.leftDrawerViewController as! LeftMenuViewController
-                vc.tableView(vc.topTableView, didSelectRowAtIndexPath:  NSIndexPath(forRow: 0, inSection: 0))
-                
-            }
-        }
+//        if let container = SideMenuManager.sharedManager().container {
+//            container.toggle(.left, animated: true) { (val) -> Void in
+//                
+//                let vc = container.leftDrawerViewController as! LeftMenuViewController
+//                vc.tableView(vc.topTableView, didSelectRowAt: IndexPath(forRow: 0, inSection: 0))
+//                
+//            }
+//        }
         
         
     }

@@ -37,11 +37,11 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
         let imagePicker = QBImagePickerController()
         imagePicker.delegate = self
-        imagePicker.mediaType = QBImagePickerMediaType.Image
+        imagePicker.mediaType = QBImagePickerMediaType.image
         imagePicker.allowsMultipleSelection = true
         imagePicker.showsNumberOfSelectedAssets = true
         flagImage = true
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        self.present(imagePicker, animated: true, completion: nil)
         
         
     }
@@ -58,11 +58,11 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
         
         let imagePicker = QBImagePickerController()
         imagePicker.delegate = self
-        imagePicker.mediaType = QBImagePickerMediaType.Video
+        imagePicker.mediaType = QBImagePickerMediaType.video
         imagePicker.allowsMultipleSelection = true
         imagePicker.showsNumberOfSelectedAssets = true
         flagVideo = true
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        self.present(imagePicker, animated: true, completion: nil)
         
     }
     
@@ -150,15 +150,15 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
             for item in assets{
                 
                 let asset = item as! PHAsset
-                asset.requestContentEditingInputWithOptions(PHContentEditingInputRequestOptions()) { (input, _) in
+                asset.requestContentEditingInput(with: PHContentEditingInputRequestOptions()) { (input, _) in
                     let url = input!.fullSizeImageURL
                     print(url)
                     
                     do{
-                        let array = url?.path?.componentsSeparatedByString("/")
+                        let array = url?.path.components(separatedBy: "/")
                         let name = array!.last! as String
                         let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
-                        try NSFileManager.defaultManager().copyItemAtURL(url!, toURL: selectedVideo)
+                        try FileManager.default.copyItem(at: url!, to: selectedVideo as URL)
                         
                         currentItem += 1
                         
@@ -217,25 +217,24 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
                 
                 nameIndex += 1
                 
-                PHImageManager.defaultManager().requestAVAssetForVideo(asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
+                PHImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
                     
-                    if (asset != nil &&  asset!.isKindOfClass(AVURLAsset.classForCoder()) ){
+                    if (asset != nil && asset!.isKind(of: AVURLAsset.classForCoder())){
                         
                         let newVal = asset as! AVURLAsset
-                        let url = newVal.URL
+                        let url = newVal.url
                         print(url)
                         
                         do{
-                            let array = url.path?.componentsSeparatedByString("/")
-                            let name = array!.last! as String
+                            let array = url.path.components(separatedBy:"/")
+                            let name = array.last! as String
                             let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
-                            try NSFileManager.defaultManager().copyItemAtURL(url, toURL: selectedVideo)
+                            try FileManager.default.copyItem(at: url, to: selectedVideo as URL)
                             self.currentItem += 1
                             
                             print("in normal motion cur item = \(self.currentItem)")
                             
-                            dispatch_async(dispatch_get_main_queue(), {
-                                
+                            DispatchQueue.main.async {
                                 if self.currentItem == self.totalItem{
                                     SwiftSpinner.hide()
                                     self.currentItem = 0
@@ -243,14 +242,13 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
                                     let newPath = cacheDir + ".zip"
                                     self.zipMyFiles(newPath, existingFolder: cacheDir)
                                 }
-                                
-                            })
+                            }
                             
                         }catch let e as NSError{
                             print(e)
                         }
                         
-                    }else if (asset != nil &&  asset!.isKindOfClass(AVComposition.classForCoder()) ){
+                    }else if (asset != nil &&  asset!.isKind(of:AVComposition.classForCoder()) ){
                         
                         let path = "\(cacheDir)/mergeSlowMoVideo_\(self.nameIndex).mov"
                         self.folderDir = cacheDir
@@ -363,7 +361,7 @@ class PhotoPickerVC: UIViewController, QBImagePickerControllerDelegate {
             return
         }
         
-        let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: existingFolder)
+        let success = SSZipArchive.createZipFile(atPath: newZipFile, withContentsOfDirectory: existingFolder)
         if success {
             try! FileManager.default.removeItem(atPath: existingFolder)
             print("Zip file created successfully")
@@ -537,7 +535,7 @@ extension PhotoPickerVC : MPMediaPickerControllerDelegate {
                 
             }else{
                 
-                print("error: \(exporter?.error?.localizedFailureReason)")
+                print("error: \(exporter?.error?.localizedDescription)")
                 
                 DispatchQueue.main.async(execute: {
                     

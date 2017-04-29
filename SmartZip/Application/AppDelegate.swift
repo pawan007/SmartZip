@@ -268,7 +268,7 @@ extension AppDelegate {
         #if DEBUG
             LogManager.setup(.Debug)
         #else
-            LogManager.setup(.Error)
+            LogManager.setup(.error)
         #endif
     }
     

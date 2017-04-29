@@ -145,8 +145,8 @@ class UnZipVC: UIViewController {
             return nil
         }
         
-        if let path = url.path {
-            return path
+        if url.path.length != 0 {
+            return url.path
         }
         
         return nil
@@ -189,8 +189,8 @@ class UnZipVC: UIViewController {
             return nil
         }
         
-        if let path = url.path {
-            return path
+        if url.path.length != 0 {
+            return url.path
         }
         
         return nil

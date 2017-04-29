@@ -28,7 +28,7 @@ class UnZipExternal: NSObject {
         unZipFilePath = unzipPath
         //        unZipFilePath = CommonFunctions.sharedInstance.docDirPath()
         
-        let success = SSZipArchive.unzipFileAtPath(zipPath, toDestination: unZipFilePath)
+        let success = SSZipArchive.unzipFile(atPath: zipPath, toDestination: unZipFilePath)
         
         if !success {
             
@@ -58,8 +58,8 @@ class UnZipExternal: NSObject {
             return CommonFunctions.sharedInstance.docDirPath()
         }
         
-        if let path = url.path {
-            return path
+        if url.path.length != 0 {
+            return url.path
         }
         
         return nil
@@ -75,7 +75,7 @@ class UnZipExternal: NSObject {
         unZipFilePath = unzipPath
         //        unZipFilePath = CommonFunctions.sharedInstance.docDirPath()
         
-        let success = SSZipArchive.unzipFileAtPath(zipPath, toDestination: unZipFilePath)
+        let success = SSZipArchive.unzipFile(atPath: zipPath, toDestination: unZipFilePath)
         
         if !success {
             
@@ -93,7 +93,7 @@ class UnZipExternal: NSObject {
     func unzipPathInner(_ zipPath:String, unzipPath:String) -> String {
         
         unZipFilePath = unzipPath
-        let success = SSZipArchive.unzipFileAtPath(zipPath, toDestination: unZipFilePath)
+        let success = SSZipArchive.unzipFile(atPath: zipPath, toDestination: unZipFilePath)
         if !success {
             return ""
         }else{
@@ -105,15 +105,10 @@ class UnZipExternal: NSObject {
     
     func tempUnzipPathInner(_ zipPath:String) -> String? {
         
-        
-//        let zipName = zipPath.componentsSeparatedByString("/").last?.replace(".zip", replacementString: "")
         let folderPath = zipPath.replacingOccurrences(of: ".zip", with: "")
-//        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-//        print(zipName)
         print(folderPath)
-//        print(path)
-//        folderPath += "/\(zipName!)"
         
+        var filePath:String?
         
         if !FileManager.default.fileExists(atPath: folderPath) {
             
@@ -123,9 +118,9 @@ class UnZipExternal: NSObject {
             } catch {
                 return CommonFunctions.sharedInstance.docDirPath()
             }
-            if let path = url.path {
-                return path
-            }
+            
+            filePath = url.path
+            return filePath
             
         }else{
             
@@ -137,9 +132,9 @@ class UnZipExternal: NSObject {
             } catch {
                 return CommonFunctions.sharedInstance.docDirPath()
             }
-            if let path = url.path {
-                return path
-            }
+            
+            filePath = url.path
+            return filePath
         }
         
         

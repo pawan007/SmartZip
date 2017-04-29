@@ -66,35 +66,35 @@ extension LeftMenuViewController: UITableViewDelegate
         case "HomeCell" :
             let center = (self.storyboard?.instantiateViewController(withIdentifier: "HomeVCNew"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
-            container!.closeDrawerAnimated(animated: true, completion: { (Bool) in
+            container!.closeDrawer(animated: true, completion: { (Bool) in
             })
             break
         case "TutorialCell" :
             //TODO
             let center = (self.storyboard?.instantiateViewController(withIdentifier: "WLCTutorialVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
-            container!.closeDrawerAnimated(animated: true, completion: { (Bool) in
+            container!.closeDrawer(animated: true, completion: { (Bool) in
             })
             break
         case "BuyProCell" :
             let center = (self.storyboard?.instantiateViewController(withIdentifier: "BuyProVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            container!.closeDrawer(animated: true, completion: { (Bool) in
             })
             break
         case "RestoreCell" :
             let center = self.storyboard?.instantiateViewController(withIdentifier: "BuyProVC") as? BuyProVC
             container!.centerViewController =  UINavigationController(rootViewController: center!)
             center!.isShowRestoreBtn = true
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            container!.closeDrawer(animated: true, completion: { (Bool) in
             })
             
             break
         //TODO
         case "PasswordCell" :
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
-                let passcodeVC : PasscodeVC = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("PasscodeVC") as! PasscodeVC
-                self.presentViewController(passcodeVC, animated: true, completion: nil)
+            container!.closeDrawer(animated: true, completion: { (Bool) in
+                let passcodeVC : PasscodeVC = UIStoryboard.mainStoryboard().instantiateViewController(withIdentifier: "PasscodeVC") as! PasscodeVC
+                self.present(passcodeVC, animated: true, completion: nil)
                 //self.navigationController?.pushViewController(passcodeVC, animated: true)
             })
             break
@@ -121,7 +121,7 @@ extension LeftMenuViewController: UITableViewDelegate
         case "HistoryCell" :
             let center = (self.storyboard?.instantiateViewController(withIdentifier: "HistoryVC"))!
             container!.centerViewController =  UINavigationController(rootViewController: center)
-            container!.closeDrawerAnimated(true, completion: { (Bool) in
+            container!.closeDrawer(animated: true, completion: { (Bool) in
             })
             break
         default: break
@@ -133,7 +133,7 @@ extension LeftMenuViewController: UITableViewDelegate
         let container = SideMenuManager.sharedManager().container
         let center = (self.storyboard?.instantiateViewController(withIdentifier: "AboutCompany"))!
         container!.centerViewController =  UINavigationController(rootViewController: center)
-        container!.closeDrawerAnimated(true, completion: { (Bool) in
+        container!.closeDrawer(animated: true, completion: { (Bool) in
         })
     }
     
@@ -141,7 +141,7 @@ extension LeftMenuViewController: UITableViewDelegate
         let container = SideMenuManager.sharedManager().container
         let center = (self.storyboard?.instantiateViewController(withIdentifier: "AboutProduct"))!
         container!.centerViewController =  UINavigationController(rootViewController: center)
-        container!.closeDrawerAnimated(true, completion: { (Bool) in
+        container!.closeDrawer(animated: true, completion: { (Bool) in
         })
     }
     

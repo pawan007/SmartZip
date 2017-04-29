@@ -86,7 +86,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             // Request test ads on devices you specify. Your test device ID is printed to the console when
             // an ad request is made.
             // request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
-            interstitial.loadRequest(request)
+            interstitial.load(request)
         }
         
         if (!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
@@ -94,7 +94,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                 shared = nil
             }
             shared = GADMasterViewController.singleton()
-            shared.resetAdView(self, andDisplayView: _bView)
+            shared.resetAdView(self, andDisplay: _bView)
         }
         if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
             
@@ -107,7 +107,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                 shared = nil
             }
             shared = GADMasterViewController.singleton()
-            shared.resetAdView(self, andDisplayView: _bView)
+            shared.resetAdView(self, andDisplay: _bView)
             
             _bView.isHidden = true
         }
@@ -164,14 +164,14 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
         bannerView.adUnitID = kGoogleBannerAdId
         bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        bannerView.load(GADRequest())
         
         interstitial = GADInterstitial(adUnitID: kGoogleInterstitialAd)
         let request = GADRequest()
         // Request test ads on devices you specify. Your test device ID is printed to the console when
         // an ad request is made.
         // request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
-        interstitial.loadRequest(request)
+        interstitial.load(request)
     }
     
     /*func showFullPageAd() -> Bool {
@@ -213,7 +213,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             //show ad
             adCounter = 0
             if interstitial.isReady && (!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)){
-                interstitial.presentFromRootViewController(self)
+                interstitial.present(fromRootViewController: self)
                 isShow = true
             } else {
                 adCounter = 5
@@ -313,7 +313,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         }
         else {
             if let container = SideMenuManager.sharedManager().container {
-                container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
+                container.toggle(.left, animated: true) { (val) -> Void in
                     
                 }
             }
@@ -335,7 +335,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         self.navigationController?.pushViewController(fileListViewController, animated: true)
         
         let flurryParams = [ "Type" :"handleLocalFile"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
         
     }
     
@@ -343,14 +343,14 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
         let imagePicker = QBImagePickerController()
         imagePicker.delegate = self
-        imagePicker.mediaType = QBImagePickerMediaType.Image
+        imagePicker.mediaType = QBImagePickerMediaType.image
         imagePicker.allowsMultipleSelection = true
         imagePicker.showsNumberOfSelectedAssets = true
         flagImage = true
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        self.present(imagePicker, animated: true, completion: nil)
         
         let flurryParams = [ "Type" :"selectPhotos"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
     }
     
     
@@ -359,7 +359,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         let vc = UIStoryboard.dropBoxVC()
         self.navigationController?.pushViewController(vc!, animated: true)
         let flurryParams = [ "Type" :"useDropBox"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
         
     }
     
@@ -369,7 +369,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         self.navigationController?.pushViewController(vc!, animated: true)
         
         let flurryParams = [ "Type" :"useGoogle"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
         
     }
     
@@ -378,14 +378,14 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
         let imagePicker = QBImagePickerController()
         imagePicker.delegate = self
-        imagePicker.mediaType = QBImagePickerMediaType.Video
+        imagePicker.mediaType = QBImagePickerMediaType.video
         imagePicker.allowsMultipleSelection = true
         imagePicker.showsNumberOfSelectedAssets = true
         flagVideo = true
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        self.present(imagePicker, animated: true, completion: nil)
         
         let flurryParams = [ "Type" :"selectVideos"]
-        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+        AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
         
     }
     
@@ -404,7 +404,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         case .phone:
             
             let flurryParams = [ "Type" :"selectAudio"]
-            AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+            AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
             break
         case .pad:
             
@@ -415,7 +415,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             }
             
             let flurryParams = [ "Type" :"selectAudio"]
-            AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
+            AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams as NSDictionary?, screenName: "AppDelegate")
             break
         case .unspecified:
             break
@@ -426,31 +426,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
         
     }
-    /*
-     func useMoreCloud( ) {
-     // user url path..Please handle url
-     let urlPickedfuture = NADocumentPicker.show(from: self.view, parentViewController: self)
-     urlPickedfuture.onSuccess { url in
-     print("URL: \(url)")
-     if let urlCloud = NSURL(string: String(url)) {
-     let dataFromURL = NSData(contentsOfURL: urlCloud)
-     print(urlCloud.lastPathComponent ?? "")
-     let filemanager = NSFileManager.defaultManager()
-     let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-     let destinationPath:NSString = documentsPath.stringByAppendingString(urlCloud.lastPathComponent!)
-     if (!filemanager.fileExistsAtPath(destinationPath as String)) {
-     dataFromURL?.writeToFile(destinationPath as String, atomically:true)
-     CommonFunctions.sharedInstance.zipMyFiles("\(destinationPath).zip", filePath: destinationPath as String, vc: self)
-     } else {
-     print("The files already exist")
-     }
-     }
-     }
-     
-     let flurryParams = [ "Type" :"selectMoreCloud"]
-     AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
-     }
-     */
+    
     
     func qb_imagePickerControllerDidCancel(_ imagePickerController: QBImagePickerController!) {
         
@@ -460,7 +436,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
     }
     
-    func qb_imagePickerController(_ imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
+    private func qb_imagePickerController(_ imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         
         
         
@@ -524,17 +500,17 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             for item in assets{
                 
                 let asset = item as! PHAsset
-                asset.requestContentEditingInputWithOptions(PHContentEditingInputRequestOptions()) { (input, _) in
+                asset.requestContentEditingInput(with: PHContentEditingInputRequestOptions()) { (input, _) in
                     let url = input!.fullSizeImageURL
                     print(url)
                     
                     do{
-                        let array = url?.path?.componentsSeparatedByString("/")
+                        let array = url?.path.components(separatedBy: "/")
                         let name = array!.last! as String
                         let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
                         
-                        if(!kFileManager.fileExistsAtPath(selectedVideo.path!)){
-                            try kFileManager.copyItemAtURL(url!, toURL: selectedVideo)
+                        if(!kFileManager.fileExists(atPath: selectedVideo.path!)){
+                            try kFileManager.copyItem(at: url!, to: selectedVideo as URL)
                         }
                         currentItem += 1
                         
@@ -592,25 +568,24 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                 
                 nameIndex += 1
                 
-                PHImageManager.defaultManager().requestAVAssetForVideo(asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
+                PHImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
                     
-                    if (asset != nil &&  asset!.isKindOfClass(AVURLAsset.classForCoder()) ){
+                    if (asset != nil &&  asset!.isKind(of:AVURLAsset.classForCoder()) ){
                         
                         let newVal = asset as! AVURLAsset
-                        let url = newVal.URL
+                        let url = newVal.url
                         print(url)
                         
                         do{
-                            let array = url.path?.componentsSeparatedByString("/")
-                            let name = array!.last! as String
+                            let array = url.path.components(separatedBy: "/")
+                            let name = array.last! as String
                             let selectedVideo = NSURL(fileURLWithPath:"\(cacheDir)/\(name)")
-                            try kFileManager.copyItemAtURL(url, toURL: selectedVideo)
+                            try kFileManager.copyItem(at: url, to: selectedVideo as URL)
                             self.currentItem += 1
                             
                             print("in normal motion cur item = \(self.currentItem)")
                             
-                            dispatch_async(dispatch_get_main_queue(), {
-                                
+                            DispatchQueue.main.async {
                                 if self.currentItem == self.totalItem{
                                     SwiftSpinner.hide()
                                     self.currentItem = 0
@@ -618,15 +593,15 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                                     let newPath = cacheDir + ".zip"
                                     self.zipMyFiles(newPath, existingFolder: cacheDir)
                                 }
-                                
-                            })
+                            }
+                           
                             
                         }catch let e as NSError{
                             print(e)
                             SwiftSpinner.hide()
                         }
                         
-                    }else if (asset != nil &&  asset!.isKindOfClass(AVComposition.classForCoder()) ){
+                    }else if (asset != nil &&  asset!.isKind(of:AVComposition.classForCoder()) ){
                         
                         let path = "\(cacheDir)/SlowMotionVideo_\(self.nameIndex).mov"
                         self.folderDir = cacheDir
@@ -663,14 +638,14 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
             
             let asset = item as! PHAsset
             
-            PHImageManager.defaultManager().requestAVAssetForVideo(asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
+            PHImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: { (asset, audioMix, response) -> Void in
                 
-                if (asset != nil &&  asset!.isKindOfClass(AVURLAsset.classForCoder()) ){
+                if (asset != nil &&  asset!.isKind(of:AVURLAsset.classForCoder()) ){
                     
                     self.currentItem += 1
                     print("in normal Video cur item = \(self.currentItem)")
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
+                    
+                    DispatchQueue.main.async {
                         if self.currentItem == self.totalItem{
                             if (self.isCalledVideoCheck == false){
                                 self.isCalledVideoCheck = true
@@ -679,16 +654,15 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                                 self.videoCheck()
                             }
                         }
-                    })
+                    }
                     
-                }else if (asset != nil &&  asset!.isKindOfClass(AVComposition.classForCoder()) ){
+                }else if (asset != nil &&  asset!.isKind(of:AVComposition.classForCoder()) ){
                     
                     self.currentItem += 1
                     self.slowMotionVideoCount += 1
                     print("in slow video cur item = \(self.currentItem)")
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
+                    DispatchQueue.main.async {
                         if self.currentItem == self.totalItem{
                             
                             if (self.isCalledVideoCheck == false){
@@ -700,9 +674,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                             
                             
                         }
-                        
-                    })
-                    
+                    }
                 }
                 
             })
@@ -804,7 +776,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         }
         
         
-        let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: existingFolder)
+        let success = SSZipArchive.createZipFile(atPath: newZipFile, withContentsOfDirectory: existingFolder)
         if success {
             
             //            try! kFileManager.removeItemAtPath(existingFolder)
@@ -1045,7 +1017,7 @@ extension HomeVCNew : MPMediaPickerControllerDelegate {
                 let filePath = "\(parentDir)/\(title).m4a"
                 var fileSize : UInt64 = 0
                 do {
-                    let attr : NSDictionary? = try kFileManager.attributesOfItem(atPath: filePath)
+                    let attr : NSDictionary? = try kFileManager.attributesOfItem(atPath: filePath) as NSDictionary?
                     if let _attr = attr {
                         fileSize = _attr.fileSize();
                         print("fileSize: \(fileSize)")
@@ -1081,7 +1053,7 @@ extension HomeVCNew : MPMediaPickerControllerDelegate {
                 
             }else{
                 
-                print("error: \(exporter?.error?.localizedFailureReason)")
+                print("error: \(exporter?.error?.localizedDescription)")
                 
                 DispatchQueue.main.async(execute: {
                     
@@ -1109,7 +1081,7 @@ extension  HomeVCNew:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
         
         print(url.path)
         let zipPath = "\(CommonFunctions.sharedInstance.docDirPath())/\((url.lastPathComponent)).zip"
-        CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: url.path!, vc: self)
+        CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: url.path, vc: self)
         self.perform(#selector(HomeVCNew.handleLocalFile), with: nil, afterDelay: 1)
         
     }

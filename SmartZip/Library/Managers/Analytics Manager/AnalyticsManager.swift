@@ -49,7 +49,7 @@ class AnalyticsManager: NSObject {
             self.googleAnalyserInitialize()
             
         default: break // .MixPannel:
-            Mixpanel.sharedInstanceWithToken(Constants.Tokens.MIX_PANNEL_TOKEN)
+            Mixpanel.sharedInstance(withToken: Constants.Tokens.MIX_PANNEL_TOKEN)
         }
     }
     

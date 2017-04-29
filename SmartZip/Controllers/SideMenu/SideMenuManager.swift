@@ -18,9 +18,9 @@ class SideMenuManager: NSObject {
     var container: MMDrawerController? = MMDrawerController()
     var center: UIViewController {
         get {
-            container!.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionMode.None
+            container!.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionMode.none
 
-            if container!.centerViewController.isKindOfClass(UINavigationController) {
+            if container!.centerViewController.isKind(of:UINavigationController.self) {
                 return (container!.centerViewController as! UINavigationController).viewControllers.first!
             }
             return container!.centerViewController
@@ -45,7 +45,7 @@ class SideMenuManager: NSObject {
     class func sharedManager() -> SideMenuManager {
         if _sharedManager.container == nil {
             _sharedManager.container = MMDrawerController()
-            _sharedManager.container!.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionMode.None
+            _sharedManager.container!.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionMode.none
             /*
              
              Note that either `openDrawerGestureModeMask` must contain `MMOpenDrawerGestureModeCustom`, or `closeDrawerGestureModeMask` must contain `MMCloseDrawerGestureModeCustom` for this block to be consulted.
@@ -53,10 +53,10 @@ class SideMenuManager: NSObject {
              
              */
 
-            _sharedManager.container!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.Custom
-            _sharedManager.container!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.Custom
+            _sharedManager.container!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.custom
+            _sharedManager.container!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.custom
             
-            _sharedManager.container?.setGestureShouldRecognizeTouchBlock({ (drawer, recog, touch) -> Bool in
+            _sharedManager.container?.setGestureShouldRecognizeTouch({ (drawer, recog, touch) -> Bool in
                return false
             })
             

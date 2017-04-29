@@ -9,21 +9,6 @@ import Foundation
 
 // MARK: Arithmetic
 
-func +(date: Date, timeInterval: Int) -> Date {
-    return date + TimeInterval(timeInterval)
-}
-
-func -(date: Date, timeInterval: Int) -> Date {
-    return date - TimeInterval(timeInterval)
-}
-
-func +=(date: inout Date, timeInterval: Int) {
-    date = date + timeInterval
-}
-
-func -=(date: inout Date, timeInterval: Int) {
-    date = date - timeInterval
-}
 
 func +(date: Date, timeInterval: Double) -> Date {
     return date.addingTimeInterval(TimeInterval(timeInterval))
@@ -33,13 +18,9 @@ func -(date: Date, timeInterval: Double) -> Date {
     return date.addingTimeInterval(TimeInterval(-timeInterval))
 }
 
-func +=(date: inout Date, timeInterval: Double) {
-    date = date + timeInterval
-}
 
-func -=(date: inout Date, timeInterval: Double) {
-    date = date - timeInterval
-}
+
+
 
 func -(date: Date, otherDate: Date) -> TimeInterval {
     return date.timeIntervalSince(otherDate)

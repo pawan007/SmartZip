@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     }    // MARK:- IBActions
     @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
-            container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
+            container.toggle(.left, animated: true) { (val) -> Void in
                 
             }
         }
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         let sampleDataPath = Bundle.main.bundleURL.appendingPathComponent("Sample Data").path
         zipPath = tempZipPath()
         
-        let success = SSZipArchive.createZipFileAtPath(zipPath!, withContentsOfDirectory: sampleDataPath!)
+        let success = SSZipArchive.createZipFile(atPath: zipPath!, withContentsOfDirectory: sampleDataPath)
         if success {
             unzipButton.isEnabled = true
             zipButton.isEnabled = false
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
             return
         }
         
-        let success = SSZipArchive.unzipFileAtPath(zipPath, toDestination: unzipPath)
+        let success = SSZipArchive.unzipFile(atPath: zipPath, toDestination: unzipPath)
         if !success {
             return
         }
@@ -130,8 +130,8 @@ class ViewController: UIViewController {
             return nil
         }
         
-        if let path = url.path {
-            return path
+        if url.path.length != 0 {
+            return url.path
         }
         
         return nil

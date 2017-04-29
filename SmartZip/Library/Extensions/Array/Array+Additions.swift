@@ -140,30 +140,6 @@ internal extension Array {
     }
     
     /**
-     Randomly rearranges the elements of self using the Fisher-Yates shuffle
-     */
-    mutating func shuffle () {
-        
-        for var i = self.count - 1; i >= 1; i -= 1 {
-            let j = Int.random(max: i)
-            swap(&self[i], &self[j])
-        }
-    }
-    
-    /**
-     Shuffles the values of the array into a new one
-     
-     - returns: Shuffled copy of self
-     */
-    func shuffled () -> Array {
-        var shuffled = self
-        
-        shuffled.shuffle()
-        
-        return shuffled
-    }
-    
-    /**
      Returns the subarray in the given range.
      
      - parameter range: Range of the subarray elements
@@ -180,26 +156,7 @@ internal extension Array {
         
         return Array(self[(start ..< end)] as ArraySlice<Element>)
     }
-    
-    /**
-     Returns a subarray whose items are in the given interval in self.
-     
-     - parameter interval: Interval of indexes of the subarray elements
-     - returns: Subarray or nil if the index is out of bounds
-     */
-    subscript (interval: Range<Int>) -> Array {
-        return self[rangeAsArray: (interval.start ..< interval.end)]
-    }
-    
-    /**
-     Returns a subarray whose items are in the given interval in self.
-     
-     - parameter interval: Interval of indexes of the subarray elements
-     - returns: Subarray or nil if the index is out of bounds
-     */
-    subscript (interval: ClosedRange<Int>) -> Array {
-        return self[rangeAsArray: (interval.start ..< interval.end + 1)]
-    }
+
     
     /**
      Creates an array with the elements at indexes in the given list of integers.
@@ -225,20 +182,6 @@ internal extension Array {
         return self[rangeAsArray: range]
     }
     
-    /**
-     Returns a random subarray of given length.
-     
-     - parameter n: Length
-     - returns: Random subarray of length n
-     */
-    func sample (size n: Int = 1) -> Array {
-        if n >= count {
-            return self
-        }
-        
-        let index = Int.random(max: count - n)
-        return self[index..<(n + index)]
-    }
     
     /**
      Max value in the current array (if Array.Element implements the Comparable protocol).

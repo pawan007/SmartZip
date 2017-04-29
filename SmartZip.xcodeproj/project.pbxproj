@@ -1006,7 +1006,7 @@
 					D4284CA31D1E4B9800E1BCA9 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 9YG7G7YB2J;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;

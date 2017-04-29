@@ -98,42 +98,6 @@ public extension Int {
      
      - parameter function: Function to call
      */
-    func times <T> (_ function: @escaping (Void) -> T) {
-        (0..<self).each { _ in function(); return }
-    }
-    
-    /**
-     Calls function self times.
-     
-     - parameter function: Function to call
-     */
-    func times (_ function: @escaping (Void) -> Void) {
-        (0..<self).each { _ in function(); return }
-    }
-    
-    /**
-     Calls function self times passing a value from 0 to self on each call.
-     
-     - parameter function: Function to call
-     */
-    func times <T> (_ function: @escaping (Int) -> T) {
-        (0..<self).each { index in function(index); return }
-    }
-    
-    /**
-     Iterates function, passing in integer values from self until and including limit.
-     
-     - parameter limit: Last value to pass
-     - parameter function: Function to invoke
-     */
-
-    func until (_ limit: Int, function: (Int) -> ()) {
-        if limit < self {
-            Array(Array(limit...self).reversed()).each(function)
-        } else {
-            (self...limit).each(function)
-        }
-    }
     
     /**
      Clamps self to a specified range.

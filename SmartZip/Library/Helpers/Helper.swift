@@ -45,8 +45,8 @@ public func deviceId () -> String {
     if let deviceID = UserDefaults.objectForKey(DEVICE_ID_KEY) {
         return deviceID as! String
     } else {
-        let deviceID = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? ""
-        UserDefaults.setObject(deviceID, forKey: DEVICE_ID_KEY)
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        UserDefaults.setObject(deviceID as AnyObject, forKey: DEVICE_ID_KEY)
         return deviceID
     }
 }
@@ -56,7 +56,7 @@ public func accessToken () -> String? {
 }
 
 public func saveAccessToken (_ token: String) {
-    UserDefaults.setObject(token, forKey: ACCESS_TOKEN_KEY)
+    UserDefaults.setObject(token as AnyObject?, forKey: ACCESS_TOKEN_KEY)
 }
 
 public func deviceInfo () -> [String: String] {

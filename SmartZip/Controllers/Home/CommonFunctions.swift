@@ -10,18 +10,11 @@ import SSZipArchive
 
 class CommonFunctions: NSObject {
     
-    private static var __once: () = {
-            Static.instance = CommonFunctions()
-        }()
+    // MARK: Singleton Instance
+    static let sharedInstance = CommonFunctions()
     
-    /// Singleton object
-    class var sharedInstance : CommonFunctions {
-        struct Static {
-            static var onceToken : Int = 0
-            static var instance : CommonFunctions? = nil
-        }
-        _ = CommonFunctions.__once
-        return Static.instance!
+    class func shared() -> CommonFunctions {
+        return sharedInstance
     }
     
     //MARK: NSUser Defaults
@@ -64,12 +57,12 @@ class CommonFunctions: NSObject {
         userDefaults.synchronize()
     }
     
-    func getDictionaryFromUserDefaults(_ key:String) -> NSMutableDictionary {
-        let userDefaults: UserDefaults = UserDefaults.standard
-        let data: Data = userDefaults.object(forKey: key) as! Data
-        let dictData: NSMutableDictionary? = ((NSKeyedUnarchiver.unarchiveObject(with: data) as AnyObject).mutableCopy())! as? NSMutableDictionary
-        return dictData!
-    }
+//    func getDictionaryFromUserDefaults(_ key:String) -> NSMutableDictionary {
+//        let userDefaults: UserDefaults = UserDefaults.standard
+//        let data: Data = userDefaults.object(forKey: key) as! Data
+//        let dictData: NSMutableDictionary? = ((NSKeyedUnarchiver.unarchiveObject(with: data) as AnyObject).mutableCopy())! as? NSMutableDictionary
+//        return dictData!
+//    }
     
     //---------------------------------------------
     // Checking for Null
@@ -270,7 +263,7 @@ class CommonFunctions: NSObject {
         notification.alertAction = "Open app!"
         notification.soundName = "Alarm.mp3"
         notification.category = ""
-        notification.userInfo = userInfoDict as [AnyHashable: Any]
+        notification.userInfo = userInfoDict as! [AnyHashable: Any]
         print("alarm for shift = \(notification)")
         UIApplication.shared.scheduleLocalNotification(notification)
     }
@@ -406,7 +399,7 @@ class CommonFunctions: NSObject {
         }
         
         
-        let success = SSZipArchive.createZipFileAtPath(newZipFile, withFilesAtPaths: [filePath])
+        let success = SSZipArchive.createZipFile(atPath: newZipFile, withFilesAtPaths: [filePath])
         if success {
             try! kFileManager.removeItem(atPath: filePath)
             print("Zip file created successfully")
@@ -420,7 +413,7 @@ class CommonFunctions: NSObject {
         
         var arrayPaths = [String]()
         for item in files {
-            arrayPaths.append(item.filePath.path!)
+            arrayPaths.append(item.filePath.path)
         }
         
         do{
@@ -448,7 +441,7 @@ class CommonFunctions: NSObject {
                 
             }
             
-            let success = SSZipArchive.createZipFileAtPath(newZipFile, withContentsOfDirectory: cacheDir)
+            let success = SSZipArchive.createZipFile(atPath: newZipFile, withContentsOfDirectory: cacheDir)
             if success {
                 print("Zip file created successfully")
                 try! kFileManager.removeItem(atPath: cacheDir)
@@ -588,7 +581,7 @@ class CommonFunctions: NSObject {
         let directoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
         return directoryPath!
     }
-    
+    /*
     func report_memory() {
         // constant
         let MACH_TASK_BASIC_INFO_COUNT = (MemoryLayout<mach_task_basic_info_data_t>.size / MemoryLayout<natural_t>.size)
@@ -621,10 +614,12 @@ class CommonFunctions: NSObject {
             
         } else {
             let errorString = String(CString: mach_error_string(kerr), encoding: String.Encoding.ascii)
-            print(errorString ?? "Error: couldn't parse error string")
+            
+            String()
+            print(errorString )
         }    
     }
-    
+    */
     
     /*-(uint64_t)getFreeDiskspace {
      uint64_t totalSpace = 0;
@@ -660,8 +655,8 @@ class CommonFunctions: NSObject {
             if !dictionary.isEmpty {
                 let fileSystemSizeInBytes = dictionary[FileAttributeKey.systemSize]
                 let freeFileSystemSizeInBytes = dictionary[FileAttributeKey.systemFreeSize]
-                totalSpace = (fileSystemSizeInBytes?.uint64Value)!
-                totalFreeSpace = (freeFileSystemSizeInBytes?.uint64Value)!
+                totalSpace = ((fileSystemSizeInBytes as AnyObject).uint64Value)!
+                totalFreeSpace = ((freeFileSystemSizeInBytes as AnyObject).uint64Value)!
                 print("Memory Capacity of \( ((totalSpace/1024)/1024) ) MiB with \( ((totalFreeSpace/1024)/1024) ) MiB Free memory available.")
             }
             return totalFreeSpace
@@ -728,7 +723,7 @@ class CommonFunctions: NSObject {
             
             do{
                 //                var fileSize : UInt64 = 0
-                let attr:NSDictionary? = try kFileManager.attributesOfItem(atPath: filePath)
+                let attr:NSDictionary? = try kFileManager.attributesOfItem(atPath: filePath) as NSDictionary?
                 if let _attr = attr {
                     fileSize = _attr.fileSize();
                     return fileSize
@@ -766,7 +761,7 @@ class CommonFunctions: NSObject {
     func fileIsDir(_ path: String) -> Bool {
         var isDir: ObjCBool = false;
         kFileManager.fileExists(atPath: path, isDirectory: &isDir)
-        return Bool(isDir);
+        return isDir.boolValue;
     }
     
     func canCreateZip(_ path: String) -> Bool {

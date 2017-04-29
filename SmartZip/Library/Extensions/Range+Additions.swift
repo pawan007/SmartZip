@@ -9,63 +9,7 @@ import Foundation
 // MARK: - Range Extension
 internal extension Range {
     
-    /**
-        For each element in the range invokes function.
-        
-        - parameter function: Function to call
-    */
-    func times (_ function: @escaping () -> ()) {
-        each { (current: Element) -> () in
-            function()
-        }
-    }
-
-    /**
-        For each element in the range invokes function passing the element as argument.
     
-        - parameter function: Function to invoke
-    */
-    func times (_ function: (Element) -> ()) {
-        each (function)
-    }
-
-    /**
-        For each element in the range invokes function passing the element as argument.
-    
-        - parameter function: Function to invoke
-    */
-    func each (_ function: (Element) -> ()) {
-        for i in self {
-            function(i)
-        }
-    }
-
-	/**
-		Returns each element of the range in an array
-	
-		- returns: Each element of the range in an array
-	*/
-    func toArray () -> [Element] {
-        var result: [Element] = []
-        for i in self {
-            result.append(i)
-        }
-        return result
-    }
-
-    /**
-        Range of Int with random bounds between from and to (inclusive).
-    
-        - parameter from: Lower bound
-        - parameter to: Upper bound
-        - returns: Random range
-    */
-    static func random (_ from: Int, to: Int) -> CountableRange<Int> {
-        let lowerBound = Int.random(from, max: to)
-        let upperBound = Int.random(lowerBound, max: to)
-        
-        return lowerBound...upperBound
-    }
 }
 
 /**

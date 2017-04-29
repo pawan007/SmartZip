@@ -173,7 +173,7 @@ class FileListViewController: UIViewController {
             //GADBannerView
             // self.setUpGoogleAds()
             shared = GADMasterViewController.singleton()
-            shared.resetAdView(self, andDisplayView: bannerAdView)
+            shared.resetAdView(self, andDisplay: bannerAdView)
         }
         
         
@@ -291,7 +291,7 @@ class FileListViewController: UIViewController {
         
         for i in 0..<moveItemPaths.count{
             
-            if moveFileToPath(moveItemPaths[i].path!) == false {
+            if moveFileToPath(moveItemPaths[i].path) == false {
                 self.showAlertViewWithMessage("Error occured", message: "Unable to move all files, please create a new folder at that location and try again.")
                 break
             }
@@ -582,7 +582,7 @@ extension FileListViewController{
                             SwiftSpinner.show("Please wait...", animated: true)
                         }
                         
-                        let image = UIImage(contentsOfFile: (file.filePath.path)!)
+                        let image = UIImage(contentsOfFile: (file.filePath.path))
                         
                         UIImageWriteToSavedPhotosAlbum(image!, self, #selector(FileListViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
                         
@@ -594,7 +594,7 @@ extension FileListViewController{
                             SwiftSpinner.show("Please wait...", animated: true)
                         }
                         
-                        UISaveVideoAtPathToSavedPhotosAlbum((file.filePath.path)!, self, #selector(FileListViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                        UISaveVideoAtPathToSavedPhotosAlbum((file.filePath.path), self, #selector(FileListViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
                         
                     }
                     

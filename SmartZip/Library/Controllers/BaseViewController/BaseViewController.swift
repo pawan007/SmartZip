@@ -86,7 +86,7 @@ open class BaseViewController: UIViewController {
     @IBAction func menuButtonAction(_ sender: AnyObject) {
         
         if let container = SideMenuManager.sharedManager().container {
-            container.toggle(.Left, animated: true) { (val) -> Void in
+            container.toggle(.left, animated: true) { (val) -> Void in
                 
             }
         }

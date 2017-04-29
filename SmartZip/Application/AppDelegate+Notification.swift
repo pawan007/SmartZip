@@ -17,7 +17,7 @@ extension AppDelegate {
     
     // MARK: - UIApplicationDelegate Methods
     func application (_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        LogManager.logDebug("Device Push Token \(String(data: deviceToken, encoding: String.Encoding.utf8))")
+        LogManager.logDebug("Device Push Token \(String(describing: String(data: deviceToken, encoding: String.Encoding.utf8)))")
         // Prepare the Device Token for Registration (remove spaces and < >)
         
         self.setDeviceToken(deviceToken)
@@ -39,13 +39,7 @@ extension AppDelegate {
      */
     func registerRemoteNotification () {
         
-        let settings = UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
         
-        // This is an asynchronous method to retrieve a Device Token
-        // Callbacks are in AppDelegate.swift
-        
-        UIApplication.shared.registerForRemoteNotifications()
     }
     
     /**
@@ -57,7 +51,7 @@ extension AppDelegate {
     
     func setDeviceToken (_ token: Data) {
         let deviceToken = token.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: "") ?? ""
-        UserDefaults.setObject(deviceToken, forKey: Keys.deviceToken)
+        UserDefaults.setObject(deviceToken as AnyObject?, forKey: Keys.deviceToken)
     }
     
     func deviceToken () -> String {

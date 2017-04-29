@@ -47,8 +47,8 @@ extension String {
      - returns: Height of string
      */
     func heightWithConstrainedWidth(_ width: CGFloat, font: UIFont) -> CGFloat? {
-        let constraintRect = CGSize(width: width, height: CGFloat.max)
-        let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         
         return boundingBox.height
     }
@@ -62,9 +62,9 @@ extension String {
      - returns: Height of string
      */
     func widthWithConstrainedHeight(_ height: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: CGFloat.max, height: height)
+        let constraintRect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
         
-        let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         
         return ceil(boundingBox.width)
     }
@@ -446,17 +446,6 @@ extension String {
         return array.componentsJoined(by: seperator)
     }
     
-    /**
-     Get array from string
-     
-     - parameter seperator: String to seperate array
-     
-     - returns: Array from string
-     */
-    func arrayFromString (_ seperator: String) -> NSArray {
-      
-        return self.components(separatedBy: seperator)
-    }
     
     /**
      Get substring in string.

@@ -61,7 +61,7 @@ extension UIViewController {
         let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit"), style: .default) {  (action: UIAlertAction!) in
             let answerTF = alertController.textFields![0]
             let text = answerTF.text
-            submitActionHandler(textFromTextField: text)
+            submitActionHandler(text)
         }
         alertController.addAction(submitAction)
         
@@ -90,7 +90,7 @@ extension UIViewController {
         
         let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit"), style: .default) {  (action: UIAlertAction!) in
             let answer = alertController.textFields![0]
-            submitActionHandler(textFromTextField: answer.text!)
+            submitActionHandler(answer.text!)
         }
         alertController.addAction(submitAction)
         

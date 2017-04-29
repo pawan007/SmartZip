@@ -53,7 +53,7 @@ class FileParser {
             }
             
             let path = "\(CommonFunctions.sharedInstance.docDirPath())/Inbox"
-            if file.filePath.path!.contains(path){
+            if file.filePath.path.contains(path){
                 continue
             }
             

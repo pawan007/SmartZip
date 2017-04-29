@@ -75,7 +75,7 @@ class NotificationViewController: BaseViewController {
     // MARK:- IBActions
     @IBAction override func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
-            container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
+            container.toggle(.left, animated: true) { (val) -> Void in
                 
             }
         }

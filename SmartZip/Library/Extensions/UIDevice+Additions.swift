@@ -9,7 +9,7 @@
 import Foundation
 extension UIDevice {
     var iPhone: Bool {
-        return UIDevice().userInterfaceIdiom == .Phone
+        return UIDevice().userInterfaceIdiom == .phone
     }
 //    enum HHScreenType: String {
 //        case iPhone4

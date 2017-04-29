@@ -56,17 +56,8 @@ class WebviewPreviewViewContoller: UIViewController {
         }
         var rawString: String?
         
-        // Prepare plist for display
-        if file.type == .PLIST {
-            do {
-                if let plistDescription = try (PropertyListSerialization.propertyList(from: data, options: [], format: nil) as AnyObject).description {
-                    rawString = plistDescription
-                }
-            } catch {}
-        }
-        
         // Prepare json file for display
-        else if file.type == .JSON {
+        if file.type == .JSON {
             do {
                 let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                 if JSONSerialization.isValidJSONObject(jsonObject) {

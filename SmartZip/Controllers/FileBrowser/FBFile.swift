@@ -156,12 +156,12 @@ func checkDirectory(_ filePath: URL) -> Bool {
 }
 
 func getFileAttributes(_ filePath: URL) -> NSDictionary? {
-    guard let path = filePath.path else {
+    guard filePath.path.length != 0 else {
         return nil
     }
     let fileManager = FileParser.sharedInstance.fileManager
     do {
-        let attributes = try fileManager.attributesOfItem(atPath: path) as NSDictionary
+        let attributes = try fileManager.attributesOfItem(atPath: filePath.path) as NSDictionary
         return attributes
     } catch {}
     return nil
