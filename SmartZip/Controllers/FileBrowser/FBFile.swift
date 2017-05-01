@@ -90,6 +90,9 @@ public enum FBFileType: String {
     case zip = "zip"
     case ZIP = "ZIP"
     
+    case rar = "rar"
+    case RAR = "RAR"
+    
     case mp3 = "mp3"
     case wav = "wav"
     case MP3 = "MP3"
@@ -123,6 +126,7 @@ public enum FBFileType: String {
         case .DOC, .doc: fileName = "doc"
             case .TXT, .txt: fileName = "txt"
         case .ZIP, .zip: fileName = "zip"
+        case .RAR, .rar: fileName = "rar"
             
         case .mp3, .MP3,.WAV,.wav: fileName = "music"
         case .m4v, .M4V, .mp4, .MP4, .MOV, .mov: fileName = "video"

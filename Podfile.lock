@@ -64,6 +64,9 @@ PODS:
   - SSZipArchive (1.6.2)
   - TTTAttributedLabel (2.0.0)
   - UIView+TKGeometry (0.2)
+  - UnrarKit (2.8):
+    - UnrarKit/unrar-lib (= 2.8)
+  - UnrarKit/unrar-lib (2.8)
   - XCGLogger (4.0.0):
     - XCGLogger/Core (= 4.0.0)
   - XCGLogger/Core (4.0.0)
@@ -84,6 +87,7 @@ DEPENDENCIES:
   - SSZipArchive
   - TTTAttributedLabel
   - UIView+TKGeometry
+  - UnrarKit
   - XCGLogger (~> 4.0.0)
 
 SPEC CHECKSUMS:
@@ -111,8 +115,9 @@ SPEC CHECKSUMS:
   SSZipArchive: 428eb1ac8d37dd133404d30f422b23958c1f9acc
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIView+TKGeometry: bef0d7727753910d66d6fa51a3128ae6908047ef
+  UnrarKit: bdb700ff8c740c48d20f9460186fe82b5399e289
   XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: f2328a5e1f25d54711028dc724c21562ad63fb6e
+PODFILE CHECKSUM: f880dbb9cf3d6e4e164381b43687e0dc8f5a594c
 
 COCOAPODS: 1.1.1

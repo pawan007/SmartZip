@@ -21,6 +21,7 @@ target 'SmartZip' do
         pod 'XCGLogger', '~> 4.0.0'
         pod 'Firebase/Core'
         pod 'Firebase/AdMob'
+        pod "UnrarKit"
     
 end
 

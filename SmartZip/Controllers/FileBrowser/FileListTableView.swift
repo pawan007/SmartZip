@@ -95,31 +95,17 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             
         }else if selectedFile.fileExtension == "zip" {
             
-            //            self.unzipFile(selectedFile)
-            
-            
-            
             let unzipClass = UnZipExternal()
-            
-            
-            
             unzipClass.unzipPathInner(selectedFile.filePath.path)
+            self.files = self.parser.filesForDirectory(self.initialPath!)
+            self.indexFiles()
+            self.tableView.reloadData()
             
+        }
+        else if selectedFile.fileExtension == "rar" {
             
-            /*guard let unzipPath = getUnzipPath(selectedFile.filePath.path!) else {
-             return
-             }
-             
-             if !NSFileManager.defaultManager().fileExistsAtPath(unzipPath) {
-             
-             unzipClass.unzipPathInner(selectedFile.filePath.path!,unzipPath: unzipPath)
-             
-             }else{
-             
-             let incCount = getFileCopiesCount(unzipPath)
-             let newPath = "\(unzipPath)-\(incCount)"
-             unzipClass.unzipPathInner(selectedFile.filePath.path!,unzipPath: newPath)
-             }*/
+            let rarClass = RarClasses()
+            rarClass.uncompressFiles(selectedFile.filePath.path)
             
             self.files = self.parser.filesForDirectory(self.initialPath!)
             self.indexFiles()

@@ -11,7 +11,6 @@
 #import "iCarousel.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <GTMOAuth2/GTMOAuth2ViewControllerTouch.h>
-//#import "GTLDrive.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "MYIntroductionPanel.h"
@@ -19,6 +18,7 @@
 #import "iRate.h"
 
 #import "GADMasterViewController.h"
-
+//#import "UnCompressRar.h"
+#import "RarClasses.h"
 
 #endif
