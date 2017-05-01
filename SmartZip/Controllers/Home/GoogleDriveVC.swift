@@ -128,7 +128,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func fetchFiles() {
         //        output.text = "Getting files..."
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -147,7 +147,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Construct a query to get names and IDs of 10 files using the Google Drive API
     func fetchAnptherListFiles(_ token:String) {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -169,7 +169,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Construct a query to get names and IDs of 10 files using the Google Drive API
     func fetchFolderFiles(_ folderId:String) {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -319,7 +319,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -391,7 +391,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func downloadExportDocument(_ file:GTLDriveFile) -> Void {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -424,7 +424,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func downloadNormalDocument(_ file:GTLDriveFile) -> Void {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }

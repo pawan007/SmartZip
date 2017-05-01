@@ -436,34 +436,16 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
     }
     
-    private func qb_imagePickerController(_ imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
-        
-        
-        
-        
+    func qb_imagePickerController(_ imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [Any]!) {
         if flagImage {
             
-            /*for item in assets{
-             
-             let asset = item as! PHAsset
-             
-             asset.requestContentEditingInputWithOptions(PHContentEditingInputRequestOptions()) { (input, _) in
-             let url = input!.fullSizeImageURL
-             print(url)
-             }
-             }*/
-            
             self.dismiss(animated: true, completion: nil)
-            showEnterNameAlert("Images_"+Timestamp,assets: assets, type: fileTypeImage)
-            //
-            //            self.dismissViewControllerAnimated(true, completion: nil)
-            //            zipAndShareImages(assets)
+            showEnterNameAlert("Images_"+Timestamp,assets: assets! as [AnyObject], type: fileTypeImage)
             
         }else{
             
-            
             self.dismiss(animated: true, completion: nil)
-            selectVideo = assets
+            selectVideo = assets! as [AnyObject]
             canCreateVideo(selectVideo)
             
         }
@@ -471,6 +453,8 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         flagVideo = false
         flagImage = false
     }
+    
+
     
     
     
@@ -871,7 +855,7 @@ extension HomeVCNew{
     
     @IBAction func btnDropboxTapped(_ sender: AnyObject) {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -883,7 +867,7 @@ extension HomeVCNew{
     
     @IBAction func btnGoogleDriveTapped(_ sender: AnyObject) {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }

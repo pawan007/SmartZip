@@ -19,7 +19,6 @@
 		14C2CBEA1D43C95200F7472A /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE71D43C95200F7472A /* IAPHelper.swift */; };
 		14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE81D43C95200F7472A /* RageProducts.swift */; };
 		14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */; };
-		8706C57D1D5A2F8C006C560D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706C57C1D5A2F8C006C560D /* Reachability.swift */; };
 		870744931D6CA9B60001B353 /* UnZipExternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870744921D6CA9B60001B353 /* UnZipExternal.swift */; };
 		8709B7AF1D9192DE0006DCCC /* WLCTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */; };
 		8709B7B11D9193CC0006DCCC /* TutorialCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */; };
@@ -181,7 +180,6 @@
 		14C2CBE91D43C95200F7472A /* SelectAccountTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAccountTypeViewController.swift; sourceTree = "<group>"; };
 		1FEBEE2F653552FA03C5CAC7 /* Pods-SmartZip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartZip.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartZip/Pods-SmartZip.release.xcconfig"; sourceTree = "<group>"; };
 		506BDC6D3B0D80518ED495D4 /* Pods_SmartZip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartZip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8706C57C1D5A2F8C006C560D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		870744921D6CA9B60001B353 /* UnZipExternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnZipExternal.swift; sourceTree = "<group>"; };
 		8709B7AE1D9192DE0006DCCC /* WLCTutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WLCTutorialVC.swift; path = Images/WLCTutorialVC.swift; sourceTree = "<group>"; };
 		8709B7B01D9193CC0006DCCC /* TutorialCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialCollectionViewCell.swift; path = Images/TutorialCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -564,7 +562,6 @@
 				D44DF2BD1D1E802E000C75B7 /* fonts */,
 				D44DF2C51D1E802E000C75B7 /* Info.plist */,
 				D44DF2C61D1E802E000C75B7 /* Bridge.h */,
-				8706C57C1D5A2F8C006C560D /* Reachability.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1199,7 +1196,6 @@
 				D44DF38C1D1E802E000C75B7 /* BaseViewController.swift in Sources */,
 				D44DF3B11D1E802E000C75B7 /* UIImage+Additions.swift in Sources */,
 				14C2CBEC1D43C95200F7472A /* SelectAccountTypeViewController.swift in Sources */,
-				8706C57D1D5A2F8C006C560D /* Reachability.swift in Sources */,
 				D44DF37B1D1E802E000C75B7 /* CenterViewController.swift in Sources */,
 				D44DF3C31D1E802E000C75B7 /* LogManager.swift in Sources */,
 				D44DF37C1D1E802E000C75B7 /* LeftMenuViewController.swift in Sources */,

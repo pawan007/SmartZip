@@ -52,9 +52,15 @@ class PreviewItem: NSObject, QLPreviewItem {
      * @abstract The URL of the item to preview.
      * @discussion The URL must be a file URL.
      */
-    var previewItemURL: URL?
+    var filePath: URL?
+    var previewItemURL: URL? {
+        if let filePath = filePath {
+            return filePath
+        }
+        return URL(string: "")
+    }
 
     
-    var filePath: URL?
+    
     
 }

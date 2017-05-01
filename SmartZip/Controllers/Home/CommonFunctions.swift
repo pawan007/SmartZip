@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 import SSZipArchive
+import Reachability
 
 class CommonFunctions: NSObject {
     
@@ -823,7 +824,10 @@ class CommonFunctions: NSObject {
         return true
     }
     
-    
+    func isNetworkReachable () -> Bool {
+        let reach: Reachability = Reachability.forInternetConnection()
+        return reach.currentReachabilityStatus() != .NotReachable
+    }
     
     
 }

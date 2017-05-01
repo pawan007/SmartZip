@@ -155,7 +155,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     @IBAction func reloadFiles(_ sender: AnyObject) {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -239,7 +239,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
@@ -287,7 +287,7 @@ class DropBoxVC:  UIViewController, UITableViewDelegate, UITableViewDataSource,D
         
         SwiftSpinner.show("Processing, please wait..")
         
-        guard Reachability.isConnectedToNetwork()else{
+        guard CommonFunctions.shared().isNetworkReachable() else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
             return
         }
