@@ -78,9 +78,6 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         
         if selectedFile.isDirectory {
             
-            //            let fileListViewController = FileListViewController(initialPath: selectedFile.filePath)
-            //            fileListViewController.didSelectFile = didSelectFile
-            //            self.navigationController?.pushViewController(fileListViewController, animated: true)
             FileParser.sharedInstance.currentPath = selectedFile.filePath
             let fileListViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FileListViewController") as! FileListViewController
             
@@ -96,7 +93,7 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         }else if selectedFile.fileExtension == "zip" {
             
             let unzipClass = UnZipExternal()
-            unzipClass.unzipPathInner(selectedFile.filePath.path)
+           _ = unzipClass.unzipPathInner(selectedFile.filePath.path)
             self.files = self.parser.filesForDirectory(self.initialPath!)
             self.indexFiles()
             self.tableView.reloadData()
@@ -104,9 +101,11 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
         }
         else if selectedFile.fileExtension == "rar" {
             
+            _ = SwiftSpinner.show("Processing, please wait..")
+            
             let rarClass = RarClasses()
             rarClass.uncompressFiles(selectedFile.filePath.path)
-            
+            SwiftSpinner.hide()
             self.files = self.parser.filesForDirectory(self.initialPath!)
             self.indexFiles()
             self.tableView.reloadData()

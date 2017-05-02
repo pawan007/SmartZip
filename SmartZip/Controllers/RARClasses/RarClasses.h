@@ -13,5 +13,6 @@
 @interface RarClasses : NSObject
 
 - (void)uncompressFiles:(NSString*)inFilePath;
+- (void)uncompressFilesFromOutside:(NSString*)inFilePath;
 
 @end

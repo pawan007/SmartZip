@@ -464,7 +464,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
         
         if assets.count > 0 {
             
-            SwiftSpinner.show("Processing, please wait..")
+           _ = SwiftSpinner.show("Processing, please wait..")
             //            deleteAllFilesInDirectory(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])
             
             //            folderName = "Images-\(Timestamp)"
@@ -486,7 +486,7 @@ class HomeVCNew: UIViewController, QBImagePickerControllerDelegate {
                 let asset = item as! PHAsset
                 asset.requestContentEditingInput(with: PHContentEditingInputRequestOptions()) { (input, _) in
                     let url = input!.fullSizeImageURL
-                    print(url)
+                    print(url!)
                     
                     do{
                         let array = url?.path.components(separatedBy: "/")

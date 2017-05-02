@@ -29,6 +29,7 @@
 		879A2A0D1D899BA3003283C3 /* AboutCompanyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */; };
 		87A307F51D899C0D00161454 /* AboutProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A307F41D899C0D00161454 /* AboutProductVC.swift */; };
 		87A307FA1D8B1A9800161454 /* HomeVCNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A307F91D8B1A9800161454 /* HomeVCNew.swift */; };
+		87A3F8CF1EB85C38008E6B0B /* rar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A3F8CE1EB85C37008E6B0B /* rar@3x.png */; };
 		87AFEDF41EB75F4000CEAFCE /* RarClasses.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AFEDF31EB75F4000CEAFCE /* RarClasses.m */; };
 		87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56FA21D3675F100782F96 /* CommonFunctions.swift */; };
 		87C921931D50282F0099BC7B /* FBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9217C1D50282F0099BC7B /* FBFile.swift */; };
@@ -191,6 +192,7 @@
 		879A2A0C1D899BA3003283C3 /* AboutCompanyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCompanyVC.swift; sourceTree = "<group>"; };
 		87A307F41D899C0D00161454 /* AboutProductVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutProductVC.swift; sourceTree = "<group>"; };
 		87A307F91D8B1A9800161454 /* HomeVCNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVCNew.swift; sourceTree = "<group>"; };
+		87A3F8CE1EB85C37008E6B0B /* rar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rar@3x.png"; sourceTree = "<group>"; };
 		87AFEDF21EB75F4000CEAFCE /* RarClasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RarClasses.h; sourceTree = "<group>"; };
 		87AFEDF31EB75F4000CEAFCE /* RarClasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RarClasses.m; sourceTree = "<group>"; };
 		87B56FA21D3675F100782F96 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 		D4284C9B1D1E4B9800E1BCA9 = {
 			isa = PBXGroup;
 			children = (
+				87A3F8CE1EB85C37008E6B0B /* rar@3x.png */,
 				D44DF3E31D1EE393000C75B7 /* ReadMe.txt */,
 				D436FD501D1FA6E800F2BE72 /* Frameworks */,
 				D4284CA61D1E4B9800E1BCA9 /* SmartZip */,
@@ -1097,6 +1100,7 @@
 				D436FD861D201CC700F2BE72 /* Main.storyboard in Resources */,
 				D44DF36F1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Extrabold.ttf in Resources */,
 				87DC11A31D7B03DE0015213B /* tut_3.png in Resources */,
+				87A3F8CF1EB85C38008E6B0B /* rar@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1423,7 +1427,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.smartzip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
+				"PROVISIONING_PROFILE[sdk=*]" = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1454,7 +1458,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.smartzip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8378ac5-c763-495e-97f0-16df729a002a";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_VERSION = 3.0;
 			};

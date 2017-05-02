@@ -110,25 +110,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (sourceApplication! == "com.apple.mobilemail") || (url.path.contains(docDir)) {
             
             print(url)
-            let unzipClass = UnZipExternal()
-            //            unzipFilePath = unzipClass.unzipPath(url.path!)
-            unzipClass.unzipPath(url.path)
-            isOpenedFromExternalResource = true 
-            //            let fileName = newFilePath.componentsSeparatedByString("/").last
-            CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A zip fie has been imported and unzipped in My Files", vc: (self.window?.rootViewController)!)
             
-            if APPDELEGATE.isOpenedFromExternalResource && FileParser.sharedInstance.currentPath == FileParser.sharedInstance.documentsURL() {
-                APPDELEGATE.isOpenedFromExternalResource = false
+            if url.path.contains(".zip") {
+            
+                let unzipClass = UnZipExternal()
+                //            unzipFilePath = unzipClass.unzipPath(url.path!)
+                unzipClass.unzipPath(url.path)
+                isOpenedFromExternalResource = true
+                //            let fileName = newFilePath.componentsSeparatedByString("/").last
+                CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A zip fie has been imported and unzipped in My Files", vc: (self.window?.rootViewController)!)
                 
-                if flvc != nil {
-                    flvc!.files = flvc!.parser.filesForDirectory(flvc!.initialPath!)
-                    flvc!.indexFiles()
-                    flvc!.tableView.reloadData()
+                if APPDELEGATE.isOpenedFromExternalResource && FileParser.sharedInstance.currentPath == FileParser.sharedInstance.documentsURL() {
+                    APPDELEGATE.isOpenedFromExternalResource = false
+                    
+                    if flvc != nil {
+                        flvc!.files = flvc!.parser.filesForDirectory(flvc!.initialPath!)
+                        flvc!.indexFiles()
+                        flvc!.tableView.reloadData()
+                    }
+                    
                 }
                 
+            }else if url.path.contains(".rar"){
+            
+                let rarClass = RarClasses()
+                rarClass.uncompressFiles(url.path)
+                isOpenedFromExternalResource = true
+                CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A rar fie has been imported and unarchived in My Files", vc: (self.window?.rootViewController)!)
+                
+                if APPDELEGATE.isOpenedFromExternalResource && FileParser.sharedInstance.currentPath == FileParser.sharedInstance.documentsURL() {
+                    APPDELEGATE.isOpenedFromExternalResource = false
+                    
+                    if flvc != nil {
+                        flvc!.files = flvc!.parser.filesForDirectory(flvc!.initialPath!)
+                        flvc!.indexFiles()
+                        flvc!.tableView.reloadData()
+                    }
+                    
+                }
             }
-            
-            
             return true
         }
         
