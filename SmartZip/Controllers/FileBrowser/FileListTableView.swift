@@ -111,6 +111,17 @@ extension FileListViewController: UITableViewDataSource, UITableViewDelegate, Fi
             self.tableView.reloadData()
             
         }
+        else if selectedFile.fileExtension == "7z" {
+            
+            _ = SwiftSpinner.show("Processing, please wait..")
+            let obj = Extract7z()
+            obj.uncompressFiles(selectedFile.filePath.path)
+            SwiftSpinner.hide()
+            self.files = self.parser.filesForDirectory(self.initialPath!)
+            self.indexFiles()
+            self.tableView.reloadData()
+            
+        }
         else {
             if let didSelectFile = didSelectFile {
                 self.dismiss()

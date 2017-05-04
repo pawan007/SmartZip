@@ -20,5 +20,7 @@
 #import "GADMasterViewController.h"
 //#import "UnCompressRar.h"
 #import "RarClasses.h"
+#import "LZMAExtractor.h"
+#import "Extract7z.h"
 
 #endif

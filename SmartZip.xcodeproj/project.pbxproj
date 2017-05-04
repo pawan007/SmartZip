@@ -55,6 +55,26 @@
 		87DC11A61D7B03DE0015213B /* tut_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC119F1D7B03DE0015213B /* tut_6.png */; };
 		87DC11A71D7B03DE0015213B /* tut_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DC11A01D7B03DE0015213B /* tut_8.png */; };
 		87DC11A91D7C7A7F0015213B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87DC11A81D7C7A7F0015213B /* Assets.xcassets */; };
+		87EEE79F1EBAE6BB00CD10D3 /* 7zBuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE77B1EBAE6BB00CD10D3 /* 7zBuf.c */; };
+		87EEE7A01EBAE6BB00CD10D3 /* 7zBuf2.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE77D1EBAE6BB00CD10D3 /* 7zBuf2.c */; };
+		87EEE7A11EBAE6BB00CD10D3 /* 7zDec.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE77E1EBAE6BB00CD10D3 /* 7zDec.c */; };
+		87EEE7A21EBAE6BB00CD10D3 /* 7zFile.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE77F1EBAE6BB00CD10D3 /* 7zFile.c */; };
+		87EEE7A31EBAE6BB00CD10D3 /* 7zIn.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7811EBAE6BB00CD10D3 /* 7zIn.c */; };
+		87EEE7A41EBAE6BB00CD10D3 /* 7zStream.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7821EBAE6BB00CD10D3 /* 7zStream.c */; };
+		87EEE7A51EBAE6BB00CD10D3 /* Alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7841EBAE6BB00CD10D3 /* Alloc.c */; };
+		87EEE7A61EBAE6BB00CD10D3 /* CpuArch.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7861EBAE6BB00CD10D3 /* CpuArch.c */; };
+		87EEE7A71EBAE6BB00CD10D3 /* Delta.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7881EBAE6BB00CD10D3 /* Delta.c */; };
+		87EEE7A81EBAE6BB00CD10D3 /* Lzma2Dec.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE78B1EBAE6BB00CD10D3 /* Lzma2Dec.c */; };
+		87EEE7A91EBAE6BB00CD10D3 /* LzmaDec.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE78D1EBAE6BB00CD10D3 /* LzmaDec.c */; };
+		87EEE7AA1EBAE6BB00CD10D3 /* LZMAExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7901EBAE6BB00CD10D3 /* LZMAExtractor.m */; };
+		87EEE7AB1EBAE6BB00CD10D3 /* Ppmd7.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7921EBAE6BB00CD10D3 /* Ppmd7.c */; };
+		87EEE7AC1EBAE6BB00CD10D3 /* Ppmd7Dec.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7941EBAE6BB00CD10D3 /* Ppmd7Dec.c */; };
+		87EEE7AD1EBAE6BB00CD10D3 /* Ppmd8.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7951EBAE6BB00CD10D3 /* Ppmd8.c */; };
+		87EEE7AE1EBAE6BB00CD10D3 /* Ppmd8Dec.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7971EBAE6BB00CD10D3 /* Ppmd8Dec.c */; };
+		87EEE7AF1EBAE6BB00CD10D3 /* 7zAlloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE79C1EBAE6BB00CD10D3 /* 7zAlloc.c */; };
+		87EEE7B01EBAE6BB00CD10D3 /* 7zMain.c in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE79E1EBAE6BB00CD10D3 /* 7zMain.c */; };
+		87EEE7B21EBAF67D00CD10D3 /* files_dirs.7z in Resources */ = {isa = PBXBuildFile; fileRef = 87EEE7B11EBAF67D00CD10D3 /* files_dirs.7z */; };
+		87EEE7B61EBAF6B500CD10D3 /* Extract7z.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EEE7B51EBAF6B500CD10D3 /* Extract7z.m */; };
 		BDF725601D57909100C94836 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF7255F1D57909100C94836 /* GoogleService-Info.plist */; };
 		BDF725681D5B895D00C94836 /* BuyProVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF725671D5B895D00C94836 /* BuyProVC.swift */; };
 		BDF7256B1D6103FB00C94836 /* GADMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF7256A1D6103FB00C94836 /* GADMasterViewController.m */; };
@@ -220,6 +240,44 @@
 		87DC119F1D7B03DE0015213B /* tut_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_6.png; sourceTree = "<group>"; };
 		87DC11A01D7B03DE0015213B /* tut_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut_8.png; sourceTree = "<group>"; };
 		87DC11A81D7C7A7F0015213B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87EEE77A1EBAE6BB00CD10D3 /* 7z.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 7z.h; sourceTree = "<group>"; };
+		87EEE77B1EBAE6BB00CD10D3 /* 7zBuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zBuf.c; sourceTree = "<group>"; };
+		87EEE77C1EBAE6BB00CD10D3 /* 7zBuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 7zBuf.h; sourceTree = "<group>"; };
+		87EEE77D1EBAE6BB00CD10D3 /* 7zBuf2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zBuf2.c; sourceTree = "<group>"; };
+		87EEE77E1EBAE6BB00CD10D3 /* 7zDec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zDec.c; sourceTree = "<group>"; };
+		87EEE77F1EBAE6BB00CD10D3 /* 7zFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zFile.c; sourceTree = "<group>"; };
+		87EEE7801EBAE6BB00CD10D3 /* 7zFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 7zFile.h; sourceTree = "<group>"; };
+		87EEE7811EBAE6BB00CD10D3 /* 7zIn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zIn.c; sourceTree = "<group>"; };
+		87EEE7821EBAE6BB00CD10D3 /* 7zStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zStream.c; sourceTree = "<group>"; };
+		87EEE7831EBAE6BB00CD10D3 /* 7zVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 7zVersion.h; sourceTree = "<group>"; };
+		87EEE7841EBAE6BB00CD10D3 /* Alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Alloc.c; sourceTree = "<group>"; };
+		87EEE7851EBAE6BB00CD10D3 /* Alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alloc.h; sourceTree = "<group>"; };
+		87EEE7861EBAE6BB00CD10D3 /* CpuArch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CpuArch.c; sourceTree = "<group>"; };
+		87EEE7871EBAE6BB00CD10D3 /* CpuArch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpuArch.h; sourceTree = "<group>"; };
+		87EEE7881EBAE6BB00CD10D3 /* Delta.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Delta.c; sourceTree = "<group>"; };
+		87EEE7891EBAE6BB00CD10D3 /* Delta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delta.h; sourceTree = "<group>"; };
+		87EEE78A1EBAE6BB00CD10D3 /* LzHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzHash.h; sourceTree = "<group>"; };
+		87EEE78B1EBAE6BB00CD10D3 /* Lzma2Dec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Lzma2Dec.c; sourceTree = "<group>"; };
+		87EEE78C1EBAE6BB00CD10D3 /* Lzma2Dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lzma2Dec.h; sourceTree = "<group>"; };
+		87EEE78D1EBAE6BB00CD10D3 /* LzmaDec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LzmaDec.c; sourceTree = "<group>"; };
+		87EEE78E1EBAE6BB00CD10D3 /* LzmaDec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzmaDec.h; sourceTree = "<group>"; };
+		87EEE78F1EBAE6BB00CD10D3 /* LZMAExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZMAExtractor.h; sourceTree = "<group>"; };
+		87EEE7901EBAE6BB00CD10D3 /* LZMAExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZMAExtractor.m; sourceTree = "<group>"; };
+		87EEE7911EBAE6BB00CD10D3 /* Ppmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ppmd.h; sourceTree = "<group>"; };
+		87EEE7921EBAE6BB00CD10D3 /* Ppmd7.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Ppmd7.c; sourceTree = "<group>"; };
+		87EEE7931EBAE6BB00CD10D3 /* Ppmd7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ppmd7.h; sourceTree = "<group>"; };
+		87EEE7941EBAE6BB00CD10D3 /* Ppmd7Dec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Ppmd7Dec.c; sourceTree = "<group>"; };
+		87EEE7951EBAE6BB00CD10D3 /* Ppmd8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Ppmd8.c; sourceTree = "<group>"; };
+		87EEE7961EBAE6BB00CD10D3 /* Ppmd8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ppmd8.h; sourceTree = "<group>"; };
+		87EEE7971EBAE6BB00CD10D3 /* Ppmd8Dec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Ppmd8Dec.c; sourceTree = "<group>"; };
+		87EEE7981EBAE6BB00CD10D3 /* RotateDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateDefs.h; sourceTree = "<group>"; };
+		87EEE7991EBAE6BB00CD10D3 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		87EEE79C1EBAE6BB00CD10D3 /* 7zAlloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zAlloc.c; sourceTree = "<group>"; };
+		87EEE79D1EBAE6BB00CD10D3 /* 7zAlloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 7zAlloc.h; sourceTree = "<group>"; };
+		87EEE79E1EBAE6BB00CD10D3 /* 7zMain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 7zMain.c; sourceTree = "<group>"; };
+		87EEE7B11EBAF67D00CD10D3 /* files_dirs.7z */ = {isa = PBXFileReference; lastKnownFileType = file; path = files_dirs.7z; sourceTree = "<group>"; };
+		87EEE7B41EBAF6B500CD10D3 /* Extract7z.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Extract7z.h; sourceTree = "<group>"; };
+		87EEE7B51EBAF6B500CD10D3 /* Extract7z.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Extract7z.m; sourceTree = "<group>"; };
 		BDF7255F1D57909100C94836 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDF725671D5B895D00C94836 /* BuyProVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyProVC.swift; sourceTree = "<group>"; };
 		BDF725691D6103FB00C94836 /* GADMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMasterViewController.h; sourceTree = "<group>"; };
@@ -452,6 +510,73 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		87EEE7791EBAE6BB00CD10D3 /* LZMASDK */ = {
+			isa = PBXGroup;
+			children = (
+				87EEE77A1EBAE6BB00CD10D3 /* 7z.h */,
+				87EEE77B1EBAE6BB00CD10D3 /* 7zBuf.c */,
+				87EEE77C1EBAE6BB00CD10D3 /* 7zBuf.h */,
+				87EEE77D1EBAE6BB00CD10D3 /* 7zBuf2.c */,
+				87EEE77E1EBAE6BB00CD10D3 /* 7zDec.c */,
+				87EEE77F1EBAE6BB00CD10D3 /* 7zFile.c */,
+				87EEE7801EBAE6BB00CD10D3 /* 7zFile.h */,
+				87EEE7811EBAE6BB00CD10D3 /* 7zIn.c */,
+				87EEE7821EBAE6BB00CD10D3 /* 7zStream.c */,
+				87EEE7831EBAE6BB00CD10D3 /* 7zVersion.h */,
+				87EEE7841EBAE6BB00CD10D3 /* Alloc.c */,
+				87EEE7851EBAE6BB00CD10D3 /* Alloc.h */,
+				87EEE7861EBAE6BB00CD10D3 /* CpuArch.c */,
+				87EEE7871EBAE6BB00CD10D3 /* CpuArch.h */,
+				87EEE7881EBAE6BB00CD10D3 /* Delta.c */,
+				87EEE7891EBAE6BB00CD10D3 /* Delta.h */,
+				87EEE78A1EBAE6BB00CD10D3 /* LzHash.h */,
+				87EEE78B1EBAE6BB00CD10D3 /* Lzma2Dec.c */,
+				87EEE78C1EBAE6BB00CD10D3 /* Lzma2Dec.h */,
+				87EEE78D1EBAE6BB00CD10D3 /* LzmaDec.c */,
+				87EEE78E1EBAE6BB00CD10D3 /* LzmaDec.h */,
+				87EEE78F1EBAE6BB00CD10D3 /* LZMAExtractor.h */,
+				87EEE7901EBAE6BB00CD10D3 /* LZMAExtractor.m */,
+				87EEE7911EBAE6BB00CD10D3 /* Ppmd.h */,
+				87EEE7921EBAE6BB00CD10D3 /* Ppmd7.c */,
+				87EEE7931EBAE6BB00CD10D3 /* Ppmd7.h */,
+				87EEE7941EBAE6BB00CD10D3 /* Ppmd7Dec.c */,
+				87EEE7951EBAE6BB00CD10D3 /* Ppmd8.c */,
+				87EEE7961EBAE6BB00CD10D3 /* Ppmd8.h */,
+				87EEE7971EBAE6BB00CD10D3 /* Ppmd8Dec.c */,
+				87EEE7981EBAE6BB00CD10D3 /* RotateDefs.h */,
+				87EEE7991EBAE6BB00CD10D3 /* Types.h */,
+				87EEE79A1EBAE6BB00CD10D3 /* Util */,
+			);
+			path = LZMASDK;
+			sourceTree = "<group>";
+		};
+		87EEE79A1EBAE6BB00CD10D3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				87EEE79B1EBAE6BB00CD10D3 /* 7z */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		87EEE79B1EBAE6BB00CD10D3 /* 7z */ = {
+			isa = PBXGroup;
+			children = (
+				87EEE79C1EBAE6BB00CD10D3 /* 7zAlloc.c */,
+				87EEE79D1EBAE6BB00CD10D3 /* 7zAlloc.h */,
+				87EEE79E1EBAE6BB00CD10D3 /* 7zMain.c */,
+			);
+			path = 7z;
+			sourceTree = "<group>";
+		};
+		87EEE7B31EBAF6B500CD10D3 /* 7z Classes */ = {
+			isa = PBXGroup;
+			children = (
+				87EEE7B41EBAF6B500CD10D3 /* Extract7z.h */,
+				87EEE7B51EBAF6B500CD10D3 /* Extract7z.m */,
+			);
+			path = "7z Classes";
+			sourceTree = "<group>";
+		};
 		9E43BB36368F4560283168B5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +608,7 @@
 		D4284C9B1D1E4B9800E1BCA9 = {
 			isa = PBXGroup;
 			children = (
+				87EEE7B11EBAF67D00CD10D3 /* files_dirs.7z */,
 				87A3F8CE1EB85C37008E6B0B /* rar@3x.png */,
 				D44DF3E31D1EE393000C75B7 /* ReadMe.txt */,
 				D436FD501D1FA6E800F2BE72 /* Frameworks */,
@@ -539,6 +665,7 @@
 		D436FD501D1FA6E800F2BE72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87EEE7791EBAE6BB00CD10D3 /* LZMASDK */,
 				8786ADC01DA0F9710027BE20 /* CloudKit.framework */,
 				D436FD511D1FA6E800F2BE72 /* DropboxSDK.framework */,
 				506BDC6D3B0D80518ED495D4 /* Pods_SmartZip.framework */,
@@ -598,6 +725,7 @@
 		D44DF2C81D1E802E000C75B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				87EEE7B31EBAF6B500CD10D3 /* 7z Classes */,
 				87AFEDEE1EB75BE300CEAFCE /* RARClasses */,
 				BDF725661D5B893100C94836 /* Buy */,
 				87C9217B1D50282F0099BC7B /* FileBrowser */,
@@ -1018,8 +1146,8 @@
 				TargetAttributes = {
 					D4284CA31D1E4B9800E1BCA9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9YG7G7YB2J;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -1093,6 +1221,7 @@
 				D44DF36E1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Bold.ttf in Resources */,
 				BDF725601D57909100C94836 /* GoogleService-Info.plist in Resources */,
 				D44DF36D1D1E802E000C75B7 /* Mark Simonson - Proxima Nova Alt Black.ttf in Resources */,
+				87EEE7B21EBAF67D00CD10D3 /* files_dirs.7z in Resources */,
 				D44DF3E41D1EE393000C75B7 /* ReadMe.txt in Resources */,
 				D44DF3901D1E802E000C75B7 /* WebViewController.xib in Resources */,
 				D44DF3741D1E802E000C75B7 /* Info.plist in Resources */,
@@ -1173,9 +1302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87EEE7A91EBAE6BB00CD10D3 /* LzmaDec.c in Sources */,
 				D44DF3A21D1E802E000C75B7 /* NSData+Additions.swift in Sources */,
 				8709B7AF1D9192DE0006DCCC /* WLCTutorialVC.swift in Sources */,
 				D44DF3921D1E802E000C75B7 /* DesignableLabel.swift in Sources */,
+				87EEE7A21EBAE6BB00CD10D3 /* 7zFile.c in Sources */,
 				D436FD5D1D1FA77A00F2BE72 /* KIImagePager.m in Sources */,
 				D44DF3751D1E802E000C75B7 /* AboutViewController.swift in Sources */,
 				8709B7B11D9193CC0006DCCC /* TutorialCollectionViewCell.swift in Sources */,
@@ -1185,12 +1316,15 @@
 				14C2CBEB1D43C95200F7472A /* RageProducts.swift in Sources */,
 				87AFEDF41EB75F4000CEAFCE /* RarClasses.m in Sources */,
 				D436FD261D1F8C1000F2BE72 /* DropBoxVC.swift in Sources */,
+				87EEE7A01EBAE6BB00CD10D3 /* 7zBuf2.c in Sources */,
 				87C921981D50282F0099BC7B /* FileListTableView.swift in Sources */,
 				D44DF3B31D1E802E000C75B7 /* UILabel+Additions.swift in Sources */,
 				87C9219D1D50282F0099BC7B /* PreviewTransitionViewController.swift in Sources */,
 				D436FD291D1F8C1000F2BE72 /* UnZipVC.swift in Sources */,
 				87C9219C1D50282F0099BC7B /* PreviewManager.swift in Sources */,
 				D44DF3A11D1E802E000C75B7 /* Int+NSTimeInterval.swift in Sources */,
+				87EEE7AA1EBAE6BB00CD10D3 /* LZMAExtractor.m in Sources */,
+				87EEE7B01EBAE6BB00CD10D3 /* 7zMain.c in Sources */,
 				D44DF3B51D1E802E000C75B7 /* UITextField+Additions.swift in Sources */,
 				87C921961D50282F0099BC7B /* FileListPreview.swift in Sources */,
 				D44DF36B1D1E802E000C75B7 /* AppDelegate.swift in Sources */,
@@ -1199,17 +1333,24 @@
 				87C921931D50282F0099BC7B /* FBFile.swift in Sources */,
 				D44DF3A31D1E802E000C75B7 /* NSDate+Additions.swift in Sources */,
 				87A307F51D899C0D00161454 /* AboutProductVC.swift in Sources */,
+				87EEE7A41EBAE6BB00CD10D3 /* 7zStream.c in Sources */,
 				D44DF3761D1E802E000C75B7 /* ProductsViewController.swift in Sources */,
+				87EEE7A81EBAE6BB00CD10D3 /* Lzma2Dec.c in Sources */,
 				D44DF39C1D1E802E000C75B7 /* Character+Addition.swift in Sources */,
 				D44DF3B71D1E802E000C75B7 /* UIView+Additions.swift in Sources */,
 				D44DF38F1D1E802E000C75B7 /* WebViewController.swift in Sources */,
+				87EEE79F1EBAE6BB00CD10D3 /* 7zBuf.c in Sources */,
 				14837B591D3B5B2E007B52BB /* MYIntroductionView.m in Sources */,
 				D44DF39A1D1E802E000C75B7 /* Array+Additions.swift in Sources */,
+				87EEE7AD1EBAE6BB00CD10D3 /* Ppmd8.c in Sources */,
 				14837B5B1D3B5DDD007B52BB /* TutorialVC.swift in Sources */,
 				D44DF3A61D1E802E000C75B7 /* NSDate+Formatters.swift in Sources */,
 				D44DF3B41D1E802E000C75B7 /* UIStoryboard+Additions.swift in Sources */,
 				87902D081D41403700D475AC /* HistoryVC.swift in Sources */,
+				87EEE7A61EBAE6BB00CD10D3 /* CpuArch.c in Sources */,
+				87EEE7A31EBAE6BB00CD10D3 /* 7zIn.c in Sources */,
 				87C921941D50282F0099BC7B /* FileBrowser.swift in Sources */,
+				87EEE7AC1EBAE6BB00CD10D3 /* Ppmd7Dec.c in Sources */,
 				D44DF3A81D1E802E000C75B7 /* NSURLResponse+Additions.swift in Sources */,
 				D44DF38C1D1E802E000C75B7 /* BaseViewController.swift in Sources */,
 				D44DF3B11D1E802E000C75B7 /* UIImage+Additions.swift in Sources */,
@@ -1228,6 +1369,7 @@
 				D44DF37A1D1E802E000C75B7 /* OnBoardingViewController.swift in Sources */,
 				D436FD841D1FBAB000F2BE72 /* ContentViewer.swift in Sources */,
 				D44DF37D1D1E802E000C75B7 /* SideMenuManager.swift in Sources */,
+				87EEE7AB1EBAE6BB00CD10D3 /* Ppmd7.c in Sources */,
 				D44DF3791D1E802E000C75B7 /* NotificationViewController.swift in Sources */,
 				14C2CBEA1D43C95200F7472A /* IAPHelper.swift in Sources */,
 				D44DF3951D1E802E000C75B7 /* DesignableView.swift in Sources */,
@@ -1246,20 +1388,25 @@
 				879A2A0D1D899BA3003283C3 /* AboutCompanyVC.swift in Sources */,
 				D48D5B4A1D2FFDC000483BA6 /* GoogleDriveVC.swift in Sources */,
 				D44DF3BE1D1E802E000C75B7 /* MailManager.swift in Sources */,
+				87EEE7B61EBAF6B500CD10D3 /* Extract7z.m in Sources */,
 				D44DF37E1D1E802E000C75B7 /* TermsandConditionsViewController.swift in Sources */,
 				D44DF3C11D1E802E000C75B7 /* LocationManager.swift in Sources */,
 				D44DF3A41D1E802E000C75B7 /* NSDate+Comparison.swift in Sources */,
 				D44DF3B21D1E802E000C75B7 /* UIImageView+Additions.swift in Sources */,
 				D44DF39B1D1E802E000C75B7 /* Array+Operators.swift in Sources */,
 				D44DF3D51D1E802E000C75B7 /* Location.swift in Sources */,
+				87EEE7A11EBAE6BB00CD10D3 /* 7zDec.c in Sources */,
 				D44DF3A71D1E802E000C75B7 /* NSDate+Operators.swift in Sources */,
 				D436FD8E1D202B3300F2BE72 /* PasscodeVC.swift in Sources */,
 				87A307FA1D8B1A9800161454 /* HomeVCNew.swift in Sources */,
 				BDF725681D5B895D00C94836 /* BuyProVC.swift in Sources */,
+				87EEE7A51EBAE6BB00CD10D3 /* Alloc.c in Sources */,
 				D44DF3C21D1E802E000C75B7 /* OneShotLocationManager.swift in Sources */,
+				87EEE7AE1EBAE6BB00CD10D3 /* Ppmd8Dec.c in Sources */,
 				D44DF3AD1D1E802E000C75B7 /* UIButton+Additions.swift in Sources */,
 				87C9219A1D50282F0099BC7B /* FileParser.swift in Sources */,
 				D44DF3C01D1E802E000C75B7 /* LanguageManager.swift in Sources */,
+				87EEE7AF1EBAE6BB00CD10D3 /* 7zAlloc.c in Sources */,
 				D44DF3AB1D1E802E000C75B7 /* String+Additions.swift in Sources */,
 				D44DF3B91D1E802E000C75B7 /* UIViewController+UIImagePickerController.swift in Sources */,
 				D44DF3BA1D1E802E000C75B7 /* Helper.swift in Sources */,
@@ -1267,6 +1414,7 @@
 				D436FD2A1D1F8C1000F2BE72 /* ViewController.swift in Sources */,
 				14837B5F1D3BD6F5007B52BB /* iRate.m in Sources */,
 				D44DF3931D1E802E000C75B7 /* DesignableTextField.swift in Sources */,
+				87EEE7A71EBAE6BB00CD10D3 /* Delta.c in Sources */,
 				87B56FA31D3675F100782F96 /* CommonFunctions.swift in Sources */,
 				D44DF36A1D1E802E000C75B7 /* AppDelegate+Notification.swift in Sources */,
 				D44DF3AF1D1E802E000C75B7 /* UIDevice+Additions.swift in Sources */,
@@ -1329,6 +1477,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: priyanka singh (54K7HLD85Q)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1350,7 +1499,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
+				PROVISIONING_PROFILE = "9349e9af-b198-4568-bc1c-c2fadf4dde57";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1380,6 +1529,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1394,7 +1544,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a8378ac5-c763-495e-97f0-16df729a002a";
+				PROVISIONING_PROFILE = "823fd986-70c8-4a05-b387-e22ee6aff1cd";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1409,7 +1559,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: priyanka singh (54K7HLD85Q)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: priyanka singh (54K7HLD85Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1427,7 +1578,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.smartzip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=*]" = "52046a6d-0e4f-4df9-9b7f-4197b7509c93";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "9349e9af-b198-4568-bc1c-c2fadf4dde57";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1440,7 +1593,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartZip/SmartZip.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MOBIRIZER SERVICES PRIVATE LIMITED (9YG7G7YB2J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1458,6 +1612,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobirizer.smartzip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "823fd986-70c8-4a05-b387-e22ee6aff1cd";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SmartZip/Application/Bridge.h;
 				SWIFT_VERSION = 3.0;
 			};

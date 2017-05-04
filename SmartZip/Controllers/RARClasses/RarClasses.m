@@ -8,7 +8,7 @@
 
 #import "URKArchive.h"
 #import "RarClasses.h"
-
+#import "SmartZip-swift.h"
 
 @implementation RarClasses
 
@@ -18,9 +18,10 @@
     NSError *archiveError = nil;
     URKArchive *archive = [[URKArchive alloc] initWithPath:inFilePath error:&archiveError];
     NSError *error = nil;
-    NSString *folderPath = [inFilePath stringByDeletingLastPathComponent];
+    UnZipExternal* abc = [UnZipExternal new];
+    NSString *path = [abc tempUnzipPathWith7zWithZipPath:inFilePath];
     
-    BOOL extractFilesSuccessful =  [archive extractFilesTo:folderPath overwrite:NO progress:^(URKFileInfo *currentFile, CGFloat percentArchiveDecompressed) {
+    BOOL extractFilesSuccessful =  [archive extractFilesTo:path overwrite:NO progress:^(URKFileInfo *currentFile, CGFloat percentArchiveDecompressed) {
         NSLog(@"Extracting %@: %f%% complete", @"", percentArchiveDecompressed);
     } error:&error];
     
@@ -35,9 +36,15 @@
     NSError *archiveError = nil;
     URKArchive *archive = [[URKArchive alloc] initWithPath:inFilePath error:&archiveError];
     NSError *error = nil;
-    NSString *folderPath = [self getHomeDirectory];
     
-    BOOL extractFilesSuccessful =  [archive extractFilesTo:folderPath overwrite:NO progress:^(URKFileInfo *currentFile, CGFloat percentArchiveDecompressed) {
+    NSString *folderPath = [[CommonFunctions sharedInstance] docDirPath];
+    NSString* fileName = [[inFilePath lastPathComponent] stringByReplacingOccurrencesOfString:@".rar" withString:@""];
+    NSString* filePath = [NSString stringWithFormat:@"%@/%@", folderPath,fileName];
+    
+    UnZipExternal* abc = [UnZipExternal new];
+    NSString *path = [abc tempUnzipPathWith7zWithZipPath:filePath];
+    
+    BOOL extractFilesSuccessful =  [archive extractFilesTo:path overwrite:NO progress:^(URKFileInfo *currentFile, CGFloat percentArchiveDecompressed) {
         NSLog(@"Extracting %@: %f%% complete", @"", percentArchiveDecompressed);
     } error:&error];
     
@@ -48,7 +55,7 @@
 
 }
 
--(NSString *)getHomeDirectory
++(NSString *)getHomeDirectory
 {
     NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

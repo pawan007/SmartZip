@@ -4,28 +4,20 @@
 <dict>
 	<key></key>
 	<string></string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>UILaunchStoryboardName</key>
-	<string>Launch Screen</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleVersion</key>
-	<string>3</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera.</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
 			<string>ZIP</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.pkware.zip-archive</string>
 				<string>public.zip-archive</string>
 			</array>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -35,61 +27,85 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Rar archive</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.rarlab.rar-archive</string>
 				<string>public.archive</string>
 			</array>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 		</dict>
+        <dict>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>7z</string>
+                <string>7Z</string>
+            </array>
+            <key>CFBundleTypeName</key>
+            <string>7z archive</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>org.7-zip.7-zip-archive</string>
+                <string>public.archive</string>
+            </array>
+        </dict>
 	</array>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.02</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UIRequiresFullScreen</key>
-	<true/>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>2.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-1pbpk77qpisojml</string>
 			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 		</dict>
 	</array>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>4</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
-	<key>UIFileSharingEnabled</key>
-	<true/>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 </dict>
 </plist>

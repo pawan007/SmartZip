@@ -73,7 +73,6 @@ class UnZipExternal: NSObject {
         }
         
         unZipFilePath = unzipPath
-        //        unZipFilePath = CommonFunctions.sharedInstance.docDirPath()
         
         let success = SSZipArchive.unzipFile(atPath: zipPath, toDestination: unZipFilePath)
         
@@ -136,12 +135,76 @@ class UnZipExternal: NSObject {
             filePath = url.path
             return filePath
         }
+    }
+    
+    func tempUnzipPathWithRar(extension:String, zipPath:String) -> String? {
         
+        let folderPath = zipPath.replacingOccurrences(of: ".rar", with: "")
+        print(folderPath)
         
+        var filePath:String?
         
+        if !FileManager.default.fileExists(atPath: folderPath) {
+            
+            let url = URL(fileURLWithPath: folderPath)
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                return CommonFunctions.sharedInstance.docDirPath()
+            }
+            
+            filePath = url.path
+            return filePath
+            
+        }else{
+            
+            let incCount = getFileCopiesCount(folderPath)
+            let newPath = "\(folderPath)-\(incCount)"
+            let url = URL(fileURLWithPath: newPath)
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                return CommonFunctions.sharedInstance.docDirPath()
+            }
+            
+            filePath = url.path
+            return filePath
+        }
+    }
+    
+    func tempUnzipPathWith7z(zipPath:String) -> String? {
         
+        let folderPath = zipPath.replacingOccurrences(of: ".7z", with: "")
+        print(folderPath)
         
-        return nil
+        var filePath:String?
+        
+        if !FileManager.default.fileExists(atPath: folderPath) {
+            
+            let url = URL(fileURLWithPath: folderPath)
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                return CommonFunctions.sharedInstance.docDirPath()
+            }
+            
+            filePath = url.path
+            return filePath
+            
+        }else{
+            
+            let incCount = getFileCopiesCount(folderPath)
+            let newPath = "\(folderPath)-\(incCount)"
+            let url = URL(fileURLWithPath: newPath)
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                return CommonFunctions.sharedInstance.docDirPath()
+            }
+            
+            filePath = url.path
+            return filePath
+        }
     }
     
     func getFileCopiesCount(_ path:String) -> Int {

@@ -33,24 +33,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dropboxSession = DBSession(appKey: appKey, appSecret: appSecret, root: kDBRootDropbox)
         DBSession.setShared(dropboxSession)
         if let URL = launchOptions?[UIApplicationLaunchOptionsKey.url] as? URL {
-            /*if URL.isFileReferenceURL() {
-             
-             }
-             let vc = UIStoryboard.unZipVC()
-             vc!.zipFilePath = URL.path!
-             let navController:UINavigationController? = UINavigationController(rootViewController: vc!)
-             navController?.navigationBarHidden = true
-             self.window?.rootViewController = navController
-             self.window?.makeKeyAndVisible()
-             
-             FIRApp.configure()
-             
-             return true*/
-            print(URL)
             
-            let unzipClass = UnZipExternal()
-            unzipFilePath = unzipClass.unzipPath(URL.path)
-            isOpenedFromExternalResource = true
+            print(URL)
+            if URL.path.contains(".rar"){
+            
+                let rarClass = RarClasses()
+                rarClass.uncompressFiles(fromOutside: URL.path)
+                isOpenedFromExternalResource = true
+                
+            }else if URL.path.contains(".7z"){
+                
+                let extract7z = Extract7z()
+                extract7z.uncompressFiles(fromOutside: URL.path)
+                isOpenedFromExternalResource = true
+                
+            }else{
+            
+                let unzipClass = UnZipExternal()
+                unzipFilePath = unzipClass.unzipPath(URL.path)
+                isOpenedFromExternalResource = true
+            }
+            
             
         }
         AppDelegate.presentRootViewController()
@@ -115,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
                 let unzipClass = UnZipExternal()
                 //            unzipFilePath = unzipClass.unzipPath(url.path!)
-                unzipClass.unzipPath(url.path)
+                _ = unzipClass.unzipPath(url.path)
                 isOpenedFromExternalResource = true
                 //            let fileName = newFilePath.componentsSeparatedByString("/").last
                 CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A zip fie has been imported and unzipped in My Files", vc: (self.window?.rootViewController)!)
@@ -134,9 +137,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }else if url.path.contains(".rar"){
             
                 let rarClass = RarClasses()
-                rarClass.uncompressFiles(url.path)
+                rarClass.uncompressFiles(fromOutside: url.path)
                 isOpenedFromExternalResource = true
                 CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A rar fie has been imported and unarchived in My Files", vc: (self.window?.rootViewController)!)
+                
+                if APPDELEGATE.isOpenedFromExternalResource && FileParser.sharedInstance.currentPath == FileParser.sharedInstance.documentsURL() {
+                    APPDELEGATE.isOpenedFromExternalResource = false
+                    
+                    if flvc != nil {
+                        flvc!.files = flvc!.parser.filesForDirectory(flvc!.initialPath!)
+                        flvc!.indexFiles()
+                        flvc!.tableView.reloadData()
+                    }
+                    
+                }
+            }else if url.path.contains(".7z"){
+                
+                let extract7z = Extract7z()
+                extract7z.uncompressFiles(fromOutside: url.path)
+                isOpenedFromExternalResource = true
+                CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "A 7z fie has been imported and unarchived in My Files", vc: (self.window?.rootViewController)!)
                 
                 if APPDELEGATE.isOpenedFromExternalResource && FileParser.sharedInstance.currentPath == FileParser.sharedInstance.documentsURL() {
                     APPDELEGATE.isOpenedFromExternalResource = false
