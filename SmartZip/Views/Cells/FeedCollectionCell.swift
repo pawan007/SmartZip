@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol FeedCellDelegate: class {
-    func heartClick(index: NSInteger)
+    func heartClick(_ index: NSInteger)
 }
 
 class FeedCollectionCell: UICollectionViewCell {
@@ -47,7 +47,7 @@ class FeedCollectionCell: UICollectionViewCell {
         feedImage.kf_setImageWithURL(NSURL(string: eventObj.event_img!)!, placeholderImage: UIImage(named: "img_shadow"))
     }*/
     // MARK: Control Actions
-    @IBAction private func heartClick(sender: UIButton) {
+    @IBAction fileprivate func heartClick(_ sender: UIButton) {
         // sender.selected  = !sender.selected;
         if (self.delegate != nil) {
             self.activityLoader.alpha = 1

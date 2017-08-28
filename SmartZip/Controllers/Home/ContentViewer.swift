@@ -40,16 +40,16 @@ class ContentViewer: UIViewController {
         }
     }
     
-    @IBAction func backBtnTapped(sender: AnyObject) {
+    @IBAction func backBtnTapped(_ sender: AnyObject) {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    private func playVideo(path:String) {
-        let player = AVPlayer(URL: NSURL(fileURLWithPath: path))
+    fileprivate func playVideo(_ path:String) {
+        let player = AVPlayer(url: URL(fileURLWithPath: path))
         let playerController = AVPlayerViewController()
         playerController.player = player
-        self.presentViewController(playerController, animated: true) {
+        self.present(playerController, animated: true) {
             player.play()
         }
     }

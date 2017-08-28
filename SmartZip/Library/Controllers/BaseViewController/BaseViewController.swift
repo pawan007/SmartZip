@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-public class BaseViewController: UIViewController {
+open class BaseViewController: UIViewController {
     
-    private var _tapGesture: UITapGestureRecognizer?
+    fileprivate var _tapGesture: UITapGestureRecognizer?
     var backButtonRequired: Bool = false
     // MARK: View Lifecycle
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         if let navBarFont = UIFont(name: Constants.Fonts.ProximaNovaRegular , size: 17.0) {
             let navBarAttributesDictionary: [String: AnyObject]? = [
-                NSForegroundColorAttributeName: UIColor.darkGrayColor(),
+                NSForegroundColorAttributeName: UIColor.darkGray,
                 NSFontAttributeName: navBarFont
             ]
             navigationController?.navigationBar.titleTextAttributes = navBarAttributesDictionary
@@ -28,62 +28,62 @@ public class BaseViewController: UIViewController {
         
         if self.backButtonRequired
         {
-            let backButton = UIButton.init(type:UIButtonType.Custom)
-            backButton.setImage(UIImage(named: "Ic_Back.png"), forState: UIControlState.Normal)
-            backButton.addTarget(self, action:#selector(self.backButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
-            backButton.frame=CGRectMake(0, 0, 30, 30)
+            let backButton = UIButton.init(type:UIButtonType.custom)
+            backButton.setImage(UIImage(named: "Ic_Back.png"), for: UIControlState())
+            backButton.addTarget(self, action:#selector(self.backButtonPressed), for: UIControlEvents.touchUpInside)
+            backButton.frame=CGRect(x: 0, y: 0, width: 30, height: 30)
             let backBarButton = UIBarButtonItem(customView: backButton)
             self.navigationItem.leftBarButtonItem = backBarButton
         }
     }
     
-    override public func viewWillAppear(animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil);
     }
     
-    override public func viewWillDisappear(animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.removeTapGesture()
         self.dismissKeyboard()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
     }
     
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     
     // MARK: Private Methods
-    private func addTapGesture() -> Void {
+    fileprivate func addTapGesture() -> Void {
         _tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)))
         self.view.addGestureRecognizer(_tapGesture!)
     }
     
-    private func removeTapGesture() -> Void {
+    fileprivate func removeTapGesture() -> Void {
         if let tapGesture = _tapGesture {
             self.view.removeGestureRecognizer(tapGesture)
             _tapGesture = nil
         }
     }
     
-    private func dismissKeyboard() -> Void {
+    fileprivate func dismissKeyboard() -> Void {
         self.view.endEditing(true)
     }
     
     
     // MARK: Control Actions
     func backButtonPressed() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK:- IBActions
-    @IBAction func menuButtonAction(sender: AnyObject) {
+    @IBAction func menuButtonAction(_ sender: AnyObject) {
         
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
@@ -94,16 +94,16 @@ public class BaseViewController: UIViewController {
     
     
     // MARK: Gesture Actions
-    func handleGesture(sender: UITapGestureRecognizer) -> Void {
+    func handleGesture(_ sender: UITapGestureRecognizer) -> Void {
         self.dismissKeyboard()
     }
     
     // MARK: Keyboard Notification Observers
-    func keyboardWillShow(sender: NSNotification) {
+    func keyboardWillShow(_ sender: Notification) {
         self.addTapGesture()
     }
     
-    func keyboardWillHide(sender: NSNotification) {
+    func keyboardWillHide(_ sender: Notification) {
         self.removeTapGesture()
     }
 }

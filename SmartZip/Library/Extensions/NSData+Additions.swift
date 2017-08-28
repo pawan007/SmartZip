@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - NSData Extension
-extension NSData {
+extension Data {
     
     func json() -> AnyObject? {
         
         var object: AnyObject?
         
         do {
-            object = try NSJSONSerialization.JSONObjectWithData(self, options: []) as! [String:AnyObject]
+            object = try JSONSerialization.jsonObject(with: self, options: []) as! [String:AnyObject] as AnyObject
             // use anyObj here
         } catch {
             print("json error: \(error)")

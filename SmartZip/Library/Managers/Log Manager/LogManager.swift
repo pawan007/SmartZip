@@ -27,23 +27,23 @@ class LogManager: NSObject {
     }()
     
     // MARK: - Singleton Instance
-    private static let _sharedManager = LogManager()
+    fileprivate static let _sharedManager = LogManager()
     
     class func sharedManager() -> LogManager {
         return _sharedManager
     }
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
     // MARK: - Setup methods
-    class func setup(logLevel: XCGLogger.LogLevel = .Debug, showLogLevel: Bool = true, showFunctionName: Bool = true, showThreadName: Bool = false, showFileName: Bool = true, showLineNumber: Bool = true, writeToFile: Bool = false) {
+    class func setup(_ logLevel: XCGLogger.LogLevel = .Debug, showLogLevel: Bool = true, showFunctionName: Bool = true, showThreadName: Bool = false, showFileName: Bool = true, showLineNumber: Bool = true, writeToFile: Bool = false) {
         
         LogManager.sharedManager().setup(logLevel, showLogLevel: showLogLevel, showFunctionName: showFunctionName, showThreadName: showThreadName, showFileName: showFileName, showLineNumber: showLineNumber, writeToFile: writeToFile)
     }
     
-    func setup(logLevel: XCGLogger.LogLevel = .Debug, showLogLevel: Bool = true, showFunctionName: Bool = true, showThreadName: Bool = false, showFileName: Bool = true, showLineNumber: Bool = true, writeToFile: Bool = false) {
+    func setup(_ logLevel: XCGLogger.LogLevel = .Debug, showLogLevel: Bool = true, showFunctionName: Bool = true, showThreadName: Bool = false, showFileName: Bool = true, showLineNumber: Bool = true, writeToFile: Bool = false) {
         
         #if USE_NSLOG // Set via Build Settings, under Other Swift Flags
             
@@ -53,12 +53,12 @@ class LogManager: NSObject {
             
         #else
             
-            var logPath: NSURL? = nil
+            var logPath: URL? = nil
             
             if writeToFile {
                 // create a log file name using current date
-                let fileName: String = "Log-\(NSDate().formattedString()).txt"
-                logPath = cacheDirectoryURL.URLByAppendingPathComponent(fileName)
+                let fileName: String = "Log-\(Date().formattedString()).txt"
+                logPath = cacheDirectoryURL.appendingPathComponent(fileName)
             }
             
             self.log.setup(logLevel, showThreadName: showThreadName, showFunctionName: showFunctionName, showLogLevel: showLogLevel, showFileNames: showFileName, showLineNumbers: showLineNumber, writeToFile: logPath)
@@ -68,7 +68,7 @@ class LogManager: NSObject {
     
     
     // MARK: - Write log
-    private func writeLog(logLevel: XCGLogger.LogLevel, @autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    fileprivate func writeLog(_ logLevel: XCGLogger.LogLevel, closure: @autoclosure () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         // self.log.logln(logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, closure: closure)
     }
 }
@@ -76,31 +76,31 @@ class LogManager: NSObject {
 // MARK: - Helpers for Logging
 extension LogManager {
     
-    class func logDebug(@autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logDebug(_ closure: @autoclosure () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Debug, closure: closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    class func logInfo(@autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logInfo(_ closure: @autoclosure () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Info, closure: closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    class func logWarning(@autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logWarning(_ closure: @autoclosure () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Warning, closure: closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    class func logError(@autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logError(_ closure: @autoclosure () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Error, closure: closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    class func logSevere(@autoclosure closure: () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logSevere(_ closure: @autoclosure () -> String?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Severe, closure: closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    class func logEntry(functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logEntry(_ functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Debug, closure: "ENTRY", functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    class func logExit(functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    class func logExit(_ functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         LogManager.sharedManager().writeLog(.Debug, closure: "EXIT", functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 }

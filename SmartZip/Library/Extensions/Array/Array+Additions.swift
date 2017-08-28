@@ -6,10 +6,34 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 internal extension Array {
     
-    private var indexesInterval: HalfOpenInterval<Int> { return HalfOpenInterval<Int>(0, self.count) }
+    fileprivate var indexesInterval: Range<Int> { return (0 ..< self.count) }
     
     /**
      Checks if self contains a list of items.
@@ -17,7 +41,7 @@ internal extension Array {
      - parameter items: Items to search for
      - returns: true if self contains all the items
      */
-    func contains <T: Equatable> (items: T...) -> Bool {
+    func contains <T: Equatable> (_ items: T...) -> Bool {
         return items.all { self.indexOf($0) >= 0 }
     }
     /**
@@ -26,7 +50,7 @@ internal extension Array {
      - parameter test: Function to call for each element
      - returns: True if test returns true for all the elements in self
      */
-    func all (test: (Element) -> Bool) -> Bool {
+    func all (_ test: (Element) -> Bool) -> Bool {
         for item in self {
             if !test(item) {
                 return false
@@ -42,9 +66,9 @@ internal extension Array {
      - parameter item: The item to search for
      - returns: Index of the matched item or nil
      */
-    func indexOf <U: Equatable> (item: U) -> Int? {
+    func indexOf <U: Equatable> (_ item: U) -> Int? {
         if item is Element {
-            return unsafeBitCast(self, [U].self).indexOf(item)
+            return unsafeBitCast(self, to: [U].self).indexOf(item)
         }
         
         return nil
@@ -56,8 +80,8 @@ internal extension Array {
      - parameter condition: A function which returns a boolean if an element satisfies a given condition or not.
      - returns: Index of the first matched item or nil
      */
-    func indexOf (condition: Element -> Bool) -> Int? {
-        for (index, element) in self.enumerate() {
+    func indexOf (_ condition: (Element) -> Bool) -> Int? {
+        for (index, element) in self.enumerated() {
             if condition(element) {
                 return index
             }
@@ -71,7 +95,7 @@ internal extension Array {
      
      - parameter call: Function to call for each element
      */
-    func each (call: (Element) -> ()) {
+    func each (_ call: (Element) -> ()) {
         
         for item in self {
             call(item)
@@ -102,7 +126,7 @@ internal extension Array {
      - parameter test: Function to call for each element
      - returns: the number of elements meeting the condition
      */
-    func countWhere (test: (Element) -> Bool) -> Int {
+    func countWhere (_ test: (Element) -> Bool) -> Int {
         
         var result = 0
         
@@ -147,14 +171,14 @@ internal extension Array {
      */
     subscript (rangeAsArray rangeAsArray: Range<Int>) -> Array {
         //  Fix out of bounds indexes
-        let start = Swift.max(0, rangeAsArray.startIndex)
-        let end = Swift.min(rangeAsArray.endIndex, count)
+        let start = Swift.max(0, rangeAsArray.lowerBound)
+        let end = Swift.min(rangeAsArray.upperBound, count)
         
         if start > end {
             return []
         }
         
-        return Array(self[Range(start: start, end: end)] as ArraySlice<Element>)
+        return Array(self[(start ..< end)] as ArraySlice<Element>)
     }
     
     /**
@@ -163,8 +187,8 @@ internal extension Array {
      - parameter interval: Interval of indexes of the subarray elements
      - returns: Subarray or nil if the index is out of bounds
      */
-    subscript (interval: HalfOpenInterval<Int>) -> Array {
-        return self[rangeAsArray: Range(start: interval.start, end: interval.end)]
+    subscript (interval: Range<Int>) -> Array {
+        return self[rangeAsArray: (interval.start ..< interval.end)]
     }
     
     /**
@@ -173,8 +197,8 @@ internal extension Array {
      - parameter interval: Interval of indexes of the subarray elements
      - returns: Subarray or nil if the index is out of bounds
      */
-    subscript (interval: ClosedInterval<Int>) -> Array {
-        return self[rangeAsArray: Range(start: interval.start, end: interval.end + 1)]
+    subscript (interval: ClosedRange<Int>) -> Array {
+        return self[rangeAsArray: (interval.start ..< interval.end + 1)]
     }
     
     /**
@@ -196,7 +220,7 @@ internal extension Array {
      - parameter range:
      - returns: Subarray in range
      */
-    func get (range: Range<Int>) -> Array {
+    func get (_ range: Range<Int>) -> Array {
         
         return self[rangeAsArray: range]
     }
@@ -225,7 +249,7 @@ internal extension Array {
         
         return map {
             return $0 as! U
-            }.maxElement()!
+            }.max()!
     }
     
     /**
@@ -234,7 +258,7 @@ internal extension Array {
      - parameter values: Arrays to subtract
      - returns: Difference of self and the input arrays
      */
-    func difference <T: Equatable> (values: [T]...) -> [T] {
+    func difference <T: Equatable> (_ values: [T]...) -> [T] {
         
         var result = [T]()
         
@@ -262,12 +286,12 @@ internal extension Array {
      - parameter values: Arrays to intersect
      - returns: Array of unique values contained in all the dictionaries and self
      */
-    func intersection <U: Equatable> (values: [U]...) -> Array {
+    func intersection <U: Equatable> (_ values: [U]...) -> Array {
         
         var result = self
         var intersection = Array()
         
-        for (i, value) in values.enumerate() {
+        for (i, value) in values.enumerated() {
             
             //  the intersection is computed by intersecting a couple per loop:
             //  self n values[0], (self n values[0]) n values[1], ...
@@ -294,7 +318,7 @@ internal extension Array {
      - parameter values: Arrays
      - returns: Union array of unique values
      */
-    func union <U: Equatable> (values: [U]...) -> Array {
+    func union <U: Equatable> (_ values: [U]...) -> Array {
         
         var result = self
         

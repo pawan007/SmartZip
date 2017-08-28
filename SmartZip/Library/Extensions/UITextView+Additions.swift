@@ -14,13 +14,13 @@ extension UITextView {
     /**
      Override method of awake from nib to change font size as per aspect ratio.
      */
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         
         super.awakeFromNib()
         
         if let font = self.font {
             
-            let screenRatio = (UIScreen.mainScreen().bounds.size.width / Constants.DEFAULT_SCREEN_RATIO)
+            let screenRatio = (UIScreen.main.bounds.size.width / Constants.DEFAULT_SCREEN_RATIO)
             let fontSize = font.pointSize * screenRatio
             
             //self.font = UIFont(name: font.fontName, size: fontSize)!
@@ -30,14 +30,14 @@ extension UITextView {
     func resolveHashTags() {
         
         // turn string in to NSString
-        let nsText:NSString = self.text
+        let nsText:NSString = self.text as! NSString
         
         // this needs to be an array of NSString.  String does not work.
-        let words:[NSString] = nsText.componentsSeparatedByString(" ")
+        let words:[NSString] = nsText.components(separatedBy: " ")
         
         // you can't set the font size in the storyboard anymore, since it gets overridden here.
         let attrs = [
-            NSFontAttributeName : UIFont.systemFontOfSize(17.0)
+            NSFontAttributeName : UIFont.systemFont(ofSize: 17.0)
         ]
         
         // you can staple URLs onto attributed strings
@@ -52,7 +52,7 @@ extension UITextView {
                 
                 // a range is the character position, followed by how many characters are in the word.
                 // we need this because we staple the "href" to this range.
-                let matchRange:NSRange = nsText.rangeOfString(word as String)
+                let matchRange:NSRange = nsText.range(of: word as String)
                 
                 // convert the word from NSString to String
                 // this allows us to call "dropFirst" to remove the hashtag
@@ -63,9 +63,9 @@ extension UITextView {
                 
                 // check to see if the hashtag has numbers.
                 // ribl is "#1" shouldn't be considered a hashtag.
-                let digits = NSCharacterSet.decimalDigitCharacterSet()
+                let digits = CharacterSet.decimalDigits
                 
-                if let _ = stringifiedWord.rangeOfCharacterFromSet(digits) {
+                if let _ = stringifiedWord.rangeOfCharacter(from: digits) {
                     // hashtag contains a number, like "#1"
                     // so don't make it clickable
                 } else {

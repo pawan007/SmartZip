@@ -51,7 +51,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: "check_slow_video", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PhotoPickerVC.updateVideoStatus), name: NSNotification.Name(rawValue: "check_slow_video"), object: nil)
         
         if APPDELEGATE.isOpenedFromExternalResource {
             isOpenedFromExternalResource = true
@@ -65,17 +65,17 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         }
         
         //        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "Ic_Back"), style: .Plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if isOpenedFromExternalResource {
             isOpenedFromExternalResource = false
-            self.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+            self.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         }
         
         if(!CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedFullPageAds)) {
@@ -94,7 +94,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             if(shared != nil) {
                 shared = nil
             }
-            _bView.hidden = true
+            _bView.isHidden = true
         }
         
         // self.setUpGoogleAds()
@@ -105,7 +105,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
         print("Ad changed")
         /*
          for(UIView *tempView in [adsView subviews]) {
@@ -127,15 +127,15 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         // self.animation(bannerView)
     }
     
-    func animation(animationView:UIView) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            dispatch_async(dispatch_get_main_queue()) {
+    func animation(_ animationView:UIView) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            DispatchQueue.main.async {
                 let animation:CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.x")
                 animation.fromValue = 0;
                 animation.toValue = 2 * M_PI;
                 animation.repeatCount = 1;//INFINITY;
                 animation.duration = 0.5;
-                animationView.layer.addAnimation(animation, forKey: "rotation")
+                animationView.layer.add(animation, forKey: "rotation")
             }
         }
         /*
@@ -162,22 +162,22 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     func showFullPageAd() -> Bool {
         let str = "TipsPopupValue"
         var isShow = false
-        if  NSUserDefaults.standardUserDefaults().objectForKey(str) != nil {
-            var val = NSUserDefaults.standardUserDefaults().objectForKey(str)?.integerValue
+        if  UserDefaults.standard.object(forKey: str) != nil {
+            var val = (UserDefaults.standard.object(forKey: str)? as AnyObject).intValue
             val = val! - 1
             if(val == 0) {
                 isShow = true
                 let number = self.randomInt(1, max: 4)
-                NSUserDefaults.setObject(number, forKey: str)
+                UserDefaults.setObject(number, forKey: str)
             }
             else {
-                NSUserDefaults.setObject(val, forKey: str)
+                UserDefaults.setObject(val, forKey: str)
             }
             
         }
         else {
             let number = self.randomInt(1, max: 4)
-            NSUserDefaults.setObject(number, forKey: str)
+            UserDefaults.setObject(number, forKey: str)
         }
         
         if(isShow) {
@@ -206,11 +206,11 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         return isShow
     }
     
-    func randomInt(min: Int, max:Int) -> Int {
+    func randomInt(_ min: Int, max:Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAtIndexPath\(indexPath.row)")
         
         if indexPath.section == 0 {
@@ -254,19 +254,19 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             }else if indexPath.row == 2 {
                 
                 
-                let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+                let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], in: .import)
                 
                 importMenu.delegate = self
                 
-                self.presentViewController(importMenu, animated: true, completion: nil)
+                self.present(importMenu, animated: true, completion: nil)
                 
-                let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+                let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], in: .import)
                 
                 documentPicker.delegate = self
                 
-                documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+                documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen
                 
-                self.presentViewController(documentPicker, animated: true, completion: nil)
+                self.present(documentPicker, animated: true, completion: nil)
                 
                 
                 /*guard Reachability.isConnectedToNetwork()else{
@@ -281,7 +281,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         
     }
-    @IBAction   func menuButtonAction(sender: AnyObject) {
+    @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
@@ -304,7 +304,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
          }*/
         
         FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
-        let fileListViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("FileListViewController")
+        let fileListViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FileListViewController")
         APPDELEGATE.flvc = fileListViewController as? FileListViewController
         self.navigationController?.pushViewController(fileListViewController, animated: true)
         
@@ -365,13 +365,13 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     func selectAudio() {
         
-        let picker = MPMediaPickerController(mediaTypes:.Music)
+        let picker = MPMediaPickerController(mediaTypes:.music)
         picker.showsCloudItems = false
         picker.delegate = self
         picker.allowsPickingMultipleItems = true
-        picker.modalPresentationStyle = .Popover
-        picker.preferredContentSize = CGSizeMake(500,600)
-        self.presentViewController(picker, animated: true, completion: nil)
+        picker.modalPresentationStyle = .popover
+        picker.preferredContentSize = CGSize(width: 500,height: 600)
+        self.present(picker, animated: true, completion: nil)
         
         let flurryParams = [ "Type" :"selectAudio"]
         AnalyticsManager.sharedManager().trackEvent("MediaTypeSelected", attributes: flurryParams, screenName: "AppDelegate")
@@ -403,15 +403,15 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
      }
      */
     
-    func qb_imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
+    func qb_imagePickerControllerDidCancel(_ imagePickerController: QBImagePickerController!) {
         
         flagVideo = false
         flagImage = false
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
     
-    func qb_imagePickerController(imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
+    func qb_imagePickerController(_ imagePickerController: QBImagePickerController!, didFinishPickingAssets assets: [AnyObject]!) {
         
         
         
@@ -428,7 +428,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
              }
              }*/
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             showEnterNameAlert("Images-"+Timestamp,assets: assets, type: fileTypeImage)
             //            
             //            self.dismissViewControllerAnimated(true, completion: nil)
@@ -437,7 +437,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         }else{
             
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             selectVideo = assets
             canCreateVideo(selectVideo)
             
@@ -449,7 +449,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     
     
-    func zipAndShareImages(assets: [AnyObject]!, folderName:String) {
+    func zipAndShareImages(_ assets: [AnyObject]!, folderName:String) {
         
         //        var folderName = ""
         
@@ -464,7 +464,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             cacheDir += "/\(folderName)"
             
             do{
-                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try kFileManager.createDirectory(atPath: cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -512,7 +512,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     
-    func zipAndShareVideos(assets: [AnyObject]!, folderName:String) {
+    func zipAndShareVideos(_ assets: [AnyObject]!, folderName:String) {
         
         //        var folderName = ""
         
@@ -527,7 +527,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
             cacheDir += "/\(folderName)"
             
             do{
-                try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+                try kFileManager.createDirectory(atPath: cacheDir, withIntermediateDirectories: false, attributes: nil)
             }catch let e as NSError{
                 print(e)
             }
@@ -603,7 +603,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     
     
-    func canCreateVideo(assets: [AnyObject]!){
+    func canCreateVideo(_ assets: [AnyObject]!){
         
         totalItem = assets.count
         currentItem = 0
@@ -680,11 +680,11 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     
     
     
-    func getSlowMotionVideo(asset:AVAsset , filePath:String, cacheDir:String , totalItem:Int, currentItem:Int) -> Void {
+    func getSlowMotionVideo(_ asset:AVAsset , filePath:String, cacheDir:String , totalItem:Int, currentItem:Int) -> Void {
         
         objc_sync_enter(self)
         
-        let fileUrl = NSURL(fileURLWithPath: filePath)
+        let fileUrl = URL(fileURLWithPath: filePath)
         
         let exporter = AVAssetExportSession(asset: asset, presetName:AVAssetExportPresetHighestQuality)
         exporter?.outputURL = fileUrl
@@ -693,15 +693,15 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
         objc_sync_exit(self)
         
-        exporter?.exportAsynchronouslyWithCompletionHandler({ () -> Void in
+        exporter?.exportAsynchronously(completionHandler: { () -> Void in
             
             objc_sync_enter(self)
             
-            if exporter?.status == AVAssetExportSessionStatus.Completed{
+            if exporter?.status == AVAssetExportSessionStatus.completed{
                 
                 objc_sync_exit(self)
                 print(exporter?.outputURL)
-                NSNotificationCenter.defaultCenter().postNotificationName("check_slow_video", object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "check_slow_video"), object: nil)
                 
                 
             }else{
@@ -709,7 +709,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
                 print("Error occured while generating video zip")
                 objc_sync_exit(self)
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     SwiftSpinner.hide()
                     
@@ -725,7 +725,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     func updateVideoStatus() {
         
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             self.currentItem += 1
             
@@ -744,7 +744,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
     }
     
     
-    func zipMyFiles(newZipFile:String, existingFolder:String) {
+    func zipMyFiles(_ newZipFile:String, existingFolder:String) {
         
         
         if !CommonFunctions.sharedInstance.canCreateZip(existingFolder) {
@@ -773,12 +773,12 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         
     }
     
-    func shareMyFile(zipPath:String) -> Void {
+    func shareMyFile(_ zipPath:String) -> Void {
         
-        let fileDAta = NSURL(fileURLWithPath: zipPath)
+        let fileDAta = URL(fileURLWithPath: zipPath)
         
         let ac = UIActivityViewController(activityItems: [fileDAta,"hello"] , applicationActivities: nil)
-        ac.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
+        ac.excludedActivityTypes = [UIActivityType.print, UIActivityType.copyToPasteboard,UIActivityType.assignToContact, UIActivityType.saveToCameraRoll]
         ac.setValue("My file", forKey: "Subject")
         
         
@@ -790,16 +790,16 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
         }
         
         
-        self.presentViewController(ac, animated: true, completion: nil)
+        self.present(ac, animated: true, completion: nil)
         
     }
     
-    func deleteAllFilesInDirectory(directoryPath:String) -> Void {
+    func deleteAllFilesInDirectory(_ directoryPath:String) -> Void {
         
-        if let enumerator = kFileManager.enumeratorAtPath(directoryPath) {
+        if let enumerator = kFileManager.enumerator(atPath: directoryPath) {
             while let fileName = enumerator.nextObject() as? String {
                 do {
-                    try kFileManager.removeItemAtPath("\(directoryPath)\(fileName)")
+                    try kFileManager.removeItem(atPath: "\(directoryPath)\(fileName)")
                 }
                 catch let e as NSError {
                     print(e)
@@ -818,7 +818,7 @@ class HomeVC: UITableViewController, QBImagePickerControllerDelegate {
 
 extension HomeVC {
     
-    @IBAction func btnMyFilesTapped(sender: AnyObject) {
+    @IBAction func btnMyFilesTapped(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
@@ -827,7 +827,7 @@ extension HomeVC {
         }
     }
     
-    @IBAction func btnPhotosTapped(sender: AnyObject) {
+    @IBAction func btnPhotosTapped(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
@@ -836,7 +836,7 @@ extension HomeVC {
         }
     }
     
-    @IBAction func btnVideoTapped(sender: AnyObject) {
+    @IBAction func btnVideoTapped(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
@@ -845,7 +845,7 @@ extension HomeVC {
         }
     }
     
-    @IBAction func btnMusicTapped(sender: AnyObject) {
+    @IBAction func btnMusicTapped(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
@@ -854,7 +854,7 @@ extension HomeVC {
         }
     }
     
-    @IBAction func btnDropboxTapped(sender: AnyObject) {
+    @IBAction func btnDropboxTapped(_ sender: AnyObject) {
         
         if (self.showFullPageAd()) {
             return;
@@ -868,7 +868,7 @@ extension HomeVC {
         }
     }
     
-    @IBAction func btnGoogleDriveTapped(sender: AnyObject) {
+    @IBAction func btnGoogleDriveTapped(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
@@ -881,18 +881,18 @@ extension HomeVC {
         }
     }
     
-    @IBAction func btnMoreCloudTapped(sender: AnyObject) {
+    @IBAction func btnMoreCloudTapped(_ sender: AnyObject) {
         if (self.showFullPageAd()) {
             return;
         }
         else {
-            let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+            let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], in: .import)
             importMenu.delegate = self
-            self.presentViewController(importMenu, animated: true, completion: nil)
-            let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+            self.present(importMenu, animated: true, completion: nil)
+            let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], in: .import)
             documentPicker.delegate = self
-            documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-            self.presentViewController(documentPicker, animated: true, completion: nil)
+            documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+            self.present(documentPicker, animated: true, completion: nil)
         }
         
     }
@@ -904,23 +904,23 @@ extension HomeVC {
 extension HomeVC : MPMediaPickerControllerDelegate {
     // must implement these, as there is no automatic dismissal
     
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         
         print("did pick")
         getSongsAdvance(mediaItemCollection)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         return
         
     }
     
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         print("cancel")
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func getSongsAdvance(mediaItemCollection: MPMediaItemCollection) {
+    func getSongsAdvance(_ mediaItemCollection: MPMediaItemCollection) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         if mediaItemCollection.items.count > 0 {
             
@@ -934,13 +934,13 @@ extension HomeVC : MPMediaPickerControllerDelegate {
     }
     
     
-    func zipAndShareSongs(items: [AnyObject]!, folderName:String){
+    func zipAndShareSongs(_ items: [AnyObject]!, folderName:String){
         
         var cacheDir = CommonFunctions.sharedInstance.docDirPath()
         cacheDir += "/\(folderName)"
         
         do{
-            try kFileManager.createDirectoryAtPath(cacheDir, withIntermediateDirectories: false, attributes: nil)
+            try kFileManager.createDirectory(atPath: cacheDir, withIntermediateDirectories: false, attributes: nil)
         }catch let e as NSError{
             print(e)
         }
@@ -959,46 +959,46 @@ extension HomeVC : MPMediaPickerControllerDelegate {
             
             print(item.assetURL)
             let filePath = "\(cacheDir)/\(item.title!).m4a"
-            let myFileUrl = NSURL(fileURLWithPath: filePath)
+            let myFileUrl = URL(fileURLWithPath: filePath)
             saveAssetUrlToMp3(item.assetURL!, path: myFileUrl, title: item.title!, parentDir: cacheDir)
             
         }
         
     }
     
-    func saveAssetUrlToMp3(assetUrl:NSURL, path:NSURL, title:String, parentDir:String) {
+    func saveAssetUrlToMp3(_ assetUrl:URL, path:URL, title:String, parentDir:String) {
         
-        let songAsset = AVURLAsset(URL: assetUrl, options: nil)
+        let songAsset = AVURLAsset(url: assetUrl, options: nil)
         let exporter = AVAssetExportSession(asset: songAsset, presetName: AVAssetExportPresetPassthrough)
         exporter!.outputFileType = "com.apple.quicktime-movie";
         exporter?.outputURL = path
         exporter?.shouldOptimizeForNetworkUse = true
         
-        exporter?.exportAsynchronouslyWithCompletionHandler( { () -> Void in
+        exporter?.exportAsynchronously( completionHandler: { () -> Void in
             
-            if(exporter?.status == AVAssetExportSessionStatus.Completed){
+            if(exporter?.status == AVAssetExportSessionStatus.completed){
                 
                 let filePath = "\(parentDir)/\(title).m4a"
                 var fileSize : UInt64 = 0
                 do {
-                    let attr : NSDictionary? = try kFileManager.attributesOfItemAtPath(filePath)
+                    let attr : NSDictionary? = try kFileManager.attributesOfItem(atPath: filePath)
                     if let _attr = attr {
                         fileSize = _attr.fileSize();
                         print("fileSize: \(fileSize)")
                     }
                     var newFilePath = ""
-                    if title.containsString(".mp3"){
-                        newFilePath = filePath.stringByReplacingOccurrencesOfString(".m4a", withString: "")
+                    if title.contains(".mp3"){
+                        newFilePath = filePath.replacingOccurrences(of: ".m4a", with: "")
                     }else{
-                        newFilePath = filePath.stringByReplacingOccurrencesOfString(".m4a", withString: ".mp3")
+                        newFilePath = filePath.replacingOccurrences(of: ".m4a", with: ".mp3")
                     }
-                    try! kFileManager.moveItemAtPath(filePath, toPath: newFilePath)
+                    try! kFileManager.moveItem(atPath: filePath, toPath: newFilePath)
                     
                 } catch {
                     print("Error: \(error)")
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     self.currentFile += 1
                     if self.currentFile == self.totalfileCount {
@@ -1019,7 +1019,7 @@ extension HomeVC : MPMediaPickerControllerDelegate {
                 
                 print("error: \(exporter?.error?.localizedFailureReason)")
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     self.currentFile += 1
                     if self.currentFile == self.totalfileCount {
@@ -1041,47 +1041,47 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
     
     
     
-    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         
-        print(url.path!)
-        let zipPath = "\(CommonFunctions.sharedInstance.docDirPath())/\((url.lastPathComponent)!).zip"
+        print(url.path)
+        let zipPath = "\(CommonFunctions.sharedInstance.docDirPath())/\((url.lastPathComponent)).zip"
         CommonFunctions.sharedInstance.zipMyFiles(zipPath, filePath: url.path!, vc: self)
-        self.performSelector(#selector(HomeVC.handleLocalFile), withObject: nil, afterDelay: 1)
+        self.perform(#selector(HomeVC.handleLocalFile), with: nil, afterDelay: 1)
         
     }
     
-    func documentMenu(documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+    func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         
         documentPicker.delegate=self
-        self.presentViewController(documentPicker, animated: true, completion: nil)
+        self.present(documentPicker, animated: true, completion: nil)
         
     }
     
     
     
-    @IBAction func pickerButtonPressed(sender1: UIButton) {
+    @IBAction func pickerButtonPressed(_ sender1: UIButton) {
         
-        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.text"], in: .import)
         
         importMenu.delegate = self
         
-        self.presentViewController(importMenu, animated: true, completion: nil)
+        self.present(importMenu, animated: true, completion: nil)
         
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], inMode: .Import)
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.text"], in: .import)
         
         documentPicker.delegate = self
         
-        documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+        documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         
-        self.presentViewController(documentPicker, animated: true, completion: nil)
+        self.present(documentPicker, animated: true, completion: nil)
         
     }
     
-    func showEnterNameAlert(name:String ,assets: [AnyObject]!, type:Int){
+    func showEnterNameAlert(_ name:String ,assets: [AnyObject]!, type:Int){
         
-        let alertController = UIAlertController(title: "Wait", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Wait", message: "Please enter zip name", preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
             let firstTextField = alertController.textFields![0] as UITextField
@@ -1102,7 +1102,7 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             var cacheDir = CommonFunctions.sharedInstance.docDirPath()
             cacheDir += "/\(firstTextField.text!)"
             
-            if(kFileManager.fileExistsAtPath(cacheDir)){
+            if(kFileManager.fileExists(atPath: cacheDir)){
                 
                 self.showAlert("Folder or file already exists, please provide new name", assets: assets, type: type)
                 
@@ -1137,27 +1137,27 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
         
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+        alertController.addTextField { (textField : UITextField!) -> Void in
             textField.text = name
         }
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
-    func showAlert(name:String ,assets: [AnyObject]!, type:Int){
+    func showAlert(_ name:String ,assets: [AnyObject]!, type:Int){
         
-        let alertController = UIAlertController(title: "Wait", message: name, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Wait", message: name, preferredStyle: UIAlertControllerStyle.alert)
         
-        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
             alert -> Void in
             
             var archiveName = ""
@@ -1185,7 +1185,7 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
             
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.Default, handler: {
+        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.default, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
@@ -1193,7 +1193,7 @@ extension  HomeVC:UIDocumentPickerDelegate,UIDocumentMenuDelegate{
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     

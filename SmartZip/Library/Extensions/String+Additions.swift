@@ -17,17 +17,17 @@ extension String {
     /**
      Reverse of string
      */
-    var reverse: String { return String(self.characters.reverse()) }
+    var reverse: String { return String(self.characters.reversed()) }
 
     /**
      Convert html string into  normal string
      */
     var html2AttributedString: NSAttributedString? {
         guard
-            let data = dataUsingEncoding(NSUTF8StringEncoding)
+            let data = self.data(using: String.Encoding.utf8)
             else { return nil }
         do {
-            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil)
+            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil)
         } catch let error as NSError {
             print(error.localizedDescription)
             return  nil
@@ -46,7 +46,7 @@ extension String {
      
      - returns: Height of string
      */
-    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat? {
+    func heightWithConstrainedWidth(_ width: CGFloat, font: UIFont) -> CGFloat? {
         let constraintRect = CGSize(width: width, height: CGFloat.max)
         let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         
@@ -61,7 +61,7 @@ extension String {
      
      - returns: Height of string
      */
-    func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
+    func widthWithConstrainedHeight(_ height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: CGFloat.max, height: height)
         
         let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
@@ -76,9 +76,9 @@ extension String {
      - parameter replacementString : New string at place of previous string
      - returns: Updated string after replacement
      */
-    func replace(string: String, replacementString: String) -> String {
+    func replace(_ string: String, replacementString: String) -> String {
         
-        return self.stringByReplacingOccurrencesOfString(string, withString: replacementString, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        return self.replacingOccurrences(of: string, with: replacementString, options: NSString.CompareOptions.literal, range: nil)
     }
     
     /**
@@ -91,9 +91,9 @@ extension String {
         return self.replace(" ", replacementString: "")
     }
     
-    func removeCharacterInCharacterSet(set: NSCharacterSet) -> String  {
-        let tempArr = self.componentsSeparatedByCharactersInSet(set)
-        return tempArr.joinWithSeparator("")
+    func removeCharacterInCharacterSet(_ set: CharacterSet) -> String  {
+        let tempArr = self.components(separatedBy: set)
+        return tempArr.joined(separator: "")
         
     }
     
@@ -105,12 +105,12 @@ extension String {
      */
     subscript (range: Range<Int>) -> String? {
       
-        if range.startIndex < 0 || range.endIndex > self.length {
+        if range.lowerBound < 0 || range.upperBound > self.length {
             return nil
         }
         
 //        let range = Range(start: startIndex.advancedBy(range.startIndex), end: startIndex.advancedBy(range.endIndex))
-        let range = startIndex.advancedBy(range.startIndex) ..< startIndex.advancedBy(range.endIndex)
+        let range = characters.index(startIndex, offsetBy: range.lowerBound) ..< characters.index(startIndex, offsetBy: range.upperBound)
         return self[range]
     }
     
@@ -123,7 +123,7 @@ extension String {
      */
     subscript (i: Int) -> Character {
        
-        return self[self.startIndex.advancedBy(i)]
+        return self[self.characters.index(self.startIndex, offsetBy: i)]
     }
     
     /**
@@ -144,7 +144,7 @@ extension String {
      - parameter string: String to insert
      - returns: String formed from self inserting string at index
      */
-    func insert (index: Int, _ string: String) -> String {
+    func insert (_ index: Int, _ string: String) -> String {
         
         //  Edge cases, prepend and append
         if index > length {
@@ -163,16 +163,16 @@ extension String {
      
      - returns: A String trimmed after left whitespace
      */
-    func trimmedLeft (characterSet set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+    func trimmedLeft (characterSet set: CharacterSet = CharacterSet.whitespacesAndNewlines) -> String {
        
-        if let range = rangeOfCharacterFromSet(set.invertedSet) {
-            return self[range.startIndex..<endIndex]
+        if let range = rangeOfCharacter(from: set.inverted) {
+            return self[range.lowerBound..<endIndex]
         }
         
         return ""
     }
     
-    @available (*, unavailable, message="use 'trimmedLeft' instead") func ltrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+    @available (*, unavailable, message: "use 'trimmedLeft' instead") func ltrimmed (_ set: CharacterSet = CharacterSet.whitespacesAndNewlines) -> String {
         
         return trimmedLeft(characterSet: set)
     }
@@ -184,16 +184,16 @@ extension String {
      
      - returns: A String trimmed after right whitespace
      */
-    func trimmedRight (characterSet set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+    func trimmedRight (characterSet set: CharacterSet = CharacterSet.whitespacesAndNewlines) -> String {
        
-        if let range = rangeOfCharacterFromSet(set.invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
-            return self[startIndex..<range.endIndex]
+        if let range = rangeOfCharacter(from: set.inverted, options: NSString.CompareOptions.backwards) {
+            return self[startIndex..<range.upperBound]
         }
         
         return ""
     }
     
-    @available(*, unavailable, message="use 'trimmedRight' instead") func rtrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+    @available(*, unavailable, message: "use 'trimmedRight' instead") func rtrimmed (_ set: CharacterSet = CharacterSet.whitespacesAndNewlines) -> String {
         
         return trimmedRight(characterSet: set)
     }
@@ -215,7 +215,7 @@ extension String {
      */
     func toDouble () -> Double? {
         
-        let scanner = NSScanner(string: self)
+        let scanner = Scanner(string: self)
         var double: Double = 0
         
         if scanner.scanDouble(&double) {
@@ -232,7 +232,7 @@ extension String {
      */
     func toFloat () -> Float? {
         
-        let scanner = NSScanner(string: self)
+        let scanner = Scanner(string: self)
         var float: Float = 0
         
         if scanner.scanFloat(&float) {
@@ -266,7 +266,7 @@ extension String {
      */
     func toBool () -> Bool? {
        
-        let text = self.trimmed().lowercaseString
+        let text = self.trimmed().lowercased()
         if text == "true" || text == "false" || text == "yes" || text == "no" {
             return (text as NSString).boolValue
         }
@@ -281,15 +281,15 @@ extension String {
      
      - returns: A NSDate parsed from the string or nil if it cannot be parsed as a date.
      */
-    func toDate (format : String? = "yyyy-MM-dd") -> NSDate? {
+    func toDate (_ format : String? = "yyyy-MM-dd") -> Date? {
        
-        let text = self.trimmed().lowercaseString
-        let dateFmt = NSDateFormatter()
-        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
+        let text = self.trimmed().lowercased()
+        let dateFmt = DateFormatter()
+        dateFmt.timeZone = TimeZone.current
         if let fmt = format {
             dateFmt.dateFormat = fmt
         }
-        return dateFmt.dateFromString(text)
+        return dateFmt.date(from: text)
     }
     
     /**
@@ -299,7 +299,7 @@ extension String {
      
      - returns: A NSDate parsed from the string or nil if it cannot be parsed as a date.
      */
-    func toDateTime (format : String? = "yyyy-MM-dd hh-mm-ss") -> NSDate? {
+    func toDateTime (_ format : String? = "yyyy-MM-dd hh-mm-ss") -> Date? {
        
         return toDate(format)
     }
@@ -309,9 +309,9 @@ extension String {
      
      - returns: A NSdata from string
      */
-    func data () -> NSData {
+    func data () -> Data {
        
-        return self.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        return self.data(using: String.Encoding.utf8, allowLossyConversion: false)!
     }
     
     /**
@@ -321,7 +321,7 @@ extension String {
      */
     func base64Encoded () -> String {
         
-        return data().base64EncodedStringWithOptions([NSDataBase64EncodingOptions()])
+        return data().base64EncodedString(options: [NSData.Base64EncodingOptions()])
     }
     
     /**
@@ -330,9 +330,9 @@ extension String {
      - parameter separator: Character used to split the string
      - returns: Array of substrings
      */
-    func explode (separator: Character) -> [String] {
+    func explode (_ separator: Character) -> [String] {
         
-        return self.characters.split(isSeparator: { (element: Character) -> Bool in
+        return self.characters.split(whereSeparator: { (element: Character) -> Bool in
             return element == separator
         }).map { String($0) }
     }
@@ -376,7 +376,7 @@ extension String {
         
         let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        return emailPredicate.evaluateWithObject(self)
+        return emailPredicate.evaluate(with: self)
     }
     
     /**
@@ -388,7 +388,7 @@ extension String {
         
         let phoneNumberFormat = "^\\d{3}-\\d{3}-\\d{4}$"
         let phoneNumberPredicate = NSPredicate(format:"SELF MATCHES %@", phoneNumberFormat)
-        return phoneNumberPredicate.evaluateWithObject(self)
+        return phoneNumberPredicate.evaluate(with: self)
     }
     
     /**
@@ -400,7 +400,7 @@ extension String {
 
         let passwordRegex = Constants.PASSWORD_REGEX
         let passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegex)
-        let rVal = passwordTest.evaluateWithObject(self)
+        let rVal = passwordTest.evaluate(with: self)
         if !rVal {
             
         }
@@ -416,7 +416,7 @@ extension String {
         
         let urlFormat = "(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
         let urlPredicate = NSPredicate(format:"SELF MATCHES %@", urlFormat)
-        return urlPredicate.evaluateWithObject(self)
+        return urlPredicate.evaluate(with: self)
     }
     
     /**
@@ -441,9 +441,9 @@ extension String {
      
      - returns: A NSString from array seperate by seperator
      */
-    func stringFromArray (array: NSArray, seperator: String) -> String {
+    func stringFromArray (_ array: NSArray, seperator: String) -> String {
        
-        return array.componentsJoinedByString(seperator)
+        return array.componentsJoined(by: seperator)
     }
     
     /**
@@ -453,9 +453,9 @@ extension String {
      
      - returns: Array from string
      */
-    func arrayFromString (seperator: String) -> NSArray {
+    func arrayFromString (_ seperator: String) -> NSArray {
       
-        return self.componentsSeparatedByString(seperator)
+        return self.components(separatedBy: seperator)
     }
     
     /**
@@ -465,7 +465,7 @@ extension String {
      */
     func containsSubstring () -> Bool {
        
-        return self.containsString(self)
+        return self.contains(self)
     }
     
     /**
@@ -475,13 +475,13 @@ extension String {
      
      - returns: A Bool return true if password is validate otherwise false
      */
-    private func validatePassword(password:String) -> Bool {
+    fileprivate func validatePassword(_ password:String) -> Bool {
         
         //This regular expression allowes 2 to 8 character passwords.
         //It requires to have at least 1 alphanumeric (letter/number) character and 1 non-alphanumeric character
         let passwordRegex = "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z.!&/()=?+*~#'_:.,;-]{6,32}$"
         let passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegex)
-        return passwordTest.evaluateWithObject(password)
+        return passwordTest.evaluate(with: password)
     }
     
     /**
@@ -492,7 +492,7 @@ extension String {
      
      - returns: A Bool return true if password is match with confirm password otherwise false
      */
-    private func passwordComparision(password:String, confirmPassword:String) -> Bool {
+    fileprivate func passwordComparision(_ password:String, confirmPassword:String) -> Bool {
         
         //This regular expression allowes 2 to 8 character passwords.
         //It requires to have at least 1 alphanumeric (letter/number) character and 1 non-alphanumeric character

@@ -12,14 +12,14 @@ class FileParser {
     
     static let sharedInstance = FileParser()
     
-    var currentPath:NSURL?
+    var currentPath:URL?
     
     var _excludesFileExtensions = [String]()
     
     /// Mapped for case insensitivity
     var excludesFileExtensions: [String]? {
         get {
-            return _excludesFileExtensions.map({$0.lowercaseString})
+            return _excludesFileExtensions.map({$0.lowercased()})
         }
         set {
             if let newValue = newValue {
@@ -28,36 +28,36 @@ class FileParser {
         }
     }
     
-    var excludesFilepaths: [NSURL]?
+    var excludesFilepaths: [URL]?
     
-    let fileManager = NSFileManager.defaultManager()
+    let fileManager = FileManager.default
     
-    func documentsURL() -> NSURL {
-        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as NSURL
+    func documentsURL() -> URL {
+        return fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
     }
     
-    func filesForDirectory(directoryPath: NSURL) -> [FBFile]  {
+    func filesForDirectory(_ directoryPath: URL) -> [FBFile]  {
         var files = [FBFile]()
-        var filePaths = [NSURL]()
+        var filePaths = [URL]()
         // Get contents
         do  {
-            filePaths = try self.fileManager.contentsOfDirectoryAtURL(directoryPath, includingPropertiesForKeys: [], options: [.SkipsHiddenFiles])
+            filePaths = try self.fileManager.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: [], options: [.skipsHiddenFiles])
         } catch {
             return files
         }
         // Parse
         for filePath in filePaths {
             let file = FBFile(filePath: filePath)
-            if let excludesFileExtensions = excludesFileExtensions, let fileExtensions = file.fileExtension where excludesFileExtensions.contains(fileExtensions) {
+            if let excludesFileExtensions = excludesFileExtensions, let fileExtensions = file.fileExtension, excludesFileExtensions.contains(fileExtensions) {
                 continue
             }
             
             let path = "\(CommonFunctions.sharedInstance.docDirPath())/Inbox"
-            if file.filePath.path!.containsString(path){
+            if file.filePath.path!.contains(path){
                 continue
             }
             
-            if let excludesFilepaths = excludesFilepaths where excludesFilepaths.contains(file.filePath) {
+            if let excludesFilepaths = excludesFilepaths, excludesFilepaths.contains(file.filePath) {
                 
                 print(excludesFilepaths)
                 print(file.filePath)
@@ -68,7 +68,7 @@ class FileParser {
             }
         }
         // Sort
-        files = files.sort(){$0.displayName < $1.displayName}
+        files = files.sorted(){$0.displayName < $1.displayName}
         return files
     }
 

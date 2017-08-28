@@ -14,13 +14,13 @@ extension UITextField {
     /**
      Override method of awake from nib to change font size as per aspect ratio.
      */
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         
         super.awakeFromNib()
         
         if let font = self.font {
             
-            let screenRatio = (UIScreen.mainScreen().bounds.size.width / CGFloat(Constants.DEFAULT_SCREEN_RATIO))
+            let screenRatio = (UIScreen.main.bounds.size.width / CGFloat(Constants.DEFAULT_SCREEN_RATIO))
             //let fontSize = font.pointSize * screenRatio
             
           //  self.font = UIFont(name: font.fontName, size: fontSize)!
@@ -46,14 +46,14 @@ extension UITextField {
     }
     
     func trimWhiteSpacesAndNewline() {
-        let whitespaceAndNewline: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        let trimmedString: String? = self.text?.stringByTrimmingCharactersInSet(whitespaceAndNewline)
+        let whitespaceAndNewline: CharacterSet = CharacterSet.whitespacesAndNewlines
+        let trimmedString: String? = self.text?.trimmingCharacters(in: whitespaceAndNewline)
         self.text = trimmedString
     }
 
     
     // MARK: Control Actions
     @IBAction func toggleSecureText() {
-        self.secureTextEntry = !self.secureTextEntry
+        self.isSecureTextEntry = !self.isSecureTextEntry
     }
 }

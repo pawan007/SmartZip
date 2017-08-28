@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension NSDate {
+public extension Date {
     
     /**
      Checks if self is after input NSDate
@@ -15,8 +15,8 @@ public extension NSDate {
      - parameter date: NSDate to compare
      - returns: True if self is after the input NSDate, false otherwise
      */
-    public func isAfter(date: NSDate) -> Bool{
-        return (self.compare(date) == NSComparisonResult.OrderedDescending)
+    public func isAfter(_ date: Date) -> Bool{
+        return (self.compare(date) == ComparisonResult.orderedDescending)
     }
     
     /**
@@ -25,8 +25,8 @@ public extension NSDate {
      - parameter date: NSDate to compare
      - returns: True if self is before the input NSDate, false otherwise
      */
-    public func isBefore(date: NSDate) -> Bool{
-        return (self.compare(date) == NSComparisonResult.OrderedAscending)
+    public func isBefore(_ date: Date) -> Bool{
+        return (self.compare(date) == ComparisonResult.orderedAscending)
     }
     
     /**
@@ -35,7 +35,7 @@ public extension NSDate {
      - returns: true if today's date
      */
     public func isToday() -> Bool {
-        return self.isEqualToDateIgnoringTime(NSDate())
+        return self.isEqualToDateIgnoringTime(Date())
     }
     
     /**
@@ -44,7 +44,7 @@ public extension NSDate {
      - returns: true if Tomorrow's date
      */
     public func isTomorrow() -> Bool {
-        return self.isEqualToDateIgnoringTime(NSDate())
+        return self.isEqualToDateIgnoringTime(Date())
     }
     
     /**
@@ -53,7 +53,7 @@ public extension NSDate {
      - returns: true if Yesterday's date
      */
     public func isYesterday() -> Bool {
-        return self.isEqualToDateIgnoringTime(NSDate())
+        return self.isEqualToDateIgnoringTime(Date())
     }
     
     /**
@@ -61,7 +61,7 @@ public extension NSDate {
      
      - returns: true if same day
      */
-    public func isEqualToDateIgnoringTime(date: NSDate) -> Bool {
+    public func isEqualToDateIgnoringTime(_ date: Date) -> Bool {
         
         let components1 = components()
         let components2 = date.components()

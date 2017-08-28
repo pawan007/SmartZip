@@ -13,13 +13,13 @@ extension UILabel {
     /**
      Override method of awake from nib to change font size as per aspect ratio.
      */
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         
         super.awakeFromNib()
       
         if let font = self.font {
             
-            let screenRatio = (UIScreen.mainScreen().bounds.size.width / Constants.DEFAULT_SCREEN_RATIO)
+            let screenRatio = (UIScreen.main.bounds.size.width / Constants.DEFAULT_SCREEN_RATIO)
             let fontSize = font.pointSize * screenRatio
             //self.font = UIFont(name: font.fontName, size: fontSize)!
 

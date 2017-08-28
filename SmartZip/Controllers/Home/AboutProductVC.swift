@@ -11,7 +11,7 @@ import UIKit
 class AboutProductVC: UIViewController {
     
     
-    @IBAction   func menuButtonAction(sender: AnyObject) {
+    @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 

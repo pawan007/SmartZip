@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public extension NSDate {
+public extension Date {
     
     // MARK: Getter
     
@@ -15,7 +15,7 @@ public extension NSDate {
     */
     public var year : Int {
         get {
-            return getComponent(.Year)
+            return getComponent(.year)
         }
     }
     
@@ -24,7 +24,7 @@ public extension NSDate {
      */
     public var month : Int {
         get {
-            return getComponent(.Month)
+            return getComponent(.month)
         }
     }
     
@@ -33,7 +33,7 @@ public extension NSDate {
      */
     public var weekday : Int {
         get {
-            return getComponent(.Weekday)
+            return getComponent(.weekday)
         }
     }
     
@@ -42,7 +42,7 @@ public extension NSDate {
      */
     public var weekMonth : Int {
         get {
-            return getComponent(.WeekOfMonth)
+            return getComponent(.weekOfMonth)
         }
     }
     
@@ -51,7 +51,7 @@ public extension NSDate {
      */
     public var days : Int {
         get {
-            return getComponent(.Day)
+            return getComponent(.day)
         }
     }
     
@@ -61,7 +61,7 @@ public extension NSDate {
     public var hours : Int {
         
         get {
-            return getComponent(.Hour)
+            return getComponent(.hour)
         }
     }
     
@@ -70,7 +70,7 @@ public extension NSDate {
      */
     public var minutes : Int {
         get {
-            return getComponent(.Minute)
+            return getComponent(.minute)
         }
     }
     
@@ -79,7 +79,7 @@ public extension NSDate {
      */
     public var seconds : Int {
         get {
-            return getComponent(.Second)
+            return getComponent(.second)
         }
     }
     
@@ -90,18 +90,18 @@ public extension NSDate {
      - returns: the value of the component
      */
     
-    public func getComponent (component : NSCalendarUnit) -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(component, fromDate: self)
+    public func getComponent (_ component : NSCalendar.Unit) -> Int {
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components(component, from: self)
         
-        return components.valueForComponent(component)
+        return components.value(for: component)
     }
     /**
      Returns the value of the NSDate component
      
      - returns: the value of the component
      */
-    public func components() -> NSDateComponents {
-        return NSCalendar.currentCalendar().components([.Era, .Year, .Month, .WeekOfYear, .WeekOfMonth, .Weekday, .WeekdayOrdinal, .Day, .Hour, .Minute, .Second], fromDate: self)
+    public func components() -> DateComponents {
+        return (Calendar.current as NSCalendar).components([.era, .year, .month, .weekOfYear, .weekOfMonth, .weekday, .weekdayOrdinal, .day, .hour, .minute, .second], from: self)
     }
 }

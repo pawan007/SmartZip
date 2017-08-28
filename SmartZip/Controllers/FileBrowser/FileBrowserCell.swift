@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FileBrowserCellDelegate {
-    func checkUnCheckBtn(cell:FileBrowserCell, value:Bool)
+    func checkUnCheckBtn(_ cell:FileBrowserCell, value:Bool)
 }
 
 class FileBrowserCell: UITableViewCell {
@@ -24,18 +24,18 @@ class FileBrowserCell: UITableViewCell {
     
     @IBOutlet weak var btnCheck: UIButton!
     
-    @IBAction func btnCheckTapped(sender: AnyObject) {
+    @IBAction func btnCheckTapped(_ sender: AnyObject) {
         
         if checkedStatus {
             
             checkedStatus = false
-            btnCheck.setImage(UIImage(named: "icon_unchecked"), forState: .Normal)
+            btnCheck.setImage(UIImage(named: "icon_unchecked"), for: UIControlState())
             delgate?.checkUnCheckBtn(self, value:false)
             
         }else{
             
             checkedStatus = true
-            btnCheck.setImage(UIImage(named: "icon_checked"), forState: .Normal)
+            btnCheck.setImage(UIImage(named: "icon_checked"), for: UIControlState())
             delgate?.checkUnCheckBtn(self, value:true)
         }
         

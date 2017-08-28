@@ -28,16 +28,16 @@ class NotificationViewController: BaseViewController {
         self.tableView.estimatedRowHeight = 50.0;
         self.tableView.tableFooterView = UIView()
         self.tableView.allowsMultipleSelection = false
-        location.addObject("Thank you for purchasing the app.")
-        location.addObject("Photography event near your location.")
-        location.addObject("Cooking event near your location.")
-        location.addObject("Swimming event near your location.")
+        location.add("Thank you for purchasing the app.")
+        location.add("Photography event near your location.")
+        location.add("Cooking event near your location.")
+        location.add("Swimming event near your location.")
         self.tableView.reloadData()
     }
     
-    override internal func viewWillAppear(animated: Bool) {
+    override internal func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.isHidden = false
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     }
@@ -47,33 +47,33 @@ class NotificationViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return location.count
         
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         tableView.reloadData()
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
 
         var cell: UITableViewCell! = nil
         if indexPath.row > 1 {
-            cell = self.tableView.dequeueReusableCellWithIdentifier(CellIdentifierRead, forIndexPath: indexPath)
+            cell = self.tableView.dequeueReusableCell(withIdentifier: CellIdentifierRead, for: indexPath)
         }
         else {
-            cell = self.tableView.dequeueReusableCellWithIdentifier(CellIdentifierUnRead, forIndexPath: indexPath)
+            cell = self.tableView.dequeueReusableCell(withIdentifier: CellIdentifierUnRead, for: indexPath)
         }
         
-        cell.selectionStyle = .Gray
+        cell.selectionStyle = .gray
         let name: UILabel! = cell.viewWithTag(1000) as! UILabel
         name.text = location[indexPath.row] as? String
         return cell
     }
     
     // MARK:- IBActions
-    @IBAction override func menuButtonAction(sender: AnyObject) {
+    @IBAction override func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 

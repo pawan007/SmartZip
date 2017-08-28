@@ -19,10 +19,10 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.showTutorial()
     }
@@ -43,7 +43,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
          let panel7: MYIntroductionPanel = MYIntroductionPanel(image: UIImage(named: "tut_8.png")!, description: "All other options are in left menu/drawer. If you want to go on home screen, tap on Home. If you want to see this tutorial again tap on Tutorial. Want to get ad free app tap on Buy Pro. If you have done payment before, tap on Restore. If you want to share SmartZip, rate SmartZip or want to email us, options are given respectievely.")*/
         
         if ( introductionView == nil) {
-            introductionView = MYIntroductionView(frame: CGRectMake(0, 0, introView.frame.size.width, introView.frame.size.height), headerImage: UIImage(named: "SampleHeaderImage")!, panels: [panel, panel2, panel3])
+            introductionView = MYIntroductionView(frame: CGRect(x: 0, y: 0, width: introView.frame.size.width, height: introView.frame.size.height), headerImage: UIImage(named: "SampleHeaderImage")!, panels: [panel, panel2, panel3])
             
             introductionView!.setHeaderText("SmartZip")
             introductionView!.HeaderImageView.autoresizingMask = .FlexibleWidth
@@ -58,7 +58,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
         }
     }
     
-    func introductionDidFinishWithType(finishType: MYFinishType) {
+    func introductionDidFinishWithType(_ finishType: MYFinishType) {
         //
         if(introductionView != nil) {
             introductionView?.removeFromSuperview()
@@ -67,7 +67,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
         }
     }
     
-    func introductionDidChangeToPanel(panel: MYIntroductionPanel!, withIndex panelIndex: Int) {
+    func introductionDidChangeToPanel(_ panel: MYIntroductionPanel!, withIndex panelIndex: Int) {
         //
         
         print(panelIndex)
@@ -84,7 +84,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
     }
     
     
-    @IBAction   func menuButtonAction(sender: AnyObject) {
+    @IBAction   func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 
@@ -93,7 +93,7 @@ class TutorialVC: UIViewController, MYIntroductionDelegate {
     }
     
     
-    @IBAction func btnSkipTapped(sender: AnyObject) {
+    @IBAction func btnSkipTapped(_ sender: AnyObject) {
         
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in

@@ -16,20 +16,20 @@ extension AppDelegate {
     }
     
     // MARK: - UIApplicationDelegate Methods
-    func application (application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        LogManager.logDebug("Device Push Token \(String(data: deviceToken, encoding: NSUTF8StringEncoding))")
+    func application (_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        LogManager.logDebug("Device Push Token \(String(data: deviceToken, encoding: String.Encoding.utf8))")
         // Prepare the Device Token for Registration (remove spaces and < >)
         
         self.setDeviceToken(deviceToken)
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         LogManager.logError(error.localizedDescription)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
-        self.recievedRemoteNotification(userInfo)
+        self.recievedRemoteNotification(userInfo as NSDictionary)
     }
     
     
@@ -55,13 +55,13 @@ extension AppDelegate {
         UIApplication.sharedApplication().unregisterForRemoteNotifications()
     }
     
-    func setDeviceToken (token: NSData) {
-        let deviceToken = token.description.stringByReplacingOccurrencesOfString("<", withString: "").stringByReplacingOccurrencesOfString(">", withString: "").stringByReplacingOccurrencesOfString(" ", withString: "") ?? ""
-        NSUserDefaults.setObject(deviceToken, forKey: Keys.deviceToken)
+    func setDeviceToken (_ token: Data) {
+        let deviceToken = token.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: "") ?? ""
+        UserDefaults.setObject(deviceToken, forKey: Keys.deviceToken)
     }
     
     func deviceToken () -> String {
-        let deviceToken: String? = NSUserDefaults.objectForKey(Keys.deviceToken) as? String
+        let deviceToken: String? = UserDefaults.objectForKey(Keys.deviceToken) as? String
         
         if isObjectInitialized(deviceToken) {
             return deviceToken!
@@ -72,11 +72,11 @@ extension AppDelegate {
     
     
     func setRigisterDevice () {
-             NSUserDefaults.setObject("register", forKey: Keys.deviceToken)
+             UserDefaults.setObject("register", forKey: Keys.deviceToken)
     }
     
     func getRigisterDevice () -> String {
-        let deviceIsRegister: String? = NSUserDefaults.objectForKey(Keys.deviceIsRegister) as? String
+        let deviceIsRegister: String? = UserDefaults.objectForKey(Keys.deviceIsRegister) as? String
         if isObjectInitialized(deviceIsRegister) {
             return deviceIsRegister!
         }
@@ -88,7 +88,7 @@ extension AppDelegate {
      
      - parameter userInfo: Response from server
      */
-    func recievedRemoteNotification (userInfo: NSDictionary) {
+    func recievedRemoteNotification (_ userInfo: NSDictionary) {
         
         let dictioaryUserInfo: NSDictionary = userInfo["aps"] as! NSDictionary
         

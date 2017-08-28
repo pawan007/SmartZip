@@ -20,7 +20,7 @@ extension UIColor {
      
      - returns: UIColor from RGB
      */
-    func colorWithRedValue(redValue: CGFloat, greenValue: CGFloat, blueValue: CGFloat, alpha: CGFloat) -> UIColor {
+    func colorWithRedValue(_ redValue: CGFloat, greenValue: CGFloat, blueValue: CGFloat, alpha: CGFloat) -> UIColor {
        
         return UIColor(red: redValue/255.0, green: greenValue/255.0, blue: blueValue/255.0, alpha: alpha)
     }
@@ -33,7 +33,7 @@ extension UIColor {
      
      - returns: UIColor from RGB
      */
-    func colorWithRGB (rgbValue : UInt, alpha : CGFloat = 1.0) -> UIColor {
+    func colorWithRGB (_ rgbValue : UInt, alpha : CGFloat = 1.0) -> UIColor {
        
         let red = CGFloat((rgbValue & 0xFF0000) >> 16) / 255
         let green = CGFloat((rgbValue & 0xFF00) >> 8) / 255
@@ -59,12 +59,12 @@ extension UIColor {
         
         if hexColorCode.hasPrefix("#") {
             
-            let index   = hexColorCode.startIndex.advancedBy(1)
-            let hex     = hexColorCode.substringFromIndex(index)
-            let scanner = NSScanner(string: hex)
+            let index   = hexColorCode.characters.index(hexColorCode.startIndex, offsetBy: 1)
+            let hex     = hexColorCode.substring(from: index)
+            let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
             
-            if scanner.scanHexLongLong(&hexValue) {
+            if scanner.scanHexInt64(&hexValue) {
                 
                 if hex.characters.count == 6 {
                     
@@ -111,12 +111,12 @@ extension UIColor {
         
         if hexColorCode.hasPrefix("#") {
             
-            let index   = hexColorCode.startIndex.advancedBy(1)
-            let hex     = hexColorCode.substringFromIndex(index)
-            let scanner = NSScanner(string: hex)
+            let index   = hexColorCode.characters.index(hexColorCode.startIndex, offsetBy: 1)
+            let hex     = hexColorCode.substring(from: index)
+            let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
             
-            if scanner.scanHexLongLong(&hexValue) {
+            if scanner.scanHexInt64(&hexValue) {
                 
                 if hex.characters.count == 6 {
                     

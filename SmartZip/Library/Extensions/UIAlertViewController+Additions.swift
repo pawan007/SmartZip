@@ -19,10 +19,10 @@ extension UIAlertController {
 
      - returns:  Completion handler returns callback to function
      */
-    func alertWithOk(title:String, message:String, handler:((UIAlertAction!) -> Void)? = nil) -> UIAlertController {
+    func alertWithOk(_ title:String, message:String, handler:((UIAlertAction?) -> Void)? = nil) -> UIAlertController {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.Default, handler:handler))
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default, handler:handler))
         return alert
     }
     
@@ -35,11 +35,11 @@ extension UIAlertController {
 
      - returns : Completion handler returns callback to function
      */
-    func alertWithOkAndCancel(title:String, message:String, handler:((UIAlertAction!) -> Void)? = nil) -> UIAlertController {
+    func alertWithOkAndCancel(_ title:String, message:String, handler:((UIAlertAction?) -> Void)? = nil) -> UIAlertController {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.Default, handler:handler))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "CANCEL"), style: UIAlertActionStyle.Cancel, handler:handler))
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default, handler:handler))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "CANCEL"), style: UIAlertActionStyle.cancel, handler:handler))
         return alert
     }
     
@@ -52,12 +52,12 @@ extension UIAlertController {
 
      - returns: Completion handler returns callback to function
      */
-    func confirmAlertWithMultipleButtons(title:String, message:String, arrayButtons:NSArray, handler:((UIAlertAction!) -> Void)? = nil) -> UIAlertController {
+    func confirmAlertWithMultipleButtons(_ title:String, message:String, arrayButtons:NSArray, handler:((UIAlertAction?) -> Void)? = nil) -> UIAlertController {
         
-        let alert = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.alert)
         for buttonTitle in arrayButtons {
             
-            alert.addAction(UIAlertAction(title: buttonTitle as? String, style: UIAlertActionStyle.Default, handler:handler))
+            alert.addAction(UIAlertAction(title: buttonTitle as? String, style: UIAlertActionStyle.default, handler:handler))
         }
         return alert
     }

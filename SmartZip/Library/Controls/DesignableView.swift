@@ -22,9 +22,9 @@ class DesignableView: UIView {
             layer.borderWidth = borderWidth
         }
     }
-    @IBInspectable var borderColor: UIColor? = UIColor.clearColor() {
+    @IBInspectable var borderColor: UIColor? = UIColor.clear {
         didSet {
-            layer.borderColor = borderColor?.CGColor
+            layer.borderColor = borderColor?.cgColor
         }
     }
     

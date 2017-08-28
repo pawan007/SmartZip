@@ -17,9 +17,9 @@ class DesignableTextField: UITextField {
     var leftBorder: UIView?
     var rightBorder: UIView?
     
-    @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
+    @IBInspectable var borderColor: UIColor = UIColor.clear {
         didSet {
-            layer.borderColor = borderColor.CGColor
+            layer.borderColor = borderColor.cgColor
         }
     }
     
@@ -35,7 +35,7 @@ class DesignableTextField: UITextField {
         }
     }
     
-    @IBInspectable var placeHolderColor : UIColor = UIColor.lightGrayColor(){
+    @IBInspectable var placeHolderColor : UIColor = UIColor.lightGray{
         didSet {
             setValue(placeHolderColor, forKeyPath: "_placeholderLabel.textColor")
         }
@@ -44,26 +44,26 @@ class DesignableTextField: UITextField {
     @IBInspectable var bottomLineWidth : CGFloat = 1 {
         didSet{
             let border: CALayer = CALayer()
-            border.borderColor = UIColor.darkGrayColor().CGColor
-            self.frame = CGRectMake(0, self.frame.size.height - bottomLineWidth, self.frame.size.width, self.frame.size.height)
+            border.borderColor = UIColor.darkGray.cgColor
+            self.frame = CGRect(x: 0, y: self.frame.size.height - bottomLineWidth, width: self.frame.size.width, height: self.frame.size.height)
             border.borderWidth = borderWidth
             self.layer.addSublayer(border)
             self.layer.masksToBounds = true
         }
     }
     
-    @IBInspectable var bottomLineColor : UIColor = UIColor.lightGrayColor(){
+    @IBInspectable var bottomLineColor : UIColor = UIColor.lightGray{
         didSet {
             let border: CALayer = CALayer()
-            border.borderColor = bottomLineColor.CGColor
+            border.borderColor = bottomLineColor.cgColor
         }
     }
     
     @IBInspectable var leftImage : String = "" {
         didSet {
-            leftViewMode = UITextFieldViewMode.Always
+            leftViewMode = UITextFieldViewMode.always
             let imageView = UIImageView();
-            imageView.frame=CGRectMake(self.frame.origin.x+5, self.frame.origin.y+5, 30,self.frame.size.height-4)
+            imageView.frame=CGRect(x: self.frame.origin.x+5, y: self.frame.origin.y+5, width: 30,height: self.frame.size.height-4)
             let image = UIImage(named:leftImage);
             imageView.image = image;
             leftView = imageView;
@@ -74,54 +74,54 @@ class DesignableTextField: UITextField {
     @IBInspectable var paddingLeft: CGFloat = 0
     @IBInspectable var paddingRight: CGFloat = 0
     
-    override func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectMake(bounds.origin.x + paddingLeft, bounds.origin.y,
-                          bounds.size.width - paddingLeft - paddingRight, bounds.size.height);
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x + paddingLeft, y: bounds.origin.y,
+                          width: bounds.size.width - paddingLeft - paddingRight, height: bounds.size.height);
     }
     
-    override func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return textRectForBounds(bounds)
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return textRect(forBounds: bounds)
     }
-    @IBInspectable var topBorderColor : UIColor = UIColor.clearColor()
+    @IBInspectable var topBorderColor : UIColor = UIColor.clear
     @IBInspectable var topBorderHeight : CGFloat = 0 {
         didSet{
             if topBorder == nil{
                 topBorder = UIView()
                 topBorder?.backgroundColor=topBorderColor;
-                topBorder?.frame = CGRectMake(0, 0, self.frame.size.width, topBorderHeight)
+                topBorder?.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: topBorderHeight)
                 addSubview(topBorder!)
             }
         }
     }
-    @IBInspectable var bottomBorderColor : UIColor = UIColor.clearColor()
+    @IBInspectable var bottomBorderColor : UIColor = UIColor.clear
     @IBInspectable var bottomBorderHeight : CGFloat = 0 {
         didSet{
             if bottomBorder == nil{
                 bottomBorder = UIView()
                 bottomBorder?.backgroundColor=bottomBorderColor;
-                bottomBorder?.frame = CGRectMake(0, self.frame.size.height - bottomBorderHeight, self.frame.size.width, bottomBorderHeight)
+                bottomBorder?.frame = CGRect(x: 0, y: self.frame.size.height - bottomBorderHeight, width: self.frame.size.width, height: bottomBorderHeight)
                 addSubview(bottomBorder!)
             }
         }
     }
-    @IBInspectable var leftBorderColor : UIColor = UIColor.clearColor()
+    @IBInspectable var leftBorderColor : UIColor = UIColor.clear
     @IBInspectable var leftBorderHeight : CGFloat = 0 {
         didSet{
             if leftBorder == nil{
                 leftBorder = UIView()
                 leftBorder?.backgroundColor=leftBorderColor;
-                leftBorder?.frame = CGRectMake(0, 0, leftBorderHeight, self.frame.size.height)
+                leftBorder?.frame = CGRect(x: 0, y: 0, width: leftBorderHeight, height: self.frame.size.height)
                 addSubview(leftBorder!)
             }
         }
     }
-    @IBInspectable var rightBorderColor : UIColor = UIColor.clearColor()
+    @IBInspectable var rightBorderColor : UIColor = UIColor.clear
     @IBInspectable var rightBorderHeight : CGFloat = 0 {
         didSet{
             if rightBorder == nil{
                 rightBorder = UIView()
                 rightBorder?.backgroundColor=topBorderColor;
-                rightBorder?.frame = CGRectMake(self.frame.size.width - rightBorderHeight, 0, rightBorderHeight, self.frame.size.height)
+                rightBorder?.frame = CGRect(x: self.frame.size.width - rightBorderHeight, y: 0, width: rightBorderHeight, height: self.frame.size.height)
                 addSubview(rightBorder!)
             }
         }

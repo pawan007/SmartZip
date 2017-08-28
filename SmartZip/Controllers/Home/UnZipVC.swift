@@ -31,7 +31,7 @@ class UnZipVC: UIViewController {
     @IBOutlet weak var btnBack: UIButton!
     
     
-    @IBAction func btnBackTapped(sender: AnyObject) {
+    @IBAction func btnBackTapped(_ sender: AnyObject) {
         
         AppDelegate.presentRootViewController()
         //self.navigationController?.popViewControllerAnimated(true)
@@ -41,25 +41,25 @@ class UnZipVC: UIViewController {
     
     // MARK: UITableview method implementation
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemNames.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCellFile", for: indexPath)
         cell.textLabel?.text = itemNames[indexPath.row] as? String
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         
         if resourceType == ResTypeVideo {
             
@@ -84,7 +84,7 @@ class UnZipVC: UIViewController {
         
     }
     
-    private func playVideo(path:String) {
+    fileprivate func playVideo(_ path:String) {
         
 //        let player = AVPlayer(URL: NSURL(fileURLWithPath: path))
 //        let playerController = AVPlayerViewController()
@@ -94,7 +94,7 @@ class UnZipVC: UIViewController {
 //        }
     }
     
-    func playAudio(url:String) {
+    func playAudio(_ url:String) {
         
 //        let coinSound = NSURL(fileURLWithPath: url)
 //        do{
@@ -108,7 +108,7 @@ class UnZipVC: UIViewController {
     
     
     
-    func unzipPath(zipPath:String) {
+    func unzipPath(_ zipPath:String) {
         
         guard let unzipPath = tempUnzipPath(zipPath) else {
             return
@@ -124,7 +124,7 @@ class UnZipVC: UIViewController {
         var items: [String]
         
         do {
-            items = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(unzipPath)
+            items = try FileManager.default.contentsOfDirectory(atPath: unzipPath)
             itemNames = items
             tableView.reloadData()
         } catch {
@@ -135,12 +135,12 @@ class UnZipVC: UIViewController {
     }
     
     func tempUnzipPath() -> String? {
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        path += "/\(NSUUID().UUIDString)"
-        let url = NSURL(fileURLWithPath: path)
+        var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        path += "/\(UUID().uuidString)"
+        let url = URL(fileURLWithPath: path)
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
             return nil
         }
@@ -153,21 +153,21 @@ class UnZipVC: UIViewController {
     }
     
     
-    func tempUnzipPath(zipPath:String) -> String? {
+    func tempUnzipPath(_ zipPath:String) -> String? {
         
         var folderName = ""
         
-        if zipPath.containsString("Images") {
+        if zipPath.contains("Images") {
             
             folderName = "Images-\(Timestamp)"
             resourceType = ResTypeImage
             
-        }else if zipPath.containsString("Videos") {
+        }else if zipPath.contains("Videos") {
             
             folderName = "Videos-\(Timestamp)"
             resourceType = ResTypeVideo
             
-        }else if zipPath.containsString("Song") {
+        }else if zipPath.contains("Song") {
             
             folderName = "Song-\(Timestamp)"
             resourceType = ResTypeAudio
@@ -179,12 +179,12 @@ class UnZipVC: UIViewController {
             
         }
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         path += "/\(folderName)"
-        let url = NSURL(fileURLWithPath: path)
+        let url = URL(fileURLWithPath: path)
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
             return nil
         }

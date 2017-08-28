@@ -22,35 +22,35 @@ class DesignableButton: UIButton {
             layer.borderWidth = borderWidth
         }
     }
-    @IBInspectable var borderColor: UIColor? = UIColor.clearColor() {
+    @IBInspectable var borderColor: UIColor? = UIColor.clear {
         didSet {
-            layer.borderColor = borderColor?.CGColor
+            layer.borderColor = borderColor?.cgColor
         }
     }
     
-    @IBInspectable var defaultBackgroundColor: UIColor = UIColor.clearColor() {
+    @IBInspectable var defaultBackgroundColor: UIColor = UIColor.clear {
         didSet {
             let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
             UIGraphicsBeginImageContext(rect.size)
             let context = UIGraphicsGetCurrentContext()
-            CGContextSetFillColorWithColor(context, defaultBackgroundColor.CGColor)
-            CGContextFillRect(context, rect)
+            context?.setFillColor(defaultBackgroundColor.cgColor)
+            context?.fill(rect)
             let img = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            self.setBackgroundImage(img, forState: UIControlState.Normal)
+            self.setBackgroundImage(img, for: UIControlState())
         }
     }
-    @IBInspectable var selectedBackgroundColor: UIColor = UIColor.clearColor() {
+    @IBInspectable var selectedBackgroundColor: UIColor = UIColor.clear {
         didSet {
             
             let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
             UIGraphicsBeginImageContext(rect.size)
             let context = UIGraphicsGetCurrentContext()
-            CGContextSetFillColorWithColor(context, selectedBackgroundColor.CGColor)
-            CGContextFillRect(context, rect)
+            context?.setFillColor(selectedBackgroundColor.cgColor)
+            context?.fill(rect)
             let img = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            self.setBackgroundImage(img, forState: UIControlState.Highlighted)
+            self.setBackgroundImage(img, for: UIControlState.highlighted)
         }
     }
     

@@ -32,7 +32,7 @@ class BuyProVC: UIViewController {
         self.registerNotificationForInApp()
         
         if (!isShowRestoreBtn) {
-            restoreBtn.hidden = true
+            restoreBtn.isHidden = true
         }
     }
     
@@ -44,9 +44,9 @@ class BuyProVC: UIViewController {
     
     // In-App
     func registerNotificationForInApp () {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.purchasedProduct(_:)), name: IAPHelper.IAPHelperPurchaseNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.purchasedProduct(_:)), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.productPurchaseFailed(_:)), name: IAPHelper.IAPHelperPurchaseFailedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.productPurchaseFailed(_:)), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseFailedNotification), object: nil)
         products = []
     }
     
@@ -61,35 +61,35 @@ class BuyProVC: UIViewController {
                 self.setPriceStringOnButtons(self.products)
             }
             else {
-                let alert = UIAlertController(title: "In-App Purchase", message: "Ooppss...we are unable to connect iTune Store please try after some time", preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                let alert = UIAlertController(title: "In-App Purchase", message: "Ooppss...we are unable to connect iTune Store please try after some time", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     NSLog("OK Pressed")
                 }
                 alert.addAction(okAction)
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
-    func localizedPrice(product:SKProduct) -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
+    func localizedPrice(_ product:SKProduct) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
         formatter.locale = product.priceLocale
-        return formatter.stringFromNumber(product.price)!
+        return formatter.string(from: product.price)!
     }
     
-    func setPriceStringOnButtons(products: [SKProduct]?) {
+    func setPriceStringOnButtons(_ products: [SKProduct]?) {
         for tempSkProduct in products! {
             let priceString = localizedPrice(tempSkProduct)
             if tempSkProduct.productIdentifier ==  RageProducts.removeFullPageAds {
-                fullPageAdsBtn.setTitle("\(fullPageAdsBtn.currentTitle!) (\(priceString))", forState: UIControlState.Normal)
+                fullPageAdsBtn.setTitle("\(fullPageAdsBtn.currentTitle!) (\(priceString))", for: UIControlState())
                 if(RageProducts.store.isProductPurchased(tempSkProduct.productIdentifier)) {
                     self.setTextOnButton(tempSkProduct.productIdentifier)
                 }
             }
             if tempSkProduct.productIdentifier ==  RageProducts.removeBannerAds {
-                bannerAdsBtn.setTitle("\(bannerAdsBtn.currentTitle!) (\(priceString))", forState: UIControlState.Normal)
+                bannerAdsBtn.setTitle("\(bannerAdsBtn.currentTitle!) (\(priceString))", for: UIControlState())
                 if(RageProducts.store.isProductPurchased(tempSkProduct.productIdentifier)) {
                     self.setTextOnButton(tempSkProduct.productIdentifier)
                 }
@@ -97,7 +97,7 @@ class BuyProVC: UIViewController {
         }
     }
     
-    @IBAction func removeFullPageAdsAction(sender: AnyObject) {
+    @IBAction func removeFullPageAdsAction(_ sender: AnyObject) {
         for tempSkProduct in self.products {
             if tempSkProduct.productIdentifier ==  RageProducts.removeFullPageAds {
                 print("PriceLocal is: \(tempSkProduct.priceLocale) and price is: \(tempSkProduct.price)")
@@ -106,7 +106,7 @@ class BuyProVC: UIViewController {
         }
     }
     
-    @IBAction func removeBannerAdsAction(sender: AnyObject) {
+    @IBAction func removeBannerAdsAction(_ sender: AnyObject) {
         for tempSkProduct in self.products {
             if tempSkProduct.productIdentifier ==  RageProducts.removeBannerAds {
                 print("PriceLocal is: \(tempSkProduct.priceLocale) and price is: \(tempSkProduct.price)")
@@ -115,7 +115,7 @@ class BuyProVC: UIViewController {
         }
     }
     
-    @IBAction func restorePurchasedAction(sender: AnyObject) {
+    @IBAction func restorePurchasedAction(_ sender: AnyObject) {
         self.view.showLoader(mainTitle: NSLocalizedString("Restore Items", comment: ""), subTitle: NSLocalizedString("Just a moment", comment: ""))
         
         RageProducts.store.restorePurchases()
@@ -123,15 +123,15 @@ class BuyProVC: UIViewController {
     
     
     //MARK: In App Purchase Methods
-    func willPurchaseProduct (product:SKProduct) {
+    func willPurchaseProduct (_ product:SKProduct) {
         if RageProducts.store.isProductPurchased(product.productIdentifier) {
-            let alert = UIAlertController(title: "In-App Purchase", message: "You are already subscribed to this plan", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            let alert = UIAlertController(title: "In-App Purchase", message: "You are already subscribed to this plan", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                 UIAlertAction in
                 NSLog("OK Pressed")
             }
             alert.addAction(okAction)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             print("product purchased")
         }
@@ -147,7 +147,7 @@ class BuyProVC: UIViewController {
         }
     }
     
-    func purchasedProduct(notification:NSNotification) {
+    func purchasedProduct(_ notification:Notification) {
         self.view.hideLoader()
         // The product has been purchase , go to rootViewController for the app.
         let identifier = notification.object as? String
@@ -160,22 +160,22 @@ class BuyProVC: UIViewController {
         self.setTextOnButton(identifier!)
     }
     
-    func productPurchaseFailed(notification:NSNotification) {
+    func productPurchaseFailed(_ notification:Notification) {
         self.view.hideLoader()
     }
     
-    func setTextOnButton (productIdentifierString:String) {
+    func setTextOnButton (_ productIdentifierString:String) {
         if productIdentifierString == RageProducts.removeFullPageAds {
-            fullPageAdsBtn.setTitle("Remove Full Page Ads Purchased", forState: UIControlState.Normal)
+            fullPageAdsBtn.setTitle("Remove Full Page Ads Purchased", for: UIControlState())
         }
         else if productIdentifierString ==  RageProducts.removeBannerAds {
-            bannerAdsBtn.setTitle("Remove Footer Ads Purchased", forState: UIControlState.Normal)
+            bannerAdsBtn.setTitle("Remove Footer Ads Purchased", for: UIControlState())
         }
     }
     
     
     
-    @IBAction func menuButtonAction(sender: AnyObject) {
+    @IBAction func menuButtonAction(_ sender: AnyObject) {
         if let container = SideMenuManager.sharedManager().container {
             container.toggleDrawerSide(.Left, animated: true) { (val) -> Void in
                 

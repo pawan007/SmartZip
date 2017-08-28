@@ -19,13 +19,13 @@ class FileListViewController: UIViewController {
     
     // TableView
     @IBOutlet weak var tableView: UITableView!
-    let collation = UILocalizedIndexedCollation.currentCollation()
+    let collation = UILocalizedIndexedCollation.current()
     
     /// Data
     var didSelectFile: ((FBFile) -> ())?
     var files = [FBFile]()
     var filesForSharing = [FBFile]()
-    var initialPath: NSURL?
+    var initialPath: URL?
     let parser = FileParser.sharedInstance
     let previewManager = PreviewManager()
     var sections: [[FBFile]] = []
@@ -34,8 +34,8 @@ class FileListViewController: UIViewController {
     var filteredFiles = [FBFile]()
     let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.searchBar.backgroundColor = UIColor.whiteColor()
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.backgroundColor = UIColor.white
         searchController.dimsBackgroundDuringPresentation = false
         return searchController
     }()
@@ -44,11 +44,11 @@ class FileListViewController: UIViewController {
     
     //MARK: Lifecycle
     
-    convenience init (initialPath: NSURL) {
+    convenience init (initialPath: URL) {
         
         //        self.init(nibName: "FileBrowser", bundle: NSBundle(forClass: FileListViewController.self))
         self.init()
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         // Set initial path
         self.initialPath = initialPath
@@ -80,14 +80,14 @@ class FileListViewController: UIViewController {
     override func viewDidLoad() {
         
         // Prepare data
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         if  FileParser.sharedInstance.currentPath == nil{
-            self.initialPath = FileParser.sharedInstance.documentsURL()
+            self.initialPath = FileParser.sharedInstance.documentsURL() as URL
             FileParser.sharedInstance.currentPath = FileParser.sharedInstance.documentsURL()
             
         }else{
-            self.initialPath = FileParser.sharedInstance.currentPath
+            self.initialPath = FileParser.sharedInstance.currentPath as! URL
         }
         
         self.title = initialPath!.lastPathComponent
@@ -121,19 +121,19 @@ class FileListViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
-        self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
+        self.tableView.contentOffset = CGPoint(x: 0, y: searchController.searchBar.frame.size.height)
         
         if (CommonFunctions.sharedInstance.getBOOLFromUserDefaults(kIsRemovedBannerAds)) {
             if(shared != nil) {
                 shared = nil
             }
-            bannerAdView.hidden = true
+            bannerAdView.isHidden = true
         }
     }
     
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
         print("FileListViewController Ad changed")
         for tempView in bannerAdView.subviews {
             tempView.removeFromSuperview()
@@ -143,7 +143,7 @@ class FileListViewController: UIViewController {
     
     
     
-    func setFolderPathAndReloadTableView(path:NSURL) {
+    func setFolderPathAndReloadTableView(_ path:URL) {
         
         files = parser.filesForDirectory(initialPath!)
         indexFiles()
@@ -157,14 +157,14 @@ class FileListViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Scroll to hide search bar
-        self.tableView.contentOffset = CGPointMake(0, searchController.searchBar.frame.size.height)
+        self.tableView.contentOffset = CGPoint(x: 0, y: searchController.searchBar.frame.size.height)
         
         // Make sure navigation bar is visible
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     func dismiss() {
@@ -172,7 +172,7 @@ class FileListViewController: UIViewController {
         if filesForSharing.count > 0 {
             showActionSheet(0)
         }else{
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         
@@ -183,32 +183,32 @@ class FileListViewController: UIViewController {
     //MARK: Data
     
     func indexFiles() {
-        let selector: Selector = Selector("displayName")
-        sections = Array(count: collation.sectionTitles.count, repeatedValue: [])
-        if let sortedObjects = collation.sortedArrayFromArray(files, collationStringSelector: selector) as? [FBFile]{
+        let selector: Selector = #selector(getter: UIPrinter.displayName)
+        sections = Array(repeating: [], count: collation.sectionTitles.count)
+        if let sortedObjects = collation.sortedArray(from: files, collationStringSelector: selector) as? [FBFile]{
             for object in sortedObjects {
-                let sectionNumber = collation.sectionForObject(object, collationStringSelector: selector)
+                let sectionNumber = collation.section(for: object, collationStringSelector: selector)
                 sections[sectionNumber].append(object)
             }
         }
         
         if self.files.count == 0 {
             if lblNoContent == nil {
-                lblNoContent = UILabel(frame: CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height))
+                lblNoContent = UILabel(frame: CGRect(x: 0,y: 0,width: self.view.frame.size.width,height: self.view.frame.size.height))
                 lblNoContent?.text = "No Content"
-                lblNoContent?.backgroundColor = UIColor.whiteColor()
-                lblNoContent?.textAlignment = .Center
+                lblNoContent?.backgroundColor = UIColor.white
+                lblNoContent?.textAlignment = .center
                 self.view.addSubview(lblNoContent!)
             }
-            lblNoContent?.hidden = false
+            lblNoContent?.isHidden = false
         }else{
-            lblNoContent?.hidden = true
+            lblNoContent?.isHidden = true
         }
     }
     
-    func fileForIndexPath(indexPath: NSIndexPath) -> FBFile {
+    func fileForIndexPath(_ indexPath: IndexPath) -> FBFile {
         var file: FBFile
-        if searchController.active {
+        if searchController.isActive {
             file = filteredFiles[indexPath.row]
         }
         else {
@@ -217,9 +217,9 @@ class FileListViewController: UIViewController {
         return file
     }
     
-    func filterContentForSearchText(searchText: String) {
+    func filterContentForSearchText(_ searchText: String) {
         filteredFiles = files.filter({ (file: FBFile) -> Bool in
-            return file.displayName.lowercaseString.containsString(searchText.lowercaseString)
+            return file.displayName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }

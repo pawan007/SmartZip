@@ -16,7 +16,7 @@ internal extension Dictionary {
      - parameter dictionaries: Dictionaries to subtract
      - returns: Difference of self and the input dictionaries
      */
-    func difference <V: Equatable> (dictionaries: [Key: V]...) -> [Key: V] {
+    func difference <V: Equatable> (_ dictionaries: [Key: V]...) -> [Key: V] {
         
         var result = [Key: V]()
         
@@ -30,7 +30,7 @@ internal extension Dictionary {
         for dictionary in dictionaries {
             for (key, value) in dictionary {
                 if result.has(key) && result[key] == value {
-                    result.removeValueForKey(key)
+                    result.removeValue(forKey: key)
                 }
             }
         }
@@ -44,7 +44,7 @@ internal extension Dictionary {
      - parameter dictionaries: Dictionaries to join
      - returns: Union of self and the input dictionaries
      */
-    func union (dictionaries: Dictionary...) -> Dictionary {
+    func union (_ dictionaries: Dictionary...) -> Dictionary {
         
         var result = self
         
@@ -63,9 +63,9 @@ internal extension Dictionary {
      - parameter key: Key to check
      - returns: true if the key exists
      */
-    func has (key: Key) -> Bool {
+    func has (_ key: Key) -> Bool {
        
-        return indexForKey(key) != nil
+        return index(forKey: key) != nil
     }
 
     /**
@@ -75,7 +75,7 @@ internal extension Dictionary {
      - parameter mapFunction:
      - returns: Mapped array
      */
-    func toArray <V> (map: (Key, Value) -> V) -> [V] {
+    func toArray <V> (_ map: (Key, Value) -> V) -> [V] {
         
         var mapped = [V]()
         
@@ -93,7 +93,7 @@ internal extension Dictionary {
      - parameter mapFunction:
      - returns: Mapped dictionary
      */
-    func mapValues <V> (map: (Key, Value) -> V) -> [Key: V] {
+    func mapValues <V> (_ map: (Key, Value) -> V) -> [Key: V] {
         
         var mapped = [Key: V]()
         
@@ -111,7 +111,7 @@ internal extension Dictionary {
      - parameter mapFunction:
      - returns: Mapped dictionary
      */
-    func mapFilterValues <V> (map: (Key, Value) -> V?) -> [Key: V] {
+    func mapFilterValues <V> (_ map: (Key, Value) -> V?) -> [Key: V] {
         
         var mapped = [Key: V]()
         
@@ -131,7 +131,7 @@ internal extension Dictionary {
      - parameter mapFunction:
      - returns: Mapped dictionary
      */
-    func mapFilter <K, V> (map: (Key, Value) -> (K, V)?) -> [K: V] {
+    func mapFilter <K, V> (_ map: (Key, Value) -> (K, V)?) -> [K: V] {
         
         var mapped = [K: V]()
         
@@ -151,7 +151,7 @@ internal extension Dictionary {
      - parameter mapFunction:
      - returns: Mapped dictionary
      */
-    func map <K, V> (map: (Key, Value) -> (K, V)) -> [K: V] {
+    func map <K, V> (_ map: (Key, Value) -> (K, V)) -> [K: V] {
         
         var mapped = [K: V]()
         
@@ -168,7 +168,7 @@ internal extension Dictionary {
      
      - parameter eachFunction: Function to inovke on each loop
      */
-    func each (each: (Key, Value) -> ()) {
+    func each (_ each: (Key, Value) -> ()) {
         
         for (key, value) in self {
             each(key, value)
@@ -182,7 +182,7 @@ internal extension Dictionary {
      - parameter testFunction: Function called to test each key, value
      - returns: Filtered dictionary
      */
-    func filter (test: (Key, Value) -> Bool) -> Dictionary {
+    func filter (_ test: (Key, Value) -> Bool) -> Dictionary {
         
         var result = Dictionary()
         
@@ -203,7 +203,7 @@ internal extension Dictionary {
      - parameter groupingFunction:
      - returns: Grouped dictionary
      */
-    func groupBy <T> (group: (Key, Value) -> T) -> [T: [Value]] {
+    func groupBy <T> (_ group: (Key, Value) -> T) -> [T: [Value]] {
         
         var result = [T: [Value]]()
         
@@ -229,7 +229,7 @@ internal extension Dictionary {
      - parameter groupingFunction: Function called to define the grouping key
      - returns: Grouped dictionary
      */
-    func countBy <T> (group: (Key, Value) -> (T)) -> [T: Int] {
+    func countBy <T> (_ group: (Key, Value) -> (T)) -> [T: Int] {
         
         var result = [T: Int]()
         
@@ -254,7 +254,7 @@ internal extension Dictionary {
      - parameter test: Function to call for each element
      - returns: true if test returns true for all the elements in self
      */
-    func all (test: (Key, Value) -> (Bool)) -> Bool {
+    func all (_ test: (Key, Value) -> (Bool)) -> Bool {
         
         for (key, value) in self {
             if !test(key, value) {
@@ -271,7 +271,7 @@ internal extension Dictionary {
      - parameter test: Function to call for each element
      - returns: true if test returns true for any element of self
      */
-    func any (test: (Key, Value) -> (Bool)) -> Bool {
+    func any (_ test: (Key, Value) -> (Bool)) -> Bool {
         
         for (key, value) in self {
             if test(key, value) {
@@ -288,7 +288,7 @@ internal extension Dictionary {
      - parameter test: Function to call for each element
      - returns: the number of elements meeting the condition
      */
-    func countWhere (test: (Key, Value) -> (Bool)) -> Int {
+    func countWhere (_ test: (Key, Value) -> (Bool)) -> Int {
         
         var result = 0
         
@@ -308,7 +308,7 @@ internal extension Dictionary {
      - parameter combine: Function that reduces the dictionary
      - returns: Resulting value
      */
-    func reduce <U> (initial: U, combine: (U, Element) -> U) -> U {
+    func reduce <U> (_ initial: U, combine: (U, Element) -> U) -> U {
         return self.reduce(initial, combine: combine)
     }
 
@@ -318,7 +318,7 @@ internal extension Dictionary {
      - parameter keys: Whitelisted keys
      - returns: Filtered dictionary
      */
-    func pick (keys: [Key]) -> Dictionary {
+    func pick (_ keys: [Key]) -> Dictionary {
         return filter { (key: Key, _) -> Bool in
             return keys.contains(key)
         }
@@ -330,8 +330,8 @@ internal extension Dictionary {
      - parameter keys: Whitelisted keys
      - returns: Filtered dictionary
      */
-    func pick (keys: Key...) -> Dictionary {
-        return pick(unsafeBitCast(keys, [Key].self))
+    func pick (_ keys: Key...) -> Dictionary {
+        return pick(unsafeBitCast(keys, to: [Key].self))
     }
 
     /**
@@ -340,7 +340,7 @@ internal extension Dictionary {
      - parameter keys: Keys to get
      - returns: Dictionary with the given keys
      */
-    func at (keys: Key...) -> Dictionary {
+    func at (_ keys: Key...) -> Dictionary {
         return pick(keys)
     }
 
@@ -352,18 +352,18 @@ internal extension Dictionary {
      */
     mutating func shift () -> (Key, Value)? {
         if let key = keys.first {
-            return (key, removeValueForKey(key)!)
+            return (key, removeValue(forKey: key)!)
         }
         
         return nil
     }
     
-    func queryItems() -> [NSURLQueryItem]? {
+    func queryItems() -> [URLQueryItem]? {
         if self.keys.count > 0 {
-            var items = [NSURLQueryItem]()
+            var items = [URLQueryItem]()
             for key in self.keys {
                 if key is String && self[key] is String {
-                    items.append(NSURLQueryItem(name: key as! String, value: self[key] as? String))
+                    items.append(URLQueryItem(name: key as! String, value: self[key] as? String))
                 } else {
                     assertionFailure("Key and values should be String type")
                 }

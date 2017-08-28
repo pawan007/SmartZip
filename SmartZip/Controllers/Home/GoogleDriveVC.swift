@@ -17,17 +17,17 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var bannerAdView: UIView!
     var shared:GADMasterViewController!
     
-    private let kKeychainItemName = "Drive API"
-    private let kClientID = "250150690669-f40jbqpnvvd4sjeui1id07507ds4hvcq.apps.googleusercontent.com"
+    fileprivate let kKeychainItemName = "Drive API"
+    fileprivate let kClientID = "250150690669-f40jbqpnvvd4sjeui1id07507ds4hvcq.apps.googleusercontent.com"
     
     var forFirstTime = true
     
     
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
-    private let scopes = [kGTLAuthScopeDriveFile, kGTLAuthScopeDriveReadonly, kGTLAuthScopeDrive]
+    fileprivate let scopes = [kGTLAuthScopeDriveFile, kGTLAuthScopeDriveReadonly, kGTLAuthScopeDrive]
     
-    private let service = GTLServiceDrive()
+    fileprivate let service = GTLServiceDrive()
     //    let output = UITextView()
     
     // Data model: These strings will be the data for the table view cells
@@ -57,7 +57,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
          view.addSubview(output);*/
         
         // Register the table view cell class and its reuse id
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
         // This view controller itself will provide the delegate methods and row data for the table view.
         tableView.delegate = self
@@ -82,13 +82,13 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // When the view appears, ensure that the Drive API service is authorized
     // and perform API calls
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         if forFirstTime || service.authorizer != nil {
             
             forFirstTime = false
             if let authorizer = service.authorizer,
-                canAuth = authorizer.canAuthorize where canAuth {
+                let canAuth = authorizer.canAuthorize, canAuth {
                 fetchFiles()
             } else {
                 presentViewController(
@@ -101,7 +101,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             if service.authorizer == nil {
                 
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }
             
         }
@@ -110,13 +110,13 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             if(shared != nil) {
                 shared = nil
             }
-            bannerAdView.hidden = true
+            bannerAdView.isHidden = true
         }
         
     }
     
     
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
         print("FileListViewController Ad changed")
         for tempView in bannerAdView.subviews {
             tempView.removeFromSuperview()
@@ -145,7 +145,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // Construct a query to get names and IDs of 10 files using the Google Drive API
-    func fetchAnptherListFiles(token:String) {
+    func fetchAnptherListFiles(_ token:String) {
         
         guard Reachability.isConnectedToNetwork()else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
@@ -167,7 +167,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     // Construct a query to get names and IDs of 10 files using the Google Drive API
-    func fetchFolderFiles(folderId:String) {
+    func fetchFolderFiles(_ folderId:String) {
         
         guard Reachability.isConnectedToNetwork()else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
@@ -187,7 +187,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // Parse results and display
-    func displayResultWithTicket(ticket : GTLServiceTicket,
+    func displayResultWithTicket(_ ticket : GTLServiceTicket,
                                  finishedWithObject response : GTLDriveFileList,
                                                     error : NSError?) {
         
@@ -203,7 +203,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //        self.files.removeAll()
         //        tableView.reloadData()
         
-        if let files = response.files where !files.isEmpty {
+        if let files = response.files, !files.isEmpty {
             
             
             self.files = files as! [GTLDriveFile]
@@ -243,7 +243,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     // Creates the auth controller for authorizing access to Drive API
-    private func createAuthController() -> GTMOAuth2ViewControllerTouch {
+    fileprivate func createAuthController() -> GTMOAuth2ViewControllerTouch {
         let scopeString = scopes.joinWithSeparator(" ")
         return GTMOAuth2ViewControllerTouch(
             scope: scopeString,
@@ -257,7 +257,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Handle completion of the authorization process, and update the Drive API
     // with the new credentials.
-    func viewController(vc : UIViewController,
+    func viewController(_ vc : UIViewController,
                         finishedWithAuth authResult : GTMOAuth2Authentication, error : NSError?) {
         
         if let error = error {
@@ -268,19 +268,19 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         service.authorizer = authResult
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     // Helper for showing an alert
-    func showAlert(title : String, message: String) {
+    func showAlert(_ title : String, message: String) {
         let alert = UIAlertController(
             title: title,
             message: message,
-            preferredStyle: UIAlertControllerStyle.Alert
+            preferredStyle: UIAlertControllerStyle.alert
         )
         let ok = UIAlertAction(
             title: "OK",
-            style: UIAlertActionStyle.Default,
+            style: UIAlertActionStyle.default,
             handler: nil
         )
         alert.addAction(ok)
@@ -290,7 +290,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             rect.origin.y = rect.height
             popoverPresentationController.sourceRect = rect
         }
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -300,23 +300,23 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     // number of rows in table view
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.files.count
     }
     
     // create a cell for each table view row
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
+        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         let file = self.files[indexPath.row] as GTLDriveFile
-        cell.imageView?.sd_setImageWithURL(NSURL(string: file.iconLink), placeholderImage: UIImage(named: "myfolder") )
+        cell.imageView?.sd_setImageWithURL(URL(string: file.iconLink), placeholderImage: UIImage(named: "myfolder") )
         cell.textLabel?.text = file.name
         return cell
     }
     
     // method to run when table view cell is tapped
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
         
         guard Reachability.isConnectedToNetwork()else{
@@ -390,7 +390,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     
-    func downloadExportDocument(file:GTLDriveFile) -> Void {
+    func downloadExportDocument(_ file:GTLDriveFile) -> Void {
         
         guard Reachability.isConnectedToNetwork()else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)
@@ -423,7 +423,7 @@ class GoogleDriveVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
     
-    func downloadNormalDocument(file:GTLDriveFile) -> Void {
+    func downloadNormalDocument(_ file:GTLDriveFile) -> Void {
         
         guard Reachability.isConnectedToNetwork()else{
             CommonFunctions.sharedInstance.showAlert(kAlertTitle, message: "Please connect to internet", vc: self)

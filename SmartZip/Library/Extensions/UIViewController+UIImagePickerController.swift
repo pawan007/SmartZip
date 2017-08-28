@@ -15,11 +15,11 @@ extension UIViewController : UIImagePickerControllerDelegate, UINavigationContro
      
      - parameter sender: UIButton in user interface which will fire this action
      */
-    @IBAction func openImagePickerController(sender: UIButton) {
+    @IBAction func openImagePickerController(_ sender: UIButton) {
         
-        let status = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         
-        if status == AVAuthorizationStatus.Denied {
+        if status == AVAuthorizationStatus.denied {
             let alertController = UIAlertController(title: NSLocalizedString("You do not have permissions enabled for this.", comment: "You do not have permissions enabled for this."), message: NSLocalizedString("Would you like to change them in settings?", comment: "Would you like to change them in settings?"), preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
                 guard let url = NSURL(string: UIApplicationOpenSettingsURLString) else {return}
@@ -66,11 +66,11 @@ extension UIViewController : UIImagePickerControllerDelegate, UINavigationContro
         }
     }
     
-    private func presentAlert(sender: UIAlertController) {
+    fileprivate func presentAlert(_ sender: UIAlertController) {
         presentViewController(sender, animated: true, completion: nil)
     }
     
-    public func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

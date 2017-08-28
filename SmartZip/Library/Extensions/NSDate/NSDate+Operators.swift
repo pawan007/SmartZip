@@ -9,49 +9,49 @@ import Foundation
 
 // MARK: Arithmetic
 
-func +(date: NSDate, timeInterval: Int) -> NSDate {
-    return date + NSTimeInterval(timeInterval)
+func +(date: Date, timeInterval: Int) -> Date {
+    return date + TimeInterval(timeInterval)
 }
 
-func -(date: NSDate, timeInterval: Int) -> NSDate {
-    return date - NSTimeInterval(timeInterval)
+func -(date: Date, timeInterval: Int) -> Date {
+    return date - TimeInterval(timeInterval)
 }
 
-func +=(inout date: NSDate, timeInterval: Int) {
+func +=(date: inout Date, timeInterval: Int) {
     date = date + timeInterval
 }
 
-func -=(inout date: NSDate, timeInterval: Int) {
+func -=(date: inout Date, timeInterval: Int) {
     date = date - timeInterval
 }
 
-func +(date: NSDate, timeInterval: Double) -> NSDate {
-    return date.dateByAddingTimeInterval(NSTimeInterval(timeInterval))
+func +(date: Date, timeInterval: Double) -> Date {
+    return date.addingTimeInterval(TimeInterval(timeInterval))
 }
 
-func -(date: NSDate, timeInterval: Double) -> NSDate {
-    return date.dateByAddingTimeInterval(NSTimeInterval(-timeInterval))
+func -(date: Date, timeInterval: Double) -> Date {
+    return date.addingTimeInterval(TimeInterval(-timeInterval))
 }
 
-func +=(inout date: NSDate, timeInterval: Double) {
+func +=(date: inout Date, timeInterval: Double) {
     date = date + timeInterval
 }
 
-func -=(inout date: NSDate, timeInterval: Double) {
+func -=(date: inout Date, timeInterval: Double) {
     date = date - timeInterval
 }
 
-func -(date: NSDate, otherDate: NSDate) -> NSTimeInterval {
-    return date.timeIntervalSinceDate(otherDate)
+func -(date: Date, otherDate: Date) -> TimeInterval {
+    return date.timeIntervalSince(otherDate)
 }
 
 
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == NSComparisonResult.OrderedSame
+public func ==(lhs: Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == ComparisonResult.orderedSame
 }
 
 
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
+public func <(lhs: Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == ComparisonResult.orderedAscending
 }
 
